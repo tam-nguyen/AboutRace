@@ -25,6 +25,7 @@ const Header = () => (
           RACE
         </Link>
       </h1>
+      <Link to="/">Themes</Link> / <Link to="/articles/">Articles</Link>
     </div>
   </div>
 )
