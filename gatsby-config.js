@@ -4,11 +4,11 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+      //  apiBase: `api`, // optional, defaults to `jsonapi`
     {
       resolve: `gatsby-source-drupal`,
       options: {
         baseUrl: `http://distributeddesign.institute/RacePI/`
-      //  apiBase: `api`, // optional, defaults to `jsonapi`
       },
     },
   
