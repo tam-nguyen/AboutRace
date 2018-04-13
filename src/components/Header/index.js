@@ -1,6 +1,16 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'orange',
+}
+
+const activeLinkStyle = {
+  ...linkStyle,
+  textDecoration: 'underline',
+}
+
 const Header = () => (
   <div
     style={{
@@ -25,7 +35,27 @@ const Header = () => (
           RACE
         </Link>
       </h1>
-      <Link to="/">Themes</Link> / <Link to="/articles/">Articles</Link>
+      <Link to="/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+        Themes
+      </Link>{' '}
+      /{' '}
+      <Link
+        to="/themes-articles/"
+        activeStyle={activeLinkStyle}
+        style={linkStyle}
+        exact
+      >
+        Themes (with just articles)
+      </Link>{' '}
+      /{' '}
+      <Link
+        to="/articles/"
+        activeStyle={activeLinkStyle}
+        style={linkStyle}
+        exact
+      >
+        Articles
+      </Link>
     </div>
   </div>
 )

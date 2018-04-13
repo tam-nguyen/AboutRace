@@ -2,31 +2,31 @@ import React from 'react'
 
 const ContentNodeComponent = ({ data }) => (
   <li>
-    Article: <strong>{data.title}</strong> <code>{data.id}</code>
+    <strong>{data.__typename}</strong>: {data.title}
   </li>
 )
 
 const SubThemeComponent = ({ data }) => (
   <li>
-    Subtheme: <strong>{data.name}</strong> <code>{data.id}</code>
-    {data.relationships.backref_field_belongs_to_subtheme ? (
+    Subtheme: <strong>{data.name}</strong>
+    {data.relationships.contentNodes ? (
       <ul>
-        {data.relationships.backref_field_belongs_to_subtheme.map(article => (
-          <ContentNodeComponent data={article} />
+        {data.relationships.contentNodes.map(contentNode => (
+          <ContentNodeComponent data={contentNode} />
         ))}
       </ul>
     ) : (
-      <span style={{ color: 'red' }}> (no articles)</span>
+      <span style={{ color: 'red' }}> (no contentNodes)</span>
     )}
   </li>
 )
 
 const ThemeComponent = ({ data }) => (
   <li>
-    Theme: <strong>{data.name}</strong> <code>{data.id}</code>
-    {data.relationships.backref_field_belongs_to_theme ? (
+    Theme: <strong>{data.name}</strong>
+    {data.relationships.subthemes ? (
       <ul>
-        {data.relationships.backref_field_belongs_to_theme.map(subTheme => (
+        {data.relationships.subthemes.map(subTheme => (
           <SubThemeComponent data={subTheme} />
         ))}
       </ul>
@@ -52,13 +52,21 @@ export const query = graphql`
           id
           name
           relationships {
-            backref_field_belongs_to_theme {
+            subthemes: backref_field_belongs_to_theme {
               name
               id
               relationships {
-                backref_field_belongs_to_subtheme {
-                  id
-                  title
+                contentNodes: backref_field_belongs_to_subtheme {
+                  __typename
+                  ... on node__article {
+                    title
+                  }
+                  ... on node__faq {
+                    title
+                  }
+                  ... on node__clip {
+                    title
+                  }
                 }
               }
             }
