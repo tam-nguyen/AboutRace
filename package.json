@@ -8,7 +8,7 @@
     "gatsby-link": "^1.6.39",
     "gatsby-plugin-react-helmet": "^2.0.8",
     "gatsby-plugin-sharp": "^1.6.42",
-    "gatsby-source-drupal": "file:gatsby-source-drupal-2.0.31.tgz",
+    "gatsby-source-drupal": "file:gatsby-source-drupal-2.0.31-pbs-race-custom.tgz",
     "react-helmet": "^5.2.0"
   },
   "keywords": [
