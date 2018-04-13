@@ -1,28 +1,32 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from "react"
 
-const IndexPage = () => (
-  <div>
-    <h1> About  </h1>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
-)
+export default ({ data }) => 
+<div>
+  <h1>
+    {data.allTaxonomyTermThemes.edges[0].node.name}
+   </h1>
+   <img src={data.allTaxonomyTermThemes.edges[0].node.relationships.field_theme_image.localFile.relativePath} />
+</div>
 
-export default IndexPage
-
-// export const query = graphql `
-//   query AboutQuery 
-//   {allNodeArticle {
-//   edges {
-//     node {
-//       title
-//       body {
-//         value
-//         format
-//         processed
-//         summary
-//       }
-//     }
-//   }
-// }}
-// `
+export const query = graphql `
+  query MyFilesQuery {
+    allTaxonomyTermThemes
+      (filter: {tid: {eq: 3}})
+      {
+      edges {
+        node {
+          id
+          relationships {
+            field_theme_image {
+              localFile {
+                id
+                relativePath
+                absolutePath
+              }
+            }
+          }
+        }
+      }
+    }}
+  
+`
