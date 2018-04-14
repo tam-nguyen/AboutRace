@@ -2,7 +2,7 @@ const React = require('react')
 const range = require('range')
 const ReactFlex = require('react-flex')
 require('react-flex/index.css')
-const Img = require('gatsby-image')
+import Img from 'gatsby-image'
 
 const Card = props => (
   <div
@@ -70,9 +70,14 @@ class ThemePage extends React.Component {
     return (
       <div>
         <h1>{theme.name}</h1>
-        {theme.relationships.field_theme_image
-          ? null // TODO: Img here, see https://github.com/gatsbyjs/gatsby/blob/master/examples/using-drupal/src/templates/recipe.js
-          : null}
+        {theme.relationships.field_theme_image ? (
+          <Img
+            sizes={
+              theme.relationships.field_theme_image.localFile.childImageSharp
+                .sizes
+            }
+          />
+        ) : null}
 
         {theme.description ? (
           <div
@@ -102,8 +107,11 @@ export const pageQuery = graphql`
       relationships {
         field_theme_image {
           localFile {
-            absolutePath
-            relativePath
+            childImageSharp {
+              sizes(maxWidth: 960, quality: 90) {
+                ...GatsbyImageSharpSizes
+              }
+            }
           }
         }
 
