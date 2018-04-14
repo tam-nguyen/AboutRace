@@ -5,10 +5,16 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "gatsby": "^1.9.241",
-    "gatsby-link": "^1.6.39",
+    "gatsby-image": "^1.0.45",
+    "gatsby-link": "^1.6.40",
     "gatsby-plugin-react-helmet": "^2.0.8",
     "gatsby-plugin-sharp": "^1.6.42",
     "gatsby-source-drupal": "file:gatsby-source-drupal-2.0.31-pbs-race-custom.tgz",
+    "gatsby-transformer-sharp": "^1.6.22",
+    "lodash": "^4.17.5",
+    "path": "^0.12.7",
+    "range": "0.0.3",
+    "react-flex": "^2.2.8",
     "react-helmet": "^5.2.0"
   },
   "keywords": [

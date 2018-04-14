@@ -11,6 +11,7 @@ module.exports = {
         baseUrl: `http://distributeddesign.institute/RacePI/`
       },
     },
-  
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
   ],
 };

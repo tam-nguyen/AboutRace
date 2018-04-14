@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'gatsby-link'
+import kebabCase from "lodash/kebabCase"
 
 const ContentNodeComponent = ({ data }) => (
   <li>
@@ -23,7 +25,7 @@ const SubThemeComponent = ({ data }) => (
 
 const ThemeComponent = ({ data }) => (
   <li>
-    Theme: <strong>{data.name}</strong>
+    Theme: <Link to={`/themes/${kebabCase(data.name)}`}>{data.name}</Link>
     {data.relationships.subthemes ? (
       <ul>
         {data.relationships.subthemes.map(subTheme => (
