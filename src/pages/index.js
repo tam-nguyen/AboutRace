@@ -69,6 +69,9 @@ export const query = graphql`
                   ... on node__clip {
                     title
                   }
+                  ... on node__quickfact {
+                    title
+                  }
                 }
               }
             }

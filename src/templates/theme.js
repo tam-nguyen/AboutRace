@@ -50,6 +50,11 @@ class SubthemeSection extends React.Component {
           <h4>{faq.title}</h4>
         </Card>
       )),
+      ...defaultToEmpty(subtheme.relationships.quickfacts).map(quickfact => (
+        <Card type="QuickFact">
+          <h4>{quickfact.title}</h4>
+        </Card>
+      )),
     ]
 
     const description = subtheme.description
@@ -149,6 +154,9 @@ export const pageQuery = graphql`
                 format
                 processed
               }
+            }
+            quickfacts: backref_field_belongs_to_subtheme_node_quickfact {
+              title
             }
           }
         }
