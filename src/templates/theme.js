@@ -16,7 +16,8 @@ const Card = props => (
       marginLeft: 50,
     }}
   >
-    {props.title}
+    <p>{props.type}</p>
+    <h4>{props.title}</h4>
   </div>
 )
 
@@ -31,13 +32,13 @@ class SubthemeSection extends React.Component {
 
     const allRelationships = [
       ...defaultToEmpty(subtheme.relationships.articles).map(article => (
-        <Card title={article.title} />
+        <Card title={article.title} type="Article" />
       )),
       ...defaultToEmpty(subtheme.relationships.clips).map(clip => (
-        <Card title={clip.title} />
+        <Card title={clip.title} type="Clip" />
       )),
       ...defaultToEmpty(subtheme.relationships.faqs).map(faq => (
-        <Card title={faq.title} />
+        <Card title={faq.title} type="FAQ" />
       )),
     ]
 
