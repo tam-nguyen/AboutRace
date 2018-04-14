@@ -17,7 +17,7 @@ const Card = props => (
     }}
   >
     <p>{props.type}</p>
-    <h4>{props.title}</h4>
+    {props.children}
   </div>
 )
 
@@ -32,13 +32,23 @@ class SubthemeSection extends React.Component {
 
     const allRelationships = [
       ...defaultToEmpty(subtheme.relationships.articles).map(article => (
-        <Card title={article.title} type="Article" />
+        <Card title={article.title} type="Article">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: article.field_short_version.processed,
+            }}
+          />
+        </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.clips).map(clip => (
-        <Card title={clip.title} type="Clip" />
+        <Card type="Clip">
+          <h4>{clip.title}</h4>
+        </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.faqs).map(faq => (
-        <Card title={faq.title} type="FAQ" />
+        <Card type="FAQ">
+          <h4>{faq.title}</h4>
+        </Card>
       )),
     ]
 
