@@ -43,6 +43,20 @@ class SubthemeSection extends React.Component {
       ...defaultToEmpty(subtheme.relationships.clips).map(clip => (
         <Card type="Clip">
           <h4>{clip.title}</h4>
+          {clip.relationships.field_clip ? (
+            <div>
+              <video style={{ width: '100%', display: 'block' }} controls>
+                <source
+                  src={clip.relationships.field_clip.localFile.publicURL}
+                  type={
+                    clip.relationships.field_clip.localFile.internal.mediaType
+                  }
+                />
+              </video>
+            </div>
+          ) : (
+            <small>No video file attached</small>
+          )}
         </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.faqs).map(faq => (
@@ -146,6 +160,16 @@ export const pageQuery = graphql`
             }
             clips: backref_field_belongs_to_subtheme_node_clip {
               title
+              relationships {
+                field_clip {
+                  localFile {
+                    publicURL
+                    internal {
+                      mediaType
+                    }
+                  }
+                }
+              }
             }
             faqs: backref_field_belongs_to_subtheme_node_faq {
               title
