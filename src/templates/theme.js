@@ -7,7 +7,18 @@ import Img from 'gatsby-image'
 import Card from '../components/card.js'
 import SubthemeSection from '../components/subtheme.js'
 
+const FlipMove = require('react-flip-move');
+import styled from 'styled-components';
 
+const Video = styled.video`
+  width: 100%;
+  display: block;
+`
+
+const DescriptionCard = styled.div`
+  min-width: 300px;
+  padding: 10px;
+`
 
 class ThemePage extends React.Component {
   render() {
@@ -24,8 +35,7 @@ class ThemePage extends React.Component {
           />
         ) : null}
         {theme.description ? (
-          <div
-            style={{ minWidth: 300 }}
+          <DescriptionCard
             dangerouslySetInnerHTML={{ __html: theme.description.processed }}
           />
         ) : null}
