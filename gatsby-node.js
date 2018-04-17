@@ -15,7 +15,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
   return new Promise((resolve, reject) => {
     const themeTemplate = path.resolve(`src/templates/theme.js`)
-    console.log('here???')
     // Query for markdown nodes to use in creating pages.
     graphql(
       `
@@ -31,11 +30,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       `
     ).then(result => {
-      console.log('here2')
       if (result.errors) {
-        console.log('yo yo yo')
-        console.log(result.errors)
-        debugger;
         resolve()
         // reject(result.errors);
       }

@@ -16,6 +16,7 @@
     "path": "^0.12.7",
     "range": "0.0.3",
     "react-flex": "^2.2.8",
+    "react-flip-move": "^3.0.1",
     "react-helmet": "^5.2.0"
   },
   "keywords": [

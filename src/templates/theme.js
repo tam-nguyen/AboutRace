@@ -3,23 +3,31 @@ const range = require('range')
 const ReactFlex = require('react-flex')
 require('react-flex/index.css')
 import Img from 'gatsby-image'
+const FlipMove = require('react-flip-move');
 
-const Card = props => (
-  <div
-    style={{
-      display: 'inline-block',
-      minHeight: 50,
-      minWidth: 200,
-      textAlign: 'center',
-      border: '1px solid #dddddd',
-      padding: 10,
-      marginLeft: 50,
-    }}
-  >
-    <p>{props.type}</p>
-    {props.children}
-  </div>
-)
+class Card extends React.Component {
+  render() {
+    return (
+      <div
+        style={{
+          display: 'inline-block',
+          height: 200,
+          minWidth: 200,
+          maxWidth: 400,
+          textAlign: 'center',
+          border: '1px solid #dddddd',
+          padding: 10,
+          marginLeft: 50,
+          verticalAlign: `top`,
+        }}
+        keys={this.props.key}
+      >
+        <p>{this.props.type}</p>
+        {this.props.children}
+      </div>
+    )
+  }
+}
 
 class SubthemeSection extends React.Component {
   render() {
@@ -31,8 +39,8 @@ class SubthemeSection extends React.Component {
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
     const allRelationships = [
-      ...defaultToEmpty(subtheme.relationships.articles).map(article => (
-        <Card title={article.title} type="Article">
+      ...defaultToEmpty(subtheme.relationships.articles).map((article, i) => (
+        <Card key={`article-${i}`} title={article.title} type="Article">
           <div
             dangerouslySetInnerHTML={{
               __html: article.field_short_version.processed,
@@ -40,8 +48,8 @@ class SubthemeSection extends React.Component {
           />
         </Card>
       )),
-      ...defaultToEmpty(subtheme.relationships.clips).map(clip => (
-        <Card type="Clip">
+      ...defaultToEmpty(subtheme.relationships.clips).map((clip, i) => (
+        <Card key={`clip-${i}`} type="Clip">
           <h4>{clip.title}</h4>
           {clip.relationships.field_clip ? (
             <div>
@@ -59,13 +67,13 @@ class SubthemeSection extends React.Component {
           )}
         </Card>
       )),
-      ...defaultToEmpty(subtheme.relationships.faqs).map(faq => (
-        <Card type="FAQ">
+      ...defaultToEmpty(subtheme.relationships.faqs).map((faq, i) => (
+        <Card key={`faq-${i}`} type="FAQ">
           <h4>{faq.title}</h4>
         </Card>
       )),
-      ...defaultToEmpty(subtheme.relationships.quickfacts).map(quickfact => (
-        <Card type="QuickFact">
+      ...defaultToEmpty(subtheme.relationships.quickfacts).map((quickfact, i) => (
+        <Card key={`quickfact-${i}`} type="QuickFact">
           <h4>{quickfact.title}</h4>
         </Card>
       )),
@@ -75,6 +83,7 @@ class SubthemeSection extends React.Component {
       ? [
           <div
             style={{ minWidth: 300, padding: 10 }}
+            key="description"
             dangerouslySetInnerHTML={{ __html: subtheme.description.processed }}
           />,
         ]
@@ -82,12 +91,21 @@ class SubthemeSection extends React.Component {
 
     const allCards = [...description, ...allRelationships]
 
+    const filter = this.state && this.state.filter
+
     return (
       <div
         style={{ border: '1px solid #aaaaaa', padding: 20, marginBottom: 50 }}
       >
         <h3>{subtheme.name}</h3>
-        <div style={{ display: 'flex', overflowX: 'auto' }}>{allCards}</div>
+        <button onClick={() => { this.setState( {filter: !filter} )}}>
+          Filter
+        </button>
+        <div style={{ display: 'flex', overflowX: 'auto' }}>
+          <FlipMove duration={750} easing="ease-out">
+            {allCards.filter((obj, i) => ((i % 2 == 0) || !filter))}
+          </FlipMove>
+        </div>
       </div>
     )
   }
@@ -96,7 +114,6 @@ class SubthemeSection extends React.Component {
 class ThemePage extends React.Component {
   render() {
     const theme = this.props.data.taxonomyTermThemes
-
     return (
       <div>
         <h1>{theme.name}</h1>
@@ -108,7 +125,6 @@ class ThemePage extends React.Component {
             }
           />
         ) : null}
-
         {theme.description ? (
           <div
             style={{ minWidth: 300 }}
