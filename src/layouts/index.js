@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-
+import Typekit from 'react-typekit';
 import Header from '../components/Header'
 import './index.css'
 
@@ -10,6 +10,7 @@ const TemplateWrapper = ({ children }) => (
   <div>
     <Helmet
       title="Race: The Power of an Illusion"
+
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
@@ -20,12 +21,11 @@ const TemplateWrapper = ({ children }) => (
       style={{
         margin: '0 auto',
         maxWidth:'100%',
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
       }}
     >
       {children()}
     </div>
+    <Typekit kitId="pte4pny" />
   </div>
 )
 

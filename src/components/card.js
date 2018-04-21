@@ -12,9 +12,9 @@ class Card extends React.Component {
     render() {
         return (
         <div className={this.props.className}>
-            <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
-            <p>{this.props.type}</p>
+            <h4>{this.props.type}</h4>
             {this.props.children}
+            <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
         </div>
         )
     }
@@ -22,13 +22,13 @@ class Card extends React.Component {
 
 const StyledCard = styled(Card)`
   display: inline-block;
-  height: 200px;
-  min-width: 200px;
-  max-width: 400px;
-  text-align: center;
-  border: 1px solid #dddddd;
-  padding: 10px;
-  margin-left: 50px;
+  height: 400px;
+  width: 300px;
+  padding: 15px;
+  border: solid thin darkgrey;
+  background-color: lightgrey;
+  border-radius: 12px;
+  font-family: "ff-tisa-web-pro";
 `;
 
 export default StyledCard;

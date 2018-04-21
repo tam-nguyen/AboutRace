@@ -10,9 +10,29 @@ import SubthemeSection from '../components/subtheme.js'
 const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 
-const DescriptionCard = styled.div`
-  min-width: 300px;
-  padding: 10px;
+const ThemeDescription = styled.div`
+  margin: 0 auto;
+  margin-top: 300px;
+  font-size: 24px;
+  line-height: 1.6;
+  width: 630px;
+`
+const ThemeHeader = styled.div`
+  width: 100%;
+  height: 66vh;
+  background-image: url=({theme.relationships.field_theme_image.localFile});
+  background-color: lightgrey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -999;
+`
+
+const ThemeMain = styled.div`
+  position: absolute;
+  top: 66vh;
+  width: 100%;
 `
 
 class ThemePage extends React.Component {
@@ -20,23 +40,20 @@ class ThemePage extends React.Component {
     const theme = this.props.data.taxonomyTermThemes
     return (
       <div>
-        <h1>{theme.name}</h1>
-        {theme.relationships.field_theme_image ? (
-          <Img
-            sizes={
-              theme.relationships.field_theme_image.localFile.childImageSharp
-                .sizes
-            }
-          />
-        ) : null}
-        {theme.description ? (
-          <DescriptionCard
-            dangerouslySetInnerHTML={{ __html: theme.description.processed }}
-          />
-        ) : null}
-        {theme.relationships.subthemes.map(subtheme => (
-          <SubthemeSection data={subtheme} />
-        ))}
+        <ThemeHeader>
+          <h1>{theme.name}</h1>
+          {theme.description ? (
+            <ThemeDescription
+              dangerouslySetInnerHTML={{ __html: theme.description.processed }}
+            />
+          ) : null}
+        </ThemeHeader>
+        <ThemeMain>
+          {theme.relationships.subthemes.map(subtheme => (
+                    <SubthemeSection data={subtheme} />
+                  ))}
+        </ThemeMain>
+        
         <br />
       </div>
     )

@@ -53,7 +53,7 @@ class SubthemeSection extends React.Component {
       )),
       ...defaultToEmpty(subtheme.relationships.faqs).map((faq, i) => (
         <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
-          <h4>{faq.title}</h4>
+          <h3>{faq.title}</h3>
         </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.quickfacts).map((quickfact, i) => (
@@ -95,9 +95,9 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  border: 1px solid #aaaaaa;
+  background-color: cornflowerblue;
   padding: 20px;
-  margin-bottom: 50px;
+  margin: 50px;
 `
 
 export default SubthemeContainer;
