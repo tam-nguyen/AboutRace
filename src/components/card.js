@@ -6,22 +6,12 @@ import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
+import styled from 'styled-components';
+
 class Card extends React.Component {
     render() {
         return (
-        <div
-            style={{
-            display: 'inline-block',
-            height: 200,
-            width: 300,
-            textAlign: 'center',
-            border: '1px solid #dddddd',
-            padding: 10,
-            marginLeft: 50,
-            verticalAlign: `top`,
-            }}
-            keys={this.props.key}
-        >
+        <div className={this.props.className}>
             <Link to={`/articles/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
             <p>{this.props.type}</p>
             {this.props.children}
@@ -29,6 +19,17 @@ class Card extends React.Component {
         )
     }
 }
+
+const StyledCard = styled(Card)`
+  display: inline-block;
+  height: 200;
+  min-width: 200;
+  max-width: 400;
+  text-align: center;
+  border: 1px solid #dddddd;
+  padding: 10;
+  margin-left: 50;
+`;
 
 export default Card;
 

@@ -7,6 +7,8 @@ const FlipMove = require('react-flip-move');
 
 import Card from './card.js';
 
+import styled from 'styled-components';
+
 class SubthemeSection extends React.Component {
   render() {
     const subtheme = this.props.data
@@ -72,9 +74,7 @@ class SubthemeSection extends React.Component {
     const filter = this.state && this.state.filter
 
     return (
-      <div
-        style={{ border: '1px solid #aaaaaa', padding: 20, marginBottom: 50 }}
-      >
+      <div className={this.props.className}>
         <h3>{subtheme.name}</h3>
         <button onClick={() => { this.setState( {filter: !filter} )}}>
           Filter
@@ -89,5 +89,12 @@ class SubthemeSection extends React.Component {
   }
 }
 
-export default SubthemeSection;
+
+const SubthemeContainer = styled(SubthemeSection)`
+  border: 1px solid #aaaaaa;
+  padding: 20px;
+  margin-bottom: 50px;
+`
+
+export default SubthemeContainer;
 
