@@ -9,6 +9,11 @@ import Card from './card.js';
 
 import styled from 'styled-components';
 
+const Video = styled.video`
+  width: 100%;
+  display: block;
+`
+
 class SubthemeSection extends React.Component {
   render() {
     const subtheme = this.props.data
@@ -20,7 +25,7 @@ class SubthemeSection extends React.Component {
 
     const allRelationships = [
       ...defaultToEmpty(subtheme.relationships.articles).map((article, i) => (
-        <Card key={`article-${i}`} title={article.title} type="Article">
+        <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
           <div
             dangerouslySetInnerHTML={{
               __html: article.field_short_version.processed,
@@ -29,18 +34,18 @@ class SubthemeSection extends React.Component {
         </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.clips).map((clip, i) => (
-        <Card key={`clip-${i}`} type="Clip">
+        <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip">
           <h4>{clip.title}</h4>
           {clip.relationships.field_clip ? (
             <div>
-              <video style={{ width: '100%', display: 'block' }} controls>
+              <Video controls>
                 <source
                   src={clip.relationships.field_clip.localFile.publicURL}
                   type={
                     clip.relationships.field_clip.localFile.internal.mediaType
                   }
                 />
-              </video>
+              </Video>
             </div>
           ) : (
             <small>No video file attached</small>
@@ -48,12 +53,12 @@ class SubthemeSection extends React.Component {
         </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.faqs).map((faq, i) => (
-        <Card key={`faq-${i}`} type="FAQ">
+        <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
           <h4>{faq.title}</h4>
         </Card>
       )),
       ...defaultToEmpty(subtheme.relationships.quickfacts).map((quickfact, i) => (
-        <Card key={`quickfact-${i}`} type="QuickFact">
+        <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact">
           <h4>{quickfact.title}</h4>
         </Card>
       )),

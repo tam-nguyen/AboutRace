@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Race: The Power of an Illusion',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

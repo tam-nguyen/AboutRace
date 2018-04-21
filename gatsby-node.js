@@ -16,6 +16,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     const themeTemplate = path.resolve(`src/templates/theme.js`)
     const singleTemplate = path.resolve(`src/templates/single.js`)
+    const clipTemplate = path.resolve(`src/templates/clip.js`)
+
     // Query for markdown nodes to use in creating pages.
     graphql(
       `
@@ -29,6 +31,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
           }
           allNodeArticle {
+            edges {
+              node {
+                id
+                title
+              }
+            }
+          }
+          allNodeClip {
             edges {
               node {
                 id
@@ -59,6 +69,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         createPage({
           path: `/articles/${kebabCase(edge.node.title)}`, // required
           component: singleTemplate,
+          context: {
+            id: edge.node.id,
+          },
+        })
+      })
+      _.each(result.data.allNodeClip.edges, edge => {
+        createPage({
+          path: `/clips/${kebabCase(edge.node.title)}`, // required
+          component: clipTemplate,
           context: {
             id: edge.node.id,
           },
