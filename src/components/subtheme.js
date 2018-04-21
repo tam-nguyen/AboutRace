@@ -4,10 +4,9 @@ const ReactFlex = require('react-flex')
 require('react-flex/index.css')
 import Img from 'gatsby-image'
 const FlipMove = require('react-flip-move');
+import styled from 'styled-components';
 
 import Card from './card.js';
-
-import styled from 'styled-components';
 
 const Video = styled.video`
   width: 100%;
