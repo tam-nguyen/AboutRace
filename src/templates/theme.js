@@ -10,11 +10,6 @@ import SubthemeSection from '../components/subtheme.js'
 const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 
-const Video = styled.video`
-  width: 100%;
-  display: block;
-`
-
 const DescriptionCard = styled.div`
   min-width: 300px;
   padding: 10px;
