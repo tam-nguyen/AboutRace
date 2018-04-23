@@ -382,6 +382,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  line-height: 1.7;
 }
 figure {
   margin-left: 0;
@@ -634,10 +635,23 @@ pre tt:after {
 
 .column {
   flex-basis: 100%;
+  margin-left:15px;
+  margin-right:15px;
+  flex: 1;   /* just moved this here */ 
 }
 
-@media screen and (min-width: 800px) {
+._60 {
+  flex: 1.5;
+  max-width: 720px;
+}
+
+._25 {
+  flex: .25;
+}
+
+
+/* @media screen and (min-width: 800px) {
   .column {
     flex: 1;
   }
-}
+} */

@@ -11,8 +11,9 @@ const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 
 const ThemeDescription = styled.div`
-  margin: 0 auto;
-  margin-top: 300px;
+  color: white;
+  font-weight: normal;
+  margin-top: 30px;
   font-size: 24px;
   line-height: 1.6;
   width: 630px;
@@ -21,12 +22,20 @@ const ThemeHeader = styled.div`
   width: 100%;
   height: 66vh;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   background-color: lightgrey;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: -999;
+`
+
+const ThemeIntro = styled.div`
+  margin-left: 30px;
+  margin-top: 120px;
 `
 
 const ThemeMain = styled.div`
@@ -41,12 +50,15 @@ class ThemePage extends React.Component {
     return (
       <div>
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-          <h1>{theme.name}</h1>
-          {theme.description ? (
-            <ThemeDescription
-              dangerouslySetInnerHTML={{ __html: theme.description.processed }}
-            />
-          ) : null}
+          <ThemeIntro>
+            <h1>{theme.name}</h1>
+            {theme.description ? (
+              <ThemeDescription
+                dangerouslySetInnerHTML={{ __html: theme.description.processed }}
+              />
+            ) : null}
+          </ThemeIntro>
+         
         </ThemeHeader>
         <ThemeMain>
           {theme.relationships.subthemes.map(subtheme => (
