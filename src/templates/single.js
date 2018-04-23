@@ -1,5 +1,5 @@
 const React = require('react')
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 // const MainContent = styled.div`
 //   max-width: 700px;
@@ -11,9 +11,10 @@ const LargeCalloutText = styled.div`
   font-weight: normal;
 `
 const ArticleHeader = styled.div`
-width: 100%;
+  width: 100%;
   height: 66vh;
-  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
+  background-image: ${props =>
+    props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -26,8 +27,13 @@ width: 100%;
 `
 
 export default ({ data }) => (
-    <div className="row">
-    <ArticleHeader background={data.nodeArticle.relationships.field_main_image && data.nodeArticle.relationships.field_main_image.localFile.publicURL}>
+  <div className="row">
+    <ArticleHeader
+      background={
+        data.nodeArticle.relationships.field_main_image &&
+        data.nodeArticle.relationships.field_main_image.localFile.publicURL
+      }
+    >
       <div className="column _25" />
       <div className="column">
         <strong>{data.nodeArticle.title}</strong>
@@ -37,18 +43,17 @@ export default ({ data }) => (
           dangerouslySetInnerHTML={{
             __html: data.nodeArticle.field_large_callout_text.processed,
           }}
-          />
-          <div 
+        />
+        <div
           dangerouslySetInnerHTML={{
             __html: data.nodeArticle.field_full_version.processed,
           }}
         />
-      
-      </div>  
+      </div>
       <div className="column _25" />
     </ArticleHeader>
-    </div>
-  )
+  </div>
+)
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
@@ -56,14 +61,18 @@ export const pageQuery = graphql`
       id
       title
       relationships {
-        field_main_image
+        field_main_image {
+          localFile {
+            publicURL
+          }
+        }
       }
       field_large_callout_text {
         processed
       }
       field_full_version {
-          processed
+        processed
       }
     }
-}
+  }
 `
