@@ -20,7 +20,7 @@ const ThemeDescription = styled.div`
 const ThemeHeader = styled.div`
   width: 100%;
   height: 66vh;
-  background-image: url=({theme.relationships.field_theme_image.localFile});
+  background-image: url(${props => props.background ?  `url(${props.background})` : `none`});
   background-color: lightgrey;
   position: absolute;
   top: 0;
@@ -40,7 +40,7 @@ class ThemePage extends React.Component {
     const theme = this.props.data.taxonomyTermThemes
     return (
       <div>
-        <ThemeHeader>
+        <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
           <h1>{theme.name}</h1>
           {theme.description ? (
             <ThemeDescription
@@ -73,6 +73,7 @@ export const pageQuery = graphql`
       relationships {
         field_theme_image {
           localFile {
+            publicURL
             childImageSharp {
               sizes(maxWidth: 960, quality: 90) {
                 ...GatsbyImageSharpSizes
