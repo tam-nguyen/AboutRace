@@ -1,11 +1,11 @@
 const React = require('react')
 import styled from 'styled-components';
 
-const MainContent = styled.div`
-  max-width: 700px;
-  margin-left: 48%;
-  margin-right: 12%;
-`
+// const MainContent = styled.div`
+//   max-width: 700px;
+//   margin-left: 48%;
+//   margin-right: 12%;
+// `
 const LargeCalloutText = styled.div`
   font-size: 24px;
   font-weight: 600;
@@ -13,10 +13,11 @@ const LargeCalloutText = styled.div`
 
 
 export default ({ data }) => (
-    <div>
+    <div className="row">
+      <div className="column">
       <strong>{data.nodeArticle.title}</strong>
-      
-      <MainContent>
+      </div>
+      <div className="column">
         <LargeCalloutText
           dangerouslySetInnerHTML={{
             __html: data.nodeArticle.field_large_callout_text.processed,
@@ -28,7 +29,7 @@ export default ({ data }) => (
           }}
         />
        
-      </MainContent>  
+      </div>  
     </div>
   )
 
