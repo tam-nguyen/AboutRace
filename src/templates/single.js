@@ -26,6 +26,11 @@ const ArticleHeader = styled.div`
   z-index: -999;
 `
 
+const ArticleMain = styled.div`
+  background-color: white;
+  padding: 30px;
+`
+
 export default ({ data }) => (
   <div className="row">
     <ArticleHeader
@@ -33,12 +38,12 @@ export default ({ data }) => (
         data.nodeArticle.relationships.field_main_image &&
         data.nodeArticle.relationships.field_main_image.localFile.publicURL
       }
-    >
+    />
       <div className="column _25" />
       <div className="column">
         <strong>{data.nodeArticle.title}</strong>
       </div>
-      <div className="column _60">
+      <ArticleMain className="column _60">
         <LargeCalloutText
           dangerouslySetInnerHTML={{
             __html: data.nodeArticle.field_large_callout_text.processed,
@@ -49,9 +54,9 @@ export default ({ data }) => (
             __html: data.nodeArticle.field_full_version.processed,
           }}
         />
-      </div>
+      </ArticleMain>
       <div className="column _25" />
-    </ArticleHeader>
+    
   </div>
 )
 
