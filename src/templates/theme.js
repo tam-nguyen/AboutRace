@@ -20,7 +20,7 @@ const ThemeDescription = styled.div`
 const ThemeHeader = styled.div`
   width: 100%;
   height: 66vh;
-  background-image: url(${props => props.background ?  `url(${props.background})` : `none`});
+  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-color: lightgrey;
   position: absolute;
   top: 0;
