@@ -31,34 +31,93 @@ const ArticleMain = styled.div`
   padding: 30px;
 `
 
-export default ({ data }) => (
-  <div className="row">
-    <ArticleHeader
-      background={
-        data.nodeArticle.relationships.field_main_image &&
-        data.nodeArticle.relationships.field_main_image.localFile.publicURL
-      }
+const Overlay = styled.div`
+  background-color: #FFFFE0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%
+`
+
+const Centered = styled.div`
+  border: 1px solid #888888;
+  position: relative;
+  top: 50%;
+  width: 50%;
+  transform: translate(50%,-50%);
+`
+const QuickFactOverlay = ({ quickFact }) => (
+  <Overlay>
+    <Centered
+      dangerouslySetInnerHTML={{
+        __html: quickFact.field_quickfact.processed,
+      }}
     />
-      <div className="column _25" />
-      <div className="column">
-        <strong>{data.nodeArticle.title}</strong>
-      </div>
-      <ArticleMain className="column _60">
-        <LargeCalloutText
-          dangerouslySetInnerHTML={{
-            __html: data.nodeArticle.field_large_callout_text.processed,
-          }}
-        />
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data.nodeArticle.field_full_version.processed,
-          }}
-        />
-      </ArticleMain>
-      <div className="column _25" />
-    
-  </div>
+  </Overlay>
 )
+
+class SingleArticle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  render() {
+    const { data } = this.props
+    return (
+      <div className="row">
+        {
+          this.state.quickFact ?
+            <QuickFactOverlay
+              quickFact={this.state.quickFact}
+            /> :
+            null
+        }
+        <ArticleHeader
+          background={
+            data.nodeArticle.relationships.field_main_image &&
+            data.nodeArticle.relationships.field_main_image.localFile.publicURL
+          }
+        />
+          <div className="column _25">
+          </div>
+          <div className="column">
+            <strong>{data.nodeArticle.title}</strong>
+            <div style={{height: 200}}/>
+            {
+              (data.nodeArticle.relationships.backref_field_related_content || []).map(quickFact => (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: quickFact.field_quickfact.processed,
+                    }}
+                    onClick={() => this.setState({ quickFact: quickFact })}
+                  />
+                )
+              )
+            }
+          </div>
+
+          <ArticleMain className="column _60">
+            <LargeCalloutText
+              dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_large_callout_text.processed,
+              }}
+            />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_full_version.processed,
+              }}
+            />
+          </ArticleMain>
+          <div className="column _25" />
+
+      </div>
+    )
+  }
+}
+
+export default SingleArticle
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
@@ -69,6 +128,16 @@ export const pageQuery = graphql`
         field_main_image {
           localFile {
             publicURL
+          }
+        }
+        backref_field_related_content {
+          title
+          id
+          field_quickfact {
+            value
+            format
+            processed
+            summary
           }
         }
       }
