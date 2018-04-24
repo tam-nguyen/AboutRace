@@ -13,55 +13,57 @@ const Video = styled.video`
   display: block;
 `
 
+const defaultToEmpty = arr => (arr ? arr : [])
+
+export const getCards = (relationships) => [
+  ...defaultToEmpty(relationships.articles).map((article, i) => (
+    <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
+      <div
+        dangerouslySetInnerHTML={{
+          __html: article.field_short_version.processed,
+        }}
+      />
+    </Card>
+  )),
+  ...defaultToEmpty(relationships.clips).map((clip, i) => (
+    <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip">
+      <h4>{clip.title}</h4>
+      {clip.relationships.field_clip ? (
+        <div>
+          <Video controls>
+            <source
+              src={clip.relationships.field_clip.localFile.publicURL}
+              type={
+                clip.relationships.field_clip.localFile.internal.mediaType
+              }
+            />
+          </Video>
+        </div>
+      ) : (
+        <small>No video file attached</small>
+      )}
+    </Card>
+  )),
+  ...defaultToEmpty(relationships.faqs).map((faq, i) => (
+    <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
+      <h3>{faq.title}</h3>
+    </Card>
+  )),
+  ...defaultToEmpty(relationships.quickfacts).map((quickfact, i) => (
+    <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact">
+      <h4>{quickfact.title}</h4>
+    </Card>
+  )),
+]
+
 class SubthemeSection extends React.Component {
   render() {
     const subtheme = this.props.data
     const { Flex, Item } = ReactFlex
 
-    const defaultToEmpty = arr => (arr ? arr : [])
-
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
-    const allRelationships = [
-      ...defaultToEmpty(subtheme.relationships.articles).map((article, i) => (
-        <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: article.field_short_version.processed,
-            }}
-          />
-        </Card>
-      )),
-      ...defaultToEmpty(subtheme.relationships.clips).map((clip, i) => (
-        <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip">
-          <h4>{clip.title}</h4>
-          {clip.relationships.field_clip ? (
-            <div>
-              <Video controls>
-                <source
-                  src={clip.relationships.field_clip.localFile.publicURL}
-                  type={
-                    clip.relationships.field_clip.localFile.internal.mediaType
-                  }
-                />
-              </Video>
-            </div>
-          ) : (
-            <small>No video file attached</small>
-          )}
-        </Card>
-      )),
-      ...defaultToEmpty(subtheme.relationships.faqs).map((faq, i) => (
-        <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
-          <h3>{faq.title}</h3>
-        </Card>
-      )),
-      ...defaultToEmpty(subtheme.relationships.quickfacts).map((quickfact, i) => (
-        <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact">
-          <h4>{quickfact.title}</h4>
-        </Card>
-      )),
-    ]
+    const allRelationships = getCards(subtheme.relationships)
 
     const description = subtheme.description
       ? [

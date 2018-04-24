@@ -1,6 +1,6 @@
 const React = require('react')
 import styled from 'styled-components'
-
+import { getCards } from '../components/subtheme'
 // const MainContent = styled.div`
 //   max-width: 700px;
 //   margin-left: 48%;
@@ -34,6 +34,7 @@ const ArticleMain = styled.div`
 const Overlay = styled.div`
   background-color: #FFFFE0;
   position: fixed;
+  opacity: 0.8;
   left: 0;
   top: 0;
   height: 100%;
@@ -42,20 +43,56 @@ const Overlay = styled.div`
 
 const Centered = styled.div`
   border: 1px solid #888888;
+  opacity: 1;
   position: relative;
   top: 50%;
   width: 50%;
-  transform: translate(50%,-50%);
+  padding: 20px;
+  transform: translate(50%, -50%);
 `
-const QuickFactOverlay = ({ quickFact }) => (
-  <Overlay>
-    <Centered
-      dangerouslySetInnerHTML={{
-        __html: quickFact.field_quickfact.processed,
-      }}
-    />
-  </Overlay>
-)
+class QuickFactOverlay extends React.Component {
+  render() {
+    const { quickFact } = this.props
+
+    const quickClips = quickFact.relationships.field_related_content || [];
+
+    const quickClipLinks = {
+      articles: [],
+      clips: [],
+      faqs: [],
+      quickFacts: []
+    }
+
+    quickClips.forEach(item => {
+      if (item.__typename == `node__faq`) {
+        quickClipLinks.faqs.push(item)
+      } else if (item.__typename == `node__article`) {
+        quickClipLinks.articles.push(item)
+      } else if (item.__typename == `node__clip`) {
+        quickClipLinks.clips.push(item)
+      }
+    })
+
+    return (
+      <Overlay>
+        <Centered>
+          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`}}>
+            <b>Close</b>
+          </div>
+          <h3>{quickFact.title}</h3>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: quickFact.field_quickfact.processed,
+            }}
+          />
+          {
+            getCards(quickClipLinks).slice(0,2)
+          }
+        </Centered>
+      </Overlay>
+    )
+  }
+}
 
 class SingleArticle extends React.Component {
   constructor(props) {
@@ -65,12 +102,14 @@ class SingleArticle extends React.Component {
 
   render() {
     const { data } = this.props
+
     return (
       <div className="row">
         {
           this.state.quickFact ?
             <QuickFactOverlay
               quickFact={this.state.quickFact}
+              closeHandler={() => this.setState({ quickFact: null })}
             /> :
             null
         }
@@ -87,12 +126,15 @@ class SingleArticle extends React.Component {
             <div style={{height: 200}}/>
             {
               (data.nodeArticle.relationships.backref_field_related_content || []).map(quickFact => (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: quickFact.field_quickfact.processed,
-                    }}
-                    onClick={() => this.setState({ quickFact: quickFact })}
-                  />
+                  <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
+                    <h3>{quickFact.title}</h3>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: quickFact.field_quickfact.processed,
+                      }}
+                      onClick={() => this.setState({ quickFact: quickFact })}
+                    />
+                  </div>
                 )
               )
             }
@@ -138,6 +180,36 @@ export const pageQuery = graphql`
             format
             processed
             summary
+          }
+          relationships {
+            field_related_content {
+              __typename
+              ... on node__faq {
+                title
+                field_expert_1 {
+                  processed
+                }
+              }
+              ... on node__clip {
+                title
+                relationships {
+                  field_clip {
+                    localFile {
+                      publicURL
+                      internal {
+                        mediaType
+                      }
+                    }
+                  }
+                }
+              }
+              ... on node__article {
+                title
+                field_short_version {
+                  processed
+                }
+              }
+            }
           }
         }
       }

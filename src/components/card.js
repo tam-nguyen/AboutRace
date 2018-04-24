@@ -29,6 +29,7 @@ const StyledCard = styled(Card)`
   background-color: lightgrey;
   border-radius: 12px;
   font-family: "ff-tisa-web-pro";
+  vertical-align: top;
 `;
 
 export default StyledCard;
