@@ -9,7 +9,7 @@
     "gatsby-link": "^1.6.40",
     "gatsby-plugin-react-helmet": "^2.0.8",
     "gatsby-plugin-sharp": "^1.6.42",
-    "gatsby-source-drupal": "file:gatsby-source-drupal-2.0.31-pbs-race-custom-2.tgz",
+    "gatsby-source-drupal": "file:gatsby-source-drupal-2.0.31-pbs-race-custom-3.tgz",
     "gatsby-source-filesystem": "^1.5.32",
     "gatsby-transformer-sharp": "^1.6.22",
     "lodash": "^4.17.5",
