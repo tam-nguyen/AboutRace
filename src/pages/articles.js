@@ -17,16 +17,19 @@ const SubThemeComponent = ({ data }) => (
   </li>
 )
 
-const ThemeComponent = ({ data, right }) => (
-  <div style={{float: right ? 'right': 'left'}}>
-    Article: <strong>{data.title}</strong>
-    <div dangerouslySetInnerHTML={{
-        __html: data.field_medium_version.processed,
-      }}
-    />
-
-
-    {/* {data.relationships.field_belongs_to_subtheme ? (
+const ThemeComponent = ({ data, right }) => {
+  console.log(data)
+  return (
+    <div style={{ float: right ? 'right' : 'left' }}>
+      Article: <strong>{data.title}</strong>
+      {data.field_medium_version && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data.field_medium_version.processed,
+          }}
+        />
+      )}
+      {/* {data.relationships.field_belongs_to_subtheme ? (
       <ul>
         {data.relationships.field_belongs_to_subtheme.map(subTheme => (
           <SubThemeComponent data={subTheme} />
@@ -35,13 +38,14 @@ const ThemeComponent = ({ data, right }) => (
     ) : (
       <div>No subthemes</div>
     )} */}
-  </div>
-)
+    </div>
+  )
+}
 
 export default ({ data }) => (
   <ul>
     {data.allNodeArticle.edges.map((edge, i) => (
-      <ThemeComponent data={edge.node} right={i%2} />
+      <ThemeComponent data={edge.node} right={i % 2} />
     ))}
   </ul>
 )
