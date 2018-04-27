@@ -15,6 +15,33 @@ const Video = styled.video`
 
 const defaultToEmpty = arr => (arr ? arr : [])
 
+const shuffle = (arr) => {
+  var currentIndex = arr.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = arr[currentIndex];
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = temporaryValue;
+  }
+
+  return arr;
+}
+
+const reorder = (arr, order) => {
+  const newArr = new Array(arr.length);
+  order.forEach((item, i) => {
+    newArr[i] = arr[item];
+  })
+  return newArr;
+}
+
 export const getCards = (relationships) => [
   ...defaultToEmpty(relationships.articles).map((article, i) => (
     <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
@@ -57,13 +84,23 @@ export const getCards = (relationships) => [
 ]
 
 class SubthemeSection extends React.Component {
+  constructor(props){
+    super(props)
+
+    const rels = props.data.relationships
+    const getLength = (arr) => arr && arr.length || 0;
+    const length = getLength(rels.articles) + getLength(rels.faqs) + getLength(rels.clips) + getLength(rels.quickfacts)
+    this.order = shuffle(range.range(length))
+    console.log(this.order)
+  }
+
   render() {
     const subtheme = this.props.data
     const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
-    const allRelationships = getCards(subtheme.relationships)
+    const allRelationships = shuffle(getCards(subtheme.relationships), this.order)
 
     const description = subtheme.description
       ? [
@@ -85,10 +122,8 @@ class SubthemeSection extends React.Component {
         <button onClick={() => { this.setState( {filter: !filter} )}}>
           Filter
         </button>
-        <div style={{ display: 'flex', overflowX: 'auto' }}>
-          <FlipMove duration={750} easing="ease-out">
-            {allCards.filter((obj, i) => ((i % 2 == 0) || !filter))}
-          </FlipMove>
+        <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
+          {allCards.filter((obj, i) => ((i % 2 == 0) || !filter))}
         </div>
       </div>
     )

@@ -6,7 +6,7 @@ import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 class Card extends React.Component {
     render() {
@@ -20,16 +20,32 @@ class Card extends React.Component {
     }
 }
 
+const BASE_CARD_WIDTH = 350;
+const FLEX = 100;
+const MAX_WIDTH_CONSTANT = 1.2;
+const ARTICLE_MULTIPLIER = 1.5;
+const QUICK_FACT_MULTIPLIER = 1.5;
+
 const StyledCard = styled(Card)`
   display: inline-block;
   height: 400px;
-  width: 300px;
+  flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   padding: 15px;
   border: solid thin darkgrey;
   background-color: lightgrey;
   border-radius: 12px;
   font-family: "ff-tisa-web-pro";
   vertical-align: top;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  ${props => props.type == `Article` && css`
+    flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
+  `}
+
+  ${props => props.type == `QuickFact` && css`
+    flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * QUICK_FACT_MULTIPLIER} ${BASE_CARD_WIDTH * QUICK_FACT_MULTIPLIER}px;
+  `}
 `;
 
 export default StyledCard;
