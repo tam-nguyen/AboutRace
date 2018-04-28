@@ -45,11 +45,9 @@ const reorder = (arr, order) => {
 export const getCards = (relationships) => [
   ...defaultToEmpty(relationships.articles).map((article, i) => (
     <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
-      <div
-        dangerouslySetInnerHTML={{
-          __html: article.field_short_version.processed,
-        }}
-      />
+      {article.field_short_version && (
+        <div dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+      )}
     </Card>
   )),
   ...defaultToEmpty(relationships.clips).map((clip, i) => (
