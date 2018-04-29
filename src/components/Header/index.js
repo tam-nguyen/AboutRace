@@ -49,6 +49,15 @@ const Header = () => (
       </Link>{' '}
       /{' '}
       <Link
+        to="/interviews/"
+        activeStyle={activeLinkStyle}
+        style={linkStyle}
+        exact
+      >
+        Interviews
+      </Link>{' '}
+      /{' '}
+      <Link
         to="/FAQs/"
         activeStyle={activeLinkStyle}
         style={linkStyle}
