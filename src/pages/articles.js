@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import './articles.css'
 
 // const ContentNodeComponent = ({ data }) => <li>{data.name}</li>
 
@@ -19,29 +19,36 @@ import styled from 'styled-components'
 //   </li>
 // )
 
-const Articles = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: -1em;
-  max-width: 1300px;
-`
-const ArticleCard = styled.div`
-  margin: 1em;
-  border: 1px solid red;
-  padding: 0.5em;
-  max-width: 700px;
-  display: flex;
-  &:nth-child(odd) {
-    align-self: flex-end;
-  }
-`
 
+// .card:nth-child(odd) .card__image {
+//   /* flexbox can change order of rendered elements*/
+//   order: 2;
+// }
+
+const ArticleTitle = styled.div`
+  text-transform: uppercase;
+  display:none;
+`
+const ArticleImage = styled.div`
+  background-image: ${props =>
+    props.background ? `url(${props.background})` : `none`};
+`
 
 const ArticleSummary = ({ data, right }) => {
   console.log(data)
   return (
-      <ArticleCard>
-        Article: <strong>{data.title}</strong>
+      <div className={"articleCard"}>
+        <ArticleTitle> {data.title} </ArticleTitle>
+        <h1>{data.field_author.processed}</h1>
+        <h2>{data.title}</h2>}
+        <ArticleImage
+        background={
+          data.relationships.field_main_image &&
+          data.relationships.field_main_image.localFile.publicURL
+        }
+        className={"articleCardImage"}>
+          {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
+        </ArticleImage>
         {data.field_medium_version && (
           <div
             dangerouslySetInnerHTML={{
@@ -58,16 +65,16 @@ const ArticleSummary = ({ data, right }) => {
       ) : (
         <div>No subthemes</div>
       )} */}
-      </ArticleCard>
+      </div>
   )
 }
 
 export default ({ data }) => (
-  <Articles>
+  <div className={"articles"}>
     {data.allNodeArticle.edges.map((edge, i) => (
       <ArticleSummary data={edge.node} />
     ))}
-  </Articles>
+  </div>
 )
 
 export const query = graphql`
@@ -77,10 +84,19 @@ export const query = graphql`
         node {
           id
           title
+          field_author {
+            processed
+          }
           field_medium_version {
             processed
           }
           relationships {
+            field_main_image {
+              id
+              localFile {
+                publicURL
+              }
+            }
             field_belongs_to_subtheme {
               id
               name

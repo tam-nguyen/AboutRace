@@ -1,0 +1,31 @@
+.articles {
+    display: flex;
+    flex-direction: column;
+    margin: -1em;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+  
+.articleCard {
+    margin: 1em;
+    border: 1px solid red;
+    padding: 0.5em;
+    max-width: 70%;
+    display: flex;
+}
+
+.articleCard:nth-child(odd) {
+    align-self: flex-end;
+  }
+
+.articleCardImage {
+    height: 480px;
+    background: red;
+    margin: 0.5em;
+    flex: 480px 0 0;    
+}
+
+.articleCard:nth-child(even) .articleCardImage {
+    /* flexbox can change order of rendered elements*/
+    order: 2;
+  }
