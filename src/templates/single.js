@@ -122,6 +122,10 @@ class SingleArticle extends React.Component {
           <div className="column _25">
           </div>
           <div className="column">
+          <img src={
+             data.nodeArticle.relationships.field_author_image &&
+             data.nodeArticle.relationships.field_author_image.localFile.publicURL
+          } />
             <strong>{data.nodeArticle.title}</strong>
             <div style={{height: 200}}/>
             {
@@ -167,6 +171,11 @@ export const pageQuery = graphql`
       id
       title
       relationships {
+        field_author_image {
+          localFile {
+            publicURL
+          }
+        }
         field_main_image {
           localFile {
             publicURL

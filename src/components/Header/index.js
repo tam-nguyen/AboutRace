@@ -35,11 +35,10 @@ const Header = () => (
           RACE
         </Link>
       </h1>
-      <Link to="/" activeStyle={activeLinkStyle} style={linkStyle} exact>
-        Home
+      <Link to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
+        The Film
       </Link>{' '}
       /{' '}
-      
       <Link
         to="/articles/"
         activeStyle={activeLinkStyle}
@@ -47,6 +46,24 @@ const Header = () => (
         exact
       >
         Articles
+      </Link>{' '}
+      /{' '}
+      <Link
+        to="/FAQs/"
+        activeStyle={activeLinkStyle}
+        style={linkStyle}
+        exact
+      >
+        FAQs
+      </Link>{' '}
+      /{' '}
+      <Link
+        to="/teaching/"
+        activeStyle={activeLinkStyle}
+        style={linkStyle}
+        exact
+      >
+        Teaching
       </Link>
     </div>
   </div>

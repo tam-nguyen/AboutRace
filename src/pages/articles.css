@@ -23,6 +23,8 @@
     margin: 0.5em;
     flex: 480px 0 0;  
     overflow: hidden;  
+    background-position: center center;
+    background-size: cover;
 }
 
 .articleCard:nth-child(even) .articleCardImage {

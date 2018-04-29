@@ -37,7 +37,7 @@ const ArticleImage = styled.div`
     props.background ? `url(${props.background})` : `none`};
 `
 
-const ArticleSummary = ({ data, right }) => {
+const ArticleSummary = ({ data }) => {
   console.log(data)
   return (
       <div className={"articleCard"}>
