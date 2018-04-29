@@ -36,18 +36,10 @@ const Header = () => (
         </Link>
       </h1>
       <Link to="/" activeStyle={activeLinkStyle} style={linkStyle} exact>
-        Themes
+        Home
       </Link>{' '}
       /{' '}
-      <Link
-        to="/themes-articles/"
-        activeStyle={activeLinkStyle}
-        style={linkStyle}
-        exact
-      >
-        Themes (with just articles)
-      </Link>{' '}
-      /{' '}
+      
       <Link
         to="/articles/"
         activeStyle={activeLinkStyle}

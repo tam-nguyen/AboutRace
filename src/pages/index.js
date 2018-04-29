@@ -26,7 +26,7 @@ const SubThemeComponent = ({ data }) => (
 const ThemeComponent = ({ data }) => (
   <li>
     Theme: <Link to={`/themes/${kebabCase(data.name)}`}>{data.name}</Link>
-    {data.relationships.subthemes ? (
+    {/* {data.relationships.subthemes ? (
       <ul>
         {data.relationships.subthemes.map(subTheme => (
           <SubThemeComponent data={subTheme} />
@@ -34,7 +34,7 @@ const ThemeComponent = ({ data }) => (
       </ul>
     ) : (
       <div>No subthemes</div>
-    )}
+    )} */}
   </li>
 )
 

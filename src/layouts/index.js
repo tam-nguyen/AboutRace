@@ -5,6 +5,7 @@ import Link from 'gatsby-link'
 import Typekit from 'react-typekit';
 import Header from '../components/Header'
 import './index.css'
+import {Navigation} from '../components/nav.js'
 
 const TemplateWrapper = ({ children }) => (
   <div>
@@ -24,6 +25,7 @@ const TemplateWrapper = ({ children }) => (
       }}
     >
       {children()}
+      {/* <Navigation /> */}
     </div>
     <Typekit kitId="pte4pny" />
   </div>

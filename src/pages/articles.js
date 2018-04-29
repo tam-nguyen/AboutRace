@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import './articles.css'
+import Link from 'gatsby-link'
+import kebabCase from 'lodash/kebabCase'
+
+
 
 // const ContentNodeComponent = ({ data }) => <li>{data.name}</li>
 
@@ -27,7 +31,6 @@ import './articles.css'
 
 const ArticleTitle = styled.div`
   text-transform: uppercase;
-  display:none;
 `
 const ArticleImage = styled.div`
   background-image: ${props =>
@@ -38,9 +41,6 @@ const ArticleSummary = ({ data, right }) => {
   console.log(data)
   return (
       <div className={"articleCard"}>
-        <ArticleTitle> {data.title} </ArticleTitle>
-        <h1>{data.field_author.processed}</h1>
-        <h2>{data.title}</h2>}
         <ArticleImage
         background={
           data.relationships.field_main_image &&
@@ -49,13 +49,20 @@ const ArticleSummary = ({ data, right }) => {
         className={"articleCardImage"}>
           {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
         </ArticleImage>
-        {data.field_medium_version && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data.field_medium_version.processed,
-            }}
-          />
-        )}
+        <div className="articleExcerpt">
+          {data.field_medium_version && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data.field_medium_version.processed,
+              }}
+            />
+            
+          )}
+          <ArticleTitle>
+          <Link to={`/articles/${kebabCase(data.title)}`}>{data.title}</Link>
+           </ArticleTitle>
+          <h1>{data.field_author.processed}</h1>
+          </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
           {data.relationships.field_belongs_to_subtheme.map(subTheme => (
