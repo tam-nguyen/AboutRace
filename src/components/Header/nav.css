@@ -1,0 +1,11 @@
+.logo {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+}
+
+.nav {
+    position: fixed;
+    top: 30px;
+    right: 60px;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import './nav.css'
 
 const linkStyle = {
   textDecoration: 'none',
@@ -17,13 +18,7 @@ const Header = () => (
       marginBottom: '1.45rem',
     }}
   >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: '100%',
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
+    <div className={'logo'}>
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
@@ -35,6 +30,8 @@ const Header = () => (
           RACE
         </Link>
       </h1>
+    </div>
+    <div className={'nav'}>
       <Link to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
         The Film
       </Link>{' '}
