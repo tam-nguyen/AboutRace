@@ -56,12 +56,12 @@ const ArticleSummary = ({ data }) => {
                 __html: data.field_medium_version.processed,
               }}
             />
-            
+
           )}
           <ArticleTitle>
           <Link to={`/articles/${kebabCase(data.title)}`}>{data.title}</Link>
            </ArticleTitle>
-          <h1>{data.field_author.processed}</h1>
+          <h1>{data.field_author && data.field_author.processed}</h1>
           </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
