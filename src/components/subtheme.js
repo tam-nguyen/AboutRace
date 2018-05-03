@@ -71,12 +71,12 @@ export const getCards = (relationships, queryFilter) => [
     </Card>
   )),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (
-    <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq" changed={faq.changed}>
+    <Card key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
       <h3>{faq.title}</h3>
     </Card>
   )),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (
-    <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact" changed={quickfact.changed}>
+    <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed}>
       <h4>{quickfact.title}</h4>
     </Card>
   )),

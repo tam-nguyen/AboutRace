@@ -85,9 +85,11 @@ class QuickFactOverlay extends React.Component {
               __html: quickFact.field_quickfact.processed,
             }}
           />
-          {
-            getCards(quickClipLinks).slice(0,2)
-          }
+          <div style={{ width: `100%`, display: `flex`}}>
+            {
+              getCards(quickClipLinks).slice(0,2)
+            }
+          </div>
         </Centered>
       </Overlay>
     )
