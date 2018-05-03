@@ -1,9 +1,10 @@
 const React = require('react')
 const ReactFlex = require('react-flex')
+const queryString = require('query-string');
+
 require('react-flex/index.css')
 import Img from 'gatsby-image'
-
-
+import kebabCase from 'lodash/kebabCase'
 import Card from '../components/card.js'
 import SubthemeSection from '../components/subtheme.js'
 
@@ -47,6 +48,14 @@ const ThemeMain = styled.div`
 class ThemePage extends React.Component {
   render() {
     const theme = this.props.data.taxonomyTermThemes
+
+    const queryParams = queryString.parse(this.props.location.search);
+
+    const getShortname = (subtheme) => {
+      const parts = subtheme.name.split('-');
+      return encodeURIComponent(kebabCase(parts[parts.length - 1]))
+    }
+
     return (
       <div>
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
@@ -58,14 +67,27 @@ class ThemePage extends React.Component {
               />
             ) : null}
           </ThemeIntro>
-         
+
         </ThemeHeader>
         <ThemeMain>
-          {theme.relationships.subthemes.map(subtheme => (
-                    <SubthemeSection data={subtheme} />
-                  ))}
+          {
+            theme.relationships.subthemes.sort((a, b) => {
+                var nameA = getShortname(a);
+                var nameB = getShortname(b);
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+              }).map(subtheme => (
+                <SubthemeSection
+                  data={subtheme}
+                  name={getShortname(subtheme)}
+                  filter={queryParams[getShortname(subtheme)]}
+                  queryParams={queryParams}
+                />
+              ))
+          }
         </ThemeMain>
-        
+
         <br />
       </div>
     )

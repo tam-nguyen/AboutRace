@@ -5,8 +5,9 @@ require('react-flex/index.css')
 import Img from 'gatsby-image'
 const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
-
+import { navigateTo } from 'gatsby-link';
 import Card from './card.js';
+const queryString = require('query-string');
 
 const Video = styled.video`
   width: 100%;
@@ -42,15 +43,15 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
-export const getCards = (relationships) => [
-  ...defaultToEmpty(relationships.articles).map((article, i) => (
+export const getCards = (relationships, queryFilter) => [
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (
     <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
       {article.field_short_version && (
         <div dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
       )}
     </Card>
   )),
-  ...defaultToEmpty(relationships.clips).map((clip, i) => (
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (
     <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip">
       <h4>{clip.title}</h4>
       {clip.relationships.field_clip ? (
@@ -69,12 +70,12 @@ export const getCards = (relationships) => [
       )}
     </Card>
   )),
-  ...defaultToEmpty(relationships.faqs).map((faq, i) => (
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (
     <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
       <h3>{faq.title}</h3>
     </Card>
   )),
-  ...defaultToEmpty(relationships.quickfacts).map((quickfact, i) => (
+  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (
     <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact">
       <h4>{quickfact.title}</h4>
     </Card>
@@ -83,22 +84,30 @@ export const getCards = (relationships) => [
 
 class SubthemeSection extends React.Component {
   constructor(props){
+    console.log('calling')
     super(props)
 
-    const rels = props.data.relationships
-    const getLength = (arr) => arr && arr.length || 0;
-    const length = getLength(rels.articles) + getLength(rels.faqs) + getLength(rels.clips) + getLength(rels.quickfacts)
-    this.order = shuffle(range.range(length))
-    console.log(this.order)
+    this.updateOrder(props)
   }
-
+  shouldComponentUpdate(nextProps) {
+    return nextProps.filter !== this.props.filter;
+  }
+  componentWillUpdate(nextProps) {
+    this.updateOrder(nextProps)
+  }
+  updateOrder(props) {
+    const length = getCards(props.data.relationships, props.filter).length;
+    this.order = shuffle(range.range(length))
+  }
   render() {
     const subtheme = this.props.data
     const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
-    const allRelationships = shuffle(getCards(subtheme.relationships), this.order)
+    const { filter } = this.props;
+
+    const allRelationships = reorder(getCards(subtheme.relationships, filter), this.order)
 
     const description = subtheme.description
       ? [
@@ -112,16 +121,34 @@ class SubthemeSection extends React.Component {
 
     const allCards = [...description, ...allRelationships]
 
-    const filter = this.state && this.state.filter
-
     return (
       <div className={this.props.className}>
         <h3>{subtheme.name}</h3>
-        <button onClick={() => { this.setState( {filter: !filter} )}}>
-          Filter
-        </button>
+        {
+          [`faq`, `article`, `clip`].map(filterType => (
+            <button
+              onClick={() => {
+                const newQueryParams = { ... this.props.queryParams }
+                if (newQueryParams[this.props.name] == filterType){
+                  delete newQueryParams[this.props.name]
+                } else {
+                  newQueryParams[this.props.name] = filterType;
+                }
+                navigateTo(`?${queryString.stringify(newQueryParams)}`)
+              }}
+              style={{
+                background: this.props.filter == filterType ? `#666` : `white`,
+                color: this.props.filter == filterType ? `white` : `#666`,
+                marginRight: 20,
+                marginBottom: 20
+              }}
+            >
+              {filterType}
+            </button>
+          ))
+        }
         <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
-          {allCards.filter((obj, i) => ((i % 2 == 0) || !filter))}
+          {allCards}
         </div>
       </div>
     )
