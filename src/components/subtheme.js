@@ -45,14 +45,14 @@ const reorder = (arr, order) => {
 
 export const getCards = (relationships, queryFilter) => [
   ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (
-    <Card key={`article-${i}`} title={article.title} type="Article" slug="article">
+    <Card key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
       {article.field_short_version && (
         <div dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
       )}
     </Card>
   )),
   ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (
-    <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip">
+    <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
       <h4>{clip.title}</h4>
       {clip.relationships.field_clip ? (
         <div>
@@ -71,12 +71,12 @@ export const getCards = (relationships, queryFilter) => [
     </Card>
   )),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (
-    <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq">
+    <Card key={`faq-${i}`} type="FAQ" title="faq.title" slug="faq" changed={faq.changed}>
       <h3>{faq.title}</h3>
     </Card>
   )),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (
-    <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact">
+    <Card key={`quickfact-${i}`} type="QuickFact" title="quickfact.title" slug="quickfact" changed={quickfact.changed}>
       <h4>{quickfact.title}</h4>
     </Card>
   )),
@@ -96,6 +96,7 @@ class SubthemeSection extends React.Component {
     this.updateOrder(nextProps)
   }
   updateOrder(props) {
+    if (props.filter) return;
     const length = getCards(props.data.relationships, props.filter).length;
     this.order = shuffle(range.range(length))
   }
@@ -107,7 +108,9 @@ class SubthemeSection extends React.Component {
 
     const { filter } = this.props;
 
-    const allRelationships = reorder(getCards(subtheme.relationships, filter), this.order)
+    const allRelationships = filter ?
+      getCards(subtheme.relationships, filter).sort((a, b) => (b.props.changed - a.props.changed)) :
+      reorder(getCards(subtheme.relationships, filter), this.order)
 
     const description = subtheme.description
       ? [

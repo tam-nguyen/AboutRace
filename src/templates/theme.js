@@ -125,12 +125,14 @@ export const pageQuery = graphql`
           relationships {
             articles: backref_field_belongs_to_subtheme_node_article {
               title
+              changed
               field_short_version {
                 processed
               }
             }
             clips: backref_field_belongs_to_subtheme_node_clip {
               title
+              changed
               relationships {
                 field_clip {
                   localFile {
@@ -149,9 +151,11 @@ export const pageQuery = graphql`
                 format
                 processed
               }
+              changed
             }
             quickfacts: backref_field_belongs_to_subtheme_node_quickfact {
               title
+              changed
             }
           }
         }
