@@ -13,11 +13,7 @@ const activeLinkStyle = {
 }
 
 const Header = () => (
-  <div
-    style={{
-      marginBottom: '1.45rem',
-    }}
-  >
+  <div>
     <div className={'logo'}>
       <h1 style={{ margin: 0 }}>
         <Link
@@ -31,6 +27,7 @@ const Header = () => (
         </Link>
       </h1>
     </div>
+
     <div className={'nav'}>
       <Link to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
         The Film

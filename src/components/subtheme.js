@@ -115,7 +115,7 @@ class SubthemeSection extends React.Component {
     const description = subtheme.description
       ? [
           <div
-            style={{ minWidth: 300, padding: 10 }}
+            style={{ maxWidth: 300, padding: 10 }}
             key="description"
             dangerouslySetInnerHTML={{ __html: subtheme.description.processed }}
           />,
@@ -160,7 +160,7 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: cornflowerblue;
+  background-color: #fafafa;
   padding: 20px;
   margin: 50px;
 `
