@@ -27,7 +27,7 @@ const ThemeHeader = styled.div`
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -60,7 +60,7 @@ class ThemePage extends React.Component {
       <div>
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
           <ThemeIntro>
-            <h1>{theme.name}</h1>
+            <h3>{theme.name}</h3>
             {theme.description ? (
               <ThemeDescription
                 dangerouslySetInnerHTML={{ __html: theme.description.processed }}
@@ -144,6 +144,7 @@ export const pageQuery = graphql`
                 }
               }
             }
+            
             faqs: backref_field_belongs_to_subtheme_node_faq {
               title
               field_expert_1 {
