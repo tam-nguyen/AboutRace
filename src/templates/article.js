@@ -1,6 +1,16 @@
 const React = require('react')
-import styled from 'styled-components'
-import { getCards } from '../components/subtheme'
+import styled, { css } from 'styled-components'
+import {
+  getCards,
+  QuickFactCard,
+  FAQCard,
+  ClipCard,
+  ArticleCard
+} from '../components/subtheme'
+const queryString = require('query-string');
+import kebabCase from 'lodash/kebabCase'
+import { navigateTo } from 'gatsby-link';
+
 // const MainContent = styled.div`
 //   max-width: 700px;
 //   margin-left: 48%;
@@ -38,7 +48,11 @@ const Overlay = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: 100%
+  width: 100%;
+
+  ${props => props.blue && css`
+    background-color: #E0FFFF;
+  `}
 `
 
 const Centered = styled.div`
@@ -49,6 +63,10 @@ const Centered = styled.div`
   width: 50%;
   padding: 20px;
   transform: translate(50%, -50%);
+  ${props => props.wide && css`
+    transform: translate(10%, -50%);
+    width: 80%;
+  `}
 `
 class QuickFactOverlay extends React.Component {
   render() {
@@ -76,7 +94,7 @@ class QuickFactOverlay extends React.Component {
     return (
       <Overlay>
         <Centered>
-          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`}}>
+          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
           </div>
           <h3>{quickFact.title}</h3>
@@ -85,9 +103,57 @@ class QuickFactOverlay extends React.Component {
               __html: quickFact.field_quickfact.processed,
             }}
           />
-          <div style={{ width: `100%`, display: `flex`}}>
+          <div style={{ width: `100%`, display: `flex`, }}>
             {
               getCards(quickClipLinks).slice(0,2)
+            }
+          </div>
+        </Centered>
+      </Overlay>
+    )
+  }
+}
+
+class TagOverlay extends React.Component {
+  render() {
+    const { tag, queryParams = {} } = this.props
+
+    const quickClipLinks = {
+      articles: tag.relationships.backref_field_tags_node_article ,
+      faqs: tag.relationships.backref_field_tag_node_faq,
+      clips: tag.relationships.backref_field_t_node_clip,
+      quickFacts: []
+    }
+
+    return (
+      <Overlay blue>
+        <Centered wide>
+          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
+            <b>Close</b>
+          </div>
+          {
+            [`faq`, `article`, `clip`].map(articleType => (
+              <span
+                style={{ marginRight: 20, cursor: `pointer` }}
+                onClick={ () => {
+                  const newQueryParams = { ... queryParams }
+                  if (newQueryParams[`type`] == articleType){
+                    delete newQueryParams[`type`]
+                  } else {
+                    newQueryParams[`type`] = articleType;
+                  }
+                  navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                }}
+              >
+                { articleType }
+              </span>
+            ))
+          }
+          <br/>
+          <br/>
+          <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+            {
+              getCards(quickClipLinks, queryParams[`type`])
             }
           </div>
         </Centered>
@@ -104,14 +170,40 @@ class SingleArticle extends React.Component {
 
   render() {
     const { data } = this.props
+    const queryParams = queryString.parse(this.props.location.search);
+    const quickFact = queryParams.quickfact ?
+      (data.nodeArticle.relationships.field_article_related_content || []).filter(node => (node.__typename === `node__quickfact` && kebabCase(node.title) == queryParams.quickfact)
+      )[0] :
+      null
+
+    console.log(`quickfact`)
+    console.log(quickFact)
+
+    const tag = queryParams.tag ?
+      (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
+      )[0] :
+      null
 
     return (
-      <div className="row">
+      <div className="row" style={{ overflowY: queryParams.tag ? "hidden" : "auto" }}>
         {
-          this.state.quickFact ?
+          queryParams.quickfact ?
             <QuickFactOverlay
-              quickFact={this.state.quickFact}
-              closeHandler={() => this.setState({ quickFact: null })}
+              quickFact={quickFact}
+              closeHandler={() => {
+                navigateTo(`?`)
+              }}
+            /> :
+            null
+        }
+        {
+          queryParams.tag ?
+            <TagOverlay
+              queryParams={queryParams}
+              tag={tag}
+              closeHandler={() => {
+                navigateTo(`?`)
+              }}
             /> :
             null
         }
@@ -131,22 +223,61 @@ class SingleArticle extends React.Component {
             <strong>{data.nodeArticle.title}</strong>
             <div style={{height: 200}}/>
             {
-              (data.nodeArticle.relationships.backref_field_related_content || []).map(quickFact => (
-                  <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
-                    <h3>{quickFact.title}</h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: quickFact.field_quickfact.processed,
-                      }}
-                      onClick={() => this.setState({ quickFact: quickFact })}
-                    />
-                  </div>
-                )
+              (data.nodeArticle.relationships.field_article_related_content || []).map((node, i) => {
+                  if (node.__typename == `node__quickfact`) {
+                    return (
+                      <QuickFactCard
+                        onClick={() => {
+                          console.log(node.title)
+                          const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
+                          navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                        }}
+                        quickfact={node}
+                        i={i}
+                        style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}
+                      />
+                    )
+                  } else if (node.__typename == `node__article`) {
+                    return (
+                      <ArticleCard
+                        i={i}
+                        article={node}
+                      />
+                    )
+                  } else if (node.__typename == `node__faq`) {
+                    return (
+                      <FAQCard
+                        i={i}
+                        article={node}
+                      />
+                    )
+                  } else if (node.__typename == `node__clip`) {
+                    return (
+                      <ClipCard
+                        i={i}
+                        article={node}
+                      />
+                    )
+                  }
+                }
               )
             }
           </div>
 
           <ArticleMain className="column _60">
+            {
+              (data.nodeArticle.relationships.field_tags || []).map(tag =>
+                <span
+                  onClick={()=>{
+                    const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
+                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                  }}
+                  style={{ marginRight: 20, color: `blue`, cursor: `pointer` }}
+                >
+                  <b>{tag.name}</b>
+                </span>
+              )
+            }
             <LargeCalloutText
               dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_large_callout_text.processed,
@@ -173,6 +304,103 @@ export const pageQuery = graphql`
       id
       title
       relationships {
+        field_article_related_content {
+          __typename
+          ... on node__faq {
+            title
+            field_expert_1 {
+              processed
+            }
+          }
+          ... on node__clip {
+            title
+            relationships {
+              field_clip {
+                localFile {
+                  publicURL
+                  internal {
+                    mediaType
+                  }
+                }
+              }
+            }
+          }
+          ... on node__article {
+            title
+            field_short_version {
+              processed
+            }
+          }
+          ... on node__quickfact {
+            title
+            field_quickfact {
+              value
+              format
+              processed
+              summary
+            }
+            relationships {
+              field_related_content {
+                __typename
+                ... on node__faq {
+                  title
+                  field_expert_1 {
+                    processed
+                  }
+                }
+                ... on node__clip {
+                  title
+                  relationships {
+                    field_clip {
+                      localFile {
+                        publicURL
+                        internal {
+                          mediaType
+                        }
+                      }
+                    }
+                  }
+                }
+                ... on node__article {
+                  title
+                  field_short_version {
+                    processed
+                  }
+                }
+              }
+            }
+          }
+        }
+        field_tags {
+          name
+          relationships {
+            backref_field_tags_node_article {
+              title
+              field_short_version {
+                processed
+              }
+            }
+            backref_field_tag_node_faq {
+              title
+              field_expert_1 {
+                processed
+              }
+            }
+            backref_field_t_node_clip {
+              title
+              relationships {
+                field_clip {
+                  localFile {
+                    publicURL
+                    internal {
+                      mediaType
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         field_author_image {
           localFile {
             publicURL

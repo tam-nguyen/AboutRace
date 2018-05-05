@@ -43,43 +43,61 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
-export const getCards = (relationships, queryFilter) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (
-    <Card key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+export const ArticleCard = ({ article, i }) => (
+  <Card key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
       {article.field_short_version && (
         <div dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
       )}
-    </Card>
-  )),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (
-    <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
-      <h4>{clip.title}</h4>
-      {clip.relationships.field_clip ? (
-        <div>
-          <Video controls>
-            <source
-              src={clip.relationships.field_clip.localFile.publicURL}
-              type={
-                clip.relationships.field_clip.localFile.internal.mediaType
-              }
-            />
-          </Video>
-        </div>
-      ) : (
-        <small>No video file attached</small>
-      )}
-    </Card>
-  )),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (
-    <Card key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
-      <h3>{faq.title}</h3>
-    </Card>
-  )),
-  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (
-    <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed}>
-      <h4>{quickfact.title}</h4>
-    </Card>
-  )),
+  </Card>
+)
+
+export const ClipCard = ({ clip = { relationships: {} }, i }) => (
+  <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
+    <h4>{clip.title}</h4>
+    {clip.relationships.field_clip ? (
+      <div>
+        <Video controls>
+          <source
+            src={clip.relationships.field_clip.localFile.publicURL}
+            type={
+              clip.relationships.field_clip.localFile.internal.mediaType
+            }
+          />
+        </Video>
+      </div>
+    ) : (
+      <small>No video file attached</small>
+    )}
+  </Card>
+)
+
+export const FAQCard = ({ faq = {}, i }) => (
+  <Card key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
+    <h3>{faq.title}</h3>
+  </Card>
+)
+
+export const QuickFactCard = ({ quickfact, i, onClick, style = {} }) => (
+  <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={style}>
+    <h4>{quickfact.title}</h4>
+    {
+      onClick ?
+        <div
+          dangerouslySetInnerHTML={{
+            __html: quickfact.field_quickfact.processed,
+          }}
+          onClick={onClick}
+        /> :
+        null
+    }
+  </Card>
+)
+
+export const getCards = (relationships, queryFilter) => [
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} />)),
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard clip={clip} i={i} />)),
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} />)),
+  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} />)),
 ]
 
 class SubthemeSection extends React.Component {

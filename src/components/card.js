@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
 class Card extends React.Component {
     render() {
         return (
-        <div className={this.props.className}>
+        <div className={this.props.className} style={this.props.style}>
             <h4>{this.props.type}</h4>
             {this.props.children}
             <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
@@ -22,7 +22,7 @@ class Card extends React.Component {
 
 const BASE_CARD_WIDTH = 350;
 const FLEX = 100;
-const MAX_WIDTH_CONSTANT = 1.2;
+const MAX_WIDTH_CONSTANT = 2;
 const ARTICLE_MULTIPLIER = 1.5;
 const QUICK_FACT_MULTIPLIER = 1.5;
 
@@ -38,13 +38,16 @@ const StyledCard = styled(Card)`
   vertical-align: top;
   margin-left: 10px;
   margin-right: 10px;
+  max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px
 
   ${props => props.type == `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
+    max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * ARTICLE_MULTIPLIER}px;
   `}
 
   ${props => props.type == `QuickFact` && css`
     flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * QUICK_FACT_MULTIPLIER} ${BASE_CARD_WIDTH * QUICK_FACT_MULTIPLIER}px;
+    max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * QUICK_FACT_MULTIPLIER}px;
   `}
 `;
 
