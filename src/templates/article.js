@@ -377,6 +377,13 @@ export const pageQuery = graphql`
                   field_expert_1 {
                     processed
                   }
+                  relationships {
+                    field_faq_image {
+                      localFile {
+                        publicURL
+                      }
+                    }
+                  }
                 }
                 ... on node__clip {
                   title
@@ -414,6 +421,13 @@ export const pageQuery = graphql`
               title
               field_expert_1 {
                 processed
+              }
+              relationships {
+                field_faq_image {
+                  localFile {
+                    publicURL
+                  }
+                }
               }
             }
             backref_field_t_node_clip {
@@ -457,6 +471,13 @@ export const pageQuery = graphql`
                 title
                 field_expert_1 {
                   processed
+                }
+                relationships {
+                  field_faq_image {
+                    localFile {
+                      publicURL
+                    }
+                  }
                 }
               }
               ... on node__clip {
