@@ -1,0 +1,33 @@
+button {
+    border: none;
+    text-transform: uppercase;
+    font-family: 'Lato';
+    letter-spacing: 0.14em;
+    outline: none;
+    cursor: pointer;
+}
+.subtheme-description {
+    width: 100%;
+    margin: 30px auto;
+    font-size: 24px;
+    font-family: 'Lato';
+    color: #AAA;
+    padding: 0 12%;
+}
+.caption {
+    font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.poster {
+    width: 100%;
+    height: 66%;
+    background-color: grey;
+    margin-bottom: 15px;
+}
+.card-large-text {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+}

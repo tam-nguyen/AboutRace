@@ -4,20 +4,17 @@ import './nav.css'
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'orange',
+  color: '#ff8400',
+  paddingBottom: 8
 }
 
 const activeLinkStyle = {
   ...linkStyle,
-  textDecoration: 'underline',
+  borderBottom: 'solid 3px #ff8400',
 }
 
 const Header = () => (
-  <div
-    style={{
-      marginBottom: '1.45rem',
-    }}
-  >
+  <div>
     <div className={'logo'}>
       <h1 style={{ margin: 0 }}>
         <Link
@@ -31,44 +28,24 @@ const Header = () => (
         </Link>
       </h1>
     </div>
+
     <div className={'nav'}>
-      <Link to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
+      <Link className={'navItem'} to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
         The Film
-      </Link>{' '}
-      /{' '}
-      <Link
-        to="/articles/"
-        activeStyle={activeLinkStyle}
-        style={linkStyle}
-        exact
-      >
+      </Link>
+      <Link className={'navItem'} to="/articles/" activeStyle={activeLinkStyle} style={linkStyle} exact>
         Articles
-      </Link>{' '}
-      /{' '}
-      <Link
-        to="/interviews/"
-        activeStyle={activeLinkStyle}
-        style={linkStyle}
-        exact
-      >
+      </Link>
+      <Link className={'navItem'} to="/interviews/" activeStyle={activeLinkStyle} style={linkStyle} exact>
         Interviews
-      </Link>{' '}
-      /{' '}
-      <Link
-        to="/FAQs/"
-        activeStyle={activeLinkStyle}
-        style={linkStyle}
-        exact
-      >
+      </Link>
+      <Link className={'navItem'} to="/FAQs/" activeStyle={activeLinkStyle} style={linkStyle} exact>
         FAQs
-      </Link>{' '}
-      /{' '}
-      <Link
-        to="/teaching/"
-        activeStyle={activeLinkStyle}
-        style={linkStyle}
-        exact
-      >
+      </Link>
+      <Link className={'navItem'} to="/media/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+        Media
+      </Link>
+      <Link className={'navItem'} to="/teaching/" activeStyle={activeLinkStyle} style={linkStyle} exact>
         Teaching
       </Link>
     </div>

@@ -30,10 +30,12 @@ const StyledCard = styled(Card)`
   display: inline-block;
   height: 400px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
-  padding: 15px;
-  border: solid thin darkgrey;
-  background-color: lightgrey;
-  border-radius: 12px;
+  border: solid thin lightgrey;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  margin-bottom: 20px;
   font-family: "ff-tisa-web-pro";
   vertical-align: top;
   margin-left: 10px;

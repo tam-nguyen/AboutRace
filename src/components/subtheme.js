@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { navigateTo } from 'gatsby-link';
 import Card from './card.js';
 const queryString = require('query-string');
+import './subtheme.css';
 
 const Video = styled.video`
   width: 100%;
@@ -46,16 +47,18 @@ const reorder = (arr, order) => {
 }
 
 export const ArticleCard = ({ article, i }) => (
-  <Card key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+  <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
       {article.field_short_version && (
-        <div dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+        <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
       )}
   </Card>
 )
 
 export const ClipCard = ({ clip = { relationships: {} }, i }) => (
   <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
-    <h4>{clip.title}</h4>
+    
+    <div className={'poster'} />
+    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
     {clip.relationships.field_clip ? (
       <div>
         <Video controls>
@@ -74,8 +77,14 @@ export const ClipCard = ({ clip = { relationships: {} }, i }) => (
 )
 
 export const FAQCard = ({ faq = {}, i }) => (
-  <Card key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
-    <h3>{faq.title}</h3>
+  <Card style={{padding:90, backgroundColor:'lightgrey'}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
+    <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p>
+  </Card>
+)
+
+export const InterviewCard = ({ interview = {}, i }) => (
+  <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
+    <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
 
@@ -99,6 +108,7 @@ export const getCards = (relationships, queryFilter) => [
   ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} />)),
   ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard clip={clip} i={i} />)),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} />)),
+  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} />)),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} />)),
 ]
 
@@ -139,7 +149,7 @@ class SubthemeSection extends React.Component {
     const description = subtheme.description
       ? [
           <div
-            style={{ minWidth: 300, padding: 10 }}
+            className={'subtheme-description'}
             key="description"
             dangerouslySetInnerHTML={{ __html: subtheme.description.processed }}
           />,
@@ -150,28 +160,34 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <h3>{subtheme.name}</h3>
+        <h2>{subtheme.name}</h2>
+        <span style={{
+                marginRight: 40,
+                fontFamily: 'Lato',
+                letterSpacing: '0.04em',
+              }}
+              >Sort by: </span>
         {
           [`faq`, `article`, `clip`].map(filterType => (
-            <button
-              onClick={() => {
-                const newQueryParams = { ... this.props.queryParams }
-                if (newQueryParams[this.props.name] == filterType){
-                  delete newQueryParams[this.props.name]
-                } else {
-                  newQueryParams[this.props.name] = filterType;
-                }
-                navigateTo(`?${queryString.stringify(newQueryParams)}`)
-              }}
-              style={{
-                background: this.props.filter == filterType ? `#666` : `white`,
-                color: this.props.filter == filterType ? `white` : `#666`,
-                marginRight: 20,
-                marginBottom: 20
-              }}
-            >
-              {filterType}
-            </button>
+              <button
+                onClick={() => {
+                  const newQueryParams = { ... this.props.queryParams }
+                  if (newQueryParams[this.props.name] == filterType){
+                    delete newQueryParams[this.props.name]
+                  } else {
+                    newQueryParams[this.props.name] = filterType;
+                  }
+                  navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                }}
+                style={{
+                  background: this.props.filter == filterType ? `#666` : `white`,
+                  color: this.props.filter == filterType ? `white` : `#666`,
+                  marginRight: 20,
+                  marginBottom: 20
+                }}
+              >
+                {filterType}
+              </button>
           ))
         }
         <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
@@ -196,7 +212,7 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: cornflowerblue;
+  background-color: #fafafaf5;
   padding: 20px;
   margin: 50px;
 `

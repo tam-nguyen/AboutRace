@@ -112,45 +112,42 @@ class SingleInterview extends React.Component {
         <InterviewHeader
           
         />
-          <div className="column _25">
-          </div>
-          <div className="column">
-          <img src={
-             data.nodeInterview.relationships.field_interviewee &&
-             data.nodeInterview.relationships.field_interviewee.localFile.publicURL
-          } />
-            <strong>{data.nodeInterview.title}</strong>
-            <div style={{height: 200}}/>
-            {
-              (data.nodeInterview.relationships.backref_field_related_content || []).map(quickFact => (
-                  <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
-                    <h3>{quickFact.title}</h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: quickFact.field_quickfact.processed,
-                      }}
-                      onClick={() => this.setState({ quickFact: quickFact })}
-                    />
-                  </div>
-                )
-              )
-            }
-          </div>
-
+          <div className="column _25" />
           <InterviewMain className="column _60">
-            <KeyQuote
-              dangerouslySetInnerHTML={{
-                __html: data.nodeInterview.field_key_quote.processed,
-              }}
-            />
+            <img src={
+                data.nodeInterview.relationships.field_interviewee &&
+                data.nodeInterview.relationships.field_interviewee.localFile.publicURL
+              } />
             <div
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_full_length_version.processed,
               }}
             />
           </InterviewMain>
+          <div className="column">
+          <KeyQuote style={{lineHeight:1.5, fontStyle:'italic'}}
+              dangerouslySetInnerHTML={{
+                __html: data.nodeInterview.field_key_quote.processed,
+              }}
+            />
+              <strong>{data.nodeInterview.title}</strong>
+              <div style={{height: 200}}/>
+              {
+                (data.nodeInterview.relationships.backref_field_related_content || []).map(quickFact => (
+                    <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
+                      <h3>{quickFact.title}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: quickFact.field_quickfact.processed,
+                        }}
+                        onClick={() => this.setState({ quickFact: quickFact })}
+                      />
+                    </div>
+                  )
+                )
+              }
+          </div>
           <div className="column _25" />
-
       </div>
     )
   }
