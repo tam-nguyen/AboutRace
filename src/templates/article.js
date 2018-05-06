@@ -271,14 +271,14 @@ class SingleArticle extends React.Component {
                     return (
                       <FAQCard
                         i={i}
-                        article={node}
+                        faq={node}
                       />
                     )
                   } else if (node.__typename == `node__clip`) {
                     return (
                       <ClipCard
                         i={i}
-                        article={node}
+                        clip={node}
                       />
                     )
                   }
@@ -324,6 +324,13 @@ export const pageQuery = graphql`
             title
             field_expert_1 {
               processed
+            }
+            relationships {
+              field_faq_image {
+                localFile {
+                  publicURL
+                }
+              }
             }
           }
           ... on node__clip {
