@@ -15,6 +15,8 @@ const Video = styled.video`
   display: block;
 `
 
+const NUM_CARDS_TO_SHOW = 3;
+
 const defaultToEmpty = arr => (arr ? arr : [])
 
 const shuffle = (arr) => {
@@ -118,13 +120,16 @@ export const getCards = (relationships, queryFilter, relatedContent) => [
 
 class SubthemeSection extends React.Component {
   constructor(props){
-    console.log('calling')
     super(props)
 
     this.updateOrder(props)
+    this.state = {}
   }
-  shouldComponentUpdate(nextProps) {
-    return nextProps.filter !== this.props.filter;
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps.filter !== this.props.filter ||
+      nextState.showMore !== this.state.showMore
+    );
   }
   componentWillUpdate(nextProps) {
     this.updateOrder(nextProps)
@@ -136,6 +141,7 @@ class SubthemeSection extends React.Component {
   }
   render() {
     const subtheme = this.props.data
+    console.log(this.state)
     const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
@@ -191,8 +197,20 @@ class SubthemeSection extends React.Component {
           ))
         }
         <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
-          {allCards}
+          {
+            this.state.showMore ?
+              allCards :
+              allCards.slice(0, NUM_CARDS_TO_SHOW + 1)
+          }
         </div>
+        {
+          allCards.length >= 4 && !this.state.showMore ?
+            <button style={{ margin: 20 }} onClick={() => { console.log('here'); this.setState({ showMore: true }); } }>
+              Show More
+            </button> :
+            null
+        }
+
       </div>
     )
   }
