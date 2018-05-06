@@ -17,12 +17,11 @@ import { navigateTo } from 'gatsby-link';
 //   margin-right: 12%;
 // `
 const LargeCalloutText = styled.div`
-  font-size: 28px;
-  font-weight: normal;
+  
 `
 const ArticleHeader = styled.div`
   width: 100%;
-  height: 66vh;
+  height: 33vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
@@ -40,23 +39,29 @@ const ArticleMain = styled.div`
   background-color: white;
   padding: 30px;
 `
+const ArticleTitle = styled.div`
+    font-size: 42px;
+    font-family: 'Lato';
+    margin-bottom: 30px;
+    line-height: 1.3;
+    text-align: right;
+`
 
 const Overlay = styled.div`
   background-color: #FFFFE0;
   position: fixed;
-  opacity: 0.8;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
+  z-index:999999999999999999999999;
 
   ${props => props.blue && css`
-    background-color: #E0FFFF;
+    background-color: #f1efefdb;
   `}
 `
 
 const Centered = styled.div`
-  border: 1px solid #888888;
   opacity: 1;
   position: relative;
   top: 50%;
@@ -215,12 +220,30 @@ class SingleArticle extends React.Component {
         />
           <div className="column _25">
           </div>
-          <div className="column">
-          <img src={
+          <div style={{
+            textAlign: 'right'
+          }} className="column">
+          <img style={{
+            width:300,
+            marginTop:'12vh',
+            
+          }} src={
              data.nodeArticle.relationships.field_author_image &&
              data.nodeArticle.relationships.field_author_image.localFile.publicURL
           } />
-            <strong>{data.nodeArticle.title}</strong>
+            <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+            {
+              (data.nodeArticle.relationships.field_tags || []).map(tag =>
+                <span className={'tag'}
+                  onClick={()=>{
+                    const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
+                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                  }}
+                >
+                  <b>{tag.name}</b>
+                </span>
+              )
+            }
             <div style={{height: 200}}/>
             {
               (data.nodeArticle.relationships.field_article_related_content || []).map((node, i) => {
@@ -265,25 +288,16 @@ class SingleArticle extends React.Component {
           </div>
 
           <ArticleMain className="column _60">
-            {
-              (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <span
-                  onClick={()=>{
-                    const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
-                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                  }}
-                  style={{ marginRight: 20, color: `blue`, cursor: `pointer` }}
-                >
-                  <b>{tag.name}</b>
-                </span>
-              )
-            }
-            <LargeCalloutText
+            <LargeCalloutText style={{
+              fontSize: 28,
+              fontWeight: 'normal',
+              lineHeight: 1.5
+            }}
               dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_large_callout_text.processed,
               }}
             />
-            <div
+            <div style={{lineHeight:1.7}}
               dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_full_version.processed,
               }}

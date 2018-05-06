@@ -16,6 +16,9 @@ button {
 }
 .caption {
     font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
 }
 .poster {
     width: 100%;

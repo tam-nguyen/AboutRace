@@ -28,9 +28,8 @@ const QUICK_FACT_MULTIPLIER = 1.5;
 
 const StyledCard = styled(Card)`
   display: inline-block;
-  height: 520px;
+  height: 400px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
-  padding: 15px;
   border: solid thin lightgrey;
   background-color: white;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);

@@ -45,7 +45,7 @@ const reorder = (arr, order) => {
 }
 
 export const ArticleCard = ({ article, i }) => (
-  <Card key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+  <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
       {article.field_short_version && (
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
       )}
@@ -56,7 +56,7 @@ export const ClipCard = ({ clip = { relationships: {} }, i }) => (
   <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
     
     <div className={'poster'} />
-    <p className={'caption'}>{clip.title}</p>
+    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
     {clip.relationships.field_clip ? (
       <div>
         <Video controls>
@@ -75,13 +75,13 @@ export const ClipCard = ({ clip = { relationships: {} }, i }) => (
 )
 
 export const FAQCard = ({ faq = {}, i }) => (
-  <Card key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
-    <p className={'card-large-text'}>{faq.title}</p>
+  <Card style={{padding:90, backgroundColor:'lightgrey'}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
+    <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p>
   </Card>
 )
 
 export const InterviewCard = ({ interview = {}, i }) => (
-  <Card key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
+  <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
     <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
