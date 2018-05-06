@@ -12,7 +12,10 @@ class Card extends React.Component {
     render() {
         return (
         <div className={this.props.className} style={this.props.style}>
-            <h4>{this.props.type}</h4>
+            {this.props.type ?
+            <h4>{this.props.type}</h4> :
+            null }
+
             {this.props.children}
             <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
         </div>
@@ -42,6 +45,11 @@ const StyledCard = styled(Card)`
   margin-right: 10px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px
 
+  ${props => props.background && css`
+    background-image: url('${props.background}');
+    background-size: cover;
+  `}
+  
   ${props => props.type == `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * ARTICLE_MULTIPLIER}px;
