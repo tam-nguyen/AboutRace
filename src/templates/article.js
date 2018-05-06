@@ -17,7 +17,7 @@ import { navigateTo } from 'gatsby-link';
 //   margin-right: 12%;
 // `
 const LargeCalloutText = styled.div`
-  
+
 `
 const ArticleHeader = styled.div`
   width: 100%;
@@ -226,7 +226,7 @@ class SingleArticle extends React.Component {
           <img style={{
             width:300,
             marginTop:'12vh',
-            
+
           }} src={
              data.nodeArticle.relationships.field_author_image &&
              data.nodeArticle.relationships.field_author_image.localFile.publicURL
@@ -245,8 +245,16 @@ class SingleArticle extends React.Component {
               )
             }
             <div style={{height: 200}}/>
+            <button onClick={() => { this.setState({ teaching: false}) }}>
+              All Content
+            </button>
+            <button onClick={() => { this.setState({ teaching: true}) }}>
+              Teaching
+            </button>
             {
-              (data.nodeArticle.relationships.field_article_related_content || []).map((node, i) => {
+              (data.nodeArticle.relationships.field_article_related_content || [])
+              .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
+              .map((node, i) => {
                   if (node.__typename == `node__quickfact`) {
                     return (
                       <QuickFactCard
@@ -341,6 +349,7 @@ export const pageQuery = graphql`
           }
           ... on node__article {
             title
+            field_include_in_the_teaching_se
             field_short_version {
               processed
             }
