@@ -144,9 +144,16 @@ export const pageQuery = graphql`
                 }
               }
             }
-            
+
             faqs: backref_field_belongs_to_subtheme_node_faq {
               title
+              relationships {
+                field_faq_image {
+                  localFile {
+                    publicURL
+                  }
+                }
+              }
               field_expert_1 {
                 value
                 format

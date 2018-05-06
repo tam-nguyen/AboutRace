@@ -44,16 +44,22 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
-export const ArticleCard = ({ article, i }) => (
-  <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
-      {article.field_short_version && (
-        <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-      )}
-  </Card>
+export const ArticleCard = ({ article, i, relatedContent }) => (
+  relatedContent ? 
+    <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+        {article.field_short_version && (
+          <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+        )}
+    </Card> : 
+    <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    {article.field_short_version && (
+      <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+    )}
+    </Card>
 )
 
-export const ClipCard = ({ clip = { relationships: {} }, i }) => (
-  <Card key={`clip-${i}`} type="Clip" title={clip.title} slug="clip" changed={clip.changed}>
+export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) => (
+  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
     
     <div className={'poster'} />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
@@ -74,19 +80,19 @@ export const ClipCard = ({ clip = { relationships: {} }, i }) => (
   </Card>
 )
 
-export const FAQCard = ({ faq = {}, i }) => (
-  <Card style={{padding:90, backgroundColor:'lightgrey'}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed}>
+export const FAQCard = ({ faq = {}, i, relatedContent }) => (
+  <Card style={{padding:90}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
     <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p>
   </Card>
 )
 
-export const InterviewCard = ({ interview = {}, i }) => (
+export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
     <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
 
-export const QuickFactCard = ({ quickfact, i, onClick, style = {} }) => (
+export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {} }) => (
   <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={style}>
     <h4>{quickfact.title}</h4>
     {
@@ -102,12 +108,12 @@ export const QuickFactCard = ({ quickfact, i, onClick, style = {} }) => (
   </Card>
 )
 
-export const getCards = (relationships, queryFilter) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} />)),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard clip={clip} i={i} />)),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} />)),
-  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} />)),
-  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} />)),
+export const getCards = (relationships, queryFilter, relatedContent) => [
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard clip={clip} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
 
 class SubthemeSection extends React.Component {
