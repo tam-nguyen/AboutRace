@@ -100,7 +100,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
-    <p className={'card-large-text'}>{interview.title}</p>
+    {/* <p className={'card-large-text'}>{interview.title}</p> */}
   </Card>
 )
 
