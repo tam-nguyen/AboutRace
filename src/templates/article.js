@@ -21,7 +21,7 @@ const LargeCalloutText = styled.div`
 `
 const ArticleHeader = styled.div`
   width: 100%;
-  height: 66vh;
+  height: 33vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
@@ -273,6 +273,7 @@ class SingleArticle extends React.Component {
                       <ArticleCard
                         i={i}
                         article={node}
+                        relatedContent
                       />
                     )
                   } else if (node.__typename == `node__faq`) {
@@ -344,12 +345,9 @@ export const pageQuery = graphql`
           ... on node__clip {
             title
             relationships {
-              field_clip {
+              field_poster_image {
                 localFile {
                   publicURL
-                  internal {
-                    mediaType
-                  }
                 }
               }
             }
@@ -359,6 +357,13 @@ export const pageQuery = graphql`
             field_include_in_the_teaching_se
             field_short_version {
               processed
+            }
+            relationships {
+              field_main_image {
+                localFile {
+                  publicURL
+                }
+              }
             }
           }
           ... on node__quickfact {
@@ -388,12 +393,9 @@ export const pageQuery = graphql`
                 ... on node__clip {
                   title
                   relationships {
-                    field_clip {
+                    field_poster_image {
                       localFile {
                         publicURL
-                        internal {
-                          mediaType
-                        }
                       }
                     }
                   }
@@ -433,7 +435,7 @@ export const pageQuery = graphql`
             backref_field_t_node_clip {
               title
               relationships {
-                field_clip {
+                field_poster_image {
                   localFile {
                     publicURL
                     internal {
@@ -483,7 +485,7 @@ export const pageQuery = graphql`
               ... on node__clip {
                 title
                 relationships {
-                  field_clip {
+                  field_poster_image {
                     localFile {
                       publicURL
                       internal {
