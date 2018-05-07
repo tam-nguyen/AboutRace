@@ -94,13 +94,13 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) =>
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
   <Card style={{padding:90}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
-    <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p>
+    {/* <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p> */}
   </Card>
 )
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
-    {/* <p className={'card-large-text'}>{interview.title}</p> */}
+    <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
 
