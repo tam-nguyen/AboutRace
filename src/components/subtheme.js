@@ -57,12 +57,12 @@ const reorder = (arr, order) => {
 }
 
 export const ArticleCard = ({ article, i, relatedContent }) => (
-  relatedContent ? 
+  relatedContent ?
     <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
         {article.field_short_version && (
           <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
         )}
-    </Card> : 
+    </Card> :
     <RCCard style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
     {article.field_short_version && (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
@@ -72,7 +72,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) => (
   <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
-    
+
     <div className={'poster'} />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
     {clip.relationships.field_clip ? (
@@ -128,6 +128,42 @@ export const getCards = (relationships, queryFilter, relatedContent) => [
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
 
+
+const Filters = ({ queryParams, name, filter }) => (
+  <div>
+    <span style={{
+            marginRight: 40,
+            fontFamily: 'Lato',
+            letterSpacing: '0.04em',
+          }}
+          >Sort by: </span>
+    {
+      [`article`, 'interview', `faq`, `clip`].map(filterType => (
+          <button
+            onClick={() => {
+              const newQueryParams = { ... queryParams }
+              if (newQueryParams[name] == filterType){
+                delete newQueryParams[name]
+              } else {
+                newQueryParams[name] = filterType;
+              }
+              navigateTo(`?${queryString.stringify(newQueryParams)}`)
+            }}
+            style={{
+              background: filter == filterType ? `#666` : `white`,
+              color: filter == filterType ? `white` : `#666`,
+              marginRight: 20,
+              marginBottom: 20
+            }}
+          >
+            {filterType}
+          </button>
+      ))
+    }
+  </div>
+)
+
+
 class SubthemeSection extends React.Component {
   constructor(props){
     super(props)
@@ -158,63 +194,36 @@ class SubthemeSection extends React.Component {
 
     const { filter } = this.props;
 
-    const allRelationships = filter ?
+    const allCards = filter ?
       getCards(subtheme.relationships, filter).sort((a, b) => (b.props.changed - a.props.changed)) :
       reorder(getCards(subtheme.relationships, filter), this.order)
 
     const description = subtheme.description
-      ? [
-          <div
+      ? <div
             className={'subtheme-description'}
             key="description"
             dangerouslySetInnerHTML={{ __html: subtheme.description.processed }}
-          />,
-        ]
-      : []
-
-    const allCards = [...description, ...allRelationships]
+          />
+      : null
 
     return (
       <div className={this.props.className}>
         <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-        <span style={{
-                marginRight: 40,
-                fontFamily: 'Lato',
-                letterSpacing: '0.04em',
-              }}
-              >Sort by: </span>
-        {
-          [`article`, 'interview', `faq`, `clip`].map(filterType => (
-              <button
-                onClick={() => {
-                  const newQueryParams = { ... this.props.queryParams }
-                  if (newQueryParams[this.props.name] == filterType){
-                    delete newQueryParams[this.props.name]
-                  } else {
-                    newQueryParams[this.props.name] = filterType;
-                  }
-                  navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                }}
-                style={{
-                  background: this.props.filter == filterType ? `#666` : `white`,
-                  color: this.props.filter == filterType ? `white` : `#666`,
-                  marginRight: 20,
-                  marginBottom: 20
-                }}
-              >
-                {filterType}
-              </button>
-          ))
-        }
+        { description }
+        <Filters
+          queryParams={this.props.queryParams}
+          name={this.props.name}
+          filter={filter}
+        />
         <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
           {
             this.state.showMore ?
               allCards :
-              allCards.slice(0, NUM_CARDS_TO_SHOW + 1)
+              allCards.slice(0, NUM_CARDS_TO_SHOW)
           }
         </div>
         {
-          allCards.length >= 4 && !this.state.showMore ?
+          allCards.length >= (NUM_CARDS_TO_SHOW) && !this.state.showMore ?
             <button style={{ margin: 20 }} onClick={() => { console.log('here'); this.setState({ showMore: true }); } }>
               Show More
             </button> :
