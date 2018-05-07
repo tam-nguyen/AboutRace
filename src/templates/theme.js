@@ -179,16 +179,10 @@ export const pageQuery = graphql`
             clips: backref_field_belongs_to_subtheme_node_clip {
               title
               changed
-              relationships {
-                field_clip {
-                  localFile {
-                    publicURL
-                    internal {
-                      mediaType
-                    }
-                  }
-                }
+              field_external_video_url {
+                uri
               }
+              
             }
             interviews: backref_field_which_subtheme_does_this_b_node_interview {
               title
@@ -211,10 +205,6 @@ export const pageQuery = graphql`
                 format
                 processed
               }
-              changed
-            }
-            quickfacts: backref_field_belongs_to_subtheme_node_quickfact {
-              title
               changed
             }
           }

@@ -15,8 +15,11 @@ class RCCard extends React.Component {
             {this.props.type ?
             <h4>{this.props.type}</h4> :
             null }
-            <div className={'RCimage'}>
-            <img src={'this.props.localFile.publicURL'} />
+            <div className={'RCimage'} style={{
+              backgroundImage: `url(${this.props.imgSrc})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}>
             </div>
             <p><Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link></p>
 

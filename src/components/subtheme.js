@@ -58,16 +58,16 @@ const reorder = (arr, order) => {
 
 export const ArticleCard = ({ article, i, relatedContent }) => (
   relatedContent ?
-    <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
-        {article.field_short_version && (
-          <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-        )}
-    </Card> :
-    <RCCard style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    <RCCard style={{padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
     {article.field_short_version && (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
-    </RCCard>
+    </RCCard> :
+    <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    {article.field_short_version && (
+      <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+    )}
+</Card>
 )
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) => (
@@ -75,14 +75,12 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) =>
 
     <div className={'poster'} />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
-    {clip.relationships.field_clip ? (
+    {clip.field_external_video_url ? (
       <div>
         <Video controls>
           <source
-            src={clip.relationships.field_clip.localFile.publicURL}
-            type={
-              clip.relationships.field_clip.localFile.internal.mediaType
-            }
+            src={clip.field_external_video_url}
+            
           />
         </Video>
       </div>
@@ -105,7 +103,7 @@ export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
 )
 
 export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {} }) => (
-  <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={style}>
+  <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
     <h4>{quickfact.title}</h4>
     {
       onClick ?
