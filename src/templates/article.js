@@ -21,7 +21,7 @@ const LargeCalloutText = styled.div`
 `
 const ArticleHeader = styled.div`
   width: 100%;
-  height: 66vh;
+  height: 33vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;

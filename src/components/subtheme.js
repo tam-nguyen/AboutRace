@@ -184,7 +184,7 @@ class SubthemeSection extends React.Component {
               }}
               >Sort by: </span>
         {
-          [`faq`, `article`, `clip`].map(filterType => (
+          [`article`, 'interview', `faq`, `clip`].map(filterType => (
               <button
                 onClick={() => {
                   const newQueryParams = { ... this.props.queryParams }
