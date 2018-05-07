@@ -16,17 +16,15 @@ const activeLinkStyle = {
 const Header = () => (
   <div>
     <div className={'logo'}>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: '#999999',
-            textDecoration: 'none',
-          }}
-        >
-          RACE
-        </Link>
-      </h1>
+      <Link
+        to="/"
+        style={{
+          color: 'black',
+          textDecoration: 'none',
+        }}
+      >
+        RACE
+      </Link>
     </div>
 
     <div className={'nav'}>

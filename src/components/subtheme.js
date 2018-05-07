@@ -7,6 +7,7 @@ const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 import { navigateTo } from 'gatsby-link';
 import Card from './card.js';
+import RCCard from './rccard.js';
 const queryString = require('query-string');
 import './subtheme.css';
 
@@ -14,6 +15,17 @@ const Video = styled.video`
   width: 100%;
   display: block;
 `
+const SubthemeTitle = styled.div`
+  font-family: 'Lato';
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-size: 48px;
+  line-height: 1.1;
+  color: #0c063e;
+  margin-top: 15px;
+  padding-bottom: 30px;
+`
+const NUM_CARDS_TO_SHOW = 3;
 
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -53,11 +65,11 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
           <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
         )}
     </Card> : 
-    <Card style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    <RCCard style={{padding:15}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
     {article.field_short_version && (
-      <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+      <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
-    </Card>
+    </RCCard>
 )
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) => (
@@ -166,7 +178,7 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <h2>{subtheme.name}</h2>
+        <SubthemeTitle>{subtheme.name}</SubthemeTitle>
         <span style={{
                 marginRight: 40,
                 fontFamily: 'Lato',
@@ -219,6 +231,7 @@ class SubthemeSection extends React.Component {
 
 const SubthemeContainer = styled(SubthemeSection)`
   background-color: #fafafaf5;
+  border: solid thin lightgrey;
   padding: 20px;
   margin: 50px;
 `
