@@ -27,8 +27,6 @@ const SubthemeTitle = styled.div`
 `
 const NUM_CARDS_TO_SHOW = 3;
 
-const NUM_CARDS_TO_SHOW = 3;
-
 const defaultToEmpty = arr => (arr ? arr : [])
 
 const shuffle = (arr) => {
