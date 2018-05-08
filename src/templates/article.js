@@ -38,6 +38,7 @@ const ArticleHeader = styled.div`
 const ArticleMain = styled.div`
   background-color: white;
   padding: 30px;
+  margin-top: 10vh
 `
 const ArticleTitle = styled.div`
     font-size: 42px;
@@ -226,7 +227,7 @@ class SingleArticle extends React.Component {
           }} className="column">
           <img style={{
             width:300,
-            marginTop:'12vh',
+            marginTop:'33vh',
 
           }} src={
              data.nodeArticle.relationships.field_author_image &&
