@@ -2,6 +2,10 @@ let scrollBarWidth = null
 
 // https://gist.github.com/kflorence/3086552
 export default () => {
+  if (typeof document === 'undefined') {
+    return 0
+  }
+
   if (scrollBarWidth !== null) {
     return scrollBarWidth
   }
@@ -31,6 +35,5 @@ export default () => {
   document.body.removeChild(outer)
 
   scrollBarWidth = w1 - w2
-  console.log('sc width', scrollBarWidth)
   return scrollBarWidth
 }
