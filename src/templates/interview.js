@@ -98,7 +98,7 @@ class SingleInterview extends React.Component {
 
   render() {
     const { data } = this.props
-    console.log('aa', data)
+
     return (
       <div className="row">
         {
