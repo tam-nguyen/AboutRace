@@ -1,9 +1,5 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
-
-import getScrollBarWidth from '../../utils/scrollbar-width'
-
 import './nav.css'
 
 const linkStyle = {
@@ -16,19 +12,6 @@ const activeLinkStyle = {
   ...linkStyle,
   borderBottom: 'solid 3px #ff8400',
 }
-
-const Nav = styled.div`
-  position: fixed;
-  top: 45px;
-  right: 30px;
-  z-index: 9999999999;
-  opacity: 0.75;
-  mix-blend-mode: normal;
-
-  body.modal-open & {
-    right: ${30 + getScrollBarWidth()}px;
-  }
-`
 
 const Header = () => (
   <div>
@@ -44,7 +27,7 @@ const Header = () => (
       </Link>
     </div>
 
-    <Nav>
+    <div className={'nav'}>
       <Link className={'navItem'} to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
         The Film
       </Link>
@@ -63,7 +46,7 @@ const Header = () => (
       <Link className={'navItem'} to="/teaching/" activeStyle={activeLinkStyle} style={linkStyle} exact>
         Teaching
       </Link>
-    </Nav>
+    </div>
   </div>
 )
 
