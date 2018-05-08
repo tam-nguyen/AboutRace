@@ -136,6 +136,7 @@ class TagOverlay extends React.Component {
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
           </div>
+          <h2>{tag.name}</h2>
           {
             [`faq`, `article`, `clip`].map(articleType => (
               <span
