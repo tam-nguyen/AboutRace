@@ -1,11 +1,9 @@
 const React = require('react')
 const range = require('range')
-const ReactFlex = require('react-flex')
-require('react-flex/index.css')
 import Img from 'gatsby-image'
 const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
-import { navigateTo } from 'gatsby-link';
+import Link, { navigateTo } from 'gatsby-link';
 import Card from './card.js';
 import RCCard from './rccard.js';
 const queryString = require('query-string');
@@ -223,7 +221,6 @@ class SubthemeSection extends React.Component {
   render() {
     const subtheme = this.props.data
     console.log(this.state)
-    const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 

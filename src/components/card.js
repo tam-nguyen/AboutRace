@@ -1,7 +1,5 @@
 const React = require('react')
 const range = require('range')
-const ReactFlex = require('react-flex')
-require('react-flex/index.css')
 import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
