@@ -678,8 +678,10 @@ pre tt:after {
   }
 } */
 
-html,
-body {
-  overflow-x: hidden;
-  overflow-y: hidden;
+html {
+  overflow: visible;
+}
+
+body.modal-open {
+  overflow: hidden;
 }

@@ -8,13 +8,8 @@ import './index.css'
 import {Navigation} from '../components/nav.js'
 import styled, { css } from 'styled-components'
 
-const Wrapper = styled.div`
-  overflow-y: scroll;
-  height: 100vh;
-`
-
 const Layout = ({ children }) => (
-  <Wrapper>
+  <div>
     <Helmet
       title="Race: The Power of an Illusion"
       meta={[
@@ -34,7 +29,7 @@ const Layout = ({ children }) => (
       {/* <Navigation /> */}
     </div>
     <Typekit kitId="pte4pny" />
-  </Wrapper>
+  </div>
 )
 
 Layout.propTypes = {

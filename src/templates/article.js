@@ -56,6 +56,10 @@ const Overlay = styled.div`
   height: 100%;
   width: 100%;
   z-index:999999999999999999999999;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   ${props => props.blue && css`
     background-color: #f1efefdb;
@@ -63,14 +67,9 @@ const Overlay = styled.div`
 `
 
 const Centered = styled.div`
-  opacity: 1;
-  position: relative;
-  top: 50%;
   width: 50%;
   padding: 20px;
-  transform: translate(50%, -50%);
   ${props => props.wide && css`
-    transform: translate(10%, -50%);
     width: 80%;
   `}
 `
@@ -137,6 +136,7 @@ class TagOverlay extends React.Component {
       <Portal>
         <Overlay blue>
           <Centered wide>
+            <div style={{position: 'fixed', width: 'calc(80% - 40px)'}}>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
               <b>Close</b>
             </div>
@@ -159,9 +159,9 @@ class TagOverlay extends React.Component {
                 </span>
               ))
             }
-            <br/>
-            <br/>
-            <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+            </div>
+            
+            <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, marginTop: 100}}>
               {
                 getCards(quickClipLinks, queryParams[`type`], null, true)
               }
