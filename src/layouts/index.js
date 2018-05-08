@@ -6,12 +6,17 @@ import Typekit from 'react-typekit';
 import Header from '../components/Header'
 import './index.css'
 import {Navigation} from '../components/nav.js'
+import styled, { css } from 'styled-components'
 
-const TemplateWrapper = ({ children }) => (
-  <div>
+const Wrapper = styled.div`
+  overflow-y: scroll;
+  height: 100vh;
+`
+
+const Layout = ({ children }) => (
+  <Wrapper>
     <Helmet
       title="Race: The Power of an Illusion"
-
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
@@ -29,11 +34,11 @@ const TemplateWrapper = ({ children }) => (
       {/* <Navigation /> */}
     </div>
     <Typekit kitId="pte4pny" />
-  </div>
+  </Wrapper>
 )
 
-TemplateWrapper.propTypes = {
+Layout.propTypes = {
   children: PropTypes.func,
 }
 
-export default TemplateWrapper
+export default Layout

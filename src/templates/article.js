@@ -7,6 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
+import Portal from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import { navigateTo } from 'gatsby-link';
@@ -97,24 +98,26 @@ class QuickFactOverlay extends React.Component {
     })
 
     return (
-      <Overlay>
-        <Centered>
-          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <b>Close</b>
-          </div>
-          <h3>{quickFact.title}</h3>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: quickFact.field_quickfact.processed,
-            }}
-          />
-          <div style={{ width: `100%`, display: `flex`, }}>
-            {
-              getCards(quickClipLinks, {}, null, true).slice(0,2)
-            }
-          </div>
-        </Centered>
-      </Overlay>
+      <Portal>
+        <Overlay>
+          <Centered>
+            <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
+              <b>Close</b>
+            </div>
+            <h3>{quickFact.title}</h3>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: quickFact.field_quickfact.processed,
+              }}
+            />
+            <div style={{ width: `100%`, display: `flex`, }}>
+              {
+                getCards(quickClipLinks, {}, null, true).slice(0,2)
+              }
+            </div>
+          </Centered>
+        </Overlay>
+      </Portal>
     )
   }
 }
@@ -131,39 +134,41 @@ class TagOverlay extends React.Component {
     }
 
     return (
-      <Overlay blue>
-        <Centered wide>
-          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <b>Close</b>
-          </div>
-          <h2>{tag.name}</h2>
-          {
-            [`faq`, `article`, `clip`].map(articleType => (
-              <span
-                style={{ marginRight: 20, cursor: `pointer` }}
-                onClick={ () => {
-                  const newQueryParams = { ... queryParams }
-                  if (newQueryParams[`type`] == articleType){
-                    delete newQueryParams[`type`]
-                  } else {
-                    newQueryParams[`type`] = articleType;
-                  }
-                  navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                }}
-              >
-                { articleType }
-              </span>
-            ))
-          }
-          <br/>
-          <br/>
-          <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+      <Portal>
+        <Overlay blue>
+          <Centered wide>
+            <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
+              <b>Close</b>
+            </div>
+            <h2>{tag.name}</h2>
             {
-              getCards(quickClipLinks, queryParams[`type`], null, true)
+              [`faq`, `article`, `clip`].map(articleType => (
+                <span
+                  style={{ marginRight: 20, cursor: `pointer` }}
+                  onClick={ () => {
+                    const newQueryParams = { ... queryParams }
+                    if (newQueryParams[`type`] == articleType){
+                      delete newQueryParams[`type`]
+                    } else {
+                      newQueryParams[`type`] = articleType;
+                    }
+                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                  }}
+                >
+                  { articleType }
+                </span>
+              ))
             }
-          </div>
-        </Centered>
-      </Overlay>
+            <br/>
+            <br/>
+            <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+              {
+                getCards(quickClipLinks, queryParams[`type`], null, true)
+              }
+            </div>
+          </Centered>
+        </Overlay>
+      </Portal>
     )
   }
 }

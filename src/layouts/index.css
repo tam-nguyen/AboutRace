@@ -677,3 +677,9 @@ pre tt:after {
     flex: 1;
   }
 } */
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
