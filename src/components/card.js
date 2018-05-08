@@ -17,7 +17,6 @@ class Card extends React.Component {
             null }
 
             {this.props.children}
-            <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link>
         </div>
         )
     }
@@ -49,7 +48,7 @@ const StyledCard = styled(Card)`
     background-image: url('${props.background}');
     background-size: cover;
   `}
-  
+
   ${props => props.type == `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * ARTICLE_MULTIPLIER}px;
