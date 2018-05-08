@@ -170,42 +170,16 @@ export const pageQuery = graphql`
           }
           relationships {
             articles: backref_field_belongs_to_subtheme_node_article {
-              title
-              changed
-              field_short_version {
-                processed
-              }
+              ...ArticleFragment
             }
             clips: backref_field_belongs_to_subtheme_node_clip {
-              title
-              changed
-              field_external_video_url {
-                uri
-              }
-              
+              ...PosterImageClipFragment
             }
             interviews: backref_field_which_subtheme_does_this_b_node_interview {
-              title
-              changed
-              field_key_quote {
-                processed
-              }
+              ...InterviewFragment
             }
             faqs: backref_field_belongs_to_subtheme_node_faq {
-              title
-              relationships {
-                field_faq_image {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
-              field_expert_1 {
-                value
-                format
-                processed
-              }
-              changed
+              ...FAQFragment
             }
           }
         }

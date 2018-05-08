@@ -10,6 +10,7 @@ import Card from './card.js';
 import RCCard from './rccard.js';
 const queryString = require('query-string');
 import './subtheme.css';
+import kebabCase from 'lodash/kebabCase'
 
 const Video = styled.video`
   width: 100%;
@@ -56,6 +57,51 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
+
+class PlayablePoster extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {}
+  }
+  render() {
+    if (!this.props.clip.relationships.field_poster_image) {
+      return (
+        <div className={'poster'}/>
+      );
+    }
+
+    if (this.state.play) {
+      return (
+        /*
+        <Video controls>
+          <source
+            src={this.props.clip.field_external_video_url.uri}
+          />
+        </Video>
+        */
+        <div className={'poster'}>
+          <iframe src="https://player.vimeo.com/video/18769983?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+      )
+    }
+
+    if (this.props.linkable) {
+      return (
+        <Link to={`${kebabCase(this.props.clip.title)}`}>
+          <div className={'poster'}>
+            <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
+          </div>
+        </Link>
+      )
+    }
+    return (
+      <div className={'poster'} onClick={() => this.setState({ play: true })}>
+        <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
+      </div>
+    );
+  }
+}
+
 export const ArticleCard = ({ article, i, relatedContent }) => (
   relatedContent ?
     <RCCard style={{padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
@@ -67,26 +113,17 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     {article.field_short_version && (
       <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
-</Card>
+    </Card>
 )
 
-export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent }) => (
+export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, linkable }) => (
   <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
 
-    <div className={'poster'} />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
-    {clip.field_external_video_url ? (
-      <div>
-        <Video controls>
-          <source
-            src={clip.field_external_video_url}
-            
-          />
-        </Video>
-      </div>
-    ) : (
-      <small>No video file attached</small>
-    )}
+    <PlayablePoster
+      clip={clip}
+      linkable={linkable}
+    />
   </Card>
 )
 
@@ -118,9 +155,9 @@ export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {
   </Card>
 )
 
-export const getCards = (relationships, queryFilter, relatedContent) => [
+export const getCards = (relationships, queryFilter, relatedContent, linkableClip) => [
   ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard clip={clip} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
@@ -193,8 +230,8 @@ class SubthemeSection extends React.Component {
     const { filter } = this.props;
 
     const allCards = filter ?
-      getCards(subtheme.relationships, filter).sort((a, b) => (b.props.changed - a.props.changed)) :
-      reorder(getCards(subtheme.relationships, filter), this.order)
+      getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
+      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
 
     const description = subtheme.description
       ? <div

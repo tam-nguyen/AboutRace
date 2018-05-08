@@ -110,7 +110,7 @@ class QuickFactOverlay extends React.Component {
           />
           <div style={{ width: `100%`, display: `flex`, }}>
             {
-              getCards(quickClipLinks).slice(0,2)
+              getCards(quickClipLinks, {}, null, true).slice(0,2)
             }
           </div>
         </Centered>
@@ -158,7 +158,7 @@ class TagOverlay extends React.Component {
           <br/>
           <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
             {
-              getCards(quickClipLinks, queryParams[`type`])
+              getCards(quickClipLinks, queryParams[`type`], null, true)
             }
           </div>
         </Centered>
@@ -288,6 +288,7 @@ class SingleArticle extends React.Component {
                       <ClipCard
                         i={i}
                         clip={node}
+                        playable
                       />
                     )
                   }
@@ -330,120 +331,29 @@ export const pageQuery = graphql`
         field_article_related_content {
           __typename
           ... on node__faq {
-            title
-            field_expert_1 {
-              processed
-            }
-            relationships {
-              field_faq_image {
-                localFile {
-                  publicURL
-                }
-              }
-            }
+            ...FAQFragment
           }
           ... on node__clip {
-            title
-            relationships {
-              field_poster_image {
-                localFile {
-                  publicURL
-                }
-              }
-            }
+            ...PosterImageClipFragment
           }
           ... on node__article {
-            title
-            field_include_in_the_teaching_se
-            field_short_version {
-              processed
-            }
-            relationships {
-              field_main_image {
-                localFile {
-                  publicURL
-                }
-              }
-            }
+            ...ArticleFragment
           }
           ... on node__quickfact {
-            title
-            field_quickfact {
-              value
-              format
-              processed
-              summary
-            }
-            relationships {
-              field_related_content {
-                __typename
-                ... on node__faq {
-                  title
-                  field_expert_1 {
-                    processed
-                  }
-                  relationships {
-                    field_faq_image {
-                      localFile {
-                        publicURL
-                      }
-                    }
-                  }
-                }
-                ... on node__clip {
-                  title
-                  relationships {
-                    field_poster_image {
-                      localFile {
-                        publicURL
-                      }
-                    }
-                  }
-                }
-                ... on node__article {
-                  title
-                  field_short_version {
-                    processed
-                  }
-                }
-              }
-            }
+            ...QuickfactWithRelatedContentFragment
           }
         }
         field_tags {
           name
           relationships {
             backref_field_tags_node_article {
-              title
-              field_short_version {
-                processed
-              }
+              ...ArticleFragment
             }
             backref_field_tag_node_faq {
-              title
-              field_expert_1 {
-                processed
-              }
-              relationships {
-                field_faq_image {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
+              ...FAQFragment
             }
             backref_field_t_node_clip {
-              title
-              relationships {
-                field_poster_image {
-                  localFile {
-                    publicURL
-                    internal {
-                      mediaType
-                    }
-                  }
-                }
-              }
+              ...PosterImageClipFragment
             }
           }
         }
@@ -455,53 +365,6 @@ export const pageQuery = graphql`
         field_main_image {
           localFile {
             publicURL
-          }
-        }
-        backref_field_related_content {
-          title
-          id
-          field_quickfact {
-            value
-            format
-            processed
-            summary
-          }
-          relationships {
-            field_related_content {
-              __typename
-              ... on node__faq {
-                title
-                field_expert_1 {
-                  processed
-                }
-                relationships {
-                  field_faq_image {
-                    localFile {
-                      publicURL
-                    }
-                  }
-                }
-              }
-              ... on node__clip {
-                title
-                relationships {
-                  field_poster_image {
-                    localFile {
-                      publicURL
-                      internal {
-                        mediaType
-                      }
-                    }
-                  }
-                }
-              }
-              ... on node__article {
-                title
-                field_short_version {
-                  processed
-                }
-              }
-            }
           }
         }
       }
