@@ -23,5 +23,7 @@ module.exports = {
         path: `${__dirname}/gatsby-config.js`,
       },
     },
+    // Use react v16 for portals support
+    `gatsby-plugin-react-next` 
   ],
 }
