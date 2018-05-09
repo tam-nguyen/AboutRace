@@ -10,7 +10,7 @@ import {
 import Overlay from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
-import { navigateTo } from 'gatsby-link';
+import Link, { navigateTo } from 'gatsby-link';
 
 // const MainContent = styled.div`
 //   max-width: 700px;
@@ -260,18 +260,13 @@ class SingleArticle extends React.Component {
               / ></p>
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <div
+                <Link
+                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
                   key={`tag-${tag.name}`}
                   className={'tag'}
-                  onClick={ () => {
-                    console.log('nav')
-                    const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
-                    console.log('nav')
-                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                  }}
                 >
                   <b>{tag.name}</b>
-                </div>
+                </Link>
               )
             }
             <div style={{height: 200}}/>
