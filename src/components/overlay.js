@@ -26,10 +26,9 @@ class UnstyledOverlay extends React.Component {
   }
 
   render() {
-    const { className, children, style } = this.props
-    console.log('render overlay', this.props)
+    const { children, ...restOfProps } = this.props
     return (
-      <div className={className} style={style}>
+      <div {...restOfProps}>
         {children}
       </div>
     )
