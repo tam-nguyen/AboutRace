@@ -88,7 +88,7 @@ class QuickFactOverlay extends React.Component {
     const { quickFact, transition } = this.props
 
     if (!quickFact) return (
-      <Overlay visible={false}/>
+      <Overlay key="quickfact" id="quickfact" visible={false}/>
 
     )
     const quickClips = quickFact.relationships.field_related_content || [];
@@ -111,7 +111,7 @@ class QuickFactOverlay extends React.Component {
     })
 
     return (
-      <Overlay visible={!!quickFact} style={transition && transition.style}>
+      <Overlay key="quickfact" id="quickfact" visible={!!quickFact} style={transition && transition.style}>
         <Centered>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -138,7 +138,7 @@ class TagOverlay extends React.Component {
     const { tag, transition, queryParams = {} } = this.props
 
     if (!tag) return (
-      <Overlay blue visible={!!tag}/>
+      <Overlay key="tag" id="tag" blue visible={!!tag}/>
     )
 
     const quickClipLinks = {
@@ -149,7 +149,7 @@ class TagOverlay extends React.Component {
     }
 
     return (
-      <Overlay blue visible={!!tag} style={transition && transition.style}>
+      <Overlay key="tag" id="tag" blue visible={!!tag} style={transition && transition.style}>
         <Centered wide>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -158,6 +158,7 @@ class TagOverlay extends React.Component {
           {
             [`faq`, `article`, `clip`].map(articleType => (
               <span
+                key={articleType}
                 style={{ marginRight: 20, cursor: `pointer` }}
                 onClick={ () => {
                   const newQueryParams = { ... queryParams }
@@ -175,7 +176,7 @@ class TagOverlay extends React.Component {
           }
           <br/>
           <br/>
-          <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+          <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
             {
               getCards(quickClipLinks, queryParams[`type`], null, true)
             }
@@ -260,6 +261,7 @@ class SingleArticle extends React.Component {
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
                 <div
+                  key={`tag-${tag.name}`}
                   className={'tag'}
                   onClick={ () => {
                     console.log('nav')

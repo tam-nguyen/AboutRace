@@ -2,6 +2,11 @@ const React = require('react')
 import styled, { css } from 'styled-components'
 import getScrollBarWidth from '../utils/scrollbar-width'
 
+// hacky:
+// because url is changed when we open modals, component get's remounted
+// so we need to track previous props outside of actual component
+const previousVisible = {}
+
 class UnstyledOverlay extends React.Component {
   componentDidMount() {
     this.onVisibleChange(this.props.visible)
@@ -14,21 +19,27 @@ class UnstyledOverlay extends React.Component {
   }
 
   onVisibleChange(visible) {
-    if (visible) {
-      document.body.classList.add('modal-open')
-      document.body.style.paddingRight = `${getScrollBarWidth()}px`
-      window.dispatchEvent(new CustomEvent('modal', { detail: { open: true, scrollBarWidth: getScrollBarWidth() } }))
-    } else {
-      document.body.classList.remove('modal-open')
-      document.body.style.paddingRight = ``
-      window.dispatchEvent(new CustomEvent('modal', { detail: { open: false, scrollBarWidth: 0 } }))
+    const wereAllHidden = Object.values(previousVisible).every(val => val === false)
+    previousVisible[this.props.id] = visible
+    const areAllHidden = Object.values(previousVisible).every(val => val === false)
+
+    if (wereAllHidden !== areAllHidden) {
+      if (visible) {
+        document.body.classList.add('modal-open')
+        document.body.style.paddingRight = `${getScrollBarWidth()}px`
+        window.dispatchEvent(new CustomEvent('modal', { detail: { open: true, scrollBarWidth: getScrollBarWidth() } }))
+      } else {
+        document.body.classList.remove('modal-open')
+        document.body.style.paddingRight = ``
+        window.dispatchEvent(new CustomEvent('modal', { detail: { open: false, scrollBarWidth: 0 } }))
+      }
     }
   }
 
   render() {
-    const { children, ...restOfProps } = this.props
+    const { children, style, className } = this.props
     return (
-      <div {...restOfProps}>
+      <div className={className} style={style}>
         {children}
       </div>
     )
