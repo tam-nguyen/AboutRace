@@ -19,6 +19,20 @@ import { navigateTo } from 'gatsby-link';
 const LargeCalloutText = styled.div`
 
 `
+const HeaderDimmer = styled.div`
+  width: 100%;
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  z-index: 99999999;
+  height:50vh;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,d3dde5+100&0.5+1,0+100 */
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%, rgba(2,2,2,0.5) 1%, rgba(211,221,229,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#00d3dde5',GradientType=0 ); /* IE6-9 */
+`
 const ArticleHeader = styled.div`
   width: 100%;
   height: 66vh;
@@ -38,7 +52,9 @@ const ArticleHeader = styled.div`
 const ArticleMain = styled.div`
   background-color: white;
   padding: 30px;
-  margin-top: 10vh
+  margin-top: 10vh;
+  position: relative;
+  z-index:99999999;
 `
 const ArticleTitle = styled.div`
     font-size: 42px;
@@ -46,8 +62,14 @@ const ArticleTitle = styled.div`
     margin-bottom: 30px;
     line-height: 1.3;
     text-align: right;
+    font-weight:500;
 `
-
+const AuthorTitle = styled.div`
+    font-family: 'Lato';
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 15px;
+`
 const Overlay = styled.div`
   background-color: #FFFFE0;
   position: fixed;
@@ -214,6 +236,7 @@ class SingleArticle extends React.Component {
             /> :
             null
         }
+        <HeaderDimmer />
         <ArticleHeader
           background={
             data.nodeArticle.relationships.field_main_image &&
@@ -234,6 +257,17 @@ class SingleArticle extends React.Component {
              data.nodeArticle.relationships.field_author_image.localFile.publicURL
           } />
             <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+            <AuthorTitle>By {data.nodeArticle.field_author.processed}</AuthorTitle>
+            <hr style={{width:60, marginBottom:15, display:'inline-block'}} />
+            <p style={{
+              letterSpacing: '0.04em',
+              fontStyle: 'italic',
+              fontFamily: 'Lato',
+              marginBottom:60
+            }}>Originally published: <span dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_copyright.processed,
+              }}
+              / ></p>
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
                 <span className={'tag'}
@@ -314,6 +348,18 @@ class SingleArticle extends React.Component {
                 __html: data.nodeArticle.field_full_version.processed,
               }}
             />
+            <hr style={{width:60, marginTop:60, marginBottom:15}} />
+            <p style={{
+              color: 'lightgrey',
+              letterSpacing: '0.04em',
+              fontStyle: 'italic',
+              fontFamily: 'Lato',
+              
+            }}>Originally published: <span dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_copyright.processed,
+              }}
+              / ></p>
+            
           </ArticleMain>
           <div className="column _25" />
 
@@ -328,6 +374,15 @@ export const pageQuery = graphql`
   query singleQuery($id: String) {
     nodeArticle(id: { eq: $id }) {
       id
+      field_author {
+        processed
+      }
+      field_author_bio {
+        processed
+      }
+      field_copyright {
+        processed
+      }
       title
       relationships {
         field_article_related_content {
