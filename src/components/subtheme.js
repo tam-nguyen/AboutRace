@@ -127,6 +127,14 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
 )
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, linkable }) => (
+  relatedContent ?
+  <RCCard key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
+    <PlayablePoster
+      clip={clip}
+      linkable={linkable}
+    />
+    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
+  </RCCard> :
   <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
     <PlayablePoster
       clip={clip}
@@ -146,7 +154,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 )
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
-  <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
+  <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
     <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )

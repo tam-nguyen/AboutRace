@@ -71,7 +71,7 @@ const AuthorTitle = styled.div`
     margin-bottom: 15px;
 `
 const Overlay = styled.div`
-  background-color: #FFFFE0;
+  background-color: ##f1efeff0;
   position: fixed;
   left: 0;
   top: 0;
@@ -82,7 +82,7 @@ const Overlay = styled.div`
   display: none;
 
   ${props => props.blue && css`
-    background-color: #f1efefdb;
+    background-color: ##f1efeff0;
   `}
 
   ${props => props.visible && css`
@@ -90,7 +90,20 @@ const Overlay = styled.div`
     display: inline;
   `}
 `
-
+const OverlayTitle = styled.div`
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  border: solid;
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  margin-top: 60px;
+  font-family: 'Lato';
+  font-size: 30px;
+`
 const Centered = styled.div`
   opacity: 1;
   position: relative;
@@ -174,7 +187,11 @@ class TagOverlay extends React.Component {
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
           </div>
-          <h2>{tag.name}</h2>
+          <div style={{
+            textAlign:'center'
+          }}>
+            <OverlayTitle>{tag.name}</OverlayTitle>
+          </div>
           {
             [`faq`, `article`, `clip`].map(articleType => (
               <span
