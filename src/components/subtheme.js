@@ -303,10 +303,10 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: #fafafaf5;
+  background-color: #fafafadb;
   border: solid thin lightgrey;
   padding: 30px;
-  margin: 90px;
+  padding: 90px;
   border-radius:15px;
 `
 
