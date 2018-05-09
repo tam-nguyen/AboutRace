@@ -40,7 +40,7 @@ const StyledRCCard = styled(RCCard)`
   height: auto;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   border: solid thin lightgrey;
-  background-color: white;
+  background-color: #f7f7f7;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
