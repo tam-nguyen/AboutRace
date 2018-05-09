@@ -98,7 +98,7 @@ class SingleInterview extends React.Component {
 
   render() {
     const { data } = this.props
-    console.log('aa', data)
+
     return (
       <div className="row">
         {
@@ -125,13 +125,13 @@ class SingleInterview extends React.Component {
             />
           </InterviewMain>
           <div className="column">
+          <AuthorBio> </AuthorBio>
           <KeyQuote style={{lineHeight:1.5, fontStyle:'italic'}}
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,
               }}
             />
               <strong>{data.nodeInterview.title}</strong>
-              <div style={{marginTop: 20}}>{data.nodeInterview.field_interviewee_bio.processed}</div>
               <div style={{height: 200}}/>
               {
                 (data.nodeInterview.relationships.backref_field_related_content || []).map(quickFact => (

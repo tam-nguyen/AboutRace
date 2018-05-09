@@ -16,6 +16,12 @@ const Video = styled.video`
   width: 100%;
   display: block;
 `
+const FAQQuestion = styled.div`
+  background-color:#ffffffde;
+  height:auto;
+  padding:30px;
+  margin:0 auto;
+`
 const SubthemeTitle = styled.div`
   font-family: 'Lato';
   font-weight: normal;
@@ -128,8 +134,11 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:90}} key={`faq-${i}`} type="FAQ" title={faq.title} slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
-    {/* <p style={{fontSize:18}} className={'card-large-text'}>{faq.title}</p> */}
+  <Card style={{padding:45, display:'flex', alignItems:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
+    <FAQQuestion>
+      <h4>FAQ</h4>
+      <p style={{fontSize:18, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
+    </FAQQuestion>
   </Card>
 )
 
