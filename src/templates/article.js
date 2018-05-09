@@ -7,6 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
+import Overlay from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import { navigateTo } from 'gatsby-link';
@@ -70,27 +71,6 @@ const AuthorTitle = styled.div`
     letter-spacing: 0.04em;
     margin-bottom: 15px;
 `
-const Overlay = styled.div`
-  background-color: #FFFFE0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index:999999999999999999999999;
-  opacity: 0;
-  display: none;
-
-  ${props => props.blue && css`
-    background-color: #f1efefdb;
-  `}
-
-  ${props => props.visible && css`
-    opacity: 1;
-    display: inline;
-  `}
-`
-
 const Centered = styled.div`
   opacity: 1;
   position: relative;
@@ -220,8 +200,8 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
-    console.log(`quickfact`)
-    console.log(quickFact)
+    // console.log(`quickfact`)
+    // console.log(quickFact)
 
     const tag = queryParams.tag ?
       (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
@@ -230,13 +210,13 @@ class SingleArticle extends React.Component {
 
     return (
       <div className="row">
-        <QuickFactOverlay
+        {/* <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
             navigateTo(`?`)
           }}
           transition={transition}
-        />
+        /> */}
         <TagOverlay
           queryParams={queryParams}
           tag={tag}

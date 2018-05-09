@@ -677,3 +677,11 @@ pre tt:after {
     flex: 1;
   }
 } */
+
+html {
+  overflow: visible;
+}
+
+body.modal-open {
+  overflow-y: hidden;
+}
