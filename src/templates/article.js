@@ -7,9 +7,10 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
+import Overlay from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
-import { navigateTo } from 'gatsby-link';
+import Link, { navigateTo } from 'gatsby-link';
 
 // const MainContent = styled.div`
 //   max-width: 700px;
@@ -70,26 +71,6 @@ const AuthorTitle = styled.div`
     letter-spacing: 0.04em;
     margin-bottom: 15px;
 `
-const Overlay = styled.div`
-  background-color: ##f1efeff0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index:999999999999999999999999;
-  opacity: 0;
-  display: none;
-
-  ${props => props.blue && css`
-    background-color: ##f1efeff0;
-  `}
-
-  ${props => props.visible && css`
-    opacity: 1;
-    display: inline;
-  `}
-`
 const OverlayTitle = styled.div`
   text-align: center;
   text-transform: uppercase;
@@ -121,7 +102,7 @@ class QuickFactOverlay extends React.Component {
     const { quickFact, transition } = this.props
 
     if (!quickFact) return (
-      <Overlay visible={false}/>
+      <Overlay key="quickfact" id="quickfact" visible={false}/>
 
     )
     const quickClips = quickFact.relationships.field_related_content || [];
@@ -144,7 +125,7 @@ class QuickFactOverlay extends React.Component {
     })
 
     return (
-      <Overlay visible={!!quickFact} style={transition && transition.style}>
+      <Overlay key="quickfact" id="quickfact" visible={!!quickFact} style={transition && transition.style}>
         <Centered>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -171,7 +152,7 @@ class TagOverlay extends React.Component {
     const { tag, transition, queryParams = {} } = this.props
 
     if (!tag) return (
-      <Overlay blue visible={!!tag}/>
+      <Overlay key="tag" id="tag" visible={!!tag}/>
     )
 
     const quickClipLinks = {
@@ -182,7 +163,7 @@ class TagOverlay extends React.Component {
     }
 
     return (
-      <Overlay blue visible={!!tag} style={transition && transition.style}>
+      <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
         <Centered wide>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -195,6 +176,7 @@ class TagOverlay extends React.Component {
           {
             [`faq`, `article`, `clip`].map(articleType => (
               <span
+                key={articleType}
                 style={{ marginRight: 20, cursor: `pointer` }}
                 onClick={ () => {
                   const newQueryParams = { ... queryParams }
@@ -212,7 +194,7 @@ class TagOverlay extends React.Component {
           }
           <br/>
           <br/>
-          <div style={{ width: `100%`, display: 'flex', 'flex-wrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+          <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
             {
               getCards(quickClipLinks, queryParams[`type`], null, true)
             }
@@ -296,17 +278,13 @@ class SingleArticle extends React.Component {
               / ></p>
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <div
+                <Link
+                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
+                  key={`tag-${tag.name}`}
                   className={'tag'}
-                  onClick={ () => {
-                    console.log('nav')
-                    const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
-                    console.log('nav')
-                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                  }}
                 >
                   <b>{tag.name}</b>
-                </div>
+                </Link>
               )
             }
             <div style={{height: 200}}/>
@@ -321,13 +299,11 @@ class SingleArticle extends React.Component {
               .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
               .map((node, i) => {
                   if (node.__typename == `node__quickfact`) {
+                    const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
+
                     return (
                       <QuickFactCard
-                        onClick={() => {
-                          console.log(node.title)
-                          const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
-                          navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                        }}
+                        link={`?${queryString.stringify(newQueryParams)}`}
                         quickfact={node}
                         i={i}
                         style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}

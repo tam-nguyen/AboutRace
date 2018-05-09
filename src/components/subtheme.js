@@ -159,26 +159,21 @@ export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   </Card>
 )
 
-export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {} }) => (
-  <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
+export const QuickFactCard = ({ quickfact, i, relatedContent, style = {}, ...rest }) => (
+  <Card {...rest} key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
     <h4>{quickfact.title}</h4>
-    {
-      onClick ?
-        <div
-          dangerouslySetInnerHTML={{
-            __html: quickfact.field_quickfact.processed,
-          }}
-          onClick={onClick}
-        /> :
-        null
-    }
+    <div
+      dangerouslySetInnerHTML={{
+        __html: quickfact.field_quickfact.processed,
+      }}
+    /> 
   </Card>
 )
 
 export const getCards = (relationships, queryFilter, relatedContent, linkableClip) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} article={article} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`article-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
