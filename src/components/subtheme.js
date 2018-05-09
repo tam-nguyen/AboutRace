@@ -168,12 +168,20 @@ export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {
 )
 
 export const getCards = (relationships, queryFilter, relatedContent, linkableClip) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `clip`).map((clip, i) => (<ClipCard linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard article={article} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard faq={faq} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
+
+const DISPLAY_NAMES_TO_SLUG = new Map([
+  [`articles`, `article`],
+  [`interviews`, `interview`],
+  [`faqs`, `faq`],
+  [`clips`, `clip`],
+  [`recently added`, `recent`]
+])
 
 
 const Filters = ({ queryParams, name, filter }) => (
@@ -185,14 +193,14 @@ const Filters = ({ queryParams, name, filter }) => (
           }}
           >Sort by: </span>
     {
-      [`article`, 'interview', `faq`, `clip`].map(filterType => (
+      Array.from(DISPLAY_NAMES_TO_SLUG.keys()).map(filterType => (
           <button
             onClick={() => {
               const newQueryParams = { ... queryParams }
-              if (newQueryParams[name] == filterType){
+              if (newQueryParams[name] == DISPLAY_NAMES_TO_SLUG.get(filterType)){
                 delete newQueryParams[name]
               } else {
-                newQueryParams[name] = filterType;
+                newQueryParams[name] = DISPLAY_NAMES_TO_SLUG.get(filterType);
               }
               navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
@@ -200,7 +208,11 @@ const Filters = ({ queryParams, name, filter }) => (
               background: filter == filterType ? `none` : `none`,
               fontWeight: filter == filterType ? `800` : `normal`,
               marginRight: 20,
-              marginBottom: 20
+              marginBottom: 20,
+              float: (
+                (DISPLAY_NAMES_TO_SLUG.get(filterType) === `recent`) ?
+                `right` : `none`
+              )
             }}
           >
             {filterType}

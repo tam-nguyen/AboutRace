@@ -46,9 +46,16 @@ const Centered = styled.div`
   padding: 20px;
   transform: translate(50%, -50%);
 `
+
+const AuthorBio = ({ data }) => (
+  <div style={{marginTop: 20}}>{data.nodeInterview.field_interviewee_bio.processed}</div>
+)
+
 class QuickFactOverlay extends React.Component {
   render() {
     const { quickFact } = this.props
+
+    if (!quickFact) { return null; }
 
     const quickClips = quickFact.relationships.field_related_content || [];
 
@@ -101,16 +108,12 @@ class SingleInterview extends React.Component {
 
     return (
       <div className="row">
-        {
-          this.state.quickFact ?
-            <QuickFactOverlay
-              quickFact={this.state.quickFact}
-              closeHandler={() => this.setState({ quickFact: null })}
-            /> :
-            null
-        }
+        <QuickFactOverlay
+          quickFact={this.state.quickFact}
+          closeHandler={() => this.setState({ quickFact: null })}
+        />
         <InterviewHeader
-          
+
         />
           <div className="column _25" />
           <InterviewMain className="column _60">
@@ -125,7 +128,7 @@ class SingleInterview extends React.Component {
             />
           </InterviewMain>
           <div className="column">
-          <AuthorBio> </AuthorBio>
+          <AuthorBio data={data}> </AuthorBio>
           <KeyQuote style={{lineHeight:1.5, fontStyle:'italic'}}
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,

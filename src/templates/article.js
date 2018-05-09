@@ -78,9 +78,16 @@ const Overlay = styled.div`
   height: 100%;
   width: 100%;
   z-index:999999999999999999999999;
+  opacity: 0;
+  display: none;
 
   ${props => props.blue && css`
     background-color: #f1efefdb;
+  `}
+
+  ${props => props.visible && css`
+    opacity: 1;
+    display: inline;
   `}
 `
 
@@ -98,8 +105,12 @@ const Centered = styled.div`
 `
 class QuickFactOverlay extends React.Component {
   render() {
-    const { quickFact } = this.props
+    const { quickFact, transition } = this.props
 
+    if (!quickFact) return (
+      <Overlay visible={false}/>
+
+    )
     const quickClips = quickFact.relationships.field_related_content || [];
 
     const quickClipLinks = {
@@ -120,7 +131,7 @@ class QuickFactOverlay extends React.Component {
     })
 
     return (
-      <Overlay>
+      <Overlay visible={!!quickFact} style={transition && transition.style}>
         <Centered>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -144,7 +155,11 @@ class QuickFactOverlay extends React.Component {
 
 class TagOverlay extends React.Component {
   render() {
-    const { tag, queryParams = {} } = this.props
+    const { tag, transition, queryParams = {} } = this.props
+
+    if (!tag) return (
+      <Overlay blue visible={!!tag}/>
+    )
 
     const quickClipLinks = {
       articles: tag.relationships.backref_field_tags_node_article ,
@@ -154,7 +169,7 @@ class TagOverlay extends React.Component {
     }
 
     return (
-      <Overlay blue>
+      <Overlay blue visible={!!tag} style={transition && transition.style}>
         <Centered wide>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
@@ -198,7 +213,7 @@ class SingleArticle extends React.Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, transition } = this.props
     const queryParams = queryString.parse(this.props.location.search);
     const quickFact = queryParams.quickfact ?
       (data.nodeArticle.relationships.field_article_related_content || []).filter(node => (node.__typename === `node__quickfact` && kebabCase(node.title) == queryParams.quickfact)
@@ -214,28 +229,22 @@ class SingleArticle extends React.Component {
       null
 
     return (
-      <div className="row" style={{ overflowY: queryParams.tag ? "hidden" : "auto" }}>
-        {
-          queryParams.quickfact ?
-            <QuickFactOverlay
-              quickFact={quickFact}
-              closeHandler={() => {
-                navigateTo(`?`)
-              }}
-            /> :
-            null
-        }
-        {
-          queryParams.tag ?
-            <TagOverlay
-              queryParams={queryParams}
-              tag={tag}
-              closeHandler={() => {
-                navigateTo(`?`)
-              }}
-            /> :
-            null
-        }
+      <div className="row">
+        <QuickFactOverlay
+          quickFact={quickFact}
+          closeHandler={() => {
+            navigateTo(`?`)
+          }}
+          transition={transition}
+        />
+        <TagOverlay
+          queryParams={queryParams}
+          tag={tag}
+          transition={transition}
+          closeHandler={() => {
+            navigateTo(`?`)
+          }}
+        />
         <HeaderDimmer />
         <ArticleHeader
           background={
@@ -270,14 +279,17 @@ class SingleArticle extends React.Component {
               / ></p>
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <span className={'tag'}
-                  onClick={()=>{
+                <div
+                  className={'tag'}
+                  onClick={ () => {
+                    console.log('nav')
                     const newQueryParams = { ...queryParams, tag: kebabCase(tag.name) }
+                    console.log('nav')
                     navigateTo(`?${queryString.stringify(newQueryParams)}`)
                   }}
                 >
                   <b>{tag.name}</b>
-                </span>
+                </div>
               )
             }
             <div style={{height: 200}}/>
@@ -334,16 +346,18 @@ class SingleArticle extends React.Component {
           </div>
 
           <ArticleMain className="column _60">
-            <LargeCalloutText style={{
-              fontSize: 28,
-              fontWeight: 'normal',
-              lineHeight: 1.5
-            }}
+            <LargeCalloutText
+              style={{
+                fontSize: 28,
+                fontWeight: 'normal',
+                lineHeight: 1.5
+              }}
               dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_large_callout_text.processed,
               }}
             />
-            <div style={{lineHeight:1.7}}
+            <div
+              style={{lineHeight:1.7}}
               dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_full_version.processed,
               }}
@@ -354,12 +368,12 @@ class SingleArticle extends React.Component {
               letterSpacing: '0.04em',
               fontStyle: 'italic',
               fontFamily: 'Lato',
-              
+
             }}>Originally published: <span dangerouslySetInnerHTML={{
                 __html: data.nodeArticle.field_copyright.processed,
               }}
               / ></p>
-            
+
           </ArticleMain>
           <div className="column _25" />
 
@@ -368,7 +382,7 @@ class SingleArticle extends React.Component {
   }
 }
 
-export default SingleArticle
+export default SingleArticle;
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
