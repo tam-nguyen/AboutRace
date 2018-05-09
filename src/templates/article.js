@@ -200,8 +200,8 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
-    // console.log(`quickfact`)
-    // console.log(quickFact)
+    console.log(`quickfact`)
+    console.log(quickFact)
 
     const tag = queryParams.tag ?
       (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
@@ -210,13 +210,13 @@ class SingleArticle extends React.Component {
 
     return (
       <div className="row">
-        {/* <QuickFactOverlay
+        <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
             navigateTo(`?`)
           }}
           transition={transition}
-        /> */}
+        />
         <TagOverlay
           queryParams={queryParams}
           tag={tag}
