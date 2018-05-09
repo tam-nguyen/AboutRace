@@ -140,7 +140,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
   <Card style={{padding:45, display:'flex', alignItems:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
     <FAQQuestion>
       <h4>FAQ</h4>
-      <p style={{fontSize:18, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
+      <p style={{fontSize:24, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
     </FAQQuestion>
   </Card>
 )
@@ -185,11 +185,17 @@ const DISPLAY_NAMES_TO_SLUG = new Map([
 
 
 const Filters = ({ queryParams, name, filter }) => (
-  <div>
+  <div style={{
+    opacity:0.75,
+    mixBlendMode:'normal'
+  }}
+    >
     <span style={{
             marginRight: 30,
             fontFamily: 'Lato',
             letterSpacing: '0.04em',
+            color:'rgb(255, 132, 0)',
+            marginLeft:15
           }}
           >Sort by: </span>
     {
@@ -206,7 +212,8 @@ const Filters = ({ queryParams, name, filter }) => (
             }}
             style={{
               background: filter == filterType ? `none` : `none`,
-              fontWeight: filter == filterType ? `800` : `normal`,
+              color: filter == filterType ? `black` : `rgb(255, 132, 0)`,
+              fontWeight: filter == filterType ? `300` : `800`,
               marginRight: 20,
               marginBottom: 20,
               float: (
