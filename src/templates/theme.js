@@ -45,7 +45,7 @@ const ThemeHeader = styled.div`
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -86,7 +86,7 @@ const ThemeIntro = styled.div`
 
 const ThemeMain = styled.div`
   position: absolute;
-  top: 100vh;
+  top: 66vh;
   width: 100%;
 `
 
