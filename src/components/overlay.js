@@ -21,12 +21,14 @@ class Portal extends React.Component {
     document.body.appendChild(this.el)
     document.body.classList.add('modal-open')
     document.body.style.paddingRight = `${getScrollBarWidth()}px`
+    window.dispatchEvent(new CustomEvent('modal', { detail: { open: true } }))
   }
 
   componentWillUnmount() {
     document.body.removeChild(this.el)
     document.body.classList.remove('modal-open')
     document.body.style.paddingRight = ''
+    window.dispatchEvent(new CustomEvent('modal', { detail: { open: false } }))
   }
 
   render() {
