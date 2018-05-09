@@ -654,7 +654,7 @@ pre tt:after {
 .tag {
   display: inline-block;
   padding: 8px 16px;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
   margin-left: 15px;
   border: solid thin lightgrey;
   font-family: 'Lato';
@@ -662,6 +662,7 @@ pre tt:after {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #999;
+  text-decoration: none;
   cursor: pointer;
   background-color: white;
   transition: background-color 1s;
@@ -671,9 +672,16 @@ pre tt:after {
   transition: background-color 1s;
 }
 
-
 /* @media screen and (min-width: 800px) {
   .column {
     flex: 1;
   }
 } */
+
+html {
+  overflow: visible;
+}
+
+body.modal-open {
+  overflow-y: hidden;
+}

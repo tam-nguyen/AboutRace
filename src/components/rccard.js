@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
 class RCCard extends React.Component {
     render() {
         return (
-        <div className={this.props.className} style={this.props.style}>
+        <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`} className={this.props.className} style={this.props.style}>
             {this.props.type ?
             <h4>{this.props.type}</h4> :
             null }
@@ -21,10 +21,10 @@ class RCCard extends React.Component {
               backgroundPosition: 'center'
             }}>
             </div>
-            <p><Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`}>{this.props.title}</Link></p>
+            <p>{this.props.title}</p>
 
             {this.props.children}
-        </div>
+        </Link>
         )
     }
 }
@@ -51,6 +51,10 @@ const StyledRCCard = styled(RCCard)`
   margin-left: 10px;
   margin-right: 10px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px
+
+  // Link styling
+  color: inherit;
+  text-decoration: inherit;
 
   ${props => props.background && css`
     background-image: url('${props.background}');
