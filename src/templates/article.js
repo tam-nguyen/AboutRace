@@ -286,13 +286,11 @@ class SingleArticle extends React.Component {
               .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
               .map((node, i) => {
                   if (node.__typename == `node__quickfact`) {
+                    const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
+
                     return (
                       <QuickFactCard
-                        onClick={() => {
-                          console.log(node.title)
-                          const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
-                          navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                        }}
+                        link={`?${queryString.stringify(newQueryParams)}`}
                         quickfact={node}
                         i={i}
                         style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}

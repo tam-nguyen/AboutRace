@@ -151,19 +151,14 @@ export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   </Card>
 )
 
-export const QuickFactCard = ({ quickfact, i, relatedContent, onClick, style = {} }) => (
-  <Card key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
+export const QuickFactCard = ({ quickfact, i, relatedContent, style = {}, ...rest }) => (
+  <Card {...rest} key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
     <h4>{quickfact.title}</h4>
-    {
-      onClick ?
-        <div
-          dangerouslySetInnerHTML={{
-            __html: quickfact.field_quickfact.processed,
-          }}
-          onClick={onClick}
-        /> :
-        null
-    }
+    <div
+      dangerouslySetInnerHTML={{
+        __html: quickfact.field_quickfact.processed,
+      }}
+    /> 
   </Card>
 )
 
