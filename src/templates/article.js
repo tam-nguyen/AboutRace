@@ -138,7 +138,7 @@ class TagOverlay extends React.Component {
     const { tag, transition, queryParams = {} } = this.props
 
     if (!tag) return (
-      <Overlay key="tag" id="tag" blue visible={!!tag}/>
+      <Overlay key="tag" id="tag" visible={!!tag}/>
     )
 
     const quickClipLinks = {
@@ -149,7 +149,7 @@ class TagOverlay extends React.Component {
     }
 
     return (
-      <Overlay key="tag" id="tag" blue visible={!!tag} style={transition && transition.style}>
+      <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
         <Centered wide>
           <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
             <b>Close</b>
