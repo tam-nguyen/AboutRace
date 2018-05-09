@@ -5,7 +5,7 @@ require('react-flex/index.css')
 import Img from 'gatsby-image'
 const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
-import { navigateTo } from 'gatsby-link';
+import Link, { navigateTo } from 'gatsby-link';
 import Card from './card.js';
 import RCCard from './rccard.js';
 const queryString = require('query-string');
