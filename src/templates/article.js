@@ -257,7 +257,7 @@ class SingleArticle extends React.Component {
              data.nodeArticle.relationships.field_author_image.localFile.publicURL
           } />
             <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-            <AuthorTitle>By {data.nodeArticle.field_author.processed}</AuthorTitle>
+            <AuthorTitle>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</AuthorTitle>
             <hr style={{width:60, marginBottom:15, display:'inline-block'}} />
             <p style={{
               letterSpacing: '0.04em',

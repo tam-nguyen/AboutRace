@@ -17,7 +17,7 @@ const Video = styled.video`
   display: block;
 `
 const FAQQuestion = styled.div`
-  background-color:#ffffffde;
+  background-color:#ffffffed;
   height:auto;
   padding:30px;
   margin:0 auto;
@@ -26,11 +26,15 @@ const SubthemeTitle = styled.div`
   font-family: 'Lato';
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 48px;
+  font-size: 24px;
   line-height: 1.1;
   color: #0c063e;
   margin-top: 15px;
-  padding-bottom: 30px;
+  color: #a6a6a6;
+  text-transform: uppercase;
+  margin-top: 30px;
+  text-align: center;
+  letter-spacing: 0.12em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -124,12 +128,11 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, linkable }) => (
   <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
-
-    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
     <PlayablePoster
       clip={clip}
       linkable={linkable}
     />
+    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
   </Card>
 )
 
@@ -176,7 +179,7 @@ export const getCards = (relationships, queryFilter, relatedContent, linkableCli
 const Filters = ({ queryParams, name, filter }) => (
   <div>
     <span style={{
-            marginRight: 40,
+            marginRight: 30,
             fontFamily: 'Lato',
             letterSpacing: '0.04em',
           }}
@@ -194,8 +197,8 @@ const Filters = ({ queryParams, name, filter }) => (
               navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
             style={{
-              background: filter == filterType ? `#666` : `white`,
-              color: filter == filterType ? `white` : `#666`,
+              background: filter == filterType ? `none` : `none`,
+              fontWeight: filter == filterType ? `800` : `normal`,
               marginRight: 20,
               marginBottom: 20
             }}
@@ -283,8 +286,9 @@ class SubthemeSection extends React.Component {
 const SubthemeContainer = styled(SubthemeSection)`
   background-color: #fafafaf5;
   border: solid thin lightgrey;
-  padding: 20px;
-  margin: 50px;
+  padding: 30px;
+  margin: 90px;
+  border-radius:15px;
 `
 
 export default SubthemeContainer;
