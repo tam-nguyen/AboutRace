@@ -119,7 +119,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
     </RCCard> :
-    <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
     {article.field_short_version && (
       <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
@@ -146,7 +146,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 )
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
-  <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
+  <Card style={{padding:15}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
     <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
