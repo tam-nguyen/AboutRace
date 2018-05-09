@@ -97,15 +97,18 @@ class PlayablePoster extends React.Component {
 
     if (this.props.linkable) {
       return (
-        <Link to={`${kebabCase(this.props.clip.title)}`}>
-          <div className={'poster'}>
-            <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
-          </div>
-        </Link>
+        <div className={'poster'}>
+          <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
+        </div>
       )
     }
+    const additionalProps = {}
+    if (!this.props.linkable) {
+      additionalProps.onClick = () => this.setState({ play: true })
+    }
+
     return (
-      <div className={'poster'} onClick={() => this.setState({ play: true })}>
+      <div className={'poster'} {...additionalProps}>
         <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
       </div>
     );
@@ -127,7 +130,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
 )
 
 export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, linkable }) => (
-  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
+  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed} link={linkable && `/clips/${kebabCase(clip.title)}`}>
     <PlayablePoster
       clip={clip}
       linkable={linkable}
