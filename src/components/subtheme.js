@@ -121,9 +121,9 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
     {article.field_short_version && (
       <div>
-        <h4>{article.title}</h4>
-        { article.field_author && <h6 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+        <h6>{article.title}</h6>
+        { article.field_author && <h4 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
       </div>
     )}
     </Card>
