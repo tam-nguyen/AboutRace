@@ -56,6 +56,7 @@ const Overlay = styled(UnstyledOverlay)`
   z-index:999999999999999999999999;
   opacity: 0;
   display: none;
+  overflow-y: auto;
 
   ${props => props.visible && css`
     opacity: 1;
