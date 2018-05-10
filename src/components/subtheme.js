@@ -224,13 +224,13 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             }}
             style={{
               background: filter == filterSlug ? `none` : `none`,
-              color: filter == filterSlug ? `black` : `rgb(255, 132, 0)`,
-              fontWeight: filter == filterSlug ? `300` : `800`,
+              color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
+              fontWeight: filter == filterSlug ? `800` : `400`,
               marginRight: 20,
               marginBottom: 20,
               float: (
                 (filterSlug === `recent`) ?
-                `right` : `none`
+                `none` : `none`
               )
             }}
           >
@@ -318,11 +318,11 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: #fafafadb;
+  background-color: rgba(241,239,239,0.94);
   border: solid thin lightgrey;
   padding: 30px;
   padding: 90px;
-  border-radius:15px;
+  margin-bottom:60px;
 `
 
 export default SubthemeContainer;
