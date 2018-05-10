@@ -55,8 +55,10 @@ class ExpandableText extends React.Component {
 }
 
 const EpisodeItem = ({ episode, queryParams }) => (
-    <div className="row">
-        <div className="column">Clip here</div>
+    <div className="row" style={{marginBottom: 25}}>
+        <div className="column">
+            <div style={{background: 'gray', width: 500, height: (500 * 9 / 16)}}/>
+        </div>
         <div className="column">
             Episode {episode.episodeNumber}
             <h2>{episode.title}</h2>
@@ -94,7 +96,7 @@ export default ({ data, transition, location }) => {
         <HeaderDimmer />
         <Overlay id="transcript" visible={!!transcript} style={transition && transition.style}>
         {transcript &&
-            <OverlayBody wide>
+            <OverlayBody>
                 <OverlayHeader>
                     <div onClick={closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
                     <b>Close</b>
