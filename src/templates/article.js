@@ -7,7 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
-import Overlay from '../components/overlay'
+import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
@@ -85,18 +85,6 @@ const OverlayTitle = styled.div`
   font-family: 'Lato';
   font-size: 30px;
 `
-const Centered = styled.div`
-  opacity: 1;
-  position: relative;
-  top: 50%;
-  width: 50%;
-  padding: 20px;
-  transform: translate(50%, -50%);
-  ${props => props.wide && css`
-    transform: translate(10%, -50%);
-    width: 80%;
-  `}
-`
 class QuickFactOverlay extends React.Component {
   render() {
     const { quickFact, transition } = this.props
@@ -126,22 +114,24 @@ class QuickFactOverlay extends React.Component {
 
     return (
       <Overlay key="quickfact" id="quickfact" visible={!!quickFact} style={transition && transition.style}>
-        <Centered>
-          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <b>Close</b>
-          </div>
-          <h3>{quickFact.title}</h3>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: quickFact.field_quickfact.processed,
-            }}
-          />
+        <OverlayBody>
+          <OverlayHeader>
+            <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
+              <b>Close</b>
+            </div>
+            <h3>{quickFact.title}</h3>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: quickFact.field_quickfact.processed,
+              }}
+            />
+          </OverlayHeader>
           <div style={{ width: `100%`, display: `flex`, }}>
             {
               getCards(quickClipLinks, null, null, true).slice(0,2)
             }
           </div>
-        </Centered>
+        </OverlayBody>
       </Overlay>
     )
   }
@@ -170,42 +160,42 @@ class TagOverlay extends React.Component {
 
     return (
       <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
-        <Centered wide>
-          <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <b>Close</b>
-          </div>
-          <div style={{
-            textAlign:'center'
-          }}>
-            <OverlayTitle>{tag.name}</OverlayTitle>
-          </div>
-          {
-            [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
-              <span
-                key={articleType}
-                style={{ marginRight: 20, cursor: `pointer` }}
-                onClick={ () => {
-                  const newQueryParams = { ... queryParams }
-                  if (newQueryParams[`type`] == articleType){
-                    delete newQueryParams[`type`]
-                  } else {
-                    newQueryParams[`type`] = articleType;
-                  }
-                  navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                }}
-              >
-                { articleType }
-              </span>
-            ))
-          }
-          <br/>
-          <br/>
-          <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap', height: `80vh`, overflowY: `auto`}}>
+        <OverlayBody wide>
+          <OverlayHeader>
+            <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
+              <b>Close</b>
+            </div>
+            <div style={{
+              textAlign:'center'
+            }}>
+              <OverlayTitle>{tag.name}</OverlayTitle>
+            </div>
+            {
+              [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
+                <span
+                  key={articleType}
+                  style={{ marginRight: 20, cursor: `pointer` }}
+                  onClick={ () => {
+                    const newQueryParams = { ... queryParams }
+                    if (newQueryParams[`type`] == articleType){
+                      delete newQueryParams[`type`]
+                    } else {
+                      newQueryParams[`type`] = articleType;
+                    }
+                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                  }}
+                >
+                  { articleType }
+                </span>
+              ))
+            }
+          </OverlayHeader>
+          <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap'}}>
             {
               getCards(quickClipLinks, queryParams[`type`], null, true)
             }
           </div>
-        </Centered>
+        </OverlayBody>
       </Overlay>
     )
   }
