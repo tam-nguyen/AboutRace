@@ -64,7 +64,7 @@ const EpisodeItem = ({ episode, queryParams }) => (
             <h2>{episode.title}</h2>
             <div style={{margin: '0 -15px'}}>
                 <Link to={`?${queryString.stringify({ ...queryParams, transcript: episode.episodeNumber })}`} className="tag">Transcript</Link>
-                <button className="tag">Credits</button>
+                <Link to={`?${queryString.stringify({ ...queryParams, credits: episode.episodeNumber })}`} className="tag">Credits</Link>
                 <button className="tag">Clips</button>
             </div>
             <div>
@@ -89,13 +89,13 @@ export default ({ data, transition, location }) => {
   const queryParams = queryString.parse(location.search)
 
   const transcript = queryParams.transcript ? getEpisodeByNumber(queryParams.transcript) : null
-//   const credits = queryParams.credits ? safeGet(getEpisodeByNumber(queryParams.credits), 'credits') : null
+  const credits = queryParams.credits ? getEpisodeByNumber(queryParams.credits) : null
 
   return (
     <Wrapper>
         <HeaderDimmer />
-        <Overlay id="transcript" visible={!!transcript} style={transition && transition.style}>
-        {transcript &&
+        <Overlay id="film-overlay" visible={!!transcript || !!credits} style={transition && transition.style}>
+        {(transcript || credits) &&
             <OverlayBody>
                 <OverlayHeader>
                     <div onClick={closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
@@ -104,12 +104,12 @@ export default ({ data, transition, location }) => {
                     <div style={{
                     textAlign:'center'
                     }}>
-                        <h1>{transcript.title}</h1>
+                        <h1>{transcript ? transcript.title : credits.title}</h1>
                     </div>
                 </OverlayHeader>
                 <div
                 dangerouslySetInnerHTML={{
-                    __html: safeGet(transcript, 'transcript'),
+                    __html: transcript ? safeGet(transcript, 'transcript') : safeGet(credits, 'credits'),
                 }}
                 />
             </OverlayBody>
