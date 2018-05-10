@@ -119,7 +119,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
     </RCCard> :
-    <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed}>
+    <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
     {article.field_short_version && (
       <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
@@ -135,7 +135,7 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
     />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
   </RCCard> :
-  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
+  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
     <PlayablePoster
       clip={clip}
       linkable={linkable}
@@ -145,7 +145,7 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:45, display:'flex', alignItems:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}>
+  <Card style={{padding:45, display:'flex', alignItems:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
     <FAQQuestion>
       <h4>FAQ</h4>
       <p style={{fontSize:24, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
@@ -154,7 +154,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 )
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
-  <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed}>
+  <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
     <p className={'card-large-text'}>{interview.title}</p>
   </Card>
 )
@@ -166,7 +166,7 @@ export const QuickFactCard = ({ quickfact, i, relatedContent, style = {}, ...res
       dangerouslySetInnerHTML={{
         __html: quickfact.field_quickfact.processed,
       }}
-    /> 
+    />
   </Card>
 )
 
@@ -186,8 +186,14 @@ const DISPLAY_NAMES_TO_SLUG = new Map([
   [`recently added`, `recent`]
 ])
 
+const itemExists = (itemTag, parent) => {
+  console.log(parent.relationships)
+  console.log(itemTag)
+  return parent.relationships[itemTag]
 
-const Filters = ({ queryParams, name, filter }) => (
+}
+
+const Filters = ({ queryParams, name, filter, subtheme }) => (
   <div style={{
     opacity:0.75,
     mixBlendMode:'normal'
@@ -202,7 +208,7 @@ const Filters = ({ queryParams, name, filter }) => (
           }}
           >Sort by: </span>
     {
-      Array.from(DISPLAY_NAMES_TO_SLUG.keys()).map(filterType => {
+      Array.from(DISPLAY_NAMES_TO_SLUG.keys()).filter(itemType => (itemType === `recently added` || itemExists(itemType, subtheme))).map(filterType => {
         const filterSlug = DISPLAY_NAMES_TO_SLUG.get(filterType)
 
         return (
@@ -238,15 +244,18 @@ const Filters = ({ queryParams, name, filter }) => (
 
 class SubthemeSection extends React.Component {
   constructor(props){
+    console.log('creating subsection')
     super(props)
 
     this.updateOrder(props)
-    this.state = {}
+    this.state = { numCards: NUM_CARDS_TO_SHOW }
   }
   shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps.filter)
+    console.log(this.props.filter)
     return (
       nextProps.filter !== this.props.filter ||
-      nextState.showMore !== this.state.showMore
+      nextState.numCards !== this.state.numCards
     );
   }
   componentWillUpdate(nextProps) {
@@ -268,7 +277,8 @@ class SubthemeSection extends React.Component {
 
     const allCards = filter ?
       getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
-      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
+      //reorder(getCards(subtheme.relationships, filter, null, true), this.order)
+      getCards(subtheme.relationships, filter, null, true)
 
     const description = subtheme.description
       ? <div
@@ -286,17 +296,16 @@ class SubthemeSection extends React.Component {
           queryParams={this.props.queryParams}
           name={this.props.name}
           filter={filter}
+          subtheme={subtheme}
         />
         <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
           {
-            this.state.showMore ?
-              allCards :
-              allCards.slice(0, NUM_CARDS_TO_SHOW)
+            allCards.slice(0, this.state.numCards)
           }
         </div>
         {
-          allCards.length >= (NUM_CARDS_TO_SHOW) && !this.state.showMore ?
-            <button style={{ margin: 20 }} onClick={() => { console.log('here'); this.setState({ showMore: true }); } }>
+          allCards.length >= this.state.numCards ?
+            <button style={{ margin: 20 }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
               Show More
             </button> :
             null
