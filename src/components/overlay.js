@@ -68,7 +68,7 @@ const OverlayBody = styled.div`
   opacity: 1;
   padding: 20px;
   top: 0;
-  // height: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   display: flex;
   justify-content: center;
