@@ -13,39 +13,36 @@ import styled from 'styled-components';
 
 
 const ThemeTitle = styled.div`
-  width: 720px;
   margin-top: 50vh;
   margin-bottom:30px;
   color: inherit;
   font-family: "lato";
   font-weight: 800;
   text-rendering: optimizeLegibility;
-  font-size: 36px;
+  font-size: 24px;
   line-height: 1.1;
   letter-spacing: 0.14em;
-  color: white;
-  mix-blend-mode: overlay;
-  opacity: 0.9;
+  color: rgba(59, 59, 59, 0.8);
   text-transform: uppercase;
 `
 const ThemeDescription = styled.div`
-  color: white;
-  font-weight: 700;
-  font-size: 20px;
+  color: rgba(59, 59, 59, 0.8);
+  font-weight: 400;
+  font-size: 24px;
+  font-style:italic;
   line-height: 1.5;
-  width: 490px;
   position:relative;
   z-index:99999;
 `
 const ThemeHeader = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -80,14 +77,16 @@ const Dimmer = styled.div`
 `
 
 const ThemeIntro = styled.div`
-  margin-left: 30px;
-  margin-top: 120px;
+  // height: 100vh;
+  padding:60px;
+  // background-color:rgba(241,239,239,0.94);
+  z-index:99999999999999999999;
+  color: rgba(59, 59, 59, 0.8);
 `
 
 const ThemeMain = styled.div`
   position: absolute;
-  top: 66vh;
-  width: 100%;
+  top: 110vh;
 `
 
 class ThemePage extends React.Component {
