@@ -123,8 +123,8 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     {article.field_short_version && (
       <div>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-        <h4>{article.title}</h4>
-        { article.field_author && <h6 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+        <h6>{article.title}</h6>
+        { article.field_author && <h4 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
       </div>
     )}
     </Card>
