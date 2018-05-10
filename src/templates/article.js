@@ -7,7 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
-import Overlay from '../components/overlay'
+import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
@@ -85,29 +85,6 @@ const OverlayTitle = styled.div`
   font-family: 'Lato';
   font-size: 30px;
 `
-const Centered = styled.div`
-  opacity: 1;
-  padding: 20px;
-  top: 0;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-  ${props => props.wide ? css`
-      width: 80%;
-  ` : css`
-      width: 50%;
-  `}
-`
-
-const OverlayHeader = styled.div`
-  position: sticky;
-  top: 20px;
-  margin-bottom: 1em;
-`
-
 class QuickFactOverlay extends React.Component {
   render() {
     const { quickFact, transition } = this.props
@@ -137,7 +114,7 @@ class QuickFactOverlay extends React.Component {
 
     return (
       <Overlay key="quickfact" id="quickfact" visible={!!quickFact} style={transition && transition.style}>
-        <Centered>
+        <OverlayBody>
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
               <b>Close</b>
@@ -154,7 +131,7 @@ class QuickFactOverlay extends React.Component {
               getCards(quickClipLinks, null, null, true).slice(0,2)
             }
           </div>
-        </Centered>
+        </OverlayBody>
       </Overlay>
     )
   }
@@ -183,7 +160,7 @@ class TagOverlay extends React.Component {
 
     return (
       <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
-        <Centered wide>
+        <OverlayBody wide>
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
               <b>Close</b>
@@ -218,7 +195,7 @@ class TagOverlay extends React.Component {
               getCards(quickClipLinks, queryParams[`type`], null, true)
             }
           </div>
-        </Centered>
+        </OverlayBody>
       </Overlay>
     )
   }

@@ -64,4 +64,27 @@ const Overlay = styled(UnstyledOverlay)`
   `}
 `
 
-export default Overlay
+const OverlayBody = styled.div`
+  opacity: 1;
+  padding: 20px;
+  top: 0;
+  // height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  ${props => props.wide ? css`
+      width: 80%;
+  ` : css`
+      width: 50%;
+  `}
+`
+
+const OverlayHeader = styled.div`
+  position: sticky;
+  top: 20px;
+  margin-bottom: 1em;
+`
+
+export default { Overlay, OverlayHeader, OverlayBody }
