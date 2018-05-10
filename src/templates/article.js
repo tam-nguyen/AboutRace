@@ -302,7 +302,7 @@ class SingleArticle extends React.Component {
                         link={`?${queryString.stringify(newQueryParams)}`}
                         quickfact={node}
                         i={i}
-                        style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}
+                        style={{ cursor: `pointer`, textAlign:'left', border: `1px solid #888888`, padding: 20}}
                       />
                     )
                   } else if (node.__typename == `node__article`) {

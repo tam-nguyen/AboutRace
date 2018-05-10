@@ -28,9 +28,8 @@ const SubthemeTitle = styled.div`
   text-rendering: optimizeLegibility;
   font-size: 24px;
   line-height: 1.1;
-  color: #0c063e;
+  color: rgba(59, 59, 59, 0.8);
   margin-top: 15px;
-  color: #a6a6a6;
   text-transform: uppercase;
   margin-top: 30px;
   text-align: center;
@@ -322,7 +321,7 @@ const SubthemeContainer = styled(SubthemeSection)`
   border: solid thin lightgrey;
   padding: 30px;
   padding: 90px;
-  margin-bottom:60px;
+  margin: 30px;
 `
 
 export default SubthemeContainer;
