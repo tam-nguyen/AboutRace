@@ -133,10 +133,18 @@ export default ({ data }) => (
             <div className="column _25"/>
             <div className="column">
                 <h1>Race: The power of an Illusion</h1>
-                <div>Statement from executive producer</div>
+                <p><strong>Statement from executive producer</strong></p>
                 <div className="row" style={{margin: '0 -15px'}}>
                     <div className="column">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex odio, faucibus faucibus condimentum nec, vulputate nec massa. Aenean quis lorem purus. Aenean posuere felis eros, ut tempus ex finibus efficitur. Integer porta sollicitudin odio, eget fermentum augue posuere ac. Sed eget enim metus. Proin viverra mauris maximus nunc interdum consequat. Morbi porta massa ac sapien sodales consectetur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum tempor sapien ut felis elementum placerat eget et odio. Aliquam imperdiet libero dui, nec faucibus urna porta non. In felis lorem, volutpat vel dictum id, lobortis ac quam. Nullam eu molestie justo.
+                        <p>Race is one topic where we all think we're experts. Yet ask 10 people to define race or name "the races," and you're likely to get 10 different answers. Few issues are characterized by more contradictory assumptions and myths, each voiced with absolute certainty.</p>
+
+                        <p>In producing this series, we felt it was important to go back to first principles and ask, What is this thing called "race?" - a question so basic it is rarely raised. What we discovered is that most of our common assumptions about race - for instance, that the world's people can be divided biologically along racial lines - are wrong. Yet the consequences of racism are very real.</p>
+
+                        <p>How do we make sense of these two seeming contradictions? Our hope is that this series can help us all navigate through our myths and misconceptions, and scrutinize some of the assumptions we take for granted. In that sense, the real subject of the film is not so much race but the viewer, or more precisely, the notions about race we all hold.</p>
+
+                        <p>We hope this series can help clear away the biological underbrush and leave starkly visible the underlying social, economic, and political conditions that disproportionately channel advantages and opportunities to white people. Perhaps then we can shift the conversation from discussing diversity and respecting cultural difference to building a more just and equitable society.</p>
+
+                        <p><strong>April 2003</strong></p>
                     </div>
                     <div>
                         <div className="tag">Buy on DVD</div>
