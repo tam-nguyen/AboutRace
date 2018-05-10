@@ -280,7 +280,7 @@ class SubthemeSection extends React.Component {
 
     const allCards = filter ?
       getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
-      //reorder(getCards(subtheme.relationships, filter, null, true), this.order)
+      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
       getCards(subtheme.relationships, filter, null, true)
 
     const description = subtheme.description
