@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import './FAQs.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
+const queryString = require('query-string');
 
 const HeaderDimmer = styled.div`
   width: 100%;
@@ -98,22 +100,22 @@ class ExpandableText extends React.Component {
                 <div style={{maxHeight: expanded ? '' : '105px', overflow: 'hidden', marginBottom: 15 }}>
                     {this.props.children}
                 </div>
-                <button className="tag" style={{float: 'right'}} onClick={this.toggleExpand}>{expanded ? "Collapse" : "View more"}</button>
+                <button className="tag" style={{float: 'right'}} onClick={this.toggleExpand}>{expanded ? "View less" : "View more"}</button>
             </div>
         )
     }
 }
 
-const EpisodeItem = ({episode}) => (
+const EpisodeItem = ({ episode, queryParams }) => (
     <div className="row">
         <div className="column">Clip here</div>
         <div className="column">
             Episode {episode.episodeNumber}
             <h2>{episode.title}</h2>
             <div style={{margin: '0 -15px'}}>
-                <div className="tag">Transcript</div>
-                <div className="tag">Credits</div>
-                <div className="tag">Clips</div>
+                <Link to={`?${queryString.stringify({ ...queryParams, transcript: episode.episodeNumber })}`} className="tag">Transcript</Link>
+                <button className="tag">Credits</button>
+                <button className="tag">Clips</button>
             </div>
             <div>
                 <ExpandableText>
@@ -126,13 +128,16 @@ const EpisodeItem = ({episode}) => (
     </div>
 )
 
-export default ({ data }) => (
+export default ({ data, transition, location }) => {
+  const queryParams = queryString.parse(location.search)
+
+  return (
     <Wrapper>
         <HeaderDimmer />
         <div className="row">
             <div className="column _25"/>
             <div className="column">
-                <h1>Race: The power of an Illusion</h1>
+                <h1>Race: The Power of an Illusion</h1>
                 <p><strong>Statement from executive producer</strong></p>
                 <div className="row" style={{margin: '0 -15px'}}>
                     <div className="column">
@@ -155,13 +160,14 @@ export default ({ data }) => (
                     </div>
                 </div>
                 <div style={{marginTop: 50}}>
-                    {episodes.map(episode => <EpisodeItem key={`episode-${episode.episodeNumber}`} episode={episode}/>)}
+                    {episodes.map(episode => <EpisodeItem key={`episode-${episode.episodeNumber}`} episode={episode} queryParams={queryParams} />)}
                 </div>
             </div>
             <div className="column _25"/>
         </div>
     </Wrapper>
-)
+  )
+}
 
 // export const query = graphql`
 //   query FAQssQuery {
