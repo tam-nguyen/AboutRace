@@ -138,7 +138,7 @@ class QuickFactOverlay extends React.Component {
           />
           <div style={{ width: `100%`, display: `flex`, }}>
             {
-              getCards(quickClipLinks, {}, null, true).slice(0,2)
+              getCards(quickClipLinks, null, null, true).slice(0,2)
             }
           </div>
         </Centered>
@@ -162,6 +162,12 @@ class TagOverlay extends React.Component {
       quickFacts: []
     }
 
+    const itemExists = itemTag => (({
+      faq: tag.relationships.backref_field_tag_node_faq,
+      article: tag.relationships.backref_field_tags_node_article,
+      clip: tag.relationships.backref_field_t_node_clip,
+    })[itemTag])
+
     return (
       <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
         <Centered wide>
@@ -174,7 +180,7 @@ class TagOverlay extends React.Component {
             <OverlayTitle>{tag.name}</OverlayTitle>
           </div>
           {
-            [`faq`, `article`, `clip`].map(articleType => (
+            [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
               <span
                 key={articleType}
                 style={{ marginRight: 20, cursor: `pointer` }}
@@ -374,6 +380,7 @@ class SingleArticle extends React.Component {
     )
   }
 }
+
 
 export default SingleArticle;
 

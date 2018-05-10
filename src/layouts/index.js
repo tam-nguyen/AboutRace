@@ -7,7 +7,7 @@ import Header from '../components/Header'
 import './index.css'
 import {Navigation} from '../components/nav.js'
 
-const TemplateWrapper = ({ children }) => (
+const TemplateWrapper = ({ children, location }) => (
   <div>
     <Helmet
       title="Race: The Power of an Illusion"
@@ -17,7 +17,7 @@ const TemplateWrapper = ({ children }) => (
         { name: 'keywords', content: 'sample, something' },
       ]}
     />
-    <Header />
+    <Header pathname={location.pathname} />
     <div
       style={{
         margin: '0 auto',

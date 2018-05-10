@@ -31,6 +31,8 @@ class Header extends React.Component {
 
   render() {
     const { modalOpen } = this.state
+    const { pathname } = this.props
+    const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
 
     return (
       <div>
@@ -46,23 +48,24 @@ class Header extends React.Component {
           </Link>
         </div>
 
+
         <div className={'nav'} style={{marginRight: modalOpen ? getScrollBarWidth() : '' }}>
-          <Link className={'navItem'} to="/the-film" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/the-film" style={stylingForPath(`/the-film`)} exact>
             The Film
           </Link>
-          <Link className={'navItem'} to="/articles/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/articles/" style={stylingForPath(`/articles`)} exact>
             Articles
           </Link>
-          <Link className={'navItem'} to="/interviews/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/interviews/" style={stylingForPath(`/interviews`)} exact>
             Interviews
           </Link>
-          <Link className={'navItem'} to="/FAQs/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/FAQs/" style={stylingForPath(`/faqs`)} exact>
             FAQs
           </Link>
-          <Link className={'navItem'} to="/media/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/media/" style={linkStyle} exact>
             Media
           </Link>
-          <Link className={'navItem'} to="/teaching/" activeStyle={activeLinkStyle} style={linkStyle} exact>
+          <Link className={'navItem'} to="/teaching/" style={linkStyle} exact>
             Teaching
           </Link>
         </div>
