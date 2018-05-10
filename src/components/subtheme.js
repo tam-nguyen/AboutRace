@@ -120,7 +120,11 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     </RCCard> :
     <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
     {article.field_short_version && (
-      <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+      <div>
+        <h4>{article.title}</h4>
+        { article.field_author && <h6 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+        <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+      </div>
     )}
     </Card>
 )

@@ -77,7 +77,7 @@ const OverlayBody = styled.div`
   ${props => props.wide ? css`
       width: 80%;
   ` : css`
-      width: 50%;
+      width: 66%;
   `}
 `
 
