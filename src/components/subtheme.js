@@ -208,32 +208,35 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
           }}
           >Sort by: </span>
     {
-      Array.from(DISPLAY_NAMES_TO_SLUG.keys()).filter(itemType => (itemType === `recently added` || itemExists(itemType, subtheme))).map(filterType => (
+      Array.from(DISPLAY_NAMES_TO_SLUG.keys()).filter(itemType => (itemType === `recently added` || itemExists(itemType, subtheme))).map(filterType => {
+        const filterSlug = DISPLAY_NAMES_TO_SLUG.get(filterType)
+
+        return (
           <button
             onClick={() => {
               const newQueryParams = { ... queryParams }
-              if (newQueryParams[name] == DISPLAY_NAMES_TO_SLUG.get(filterType)){
+              if (newQueryParams[name] == filterSlug){
                 delete newQueryParams[name]
               } else {
-                newQueryParams[name] = DISPLAY_NAMES_TO_SLUG.get(filterType);
+                newQueryParams[name] = filterSlug;
               }
               navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
             style={{
-              background: filter == filterType ? `none` : `none`,
-              color: filter == filterType ? `black` : `rgb(255, 132, 0)`,
-              fontWeight: filter == filterType ? `300` : `800`,
+              background: filter == filterSlug ? `none` : `none`,
+              color: filter == filterSlug ? `black` : `rgb(255, 132, 0)`,
+              fontWeight: filter == filterSlug ? `300` : `800`,
               marginRight: 20,
               marginBottom: 20,
               float: (
-                (DISPLAY_NAMES_TO_SLUG.get(filterType) === `recent`) ?
+                (filterSlug === `recent`) ?
                 `right` : `none`
               )
             }}
           >
             {filterType}
           </button>
-      ))
+      )})
     }
   </div>
 )
