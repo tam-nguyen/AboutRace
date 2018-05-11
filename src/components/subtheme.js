@@ -119,7 +119,11 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     </RCCard> :
     <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
     {article.field_short_version && (
-      <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+      <div>
+        <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+        <h6>{article.title}</h6>
+        { article.field_author && <h4 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+      </div>
     )}
     </Card>
 )
@@ -276,7 +280,7 @@ class SubthemeSection extends React.Component {
 
     const allCards = filter ?
       getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
-      //reorder(getCards(subtheme.relationships, filter, null, true), this.order)
+      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
       getCards(subtheme.relationships, filter, null, true)
 
     const description = subtheme.description
