@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 
 const ThemeTitle = styled.div`
-  margin-top: 50vh;
+  margin-top: 10vh;
   margin-bottom:30px;
   color: inherit;
   font-family: "lato";
@@ -33,18 +33,20 @@ const ThemeDescription = styled.div`
   line-height: 1.5;
   position:relative;
   z-index:99999;
+  width: 580px;
 `
 const ThemeHeader = styled.div`
-  width: 100%;
-  height: 50vh;
+  width: 55%;
+  height: 75vh;
+  opacity: 0.4;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 30px;
+  left: 35%;
   right: 0;
   z-index: -999;
 `
@@ -102,10 +104,7 @@ class ThemePage extends React.Component {
 
     return (
       <div>
-        <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-        <HeaderDimmer />
-         <Dimmer />
-          <ThemeIntro>
+        <ThemeIntro>
             <ThemeTitle>{theme.name}</ThemeTitle>
             {theme.description ? (
               <ThemeDescription
@@ -113,6 +112,10 @@ class ThemePage extends React.Component {
               />
             ) : null}
           </ThemeIntro>
+        <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
+        <HeaderDimmer />
+         <Dimmer />
+          
         </ThemeHeader>
         <ThemeMain>
           {
