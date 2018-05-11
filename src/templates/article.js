@@ -84,6 +84,7 @@ const OverlayTitle = styled.div`
   margin-top: 60px;
   font-family: 'Lato';
   font-size: 30px;
+  opacity: 0.8;
 `
 class QuickFactOverlay extends React.Component {
   render() {

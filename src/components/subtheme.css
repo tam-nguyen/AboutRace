@@ -2,14 +2,13 @@ button {
     border: none;
     text-transform: uppercase;
     font-family: 'Lato';
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     outline: none;
     cursor: pointer;
     background:none;
 }
 .subtheme-description {
     font-size: 24px;
-    font-family: 'Lato';
     color: rgba(59, 59, 59, 0.8);
     line-height: 1.5;
     max-width: 690px;
@@ -32,7 +31,7 @@ button {
     margin-bottom: 15px;
 }
 .card-large-text {
-    font-size: 24px;
+    font-size: 30px;
     font-style: italic;
     font-weight: 300;
     line-height: 1.5;

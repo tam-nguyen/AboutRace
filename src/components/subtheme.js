@@ -17,16 +17,15 @@ const Video = styled.video`
   display: block;
 `
 const FAQQuestion = styled.div`
-  background-color:#ffffffed;
+  background-color:rgba(255,255,255,0.82);
   height:auto;
   padding:30px;
   margin:0 auto;
 `
 const SubthemeTitle = styled.div`
-  font-family: 'Lato';
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 24px;
+  font-size: 48px;
   line-height: 1.1;
   color: rgba(59, 59, 59, 0.8);
   margin-top: 15px;
@@ -199,7 +198,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
   }}
     >
     <span style={{
-            marginRight: 30,
+            marginRight: 15,
             fontFamily: 'Lato',
             letterSpacing: '0.04em',
             color:'rgb(255, 132, 0)',
@@ -224,9 +223,10 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             style={{
               background: filter == filterSlug ? `none` : `none`,
               color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
-              fontWeight: filter == filterSlug ? `800` : `400`,
-              marginRight: 20,
-              marginBottom: 20,
+              fontWeight: filter == filterSlug ? `800` : `600`,
+              marginRight: 15,
+              marginBottom: 30,
+              fontSize:16,
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
@@ -318,10 +318,8 @@ class SubthemeSection extends React.Component {
 
 const SubthemeContainer = styled(SubthemeSection)`
   background-color: rgba(241,239,239,0.94);
-  border: solid thin lightgrey;
   padding: 30px;
   padding: 90px;
-  margin: 30px;
 `
 
 export default SubthemeContainer;
