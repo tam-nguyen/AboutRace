@@ -48,6 +48,7 @@ const ArticleHeader = styled.div`
   left: 0;
   right: 0;
   z-index: -999;
+  opacity: 0.4;
 `
 
 const ArticleMain = styled.div`
