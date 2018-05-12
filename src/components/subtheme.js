@@ -29,11 +29,8 @@ const SubthemeTitle = styled.div`
   font-family: 'Lato';
   line-height: 1.1;
   color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  margin-top: 30px;
-  text-align: center;
-  letter-spacing: 0.12em;
+  margin-bottom: 30px;
+  letter-spacing: 0.04em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -205,8 +202,8 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
     <span style={{
             marginRight: 15,
             fontFamily: 'Lato',
-            letterSpacing: '0.04em',
-            color:'rgb(255, 132, 0)',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
             marginLeft:15
           }}
           >Sort by: </span>
@@ -228,7 +225,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             style={{
               background: filter == filterSlug ? `none` : `none`,
               color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
-              fontWeight: filter == filterSlug ? `800` : `600`,
+              fontWeight: filter == filterSlug ? `600` : `400`,
               marginRight: 15,
               marginBottom: 15,
               fontSize:16,
@@ -322,9 +319,9 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: rgba(241,239,239,0.94);
-  padding: 30px;
-  padding: 90px;
+  background-color: rgba(245, 245, 245, 0.94);
+  padding: 45px 30px;
+  border-bottom: solid thin grey;
 `
 
 export default SubthemeContainer;

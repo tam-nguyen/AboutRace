@@ -2,22 +2,22 @@ button {
     border: none;
     text-transform: uppercase;
     font-family: 'Lato';
-    letter-spacing: 0.16em;
+    letter-spacing: 0.06em;
     outline: none;
     cursor: pointer;
     background:none;
 }
 .subtheme-description {
-    font-size: 18px;
+    font-size: 16px;
     color: rgba(59, 59, 59, 0.8);
-    line-height: 2;
+    line-height: 1.5;
     max-width: 690px;
-    text-align: center;
-    margin: 0 auto;
+/*    text-align: center;
+*/  font-family: 'Lato';
     margin-top: 30px;
     margin-bottom: 45px;
-    font-style: italic;
-}
+/*    font-style: italic;
+*/}
 .caption {
     font-family: 'Lato';
     font-size: 14px;
