@@ -25,10 +25,11 @@ const FAQQuestion = styled.div`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 48px;
+  font-size: 24px;
+  font-family: 'Lato';
   line-height: 1.1;
   color: rgba(59, 59, 59, 0.8);
-  margin-top: 15px;
+  margin-bottom: 15px;
   text-transform: uppercase;
   margin-top: 30px;
   text-align: center;
@@ -121,7 +122,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     {article.field_short_version && (
       <div>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-        <h6>{article.title}</h6>
+        <h6 style={{color:'tomato'}}>{article.title}</h6>
         { article.field_author && <h4 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
       </div>
     )}
@@ -147,7 +148,7 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:45, display:'flex', alignItems:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
+  <Card style={{padding:45, display:'flex', alignItems:'center', backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
     <FAQQuestion>
       <h4>FAQ</h4>
       <p style={{fontSize:24, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
@@ -229,7 +230,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
               color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
               fontWeight: filter == filterSlug ? `800` : `600`,
               marginRight: 15,
-              marginBottom: 30,
+              marginBottom: 15,
               fontSize:16,
               float: (
                 (filterSlug === `recent`) ?

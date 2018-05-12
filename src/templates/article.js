@@ -7,7 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
-import { Overlay, OverlayHeader, OverlayFilter, OverlayBody }  from '../components/overlay'
+import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
@@ -72,21 +72,7 @@ const AuthorTitle = styled.div`
     letter-spacing: 0.04em;
     margin-bottom: 15px;
 `
-const OverlayTitle = styled.div`
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 400;
-  letter-spacing: 0.3em;
-  border: solid;
-  display: inline-block;
-  padding: 15px 30px;
-  margin: 0 auto;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  font-family: 'Lato';
-  font-size: 30px;
-  opacity: 0.8;
-`
+
 class QuickFactOverlay extends React.Component {
   render() {
     const { quickFact, transition } = this.props
@@ -166,7 +152,7 @@ class TagOverlay extends React.Component {
             
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-              <b>Close</b>
+              <b>Cookie</b>
             </div>
             <div style={{
               textAlign:'center'
@@ -260,14 +246,24 @@ class SingleArticle extends React.Component {
           <div style={{
             textAlign: 'right'
           }} className="column">
-          <img style={{
+          <div style={{
             width:300,
+            height:300,
+            backgroundColor:'red',
             marginTop:'33vh',
+            overflow:'hidden',
+            display:'inline-block'
 
-          }} src={
-             data.nodeArticle.relationships.field_author_image &&
-             data.nodeArticle.relationships.field_author_image.localFile.publicURL
-          } />
+          }}>
+            <img style={{
+              width:300,
+              
+
+            }} src={
+               data.nodeArticle.relationships.field_author_image &&
+               data.nodeArticle.relationships.field_author_image.localFile.publicURL
+            } />
+          </div>
             <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
             <AuthorTitle>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</AuthorTitle>
             <hr style={{width:60, marginBottom:15, display:'inline-block'}} />

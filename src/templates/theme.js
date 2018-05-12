@@ -28,7 +28,7 @@ const ThemeTitle = styled.div`
 const ThemeDescription = styled.div`
   color: rgba(59, 59, 59, 0.8);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   font-style:italic;
   line-height: 1.5;
   position:relative;
