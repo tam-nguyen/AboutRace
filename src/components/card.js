@@ -21,7 +21,7 @@ class Card extends React.Component {
       return (
         <CardWrapper link={this.props.link} className={this.props.className} style={this.props.style}>
             {this.props.type ?
-            <h4>{this.props.type}</h4> :
+            <h4 style={{marginBottom:15}}>{this.props.type}</h4> :
             null }
 
             {this.props.children}
@@ -38,7 +38,7 @@ const QUICK_FACT_MULTIPLIER = 1.5;
 
 const StyledCard = styled(Card)`
   display: inline-block;
-  height: 350px;
+  height: 300px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   border: solid thin lightgrey;
   background-color: white;

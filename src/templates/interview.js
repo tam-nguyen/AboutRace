@@ -6,12 +6,15 @@ const KeyQuote = styled.div`
   font-size: 28px;
   font-weight: normal;
 `
-const InterviewHeader = styled.div`
+const AuthorBioText = styled.div`
   width: 300px;
   height: auto;
   position: absolute;
   top: 150px;
   left: 30px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight:500;
 `
 
 const InterviewMain = styled.div`
@@ -39,12 +42,15 @@ const Centered = styled.div`
   transform: translate(50%, -50%);
 `
 const AuthorImage = styled.div`
-  width: 300px;
-  height: 300px;
-  border-radius:50%;
+  position: fixed;
+  background-color: grey;
+  top:0;
+  left:0;
+  bottom:0;
+  right:55%;
   overflow:hidden;
-  margin: 0 auto;
-  margin-bottom: 60px;
+  background-image: url('{{data.nodeInterview.relationships.field_interviewee &&
+                          data.nodeInterview.relationships.field_interviewee.localFile.publicURL}}');
 `
   
 
@@ -113,17 +119,13 @@ class SingleInterview extends React.Component {
           quickFact={this.state.quickFact}
           closeHandler={() => this.setState({ quickFact: null })}
         />
-        <InterviewHeader>
+        <AuthorBioText>
           <AuthorBio data={data}> </AuthorBio>
-        </InterviewHeader>
+        </AuthorBioText>
           <div className="column _25" />
           <InterviewMain className="column _60">
-            <AuthorImage>
-            <img src={
-                data.nodeInterview.relationships.field_interviewee &&
-                data.nodeInterview.relationships.field_interviewee.localFile.publicURL
-              } />
-            </AuthorImage>
+            <AuthorImage />
+           
             <div
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_full_length_version.processed,

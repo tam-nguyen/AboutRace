@@ -66,6 +66,20 @@ const Overlay = styled(UnstyledOverlay)`
 const OverlayFilter = styled.div`
   margin-bottom: 30px;
 `
+const OverlayTitle = styled.div`
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  border: solid;
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-family: 'Lato';
+  font-size: 30px;
+`
 const OverlayBody = styled.div`
   opacity: 1;
   padding: 20px;
@@ -92,4 +106,4 @@ const OverlayHeader = styled.div`
   padding: 0 12.5%;
 `
 
-export default { Overlay, OverlayHeader, OverlayFilter, OverlayBody }
+export default { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }
