@@ -7,7 +7,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
-import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
+import { Overlay, OverlayHeader, OverlayFilter, OverlayBody }  from '../components/overlay'
 const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
@@ -82,7 +82,7 @@ const OverlayTitle = styled.div`
   padding: 15px 30px;
   margin: 0 auto;
   margin-bottom: 30px;
-  margin-top: 60px;
+  margin-top: 30px;
   font-family: 'Lato';
   font-size: 30px;
   opacity: 0.8;
@@ -163,6 +163,7 @@ class TagOverlay extends React.Component {
     return (
       <Overlay key="tag" id="tag" visible={!!tag} style={transition && transition.style}>
         <OverlayBody wide>
+            
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
               <b>Close</b>
@@ -172,30 +173,35 @@ class TagOverlay extends React.Component {
             }}>
               <OverlayTitle>{tag.name}</OverlayTitle>
             </div>
-            {
-              [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
-                <span
-                  key={articleType}
-                  style={{ marginRight: 20, cursor: `pointer` }}
-                  onClick={ () => {
-                    const newQueryParams = { ... queryParams }
-                    if (newQueryParams[`type`] == articleType){
-                      delete newQueryParams[`type`]
-                    } else {
-                      newQueryParams[`type`] = articleType;
-                    }
-                    navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                  }}
-                >
-                  { articleType }
-                </span>
-              ))
-            }
+           
           </OverlayHeader>
-          <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap'}}>
-            {
-              getCards(quickClipLinks, queryParams[`type`], null, true)
-            }
+          <div>
+            <OverlayFilter>
+              {
+                [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
+                  <span
+                    key={articleType}
+                    style={{ marginRight: 20, cursor: `pointer` }}
+                    onClick={ () => {
+                      const newQueryParams = { ... queryParams }
+                      if (newQueryParams[`type`] == articleType){
+                        delete newQueryParams[`type`]
+                      } else {
+                        newQueryParams[`type`] = articleType;
+                      }
+                      navigateTo(`?${queryString.stringify(newQueryParams)}`)
+                    }}
+                  >
+                    { articleType }
+                  </span>
+                ))
+              }
+            </OverlayFilter>
+            <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap'}}>
+              {
+                getCards(quickClipLinks, queryParams[`type`], null, true)
+              }
+            </div>
           </div>
         </OverlayBody>
       </Overlay>

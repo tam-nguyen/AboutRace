@@ -7,24 +7,16 @@ const KeyQuote = styled.div`
   font-weight: normal;
 `
 const InterviewHeader = styled.div`
-  width: 100%;
-  height: 66vh;
-  background-image: ${props =>
-    props.background ? `url(${props.background})` : `none`};
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-color: lightgrey;
+  width: 300px;
+  height: auto;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -999;
+  top: 150px;
+  left: 30px;
 `
 
 const InterviewMain = styled.div`
-  background-color: white;
   padding: 30px;
+  margin-top: 200px;
 `
 
 const Overlay = styled.div`
@@ -46,9 +38,18 @@ const Centered = styled.div`
   padding: 20px;
   transform: translate(50%, -50%);
 `
+const AuthorImage = styled.div`
+  width: 300px;
+  height: 300px;
+  border-radius:50%;
+  overflow:hidden;
+  margin: 0 auto;
+  margin-bottom: 60px;
+`
+  
 
 const AuthorBio = ({ data }) => (
-  <div style={{marginTop: 20}}>{data.nodeInterview.field_interviewee_bio.processed}</div>
+  <div style={{marginTop: 20, fontFamily: 'Lato'}}>{data.nodeInterview.field_interviewee_bio.processed}</div>
 )
 
 class QuickFactOverlay extends React.Component {
@@ -112,15 +113,17 @@ class SingleInterview extends React.Component {
           quickFact={this.state.quickFact}
           closeHandler={() => this.setState({ quickFact: null })}
         />
-        <InterviewHeader
-
-        />
+        <InterviewHeader>
+          <AuthorBio data={data}> </AuthorBio>
+        </InterviewHeader>
           <div className="column _25" />
           <InterviewMain className="column _60">
+            <AuthorImage>
             <img src={
                 data.nodeInterview.relationships.field_interviewee &&
                 data.nodeInterview.relationships.field_interviewee.localFile.publicURL
               } />
+            </AuthorImage>
             <div
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_full_length_version.processed,
@@ -128,7 +131,6 @@ class SingleInterview extends React.Component {
             />
           </InterviewMain>
           <div className="column">
-          <AuthorBio data={data}> </AuthorBio>
           <KeyQuote style={{lineHeight:1.5, fontStyle:'italic'}}
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,

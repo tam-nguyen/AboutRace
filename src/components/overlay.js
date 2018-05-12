@@ -63,13 +63,16 @@ const Overlay = styled(UnstyledOverlay)`
     display: inline;
   `}
 `
-
+const OverlayFilter = styled.div`
+  margin-bottom: 30px;
+`
 const OverlayBody = styled.div`
   opacity: 1;
   padding: 20px;
-  top: 0;
   min-height: 100vh;
   margin: 0 auto;
+  margin-top: 150px;
+  padding-bottom: 120px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -82,9 +85,11 @@ const OverlayBody = styled.div`
 `
 
 const OverlayHeader = styled.div`
-  position: sticky;
-  top: 20px;
-  margin-bottom: 1em;
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  padding: 0 12.5%;
 `
 
-export default { Overlay, OverlayHeader, OverlayBody }
+export default { Overlay, OverlayHeader, OverlayFilter, OverlayBody }

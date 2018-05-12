@@ -36,16 +36,16 @@ const ThemeDescription = styled.div`
   width: 580px;
 `
 const ThemeHeader = styled.div`
-  width: 55%;
-  height: 75vh;
-  opacity: 0.4;
+  width: 50%;
+  height: 100vh;
+  opacity: 0.5;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
   position: absolute;
-  top: 30px;
+  top: 140px;
   left: 35%;
   right: 0;
   z-index: -999;
@@ -80,6 +80,7 @@ const Dimmer = styled.div`
 
 const ThemeIntro = styled.div`
   // height: 100vh;
+  margin-top:30vh;
   padding:60px;
   // background-color:rgba(241,239,239,0.94);
   z-index:99999999999999999999;
