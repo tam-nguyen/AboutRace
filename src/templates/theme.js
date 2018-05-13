@@ -81,7 +81,7 @@ const Dimmer = styled.div`
 
 const ThemeIntro = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: 15px;
   left: 50%;
   margin-left: -400px;
   z-index:99999999999999999999;
