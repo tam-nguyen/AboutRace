@@ -314,7 +314,7 @@ class SubthemeSection extends React.Component {
           allCards.length >= this.state.numCards ?
            <div style={{width:'100%', textAlign:'center'}}>
               <button style={{ margin: '30px auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
-                Show More
+                Show More <i className="fa fa-angle-down"></i>
               </button> 
            </div> :
             null

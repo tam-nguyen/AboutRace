@@ -12,8 +12,8 @@ const AuthorBioText = styled.div`
   height: auto;
   position: fixed;
   bottom: 0;
-  left: 50%;
-  margin-left:-360px;
+  left: 45%;
+  margin-left:-300px;
   z-index: 9999999999;
   background-color: white;
   padding: 30px;

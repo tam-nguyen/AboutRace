@@ -152,7 +152,7 @@ class TagOverlay extends React.Component {
             
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-              <b>Cookie</b>
+              <strong>Close</strong>
             </div>
             <div style={{
               textAlign:'center'
