@@ -25,12 +25,13 @@ const FAQQuestion = styled.div`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 24px;
+  font-size: 36px;
+  font-weight:600;
   font-family: 'Lato';
   line-height: 1.1;
   color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 30px;
-  letter-spacing: 0.04em;
+  margin-bottom: 15px;
+  letter-spacing: 0.02em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -204,8 +205,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             marginRight: 15,
             fontFamily: 'Lato',
             letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            marginLeft:15
+            textTransform: 'uppercase'
           }}
           >Sort by: </span>
     {
@@ -225,7 +225,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             }}
             style={{
               background: filter == filterSlug ? `none` : `none`,
-              color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
+              color: filter == filterSlug ? `rgba(255, 26, 0, 0.8)` : `rgba(59, 59, 59, 0.8)`,
               fontWeight: filter == filterSlug ? `800` : `400`,
               marginRight: 15,
               marginBottom: 15,
@@ -292,15 +292,15 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <SubthemeTitle>{subtheme.name}</SubthemeTitle>
         { description }
+        <SubthemeTitle>{subtheme.name}</SubthemeTitle>
         <Filters
           queryParams={this.props.queryParams}
           name={this.props.name}
           filter={filter}
           subtheme={subtheme}
         />
-        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'left' }}>
           {
             allCards.slice(0, this.state.numCards)
           }
@@ -308,7 +308,7 @@ class SubthemeSection extends React.Component {
         {
           allCards.length >= this.state.numCards ?
            <div style={{width:'100%', textAlign:'center'}}>
-              <button style={{ margin: '0 auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
+              <button style={{ margin: '30px auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
                 Show More
               </button> 
            </div> :
@@ -323,7 +323,7 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: rgba(245, 245, 245, 0.94);
+  background-color: rgba(247, 247, 247, 0.94);
   padding: 45px 30px;
   border-bottom: solid thin grey;
 `

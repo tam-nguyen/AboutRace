@@ -41,14 +41,17 @@ const StyledCard = styled(Card)`
   height: 350px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   background-color: white;
+  border: solid 5px white;
+  &:hover {
+    border: solid 5px beige;
+  }
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-family: "ff-tisa-web-pro";
   vertical-align: top;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 30px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px
 
   ${props => props.background && css`
