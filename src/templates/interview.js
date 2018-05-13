@@ -20,6 +20,7 @@ const AuthorBioText = styled.div`
   font-size: 14px;
   line-height: 1.5;
   font-weight:500;
+  opacity:0.9;
 `
 const InterviewTitle = styled.div`
   margin-bottom: 45px;
