@@ -119,8 +119,9 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     {article.field_short_version && (
       <div>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-        <h6 style={{color:'tomato'}}>{article.title}</h6>
-        { article.field_author && <h4 dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+         { article.field_author && <h6 style={{textAlign:'right', marginBottom:15}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal'}}>{article.title}</h6>
+       
       </div>
     )}
     </Card>
@@ -148,7 +149,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
   <Card style={{padding:45, display:'flex', alignItems:'center', backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
     <FAQQuestion>
       <h4>FAQ</h4>
-      <p style={{fontSize:24, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
+      <p style={{fontSize:18, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
     </FAQQuestion>
   </Card>
 )
@@ -225,7 +226,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             style={{
               background: filter == filterSlug ? `none` : `none`,
               color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
-              fontWeight: filter == filterSlug ? `600` : `400`,
+              fontWeight: filter == filterSlug ? `800` : `400`,
               marginRight: 15,
               marginBottom: 15,
               fontSize:16,
@@ -299,18 +300,21 @@ class SubthemeSection extends React.Component {
           filter={filter}
           subtheme={subtheme}
         />
-        <div style={{ display: 'flex', 'flex-wrap': 'wrap', overflowX: 'auto', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'space-around' }}>
           {
             allCards.slice(0, this.state.numCards)
           }
         </div>
         {
           allCards.length >= this.state.numCards ?
-            <button style={{ margin: 20 }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
-              Show More
-            </button> :
+           <div style={{width:'100%', textAlign:'center'}}>
+              <button style={{ margin: '0 auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
+                Show More
+              </button> 
+           </div> :
             null
         }
+
 
       </div>
     )
