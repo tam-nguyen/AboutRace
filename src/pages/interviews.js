@@ -5,9 +5,9 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
 const InterviewCard = styled.div`
-  width: 30%;
+  width: 45%;
   height: 400px;
-  margin: 30px;
+  margin: 2.5%;
   position: relative;
   float: left;
    -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
