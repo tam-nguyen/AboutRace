@@ -38,7 +38,7 @@ const QUICK_FACT_MULTIPLIER = 1.5;
 
 const StyledCard = styled(Card)`
   display: inline-block;
-  height: 400px;
+  height: auto;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   background-color: white;
   // border: solid 5px white;
