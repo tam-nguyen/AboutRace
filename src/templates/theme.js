@@ -20,7 +20,7 @@ const ThemeTitle = styled.div`
   font-weight: 800;
   text-rendering: optimizeLegibility;
   font-size: 48px;
-  line-height: 1.1;
+  line-height: 1
   letter-spacing: 0.04em;
   color:white;
   text-align: center;
@@ -58,12 +58,12 @@ const HeaderDimmer = styled.div`
   right:0;
   top:0;
   z-index: 99999999;
-  height:50vh;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,d3dde5+100&0.5+1,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%, rgba(2,2,2,0.5) 1%, rgba(211,221,229,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#00d3dde5',GradientType=0 ); /* IE6-9 */
+  height:210px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+16,fcfcfc+100&0.93+16,0+100 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0.93) 16%, rgba(252,252,252,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed000000', endColorstr='#00fcfcfc',GradientType=0 ); /* IE6-9 */
 `
 const Dimmer = styled.div`
   width: 100%;
@@ -71,12 +71,12 @@ const Dimmer = styled.div`
   left:0;
   right:0;
   bottom:0;
-  height:50vh;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d3dde5+11,000000+100&0+0,0.5+100 */
-  background: -moz-linear-gradient(top, rgba(211,221,229,0) 0%, rgba(211,221,229,0.06) 11%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(211,221,229,0) 0%,rgba(211,221,229,0.06) 11%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(211,221,229,0) 0%,rgba(211,221,229,0.06) 11%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00d3dde5', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
+  height:41vh;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+69 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.82) 61%, rgba(0,0,0,0.93) 69%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 
 const ThemeIntro = styled.div`
@@ -107,8 +107,8 @@ class ThemePage extends React.Component {
       <div>
        
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-        <HeaderDimmer /><HeaderDimmer /><HeaderDimmer />
-         <Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer />
+        <HeaderDimmer />
+         <Dimmer />
            <ThemeIntro>
             <ThemeTitle>{theme.name}</ThemeTitle>
             {theme.description ? (

@@ -25,7 +25,7 @@ const FAQQuestion = styled.div`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 36px;
+  font-size: 30px;
   font-weight:600;
   font-family: 'Lato';
   line-height: 1.1;
@@ -157,7 +157,8 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
-    <p className={'card-large-text'}>{interview.title}</p>
+    <p className={'card-large-text'}>{interview.field_key_quote.processed}</p>
+    <h6>{interview.title}</h6>
   </Card>
 )
 
@@ -204,8 +205,10 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
     <span style={{
             marginRight: 15,
             fontFamily: 'Lato',
+            fontWeight:800,
             letterSpacing: '0.06em',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            color:'rgb(255, 132, 0)'
           }}
           >Sort by: </span>
     {
@@ -225,8 +228,9 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             }}
             style={{
               background: filter == filterSlug ? `none` : `none`,
-              color: filter == filterSlug ? `rgba(255, 26, 0, 0.8)` : `rgba(59, 59, 59, 0.8)`,
+              color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgb(255, 132, 0)`,
               fontWeight: filter == filterSlug ? `800` : `400`,
+              borderBottom: filter == filterSlug ? `solid 2px rgb(255, 132, 0)` : `none`,
               marginRight: 15,
               marginBottom: 15,
               fontSize:16,
@@ -292,8 +296,9 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-        { description }
+       
         <SubthemeTitle>{subtheme.name}</SubthemeTitle>
+         { description }
         <Filters
           queryParams={this.props.queryParams}
           name={this.props.name}
