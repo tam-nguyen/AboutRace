@@ -225,7 +225,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             }}
             style={{
               background: filter == filterSlug ? `none` : `none`,
-              color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgba(59, 59, 59, 0.8)`,
+              color: filter == filterSlug ? `rgba(255, 26, 0, 0.8)` : `rgba(59, 59, 59, 0.8)`,
               fontWeight: filter == filterSlug ? `800` : `400`,
               marginRight: 15,
               marginBottom: 15,
@@ -308,7 +308,7 @@ class SubthemeSection extends React.Component {
         {
           allCards.length >= this.state.numCards ?
            <div style={{width:'100%', textAlign:'center'}}>
-              <button style={{ margin: '0 auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
+              <button style={{ margin: '30px auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
                 Show More
               </button> 
            </div> :

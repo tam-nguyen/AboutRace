@@ -30,6 +30,7 @@ button {
     height: 66%;
     background-color: grey;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 .card-large-text {
     font-size: 24px;

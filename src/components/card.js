@@ -41,6 +41,10 @@ const StyledCard = styled(Card)`
   height: 350px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   background-color: white;
+  border: solid 5px white;
+  &:hover {
+    border: solid 5px beige;
+  }
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
