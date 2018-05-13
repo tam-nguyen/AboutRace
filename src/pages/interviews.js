@@ -30,6 +30,16 @@ const InterviewTitle = styled.div`
   line-height:1;
   color: inherit;
 `
+const AuthorBioText = styled.div`
+  width: 300px;
+  height: auto;
+ 
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight:500;
+  opacity:0.9;
+`
+
 const InterviewImage = styled.div`
   background-color:red;
   width:33%;
@@ -49,6 +59,9 @@ const InterviewMain = styled.div`
   height: 100%;
   padding: 30px;
 `
+const AuthorBio = ({ data }) => (
+  <div style={{fontFamily: 'Lato'}}>{data.field_interviewee_bio.processed}</div>
+)
 const InterviewSummary = ({ data }) => {
   console.log(data)
   return (
@@ -59,6 +72,7 @@ const InterviewSummary = ({ data }) => {
           data.relationships.field_interviewee.localFile.publicURL
         } />
         <InterviewMain>
+         
           <div className="interviewExcerpt">
             {data.field_medium_version && (
               <div
@@ -74,6 +88,9 @@ const InterviewSummary = ({ data }) => {
 
             
              <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
+             <AuthorBioText>
+                <AuthorBio data={data}> </AuthorBio>
+             </AuthorBioText>
             </div>
           {/* {data.relationships.field_belongs_to_subtheme ? (
           <ul>
