@@ -56,9 +56,9 @@ const StyledCard = styled(Card)`
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   transition: all .3s;
   &:hover {
-    -webkit-box-shadow: 0px 7px 15px 0px rgba(179,179,179,0.38);
-    -moz-box-shadow: 0px 7px 15px 0px rgba(179,179,179,0.38);
-    box-shadow: 0px 7px 15px 0px rgba(179,179,179,0.38);
+    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
     transition: all .3s;
   }
   margin-bottom: 30px;

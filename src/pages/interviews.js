@@ -4,50 +4,89 @@ import './interviews.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
+const InterviewCard = styled.div`
+  width: 30%;
+  height: 400px;
+  margin: 30px;
+  position: relative;
+  float: left;
+   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  transition: all .3s;
+  &:hover {
+    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    transition: all .3s;
+  }
+`
 const InterviewTitle = styled.div`
-  text-transform: uppercase;
+  margin-bottom: 45px;
+  font-size:30px;
+  line-height:1.25;
+  position: relative;
+  z-index:99999;
+  line-height:1;
+  color: inherit;
 `
 const InterviewImage = styled.div`
+  background-color:red;
+  width:33%;
+  height:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-position: center;
+  background-size:cover;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
-
+const InterviewMain = styled.div`
+  position: absolute;
+  left: 33%;
+  height: 100%;
+  padding: 30px;
+`
 const InterviewSummary = ({ data }) => {
   console.log(data)
   return (
-      <div className={"interviewCard"}>
-        <InterviewImage
-        background={
-          data.relationships.field_main_image &&
-          data.relationships.field_main_image.localFile.publicURL
-        }
-        className={"interviewCardImage"}>
-          {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
-        </InterviewImage>
-        <div className="interviewExcerpt">
-          {data.field_medium_version && (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.field_medium_version.processed,
-              }}
-            />
+    <Link to={`/interviews/${kebabCase(data.title)}`}>
+      <InterviewCard>
+        <InterviewImage background={
+          data.relationships.field_interviewee &&
+          data.relationships.field_interviewee.localFile.publicURL
+        } />
+        <InterviewMain>
+          <div className="interviewExcerpt">
+            {data.field_medium_version && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.field_medium_version.processed,
+                }}
+              />
+              
+            )}
             
-          )}
-          <InterviewTitle>
-          <Link to={`/interviews/${kebabCase(data.title)}`}>{data.title}</Link>
-           </InterviewTitle>
-          <h1>{data.field_interviewee_name.processed}</h1>
-          </div>
-        {/* {data.relationships.field_belongs_to_subtheme ? (
-        <ul>
-          {data.relationships.field_belongs_to_subtheme.map(subTheme => (
-            <InterviewSummary data={subTheme} />
-          ))}
-        </ul>
-      ) : (
-        <div>No subthemes</div>
-      )} */}
-      </div>
+
+
+
+            
+             <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
+            </div>
+          {/* {data.relationships.field_belongs_to_subtheme ? (
+          <ul>
+            {data.relationships.field_belongs_to_subtheme.map(subTheme => (
+              <InterviewSummary data={subTheme} />
+            ))}
+          </ul>
+        ) : (
+          <div>No subthemes</div>
+        )} */}
+        </InterviewMain>
+      </InterviewCard>
+    </Link>
   )
 }
 

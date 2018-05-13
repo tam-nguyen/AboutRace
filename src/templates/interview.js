@@ -145,7 +145,7 @@ class SingleInterview extends React.Component {
               }}
             />
 
-              <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.title}</InterviewTitle>
+              <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
                <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
             <div
               dangerouslySetInnerHTML={{
