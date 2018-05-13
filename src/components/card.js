@@ -32,15 +32,14 @@ class Card extends React.Component {
 
 const BASE_CARD_WIDTH = 350;
 const FLEX = 100;
-const MAX_WIDTH_CONSTANT = 2;
+const MAX_WIDTH_CONSTANT = 1.25;
 const ARTICLE_MULTIPLIER = 1.5;
 const QUICK_FACT_MULTIPLIER = 1.5;
 
 const StyledCard = styled(Card)`
   display: inline-block;
-  height: 300px;
+  height: 350px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
-  border: solid thin lightgrey;
   background-color: white;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);

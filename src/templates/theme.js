@@ -89,6 +89,7 @@ const ThemeIntro = styled.div`
 const ThemeMain = styled.div`
   position: absolute;
   top: 66vh;
+  width:100%;
 `
 
 class ThemePage extends React.Component {
