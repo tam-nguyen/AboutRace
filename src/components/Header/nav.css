@@ -1,5 +1,5 @@
 .logo {
-    position: fixed;
+    position: absolute;
     z-index: 9999999999;
     top: 33px;
     left: 30px;
@@ -10,7 +10,7 @@
 }
 
 .nav {
-    position: fixed;
+    position: absolute;
     top: 45px;
     right: 30px;
     z-index: 9999999999;

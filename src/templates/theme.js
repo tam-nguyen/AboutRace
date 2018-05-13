@@ -14,39 +14,40 @@ import styled from 'styled-components';
 
 const ThemeTitle = styled.div`
   margin-top: 10vh;
-  margin-bottom:30px;
+  margin-bottom:15px;
   color: inherit;
   font-family: "lato";
   font-weight: 800;
   text-rendering: optimizeLegibility;
-  font-size: 24px;
+  font-size: 48px;
   line-height: 1.1;
-  letter-spacing: 0.14em;
-  color: rgba(59, 59, 59, 0.8);
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color:white;
+  text-align: center;
 `
 const ThemeDescription = styled.div`
-  color: rgba(59, 59, 59, 0.8);
-  font-weight: 400;
-  font-size: 22px;
-  font-style:italic;
+  font-weight: 200;
+  font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 0.02em;
   position:relative;
   z-index:99999;
-  width: 580px;
+  max-width: 800px;
+  margin: 0 auto;
+  color:white;
 `
 const ThemeHeader = styled.div`
-  width: 50%;
-  height: 100vh;
-  opacity: 0.5;
+  width: 100%;
+  height: 66vh;
+  opacity: 0.8;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: lightgrey;
   position: absolute;
-  top: 140px;
-  left: 35%;
+  top: 0;
+  left: 0;
   right: 0;
   z-index: -999;
 `
@@ -79,17 +80,15 @@ const Dimmer = styled.div`
 `
 
 const ThemeIntro = styled.div`
-  // height: 100vh;
-  margin-top:30vh;
-  padding:60px;
-  // background-color:rgba(241,239,239,0.94);
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -400px;
   z-index:99999999999999999999;
-  color: rgba(59, 59, 59, 0.8);
 `
-
 const ThemeMain = styled.div`
   position: absolute;
-  top: 110vh;
+  top: 66vh;
 `
 
 class ThemePage extends React.Component {
@@ -105,7 +104,11 @@ class ThemePage extends React.Component {
 
     return (
       <div>
-        <ThemeIntro>
+       
+        <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
+        <HeaderDimmer /><HeaderDimmer /><HeaderDimmer />
+         <Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer /><Dimmer />
+           <ThemeIntro>
             <ThemeTitle>{theme.name}</ThemeTitle>
             {theme.description ? (
               <ThemeDescription
@@ -113,10 +116,6 @@ class ThemePage extends React.Component {
               />
             ) : null}
           </ThemeIntro>
-        <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-        <HeaderDimmer />
-         <Dimmer />
-          
         </ThemeHeader>
         <ThemeMain>
           {

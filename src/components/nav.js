@@ -6,7 +6,7 @@ import Link from 'gatsby-link'
 class Navigation extends React.Component {
     render() {
         const Nav = styled.div`
-            position: fixed;
+           
             top: 30px;
             right: 20px;
         `
