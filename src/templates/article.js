@@ -163,6 +163,7 @@ class TagOverlay extends React.Component {
           </OverlayHeader>
           <div>
             <OverlayFilter>
+            <p style={{textAlign:'center', fontFamily:'Lato', fontWeight:'800', position:'relative', top:-15}}>Brief glossary-style description text here explaining tag and maybe raising issues in which it comes up.</p>
               {
                 [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
                   <span
