@@ -38,7 +38,7 @@ const ThemeDescription = styled.div`
 `
 const ThemeHeader = styled.div`
   width: 100%;
-  height: 66vh;
+  height: 100vh;
   opacity: 0.8;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
@@ -88,7 +88,7 @@ const ThemeIntro = styled.div`
 `
 const ThemeMain = styled.div`
   position: absolute;
-  top: 66vh;
+  top: 100vh;
   width:100%;
 `
 
