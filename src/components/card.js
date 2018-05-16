@@ -21,7 +21,7 @@ class Card extends React.Component {
       return (
         <CardWrapper link={this.props.link} className={this.props.className} style={this.props.style}>
             {this.props.type ?
-            <h4 style={{marginBottom:15, opacity:0.9}}>{this.props.type}</h4> :
+            <h4 style={{marginBottom:15, opacity:1}}>{this.props.type}</h4> :
             null }
 
             {this.props.children}
