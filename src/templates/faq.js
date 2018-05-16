@@ -5,6 +5,21 @@ const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
 
+class SingleFAQ extends React.Component {
+  render() {
+    return (
+    	<div>
+	      <p style={{maxWidth:700, margin:'0 auto'}} dangerouslySetInnerHTML={{
+		      __html: this.props.data.nodeFaq.field_question_summary.processed,
+	            }}
+	      />
+
+        </div>
+    )
+  }
+}
+
+export default SingleFAQ
 
 export const interviewsQuery = graphql`
   query faqQuery($id: String) {
