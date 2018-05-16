@@ -62,8 +62,8 @@ class Header extends React.Component {
           <Link className={'navItem'} to="/FAQs/" style={stylingForPath(`/faqs`)} exact>
             FAQs
           </Link>
-          <Link className={'navItem'} to="/media/" style={linkStyle} exact>
-            Media
+          <Link className={'navItem'} to="/clips/" style={linkStyle} exact>
+            Clips
           </Link>
           <Link className={'navItem'} to="/teaching/" style={linkStyle} exact>
             Teaching
