@@ -25,6 +25,9 @@ export const interviewsQuery = graphql`
   query faqQuery($id: String) {
     nodeFaq(id: { eq: $id }) {
 	  id
+	  field_title {
+	    processed
+	  }
 	  field_question_summary {
 	    processed
 	  }

@@ -45,7 +45,9 @@ export const query = graphql`
     allNodeFaq {
         edges {
           node {
-            title
+            field_title {
+              processed
+            }
           }
         }
       }

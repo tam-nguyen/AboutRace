@@ -52,9 +52,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 id
-                field_question_summary {
-                  processed
-                }
+               field_title {
+              processed
+            }
               }
             }
           }
@@ -105,7 +105,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       })
       _.each(result.data.allNodeFaq.edges, edge => {
         createPage({
-          path: `/faqs/${kebabCase(edge.node.title)}`, // required
+          path: `/faqs/${kebabCase(edge.node.field_title.processed)}`, // required
           component: faqTemplate,
           context: {
             id: edge.node.id,
