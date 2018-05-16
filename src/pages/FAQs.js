@@ -41,7 +41,7 @@ export default ({ data }) => (
 )
 
 export const query = graphql`
-  query FAQssQuery {
+  query FAQsQuery {
     allNodeFaq {
         edges {
           node {
