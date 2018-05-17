@@ -14,16 +14,27 @@ const FAQSummary = ({ data }) => {
       <div className={"articleCard"}>
        
         <div className="articleExcerpt">
-          {data.field_medium_version && (
+          { /* 
+            We are not using it - delete this?
+
+          data.field_medium_version && (
             <div
               dangerouslySetInnerHTML={{
                 __html: data.field_medium_version.processed,
               }}
             />
-          )}
+          ) */}
           
           <FAQTitle>
-            <Link to={`/articles/${kebabCase(data.title)}`}>{data.title}</Link>
+            <Link to={`/faqs/${data.fields.slug}`}>
+              {
+                // if field_question_summary is filled use it,
+                // if not - fallback to field_title (which is required)
+                data.field_question_summary 
+                  ? data.field_question_summary.processed
+                  : data.field_title.processed
+              }
+            </Link>
           </FAQTitle>
           
         </div>
@@ -41,11 +52,19 @@ export default ({ data }) => (
 )
 
 export const query = graphql`
-  query FAQssQuery {
+  query FAQsQuery {
     allNodeFaq {
         edges {
           node {
-            title
+            fields {
+              slug
+            }
+            field_title {
+              processed
+            }
+            field_question_summary {
+              processed
+            }
           }
         }
       }

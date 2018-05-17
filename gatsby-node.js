@@ -18,6 +18,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const articleTemplate = path.resolve(`src/templates/article.js`)
     const clipTemplate = path.resolve(`src/templates/clip.js`)
     const interviewTemplate = path.resolve(`src/templates/interview.js`)
+    const faqTemplate = path.resolve(`src/templates/faq.js`)
     
     // Query for markdown nodes to use in creating pages.
     graphql(
@@ -44,6 +45,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               node {
                 id
                 title
+              }
+            }
+          }
+          allNodeFaq {
+            edges {
+              node {
+                id
+                fields {
+                  slug
+                }
               }
             }
           }
@@ -92,6 +103,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+      _.each(result.data.allNodeFaq.edges, edge => {
+        createPage({
+          path: `/faqs/${edge.node.fields.slug}`, // required
+          component: faqTemplate,
+          context: {
+            id: edge.node.id,
+          },
+        })
+      })
       _.each(result.data.allNodeClip.edges, edge => {
         createPage({
           path: `/clips/${kebabCase(edge.node.title)}`, // required
@@ -104,4 +124,38 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       resolve()
     })
   })
+}
+
+const usedSlugs = {}
+const createSlug = ({ text, type, maxWords = 10 }) => {
+  let slug = kebabCase(text.split(' ').slice(0, maxWords).join(' '))
+  
+  // create map of used slugs for type if it doesn't yet exist
+  if (!usedSlugs[type]) {
+    usedSlugs[type] = {}
+  }
+
+  // check if we already used that slug
+  if (usedSlugs[type][slug]) {
+    // increment count and use it as postfix
+    let count = usedSlugs[type][slug] = usedSlugs[type][slug] + 1
+    return `${slug}-${count}`
+  } else {
+    usedSlugs[type][slug] = 1
+    return slug
+  }
+}
+
+exports.onCreateNode = ({node, boundActionCreators }) => {
+  const { createNodeField } = boundActionCreators
+  if (node.internal.type === 'node__faq') {
+    createNodeField({
+      node,
+      name: "slug",
+      value: createSlug({
+        text: node.title,
+        type: "faq"
+      })
+    })
+  }
 }
