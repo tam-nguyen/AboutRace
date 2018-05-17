@@ -10,7 +10,9 @@ class SingleFAQ extends React.Component {
     return (
     	<div>
 	      <p style={{maxWidth:700, margin:'0 auto'}} dangerouslySetInnerHTML={{
-		      __html: this.props.data.nodeFaq.field_question_summary.processed,
+					__html: this.props.data.nodeFaq.field_question_summary 
+							? this.props.data.nodeFaq.field_question_summary.processed
+							: `no summary (just so this doesn't cause build errors), title: ${this.props.data.nodeFaq.title}`,
 	            }}
 	      />
 
@@ -25,6 +27,7 @@ export const interviewsQuery = graphql`
   query faqQuery($id: String) {
     nodeFaq(id: { eq: $id }) {
 	  id
+		title
 	  field_title {
 	    processed
 	  }
