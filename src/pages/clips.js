@@ -5,7 +5,6 @@ import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
 
 
-
 const ClipsIntro = styled.div
 `
 	font-size:24px;
@@ -25,24 +24,23 @@ export default ({ data }) => (
 export const query = graphql`
   query ClipsQuery {
     allNodeClip {
-	  edges {
-	    node {
-	      field_episode
-	      title
-	    	field_title_of_clip {
-	        processed
-	      }
-	       relationships {
-	        field_poster_image {
-	          localFile {
-	            publicURL
-	          }
-	        }
-	      }
-	    }
-	  }
-	}
+		  edges {
+		    node {
+		      field_episode
+		      title
+		    	field_title_of_clip {
+		        processed
+		      }
+		       relationships {
+		        field_poster_image {
+		          localFile {
+		            publicURL
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
   }
 `
 
-	

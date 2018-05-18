@@ -62,6 +62,27 @@ export const FAQFragment = graphql`
     changed
   }
 `
+
+export const ClipFragment = graphql`
+  fragment ClipFragment on node__clip {
+    field_episode
+    title
+    field_external_video_url {
+      uri
+    }
+    field_title_of_clip {
+      processed
+    }
+     relationships {
+      field_poster_image {
+        localFile {
+          publicURL
+        }
+      }
+    }
+  }
+`
+
 export const QuickfactWithRelatedContentFragment = graphql`
   fragment QuickfactWithRelatedContentFragment on node__quickfact {
     title

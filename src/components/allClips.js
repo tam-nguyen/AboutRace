@@ -30,17 +30,21 @@ const ClipPoster = styled.div`
     background-image: ${props => props.background ?  `url(${props.background})` : `none`};
 `
 
-const AllClips = ({ data }) =>  {
-	console.log(data)
+export const Clip = ({ clip, link }) =>  {
 	return (
 		<div>
-			
 			<ClipCard>
-				<ClipPoster background={data.relationships.field_poster_image && data.relationships.field_poster_image.localFile.publicURL} >
+				{
+					link ?
+						<Link to={`/clips/${kebabCase(clip.title)}`}>
+							<ClipPoster background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL} >
 
-				</ClipPoster>
+							</ClipPoster>
+						</Link> :
+						<iframe src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				}
 				<div className="caption">
-					{data.title}
+					{clip.title}
 				</div>
 			</ClipCard>
 		</div>
@@ -48,12 +52,13 @@ const AllClips = ({ data }) =>  {
 }
 
 
-export default ({ data }) => (
+const AllClips = ({ data }) => (
   <div>
     {data.allNodeClip.edges.map((edge, i) => (
-      <AllClips data={edge.node} />
+      <Clip clip={edge.node} link={true} />
     ))}
   </div>
 )
 
+export default AllClips
 
