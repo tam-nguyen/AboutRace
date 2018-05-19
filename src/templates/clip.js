@@ -26,6 +26,7 @@ const Chosen = styled.div`
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   margin-bottom: 30px;
   padding: 30px;
+  display: flex;
 `
 
 export const ChosenClip = ({ clip, link }) =>  {
