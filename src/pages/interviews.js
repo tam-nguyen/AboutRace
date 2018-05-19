@@ -108,7 +108,7 @@ const InterviewSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
-  <div className={"interviews"}>
+  <div className={"interviews wrapper"}>
     {data.allNodeInterview.edges.map((edge, i) => (
       <InterviewSummary data={edge.node} />
     ))}

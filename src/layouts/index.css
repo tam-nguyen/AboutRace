@@ -685,3 +685,11 @@ html {
 body.modal-open {
   overflow-y: hidden;
 }
+.wrapper {
+  padding: 30px;
+  background-color: #f7f7f7;
+}
+iframe {
+  border: none;
+  display: inline-block;
+}

@@ -7,8 +7,10 @@ const ClipCard = styled.div`
 	width: 300px;
 	height:400px;
 	background-color:white;
-	float: left;
+	display:inline-block;
+	vertical-align: top;
 	margin-right:30px;
+	margin-bottom: 30px;
 	-webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
 	-moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
 	box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -32,7 +34,6 @@ const ClipPoster = styled.div`
 
 export const Clip = ({ clip, link }) =>  {
 	return (
-		<div>
 			<ClipCard>
 				{
 					link ?
@@ -47,7 +48,6 @@ export const Clip = ({ clip, link }) =>  {
 					{clip.title}
 				</div>
 			</ClipCard>
-		</div>
 		)
 }
 

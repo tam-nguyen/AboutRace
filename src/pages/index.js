@@ -24,7 +24,13 @@ const SubThemeComponent = ({ data }) => (
 )
 
 const ThemeComponent = ({ data }) => (
-  <li>
+  <div style={{
+    backgroundColor: 'red',
+    width: '40vw',
+    height: '60vh',
+    marginBottom: 30
+  }}
+  >
     Theme: <Link to={`/themes/${kebabCase(data.name)}`}>{data.name}</Link>
     {/* {data.relationships.subthemes ? (
       <ul>
@@ -35,7 +41,7 @@ const ThemeComponent = ({ data }) => (
     ) : (
       <div>No subthemes</div>
     )} */}
-  </li>
+  </div>
 )
 
 export default ({ data }) => (
