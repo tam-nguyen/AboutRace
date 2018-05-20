@@ -27,11 +27,14 @@ const SubthemeTitle = styled.div`
   text-rendering: optimizeLegibility;
   font-size: 30px;
   font-weight:600;
+  text-transform: uppercase;
+  border: solid;
+  padding: 15px;
   font-family: 'Lato';
-  line-height: 1.1;
+  text-align: center;
   color: rgba(59, 59, 59, 0.8);
   margin-bottom: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.082em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -137,7 +140,8 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
     />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
   </RCCard> :
-  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
+  // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
+  <Card key={`clip-${i}`} title={clip.title} slug="clip"  changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
     <PlayablePoster
       clip={clip}
       linkable={linkable}
@@ -234,6 +238,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
               marginRight: 15,
               marginBottom: 15,
               fontSize:16,
+              letterSpacing:'0.125em',
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
@@ -331,6 +336,8 @@ const SubthemeContainer = styled(SubthemeSection)`
   background-color: rgba(247, 247, 247, 0.94);
   padding: 45px 30px;
   border-bottom: solid thin grey;
+  margin-bottom: 60px;
+
 `
 
 export default SubthemeContainer;

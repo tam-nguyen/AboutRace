@@ -1,39 +1,66 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import styled from 'styled-components'
 
-const ContentNodeComponent = ({ data }) => (
-  <li>
-    <strong>{data.__typename}</strong>: {data.title}
-  </li>
-)
 
-const SubThemeComponent = ({ data }) => (
-  <li>
-    Subtheme: <strong>{data.name}</strong>
-    {data.relationships.contentNodes ? (
-      <ul>
-        {data.relationships.contentNodes.map(contentNode => (
-          <ContentNodeComponent data={contentNode} />
-        ))}
-      </ul>
-    ) : (
-      <span style={{ color: 'red' }}> (no contentNodes)</span>
-    )}
-  </li>
-)
+// const ContentNodeComponent = ({ data }) => (
+//   <li>
+//     <strong>{data.__typename}</strong>: {data.title}
+//   </li>
+// )
+
+// const SubThemeComponent = ({ data }) => (
+//   <li>
+//     Subtheme: <strong>{data.name}</strong>
+//     {data.relationships.contentNodes ? (
+//       <ul>
+//         {data.relationships.contentNodes.map(contentNode => (
+//           <ContentNodeComponent data={contentNode} />
+//         ))}
+//       </ul>
+//     ) : (
+//       <span style={{ color: 'red' }}> (no contentNodes)</span>
+//     )}
+//   </li>
+// )
+
+const HomeThemeImage = styled.div`
+  height: 400px;
+  color: white;
+  font-family: 'Lato';
+  font-size:24px;
+  line-height:1.5;
+  text-align: center;
+  letter-spacing: 0.04em;
+  background-position: center center;
+  background-size: cover;
+  background-image: ${props =>
+                      props.background ? `url(${props.background})` : `none`};
+`
 
 const ThemeComponent = ({ data }) => (
   <div style={{
     backgroundColor: 'red',
-    width: '40vw',
-    height: '60vh',
-    marginBottom: 30,
-    marginRight: 30,
-    float: 'left'
-  }}
+    width: '50%',
+    height: 400,
+    marginBottom: 0,
+    marginRight: 0,
+    display:'inline-block',
+    verticalAlign:'top',
+    borderRadius: 0,
+    overflow: 'hidden'
+
+    }}
   >
-    Theme: <Link to={`/themes/${kebabCase(data.name)}`}>{data.name}</Link>
+    <Link style={{textDecoration:'none'}} to={`/themes/${kebabCase(data.name)}`}>
+      <HomeThemeImage background={data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}>
+       <div className='totalDimmer'>
+        {data.name}
+        </div>
+      </HomeThemeImage>
+    </Link>
+ 
     {/* {data.relationships.subthemes ? (
       <ul>
         {data.relationships.subthemes.map(subTheme => (
@@ -47,11 +74,11 @@ const ThemeComponent = ({ data }) => (
 )
 
 export default ({ data }) => (
-  <ul>
+  <div className='wrapper'>
     {data.allTaxonomyTermThemes.edges.map(({ node }) => (
       <ThemeComponent data={node} />
     ))}
-  </ul>
+  </div>
 )
 
 export const query = graphql`
@@ -62,6 +89,11 @@ export const query = graphql`
           id
           name
           relationships {
+            field_theme_image {
+              localFile {
+                publicURL
+              }
+            }
             subthemes: backref_field_belongs_to_theme {
               name
               id

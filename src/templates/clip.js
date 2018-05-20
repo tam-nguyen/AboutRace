@@ -24,7 +24,7 @@ const Chosen = styled.div`
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   padding: 30px;
   display: flex;
 `
@@ -44,7 +44,7 @@ export const ChosenClip = ({ clip, link }) =>  {
 export default ({ data }) => (
     <div className='wrapper'>
       <ChosenClip clip={data.nodeClip} />
-      
+      <h4>All Clips</h4>
       <AllClips data={data}/>
     </div>
   )

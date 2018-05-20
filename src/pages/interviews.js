@@ -9,7 +9,8 @@ const InterviewCard = styled.div`
   height: 400px;
   margin: 2.5%;
   position: relative;
-  float: left;
+  display: inline-block;
+  background-color: white;
    -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);

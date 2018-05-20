@@ -40,7 +40,8 @@ class Header extends React.Component {
           <Link
             to="/"
             style={{
-              color: 'black',
+              color: '#828282',
+              opacity: 0.75,
               textDecoration: 'none',
             }}
           >
