@@ -6,7 +6,6 @@ import Link from 'gatsby-link'
 const ChosenClipCard = styled.div`
   height: 414px;
   width: 720px;
-  background-color:green;
   margin-bottom: 30px;
   margin-right: 30px;
   display: inline-block;
@@ -15,7 +14,8 @@ const ChosenClipCard = styled.div`
 const ChosenClipCaption = styled.div`
   font-size: 24px;
   font-family: 'Lato';
-  font-weight: 800;
+  font-weight: 400;
+  line-height:1.25;
   display: inline-block;
   padding-bottom: 30px;
 `
@@ -33,7 +33,7 @@ export const ChosenClip = ({ clip, link }) =>  {
 	return (
 		<Chosen>
 			<ChosenClipCard>
-			<iframe width='720px' height='414px' src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>			 
+			<iframe width='720px' height='100%' src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>			 
 			</ChosenClipCard>
      <ChosenClipCaption> {clip.title}</ChosenClipCaption>
   

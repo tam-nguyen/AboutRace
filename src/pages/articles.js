@@ -31,7 +31,8 @@ import kebabCase from 'lodash/kebabCase'
 
 const ArticleTitle = styled.div`
   font-family: 'Lato';
-  font-size:36px;
+  font-size:30px;
+  font-weight:700;
   line-height:1.25;
   letter-spacing: 0.01em;
   margin-bottom: 15px;
@@ -56,19 +57,21 @@ const ArticleSummary = ({ data }) => {
         
         <div style={{ margin: 60}}>
           <ArticleTitle>
-            <Link style={{  color: 'rgb(191, 191, 191)', textDecoration: 'none'}} to={`/articles/${kebabCase(data.title)}`}>{data.title}</Link>
+           {data.title}
           </ArticleTitle>
-          <h6>{data.field_author && data.field_author.processed}</h6>
-            <div className="card-large-text">
-              {data.field_medium_version && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: data.field_medium_version.processed,
-                  }}
-                />
+          
+          <h4>{data.field_author && data.field_author.processed}</h4>
+          <div className="articleExcerpt">
+            {data.field_medium_version && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.field_medium_version.processed,
+                }}
+              />
 
-              )}
-            </div>
+            )}
+          </div>
+          <Link style={{textDecoration: 'none'}} to={`/articles/${kebabCase(data.title)}`}><div className={'readButton'}>Read article</div></Link>
           </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>

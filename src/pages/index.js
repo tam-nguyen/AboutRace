@@ -28,7 +28,9 @@ const ThemeComponent = ({ data }) => (
     backgroundColor: 'red',
     width: '40vw',
     height: '60vh',
-    marginBottom: 30
+    marginBottom: 30,
+    marginRight: 30,
+    float: 'left'
   }}
   >
     Theme: <Link to={`/themes/${kebabCase(data.name)}`}>{data.name}</Link>

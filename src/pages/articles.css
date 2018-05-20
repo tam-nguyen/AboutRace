@@ -6,10 +6,11 @@
 }
   
 .articleCard {
-    max-width: 90%;
-    margin-bottom: 60px;
+    max-width: 100%;
+    border: solid thin darkgrey;
     display: flex;
-    margin-bottom: 120px;
+    margin-bottom: 30px;
+    background-color: #f7f7f7;
 }
 
 .articleCard:nth-child(even) {
@@ -32,7 +33,19 @@
 .articleExcerpt {
     font-size: 18px;
     line-height: 1.5;
-    font-style: italic;
-    font-family: "Lato";
-    padding: 30px;
+}
+.readButton {
+    background-color: rgb(83, 32, 130);
+    padding: 6px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: 'Lato';
+    width: 150px;
+    text-align: center;
+}
+.readButton:hover {
+    cursor: pointer;
+    background-color: rgba(83, 32, 130, 0.93);
 }
