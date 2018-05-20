@@ -706,3 +706,12 @@ iframe {
   flex-direction: column;
   justify-content: center;
 }
+.filmSubtitle {
+  font-size: 20px;
+  position: relative;
+  top: 1.25em;
+  left: -8em;
+  font-family: 'Lato';
+  letter-spacing: 0.075em;
+  /* font-style: italic; */
+}

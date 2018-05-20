@@ -46,6 +46,7 @@ class Header extends React.Component {
             }}
           >
             RACE
+            <span className='filmSubtitle'>the power of an illusion</span>
           </Link>
         </div>
 

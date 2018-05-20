@@ -336,7 +336,7 @@ const SubthemeContainer = styled(SubthemeSection)`
   background-color: rgba(247, 247, 247, 0.94);
   padding: 45px 30px;
   border-bottom: solid thin grey;
-  margin-bottom: 60px;
+  margin: 60px;
 
 `
 
