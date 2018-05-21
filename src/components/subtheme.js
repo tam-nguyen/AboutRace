@@ -113,7 +113,7 @@ class PlayablePoster extends React.Component {
 
 export const ArticleCard = ({ article, i, relatedContent }) => (
   relatedContent ?
-    <RCCard style={{padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
+    <RCCard style={{padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
     {article.field_short_version && (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
@@ -124,7 +124,6 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
          { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
         <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
-       
       </div>
     )}
     </Card>
@@ -150,8 +149,16 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
+<<<<<<< HEAD
   <Card style={{padding:30, backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
     <p className='card-large-text'>{faq.title}</p>
+=======
+  <Card style={{padding:45, display:'flex', alignItems:'center', backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
+    <FAQQuestion>
+      <h4>FAQ</h4>
+      <p style={{fontSize:18, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
+    </FAQQuestion>
+>>>>>>> working related content
   </Card>
 )
 // background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}
@@ -297,10 +304,16 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
+<<<<<<< HEAD
        { description }
       <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-        
-         
+
+
+=======
+
+        <SubthemeTitle>{subtheme.name}</SubthemeTitle>
+         { description }
+>>>>>>> working related content
         <Filters
           queryParams={this.props.queryParams}
           name={this.props.name}
@@ -317,7 +330,7 @@ class SubthemeSection extends React.Component {
            <div style={{width:'100%', textAlign:'center'}}>
               <button style={{ margin: '30px auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
                 Show More <i className="fa fa-angle-down"></i>
-              </button> 
+              </button>
            </div> :
             null
         }
