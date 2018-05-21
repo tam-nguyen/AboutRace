@@ -52,25 +52,25 @@ const ArticleHeader = styled.div`
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.8705882352941177);
+  background-color: rgba(255, 255, 255, 1);
   padding: 30px;
   margin-top: 10vh;
   position: relative;
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 42px;
+    font-size: 24px;
     font-family: 'Lato';
-    margin-bottom: 30px;
-    line-height: 1.3;
+    margin-bottom: 15px;
+    line-height: 1.25;
     text-align: right;
-    font-weight:500;
+    font-weight:700;
 `
 const AuthorTitle = styled.div`
     font-family: 'Lato';
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 15px;
+    margin-bottom: 90px;
 `
 
 class QuickFactOverlay extends React.Component {
@@ -248,17 +248,19 @@ class SingleArticle extends React.Component {
             textAlign: 'right'
           }} className="column">
           <div style={{
-            width:300,
-            height:300,
+            width:255,
+            height:255,
             backgroundColor:'red',
-            marginTop:'33vh',
+            marginTop:'24vh',
+            marginBottom:15,
             overflow:'hidden',
-            display:'inline-block'
+            display:'inline-block',
+            borderRadius:'50%'
 
           }}>
             <img style={{
               width:300,
-              
+             
 
             }} src={
                data.nodeArticle.relationships.field_author_image &&
@@ -266,17 +268,8 @@ class SingleArticle extends React.Component {
             } />
           </div>
             <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-            <AuthorTitle>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</AuthorTitle>
-            <hr style={{width:60, marginBottom:15, display:'inline-block'}} />
-            <p style={{
-              letterSpacing: '0.04em',
-              fontStyle: 'italic',
-              fontFamily: 'Lato',
-              marginBottom:60
-            }}>Originally published: <span dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_copyright.processed,
-              }}
-              / ></p>
+            <h4 style={{marginBottom:90}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+           
             {
               (data.nodeArticle.relationships.field_tags || []).map(tag =>
                 <Link
@@ -342,7 +335,7 @@ class SingleArticle extends React.Component {
           <ArticleMain className="column _60">
             <LargeCalloutText
               style={{
-                fontSize: 28,
+                fontSize: 24,
                 fontWeight: 'normal',
                 lineHeight: 1.5
               }}
@@ -363,10 +356,10 @@ class SingleArticle extends React.Component {
               fontStyle: 'italic',
               fontFamily: 'Lato',
 
-            }}>Originally published: <span dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_copyright.processed,
+            }}>NOTE: <span dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
               }}
-              / ></p>
+              /></p>
 
           </ArticleMain>
           <div className="column _25" />
@@ -383,6 +376,9 @@ export const pageQuery = graphql`
   query singleQuery($id: String) {
     nodeArticle(id: { eq: $id }) {
       id
+      field_old_article_discl {
+        processed
+      }
       field_author {
         processed
       }

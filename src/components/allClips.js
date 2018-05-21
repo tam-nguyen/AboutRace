@@ -5,18 +5,19 @@ import kebabCase from 'lodash/kebabCase'
 
 const ClipCard = styled.div`
 	width: 300px;
-	height:400px;
 	background-color:white;
-	float: left;
+	display:inline-block;
+	vertical-align: top;
 	margin-right:30px;
+	margin-bottom: 30px;
 	-webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
 	-moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
 	box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
 	transition: all .3s;
 	&:hover {
-	  -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-	  -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-	  box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+	  -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.38);
+	  -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.38);
+	  box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.38);
 	  transition: all .3s;
 	}
 	cursor: pointer;
@@ -32,7 +33,6 @@ const ClipPoster = styled.div`
 
 export const Clip = ({ clip, link }) =>  {
 	return (
-		<div>
 			<ClipCard>
 				{
 					link ?
@@ -47,7 +47,6 @@ export const Clip = ({ clip, link }) =>  {
 					{clip.title}
 				</div>
 			</ClipCard>
-		</div>
 		)
 }
 

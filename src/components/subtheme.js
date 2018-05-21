@@ -25,13 +25,15 @@ const FAQQuestion = styled.div`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 30px;
-  font-weight:600;
+  font-size: 48px;
+  font-weight:800;
+  text-transform: uppercase;
+  padding: 15px;
   font-family: 'Lato';
-  line-height: 1.1;
+  text-align: center;
   color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 15px;
-  letter-spacing: 0.02em;
+  margin-bottom: 60px;
+  letter-spacing: 0.04em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -94,7 +96,7 @@ class PlayablePoster extends React.Component {
 
     if (this.props.linkable) {
       return (
-        <Link to={`${kebabCase(this.props.clip.title)}`}>
+        <Link to={`../clips/${kebabCase(this.props.clip.title)}`}>
           <div className={'poster'}>
             <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
           </div>
@@ -120,8 +122,8 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     {article.field_short_version && (
       <div>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-         { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:18}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
-        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.03em', fontSize:18, fontStyle:'italic'}}>{article.title}</h6>
+         { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
        
       </div>
     )}
@@ -137,7 +139,8 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
     />
     <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
   </RCCard> :
-  <Card key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
+  // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
+  <Card key={`clip-${i}`} title={clip.title} slug="clip"  changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
     <PlayablePoster
       clip={clip}
       linkable={linkable}
@@ -147,18 +150,15 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:45, display:'flex', alignItems:'center', backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL} link={`/faqs/${kebabCase(faq.title)}`}>
-    <FAQQuestion>
-      <h4>FAQ</h4>
-      <p style={{fontSize:18, fontFamily:'Lato', lineHeight:1.5, fontWeight:700, fontStyle:'italic'}} className={'card-large-text'}>{faq.title}</p>
-    </FAQQuestion>
+  <Card style={{padding:30, backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+    <p className='card-large-text'>{faq.title}</p>
   </Card>
 )
-
+// background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
     <p className={'card-large-text'}>{interview.field_key_quote.processed}</p>
-    <h6 style={{fontSize:18, textAlign:'right'}}>{interview.title}</h6>
+    <h6 style={{fontSize:14, textAlign:'right'}}>{interview.title}</h6>
   </Card>
 )
 
@@ -198,8 +198,8 @@ const itemExists = (itemTag, parent) => {
 
 const Filters = ({ queryParams, name, filter, subtheme }) => (
   <div style={{
-    opacity:0.75,
-    mixBlendMode:'normal'
+    mixBlendMode:'normal',
+    textAlign: 'center'
   }}
     >
     <span style={{
@@ -234,6 +234,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
               marginRight: 15,
               marginBottom: 15,
               fontSize:16,
+              letterSpacing:'0.125em',
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
@@ -296,16 +297,17 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-       
-        <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-         { description }
+       { description }
+      <SubthemeTitle>{subtheme.name}</SubthemeTitle>
+        
+         
         <Filters
           queryParams={this.props.queryParams}
           name={this.props.name}
           filter={filter}
           subtheme={subtheme}
         />
-        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'left' }}>
+        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'center' }}>
           {
             allCards.slice(0, this.state.numCards)
           }
@@ -331,6 +333,8 @@ const SubthemeContainer = styled(SubthemeSection)`
   background-color: rgba(247, 247, 247, 0.94);
   padding: 45px 30px;
   border-bottom: solid thin grey;
+  margin: 60px;
+
 `
 
 export default SubthemeContainer;

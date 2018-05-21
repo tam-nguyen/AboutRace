@@ -9,8 +9,9 @@ const InterviewCard = styled.div`
   height: 400px;
   margin: 2.5%;
   position: relative;
-  float: left;
-   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  display: inline-block;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   transition: all .3s;
@@ -108,7 +109,7 @@ const InterviewSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
-  <div className={"interviews"}>
+  <div className={"interviews wrapper"}>
     {data.allNodeInterview.edges.map((edge, i) => (
       <InterviewSummary data={edge.node} />
     ))}

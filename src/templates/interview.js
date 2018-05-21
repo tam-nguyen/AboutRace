@@ -34,7 +34,7 @@ const InterviewMain = styled.div`
   padding: 30px;
   position:absolute;
   left:72.5%;
-  margin-left:-290px
+  margin-left:-290px !important;
 `
 
 const Overlay = styled.div`
@@ -145,8 +145,8 @@ class SingleInterview extends React.Component {
               }}
             />
 
-              <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
-               <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
+          <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
+          <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
             <div
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_full_length_version.processed,

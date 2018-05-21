@@ -13,7 +13,7 @@ const ClipsIntro = styled.div
 `
 
 export default ({ data }) => (
-	<div>
+	<div className='wrapper'>
 	    <ClipsIntro>
 	  		Various clips from the film featured here. Buy a copy of the film here.
 	  	</ClipsIntro>

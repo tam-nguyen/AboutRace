@@ -39,26 +39,17 @@ const QUICK_FACT_MULTIPLIER = 1.5;
 const StyledCard = styled(Card)`
   display: inline-block;
   height: auto;
+  min-height: 200px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   background-color: white;
-  // border: solid 5px white;
-  // &:hover {
-  //   border: solid 5px beige;
-  // }
-  // background-color: white;
-  // transition: all .1s;
-  // &:hover {
-  //   background-color:rgb(247, 240, 236);
-  //   transition: all .1s;
-  // }
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   transition: all .3s;
   &:hover {
-    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.48);
+    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.48);
+    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.48);
     transition: all .3s;
   }
   margin-bottom: 30px;
