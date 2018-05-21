@@ -28,7 +28,7 @@ const ThemeTitle = styled.div`
 const ThemeDescription = styled.div`
   font-weight: 200;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.75;
   letter-spacing: 0.02em;
   position:relative;
   z-index:99999;
@@ -40,7 +40,7 @@ const ThemeDescription = styled.div`
 const ThemeHeader = styled.div`
   width: 100%;
   height: 100vh;
-  opacity: 0.8;
+  // opacity: 0.8;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
@@ -94,6 +94,7 @@ const ThemeMain = styled.div`
   position: absolute;
   top: 100vh;
   width:100%;
+  background-color: #f7f7f7;
 `
 
 class ThemePage extends React.Component {

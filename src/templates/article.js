@@ -52,7 +52,7 @@ const ArticleHeader = styled.div`
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.8705882352941177);
+  background-color: rgba(255, 255, 255, 1);
   padding: 30px;
   margin-top: 10vh;
   position: relative;
@@ -251,15 +251,16 @@ class SingleArticle extends React.Component {
             width:255,
             height:255,
             backgroundColor:'red',
-            marginTop:'33vh',
+            marginTop:'24vh',
             marginBottom:15,
             overflow:'hidden',
-            display:'inline-block'
+            display:'inline-block',
+            borderRadius:'50%'
 
           }}>
             <img style={{
               width:300,
-              
+             
 
             }} src={
                data.nodeArticle.relationships.field_author_image &&
@@ -334,7 +335,7 @@ class SingleArticle extends React.Component {
           <ArticleMain className="column _60">
             <LargeCalloutText
               style={{
-                fontSize: 28,
+                fontSize: 24,
                 fontWeight: 'normal',
                 lineHeight: 1.5
               }}
@@ -355,10 +356,10 @@ class SingleArticle extends React.Component {
               fontStyle: 'italic',
               fontFamily: 'Lato',
 
-            }}>Originally published: <span dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_copyright.processed,
+            }}>NOTE: <span dangerouslySetInnerHTML={{
+                __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
               }}
-              / ></p>
+              /></p>
 
           </ArticleMain>
           <div className="column _25" />
@@ -375,6 +376,9 @@ export const pageQuery = graphql`
   query singleQuery($id: String) {
     nodeArticle(id: { eq: $id }) {
       id
+      field_old_article_discl {
+        processed
+      }
       field_author {
         processed
       }

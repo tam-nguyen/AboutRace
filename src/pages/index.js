@@ -25,6 +25,16 @@ import styled from 'styled-components'
 //   </li>
 // )
 
+const HomeBackground = styled.div`
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999999;
+  height: 100%;
+  width:100%;
+`
+
 const HomeThemeImage = styled.div`
   height: 400px;
   color: white;
@@ -74,7 +84,9 @@ const ThemeComponent = ({ data }) => (
 )
 
 export default ({ data }) => (
+  
   <div className='wrapper'>
+  <HomeBackground />
     {data.allTaxonomyTermThemes.edges.map(({ node }) => (
       <ThemeComponent data={node} />
     ))}

@@ -1,9 +1,18 @@
 import React from 'react'
 import Link from 'gatsby-link'
-
+import styled from 'styled-components';
 import getScrollBarWidth from '../../utils/scrollbar-width'
 
 import './nav.css'
+
+const TopBar = styled.div`
+  // height: 120px;
+  // position: fixed;
+  // top: 0;
+  // z-index: 9999999999999999999999999999;
+  // width: 100%;
+  // background-color: rgba(255, 255, 255, 0.9490196078431372);
+`
 
 const linkStyle = {
   textDecoration: 'none',
@@ -35,12 +44,12 @@ class Header extends React.Component {
     const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
 
     return (
-      <div>
+      <TopBar>
         <div className={'logo'}>
           <Link
             to="/"
             style={{
-              color: '#828282',
+              color: 'rgb(158, 156, 156)',
               opacity: 0.75,
               textDecoration: 'none',
             }}
@@ -71,7 +80,7 @@ class Header extends React.Component {
             Teaching
           </Link>
         </div>
-      </div>
+      </TopBar>
     )
   }
 }

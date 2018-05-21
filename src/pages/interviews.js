@@ -11,7 +11,7 @@ const InterviewCard = styled.div`
   position: relative;
   display: inline-block;
   background-color: white;
-   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   transition: all .3s;
