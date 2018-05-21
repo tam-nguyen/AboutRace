@@ -22,7 +22,7 @@ const TemplateWrapper = ({ children, location }) => (
       style={{
         margin: '0 auto',
         maxWidth:'100%',
-        marginTop:120
+        marginTop:150
       }}
     >
       {children()}
