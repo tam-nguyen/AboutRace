@@ -3,6 +3,15 @@ import AllClips, { Clip } from '../components/allClips.js'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 
+const DarkBackground = styled.div`
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999999;
+  height: 100%;
+  width:100%;
+`
 const ChosenClipCard = styled.div`
   height: 414px;
   width: 720px;
@@ -12,21 +21,20 @@ const ChosenClipCard = styled.div`
   vertical-align:top;
 `
 const ChosenClipCaption = styled.div`
-  font-size: 24px;
-  font-family: 'Lato';
+  font-size: 22px;
   font-weight: 400;
   line-height:1.25;
   display: inline-block;
   padding-bottom: 30px;
+  color:#ffe4c1;
+  letter-spacing: 0.02em;
 `
 const Chosen = styled.div`
-  background-color:white;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  background-color:#404040;
   margin-bottom: 60px;
   padding: 30px;
   display: flex;
+  align-items: center;
 `
 
 export const ChosenClip = ({ clip, link }) =>  {
@@ -43,8 +51,9 @@ export const ChosenClip = ({ clip, link }) =>  {
 
 export default ({ data }) => (
     <div className='wrapper'>
+      <DarkBackground />
       <ChosenClip clip={data.nodeClip} />
-      <h4>All Clips</h4>
+      <h4 style={{color: '#ffe4c1'}}>All Clips</h4>
       <AllClips data={data}/>
     </div>
   )

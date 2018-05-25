@@ -32,7 +32,8 @@ const SubthemeTitle = styled.div`
   font-family: 'Lato';
   text-align: center;
   color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  margin-top: 15px;
   letter-spacing: 0.04em;
 `
 const NUM_CARDS_TO_SHOW = 3;
@@ -123,7 +124,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
       <div>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
          { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
-        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
+        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
        
       </div>
     )}
@@ -199,13 +200,15 @@ const itemExists = (itemTag, parent) => {
 const Filters = ({ queryParams, name, filter, subtheme }) => (
   <div style={{
     mixBlendMode:'normal',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 15
   }}
     >
     <span style={{
             marginRight: 15,
             fontFamily: 'Lato',
             fontWeight:800,
+            fontSize: 14,
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
             color:'rgb(255, 132, 0)'
@@ -233,7 +236,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
               borderBottom: filter == filterSlug ? `solid 2px rgb(255, 132, 0)` : `none`,
               marginRight: 15,
               marginBottom: 15,
-              fontSize:16,
+              fontSize:14,
               letterSpacing:'0.125em',
               float: (
                 (filterSlug === `recent`) ?
@@ -297,9 +300,9 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-       { description }
+       
       <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-        
+      { description } 
          
         <Filters
           queryParams={this.props.queryParams}
