@@ -63,7 +63,8 @@ class ClipTemplate extends React.Component {
   render() {
     const { data } = this.props
     return (
-      <div className='wrapper'>
+      <div className='darkwrapper'>
+        <DarkBackground />
         <ChosenClip clip={data.nodeClip} />
         <div style={{ padding: 10, margin: 10, border: `1px solid black`}}>
           <button onClick={() => { this.setState({ teaching: false}) }}>
@@ -104,7 +105,7 @@ class ClipTemplate extends React.Component {
             )
           }
         </div>
-        <h4>All Clips</h4>
+        <h4 style={{color: '#ffe4c1', marginLeft: 30}}>All Clips</h4>
         <AllClips data={data}/>
       </div>
     )

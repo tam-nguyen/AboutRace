@@ -46,7 +46,7 @@ export const Clip = ({ clip, link }) =>  {
 
 
 const AllClips = ({ data }) => (
-  <div>
+  <div style={{padding: '0 30px'}}>
     {data.allNodeClip.edges.map((edge, i) => (
       <Clip clip={edge.node} link={true} />
     ))}

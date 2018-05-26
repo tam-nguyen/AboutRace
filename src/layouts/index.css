@@ -689,9 +689,12 @@ body.modal-open {
   overflow-y: hidden;
 }
 .wrapper {
-  /* padding: 30px; */
   background-color: #f7f7f7;
-  /* background-color: #333333; */
+  width: 1200px;
+  margin: 0 auto;
+}
+.darkwrapper {
+  background-color: #333333;
   width: 1200px;
   margin: 0 auto;
 }
