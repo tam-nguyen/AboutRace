@@ -19,7 +19,7 @@ const ThemeTitle = styled.div`
   font-family: "lato";
   font-weight: 800;
   text-rendering: optimizeLegibility;
-  font-size: 48px;
+  font-size: 42px;
   line-height: 1
   letter-spacing: 0.04em;
   color:white;

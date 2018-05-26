@@ -25,16 +25,16 @@ const FAQQuestion = styled.div`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
-  font-size: 48px;
-  font-weight:800;
-  text-transform: uppercase;
+  font-size: 42px;
+  font-weight:300;
+  // text-transform: uppercase;
   padding: 15px;
   font-family: 'Lato';
   text-align: center;
   color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-top: 15px;
-  letter-spacing: 0.04em;
+  // letter-spacing: 0.04em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -119,9 +119,11 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
       <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
     )}
     </RCCard> :
-    <Card style={{padding:30}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
+    <Card style={{padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
+    <div className='articleCardImage' />
     {article.field_short_version && (
-      <div>
+      <div style={{padding: 30}}>
+        <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
         <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
          { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
         <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
@@ -151,15 +153,18 @@ export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, link
 )
 
 export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:30, backgroundPosition:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+  <Card style={{padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+    <h4 style={{fontSize:12, marginBottom:15}}>FAQ</h4>
     <p className='card-large-text'>{faq.title}</p>
   </Card>
 )
 // background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
-  <Card style={{padding:30}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
-    <p className={'card-large-text'}>{interview.field_key_quote.processed}</p>
-    <h6 style={{fontSize:14, textAlign:'right'}}>{interview.title}</h6>
+  <Card style={{padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
+    <div className="interviewCardPhoto" />
+    {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
+    <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
+    <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>
   </Card>
 )
 
@@ -333,10 +338,10 @@ class SubthemeSection extends React.Component {
 
 
 const SubthemeContainer = styled(SubthemeSection)`
-  background-color: rgba(247, 247, 247, 0.94);
+  background-color: rgba(247, 247, 247, 0.97);
   padding: 45px 30px;
   border-bottom: solid thin grey;
-  margin: 60px;
+  margin: 60px 30px;
 
 `
 
