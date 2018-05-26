@@ -58,7 +58,7 @@ const shuffle = (arr) => {
 
   return arr;
 }
-
+ 
 const reorder = (arr, order) => {
   const newArr = new Array(arr.length);
   order.forEach((item, i) => {
