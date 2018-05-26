@@ -34,7 +34,8 @@ const BASE_CARD_WIDTH = 350;
 const FLEX = 100;
 const MAX_WIDTH_CONSTANT = 1.25;
 const ARTICLE_MULTIPLIER = 1.5;
-const INTERVIEW_MULTIPLIER = 1.5;
+const INTERVIEW_MULTIPLIER = 1;
+const CLIP_MULTIPLIER = 1.5;
 const QUICK_FACT_MULTIPLIER = 1.5;
 
 const StyledCard = styled(Card)`
@@ -76,6 +77,11 @@ const StyledCard = styled(Card)`
   ${props => props.type == `Interview` && css`
   flex: ${FLEX * INTERVIEW_MULTIPLIER} ${FLEX * INTERVIEW_MULTIPLIER} ${BASE_CARD_WIDTH * INTERVIEW_MULTIPLIER}px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * INTERVIEW_MULTIPLIER}px;
+`}
+
+${props => props.type == `Clip` && css`
+flex: ${FLEX * CLIP_MULTIPLIER} ${FLEX * CLIP_MULTIPLIER} ${BASE_CARD_WIDTH * CLIP_MULTIPLIER}px;
+max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * CLIP_MULTIPLIER}px;
 `}
 
   ${props => props.type == `QuickFact` && css`
