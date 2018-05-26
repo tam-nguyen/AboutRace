@@ -300,23 +300,10 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
-<<<<<<< HEAD
-       
-      <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-      { description } 
-         
-=======
-<<<<<<< HEAD
-       { description }
-      <SubthemeTitle>{subtheme.name}</SubthemeTitle>
-
-
-=======
 
         <SubthemeTitle>{subtheme.name}</SubthemeTitle>
          { description }
->>>>>>> working related content
->>>>>>> f3cc425d6e64719343d7524b00bef40ecf8bc741
+
         <Filters
           queryParams={this.props.queryParams}
           name={this.props.name}
