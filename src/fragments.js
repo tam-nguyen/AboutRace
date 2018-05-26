@@ -74,6 +74,18 @@ export const ClipFragment = graphql`
       processed
     }
      relationships {
+      field_re {
+        __typename
+        ... on node__faq {
+          ...FAQFragment
+        }
+        ... on node__clip {
+          ...PosterImageClipFragment
+        }
+        ... on node__article {
+          ...ArticleFragment
+        }
+      }
       field_poster_image {
         localFile {
           publicURL
