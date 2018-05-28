@@ -120,7 +120,7 @@ export const ArticleCard = ({ article, i, relatedContent }) => (
     )}
     </RCCard> :
     <Card style={{padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
-    <div className='articleCardImage' />
+    <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
     {article.field_short_version && (
       <div style={{padding: 30}}>
         <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
