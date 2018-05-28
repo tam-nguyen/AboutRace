@@ -86,6 +86,7 @@ const ThemeIntro = styled.div`
   position: absolute;
   bottom: 5vh;
   left: 50%;
+  text-align: center;
   margin-left: -400px;
   z-index:99999999999999999999;
 
@@ -120,6 +121,7 @@ class ThemePage extends React.Component {
                 dangerouslySetInnerHTML={{ __html: theme.description.processed }}
               />
             ) : null}
+            <img style={{width: 30}} src={require('../assets/images/down2.svg')} />
           </ThemeIntro>
         </ThemeHeader>
         <ThemeMain>
