@@ -8,11 +8,14 @@ import kebabCase from 'lodash/kebabCase'
 
 import styled, { css } from 'styled-components';
 
-const CardWrapper = ({ link, children, ...rest }) => {
-  if (link) {
-    return <Link to={link} {...rest}>{children}</Link>
-  } else {
-    return <div {...rest}>{children}</div>
+class CardWrapper extends React.Component {
+  render() {
+    const { link, children, ...rest } = this.props
+    if (link) {
+      return <Link to={link} {...rest}>{children}</Link>
+    } else {
+      return <div {...rest}>{children}</div>
+    }
   }
 }
 
