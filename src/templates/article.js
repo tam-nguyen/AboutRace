@@ -119,7 +119,7 @@ class QuickFactOverlay extends React.Component {
         <OverlayBody>
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-              <b>Close</b>
+            <img style={{width: 50, marginTop:30}} src={require('../assets/images/close.svg')} />
             </div>
             <h3>{quickFact.title}</h3>
             <div
@@ -166,7 +166,7 @@ class TagOverlay extends React.Component {
             
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-              <strong>Close</strong>
+            <img style={{width: 50, marginTop:30}} src={require('../assets/images/close.svg')} />
             </div>
             <div style={{
               textAlign:'center'
