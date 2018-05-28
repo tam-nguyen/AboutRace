@@ -161,7 +161,7 @@ export const FAQCard = ({ faq = {}, i, relatedContent }) => (
 // background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}
 export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
   <Card style={{padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
-    <div className="interviewCardPhoto" />
+    <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
     {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
     <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
     <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>

@@ -64,4 +64,6 @@ button {
     border-radius: 50%;
     background-color: grey;
     margin: 15px auto;
+    background-size: cover;
+    background-position: center center;
 }

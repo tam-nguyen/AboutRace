@@ -42,6 +42,13 @@ export const InterviewFragment = graphql`
     field_key_quote {
       processed
     }
+    relationships {
+      field_interviewee {
+        localFile {
+          publicURL
+        }
+      }
+    }
   }
 `
 export const FAQFragment = graphql`
