@@ -90,14 +90,37 @@ const ThemeComponent = ({ data }) => (
   </div>
 )
 
+const TrailerClipWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto 2em;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: ${100 / 16 * 9}%;
+  }
+
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+`
+
 export default ({ data }) => (
-  
-  <div className='wrapper'>
-  <HomeBackground />
- 
-    {data.allTaxonomyTermThemes.edges.map(({ node }) => (
-      <ThemeComponent data={node} />
-    ))}
+  <div>
+    <TrailerClipWrapper>
+      <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </TrailerClipWrapper>
+    <div className='wrapper'>
+      <HomeBackground />
+      {data.allTaxonomyTermThemes.edges.map(({ node }) => (
+        <ThemeComponent data={node} />
+      ))}
+    </div>
   </div>
 )
 
@@ -138,6 +161,9 @@ export const query = graphql`
           }
         }
       }
+    }
+    trailerClip:nodeClip(id: { eq:"dda11171-b3eb-44b4-8fa2-06bd24f545b1" } ) {
+      ...ClipFragment
     }
   }
 `

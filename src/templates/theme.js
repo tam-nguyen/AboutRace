@@ -135,6 +135,7 @@ class ThemePage extends React.Component {
               }).map(subtheme => (
                 <SubthemeSection
                   data={subtheme}
+                  key={getShortname(subtheme)}
                   name={getShortname(subtheme)}
                   filter={queryParams[getShortname(subtheme)]}
                   queryParams={queryParams}
