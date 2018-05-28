@@ -112,79 +112,104 @@ class PlayablePoster extends React.Component {
   }
 }
 
-export const ArticleCard = ({ article, i, relatedContent }) => (
-  relatedContent ?
-    <RCCard style={{padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
-    {article.field_short_version && (
-      <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-    )}
-    </RCCard> :
-    <Card style={{padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
-    <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
-    {article.field_short_version && (
-      <div style={{padding: 30}}>
-        <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
-        <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-         { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
-        <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
-       
-      </div>
-    )}
-    </Card>
-)
+export class ArticleCard extends React.Component {
+  render() {
+    const { article, i, relatedContent, style = {} } = this.props 
+    return (
+      relatedContent ?
+        <RCCard style={{...style, padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
+        {article.field_short_version && (
+          <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+        )}
+        </RCCard> :
+        <Card style={{...style, padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
+        <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
+        {article.field_short_version && (
+          <div style={{padding: 30}}>
+            <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
+            <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+             { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+            <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
+           
+          </div>
+        )}
+        </Card>
+    )
+  }
+}
 
-export const ClipCard = ({ clip = { relationships: {} }, i, relatedContent, linkable }) => (
-  relatedContent ?
-  <RCCard key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed}>
-    <PlayablePoster
-      clip={clip}
-      linkable={linkable}
-    />
-    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
-  </RCCard> :
-  // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
-  <Card key={`clip-${i}`} title={clip.title} slug="clip"  changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
-    <PlayablePoster
-      clip={clip}
-      linkable={linkable}
-    />
-    <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
-  </Card>
-)
+export class ClipCard extends React.Component {
+  render() {
+    const { clip = { relationships: {} }, i, relatedContent, linkable, style = {} } = this.props
+    return (
+      relatedContent ?
+      <RCCard key={`clip-${i}`} title={clip.title} slug="clip" changed={clip.changed} style={style}>
+        <PlayablePoster
+          clip={clip}
+          linkable={linkable}
+        />
+        <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
+      </RCCard> :
+      // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
+      <Card key={`clip-${i}`} title={clip.title} slug="clip" style={style} changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
+        <PlayablePoster
+          clip={clip}
+          linkable={linkable}
+        />
+        <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
+      </Card>
+    )
+  }
+}
 
-export const FAQCard = ({ faq = {}, i, relatedContent }) => (
-  <Card style={{padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
-    <h4 style={{fontSize:12, marginBottom:15}}>FAQ</h4>
-    <p className='card-large-text'>{faq.title}</p>
-  </Card>
-)
-// background={faq.relationships.field_faq_image && faq.relationships.field_faq_image.localFile.publicURL}
-export const InterviewCard = ({ interview = {}, i, relatedContent }) => (
-  <Card style={{padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
-    <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
-    {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
-    <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
-    <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>
-  </Card>
-)
+export class FAQCard extends React.Component {
+  render() {
+    const { faq = {}, i, relatedContent, style = {} } = this.props
+    return (
+      <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+        <h4 style={{fontSize:12, marginBottom:15}}>FAQ</h4>
+        <p className='card-large-text'>{faq.title}</p>
+      </Card>
+    )
+  }
+}
 
-export const QuickFactCard = ({ quickfact, i, relatedContent, style = {}, ...rest }) => (
-  <Card {...rest} key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
-    <h4>{quickfact.title}</h4>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: quickfact.field_quickfact.processed,
-      }}
-    />
-  </Card>
-)
+export class InterviewCard extends React.Component {
+  render() {
+    const { interview = {}, i, relatedContent, style = {} } = this.props
+    return (
+      <Card style={{...style, padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
+        <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
+        {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
+        <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
+        <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>
+      </Card>
+    )
+  }
+}
+
+export class QuickFactCard extends React.Component {
+  render() {
+    const { quickfact, i, relatedContent, style = {}, ...rest } = this.props
+    return (
+      <Card {...rest} key={`quickfact-${i}`} type="QuickFact" title={quickfact.title} slug="quickfact" changed={quickfact.changed} style={{ ...style, padding:15}}>
+        <h4>{quickfact.title}</h4>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: quickfact.field_quickfact.processed,
+          }}
+        />
+      </Card>
+    )
+  }
+}
 
 export const getCards = (relationships, queryFilter, relatedContent, linkableClip) => [
   ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} article={article} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`article-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard interview={interview} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} interview={interview} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
 
 const DISPLAY_NAMES_TO_SLUG = new Map([
@@ -196,8 +221,8 @@ const DISPLAY_NAMES_TO_SLUG = new Map([
 ])
 
 const itemExists = (itemTag, parent) => {
-  console.log(parent.relationships)
-  console.log(itemTag)
+  // console.log(parent.relationships)
+  // console.log(itemTag)
   return parent.relationships[itemTag]
 
 }
@@ -249,6 +274,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
 
         return (
           <button
+            key={filterType}
             onClick={() => {
               const newQueryParams = { ... queryParams }
               if (newQueryParams[name] == filterSlug){
@@ -283,8 +309,6 @@ class SubthemeSection extends React.Component {
     this.state = { numCards: NUM_CARDS_TO_SHOW }
   }
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps.filter)
-    console.log(this.props.filter)
     return (
       nextProps.filter !== this.props.filter ||
       nextState.numCards !== this.state.numCards
@@ -332,9 +356,9 @@ class SubthemeSection extends React.Component {
           filter={filter}
           subtheme={subtheme}
         />
-        <FlipMove style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'center' }} >
+        <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
           {
-            allCards.slice(0, this.state.numCards).map(item => <div>{item}</div>)
+            allCards.slice(0, this.state.numCards)
           }
         </FlipMove>
         {
