@@ -315,11 +315,11 @@ class SubthemeSection extends React.Component {
           filter={filter}
           subtheme={subtheme}
         />
-        <div style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'center' }}>
+        <FlipMove style={{ display: 'flex', 'flex-wrap': 'wrap', justifyContent: 'center' }} >
           {
-            allCards.slice(0, this.state.numCards)
+            allCards.slice(0, this.state.numCards).map(item => <div>{item}</div>)
           }
-        </div>
+        </FlipMove>
         {
           allCards.length >= this.state.numCards ?
            <div style={{width:'100%', textAlign:'center'}}>
