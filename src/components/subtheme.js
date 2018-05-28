@@ -202,6 +202,20 @@ const itemExists = (itemTag, parent) => {
 
 }
 
+const FilterButtonStyle = {
+  color: `rgb(255, 132, 0)`,
+  marginRight: 15,
+  marginBottom: 15,
+  fontSize:14,
+  letterSpacing:'0.125em',
+}
+
+const FilterButtonStyleActive = {
+  ...FilterButtonStyle,
+  fontWeight: `800`,
+  borderBottom: `solid 2px rgb(255, 132, 0)`,
+}
+
 const Filters = ({ queryParams, name, filter, subtheme }) => (
   <div style={{
     mixBlendMode:'normal',
@@ -219,6 +233,16 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
             color:'rgb(255, 132, 0)'
           }}
           >Sort by: </span>
+          <button onClick={() => {
+            const newQueryParams = { ... queryParams }
+            delete newQueryParams[name]
+            navigateTo(`?${queryString.stringify(newQueryParams)}`)
+          }}
+          style={
+            (!filter ? FilterButtonStyleActive : FilterButtonStyle)
+          }>
+            All
+          </button>
     {
       Array.from(DISPLAY_NAMES_TO_SLUG.keys()).filter(itemType => (itemType === `recently added` || itemExists(itemType, subtheme))).map(filterType => {
         const filterSlug = DISPLAY_NAMES_TO_SLUG.get(filterType)
@@ -235,14 +259,7 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
               navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
             style={{
-              background: filter == filterSlug ? `none` : `none`,
-              color: filter == filterSlug ? `rgb(255, 132, 0)` : `rgb(255, 132, 0)`,
-              fontWeight: filter == filterSlug ? `800` : `400`,
-              borderBottom: filter == filterSlug ? `solid 2px rgb(255, 132, 0)` : `none`,
-              marginRight: 15,
-              marginBottom: 15,
-              fontSize:14,
-              letterSpacing:'0.125em',
+              ...(filter == filterSlug ? FilterButtonStyleActive : FilterButtonStyle),
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
