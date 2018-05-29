@@ -25,6 +25,15 @@ import {ClipPoster} from '../components/allClips.js'
 //   </li>
 // )
 
+const TopArea = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 170px;
+  background-color:#3a3a3a;
+`
+
 const HomeBackground = styled.div`
   background-color: black;
   position: fixed;
@@ -91,9 +100,10 @@ const ThemeComponent = ({ data }) => (
 )
 
 const TrailerClipWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto 2em;
   position: relative;
+  margin-bottom: 190px;
 
   &:before {
     content: '';
@@ -112,6 +122,7 @@ const TrailerClipWrapper = styled.div`
 
 export default ({ data }) => (
   <div>
+    <TopArea />
     <TrailerClipWrapper>
       <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </TrailerClipWrapper>
