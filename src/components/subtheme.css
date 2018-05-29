@@ -36,7 +36,7 @@ button {
     overflow: hidden;
 }
 .card-large-text {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     line-height: 1.25;
 }
@@ -54,7 +54,7 @@ button {
     float: left;
 }
 .articleCardImage {
-    height: 288px;
+    height: 96px;
     width: 100%;
     background-color: grey;
 }
