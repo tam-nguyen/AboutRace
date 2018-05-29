@@ -151,7 +151,7 @@ export class ClipCard extends React.Component {
         <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
       </RCCard> :
       // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
-      <Card key={`clip-${i}`} title={clip.title} slug="clip" style={style} changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
+      <Card key={`clip-${i}`} title={clip.title} type="Clip" slug="clip" style={style} changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
         <PlayablePoster
           clip={clip}
         />
