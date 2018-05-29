@@ -35,7 +35,7 @@ const TopArea = styled.div`
 `
 
 const HomeBackground = styled.div`
-  background-color: black;
+  background-color: #151515;
   position: fixed;
   top: 0;
   left: 0;
