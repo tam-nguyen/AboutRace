@@ -240,7 +240,7 @@ const FilterButtonStyleActive = {
   borderBottom: `solid 2px rgb(255, 132, 0)`,
 }
 
-const Filters = ({ queryParams, name, filter, subtheme }) => (
+const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
   <div style={{
     mixBlendMode:'normal',
     textAlign: 'center',
@@ -258,9 +258,10 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
           }}
           >Sort by: </span>
           <button onClick={() => {
-            const newQueryParams = { ... queryParams }
-            delete newQueryParams[name]
-            navigateTo(`?${queryString.stringify(newQueryParams)}`)
+            toggleFilter(null)
+            // const newQueryParams = { ... queryParams }
+            // delete newQueryParams[name]
+            // navigateTo(`?${queryString.stringify(newQueryParams)}`)
           }}
           style={
             (!filter ? FilterButtonStyleActive : FilterButtonStyle)
@@ -275,13 +276,14 @@ const Filters = ({ queryParams, name, filter, subtheme }) => (
           <button
             key={filterType}
             onClick={() => {
-              const newQueryParams = { ... queryParams }
-              if (newQueryParams[name] == filterSlug){
-                delete newQueryParams[name]
-              } else {
-                newQueryParams[name] = filterSlug;
-              }
-              navigateTo(`?${queryString.stringify(newQueryParams)}`)
+              toggleFilter(filterSlug)
+              // const newQueryParams = { ... queryParams }
+              // if (newQueryParams[name] == filterSlug){
+              //   delete newQueryParams[name]
+              // } else {
+              //   newQueryParams[name] = filterSlug;
+              // }
+              // navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
             style={{
               ...(filter == filterSlug ? FilterButtonStyleActive : FilterButtonStyle),
@@ -304,21 +306,37 @@ class SubthemeSection extends React.Component {
     console.log('creating subsection')
     super(props)
 
-    this.updateOrder(props)
-    this.state = { numCards: NUM_CARDS_TO_SHOW }
+    this.updateOrder(props, null)
+    this.state = { 
+      numCards: NUM_CARDS_TO_SHOW,
+      filter: null, 
+    }
+    this.toggleFilter = this.toggleFilter.bind(this)
   }
+
+  toggleFilter(value) {
+    if (this.state.filter === value) {
+      this.setState({filter: null})
+    } else {
+      this.setState({filter: value})
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      nextProps.filter !== this.props.filter ||
-      nextState.numCards !== this.state.numCards
+      // nextProps.filter !== this.props.filter ||
+      nextState.numCards !== this.state.numCards ||
+      nextState.filter !== this.state.filter
     );
   }
-  componentWillUpdate(nextProps) {
-    this.updateOrder(nextProps)
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.filter !== nextState.filter) {
+      this.updateOrder(nextProps, nextState.filter)
+    }
   }
-  updateOrder(props) {
+  updateOrder(props, filter) {
     if (props.filter) return;
-    const length = getCards(props.data.relationships, props.filter).length;
+    const length = getCards(props.data.relationships, filter).length;
     this.order = shuffle(range.range(length))
   }
   render() {
@@ -328,12 +346,12 @@ class SubthemeSection extends React.Component {
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
-    const { filter } = this.props;
+    const { filter } = this.state;
 
     const allCards = filter ?
       getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
-      //reorder(getCards(subtheme.relationships, filter, null, true), this.order)
-      getCards(subtheme.relationships, filter, null, true)
+      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
+      // getCards(subtheme.relationships, filter, null, true)
 
     const description = subtheme.description
       ? <div
@@ -350,14 +368,17 @@ class SubthemeSection extends React.Component {
          { description }
 
         <Filters
-          queryParams={this.props.queryParams}
+          // queryParams={this.props.queryParams}
+          // filters={this.state.filters}
+          // value={this.state.filters[filter]}
+          toggleFilter={this.toggleFilter}
           name={this.props.name}
           filter={filter}
           subtheme={subtheme}
         />
         <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
           {
-            allCards.slice(0, this.state.numCards).map(card => <div>{card}</div>)
+            allCards.slice(0, this.state.numCards)
           }
         </FlipMove>
         {
