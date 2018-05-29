@@ -61,7 +61,11 @@ const InterviewMain = styled.div`
   padding: 30px;
 `
 const AuthorBio = ({ data }) => (
-  <div style={{fontFamily: 'Lato'}}>{data.field_interviewee_bio.processed}</div>
+  <div style={{fontFamily: 'Lato'}}
+  dangerouslySetInnerHTML={{
+    __html: data.field_interview_summary && data.field_interview_summary.processed,
+  }}
+  />
 )
 const InterviewSummary = ({ data }) => {
   console.log(data)
@@ -75,15 +79,15 @@ const InterviewSummary = ({ data }) => {
         <InterviewMain>
          
           <div className="interviewExcerpt">
-            {data.field_medium_version && (
+            {/* {data.field_medium_version && (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: data.field_medium_version.processed,
+                  __html: data.field_interview_summary.processed,
                 }}
               />
               
             )}
-            
+             */}
 
 
 
@@ -123,6 +127,9 @@ export const query = graphql`
           node {
             title
             field_key_quote {
+              processed
+            }
+            field_interview_summary {
               processed
             }
             field_interviewee_name {
