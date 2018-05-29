@@ -24,7 +24,7 @@ const FLEX = 100;
 const MAX_WIDTH_CONSTANT = 1.25;
 const ARTICLE_MULTIPLIER = 1.5;
 const INTERVIEW_MULTIPLIER = 1;
-const CLIP_MULTIPLIER = 1.5;
+const CLIP_MULTIPLIER = 1;
 const QUICK_FACT_MULTIPLIER = 1.5;
 
 const CardGridItem = styled.div`
