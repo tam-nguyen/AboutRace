@@ -357,7 +357,7 @@ class SubthemeSection extends React.Component {
         />
         <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
           {
-            allCards.slice(0, this.state.numCards).map(card => <div>{card}</div>)
+            allCards.slice(0, this.state.numCards)
           }
         </FlipMove>
         {

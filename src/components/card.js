@@ -19,20 +19,6 @@ class CardWrapper extends React.Component {
   }
 }
 
-class Card extends React.Component {
-    render() {
-      return (
-        <CardWrapper link={this.props.link} className={this.props.className} style={this.props.style}>
-            {/* {this.props.type ?
-            <h4 style={{marginBottom:15, fontSize:12, opacity:1}}>{this.props.type}</h4> :
-            null } */}
-
-            {this.props.children}
-        </CardWrapper>
-      )
-    }
-}
-
 const BASE_CARD_WIDTH = 350;
 const FLEX = 100;
 const MAX_WIDTH_CONSTANT = 1.25;
@@ -41,36 +27,15 @@ const INTERVIEW_MULTIPLIER = 1;
 const CLIP_MULTIPLIER = 1.5;
 const QUICK_FACT_MULTIPLIER = 1.5;
 
-const StyledCard = styled(Card)`
+const CardGridItem = styled.div`
   display: inline-block;
   height: auto;
   min-height: 200px;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
-  background-color: white;
-  border-radius:6px;
-  overflow: hidden;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  transition: all .3s;
-  &:hover {
-    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
-    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
-    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
-    color:rgb(255, 132, 0);
-    transition: all .3s;
-  }
   margin-bottom: 30px;
-  font-family: "ff-tisa-web-pro";
-  vertical-align: top;
   margin-left: 15px;
   margin-right: 15px;
-  max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px
-
-  ${props => props.background && css`
-    background-image: url('${props.background}');
-    background-size: cover;
-  `}
+  max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px;
 
   ${props => props.type == `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
@@ -90,6 +55,46 @@ max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * CLIP_MULTIPLIER}px;
   ${props => props.type == `QuickFact` && css`
     flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * QUICK_FACT_MULTIPLIER} ${BASE_CARD_WIDTH * QUICK_FACT_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * QUICK_FACT_MULTIPLIER}px;
+  `}
+`
+
+class Card extends React.Component {
+    render() {
+      const { link, className, style, children, ...rest } = this.props
+      return (
+        <CardGridItem {...rest}>
+          <CardWrapper link={link} className={className} style={style}>
+              {this.props.children}
+          </CardWrapper>
+        </CardGridItem>
+      )
+    }
+}
+
+const StyledCard = styled(Card)`
+  display: block;
+  height: 100%;
+  background-color: white;
+  border-radius:6px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  transition: all .3s;
+  &:hover {
+    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
+    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
+    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
+    color:rgb(255, 132, 0);
+    transition: all .3s;
+  }
+  
+  font-family: "ff-tisa-web-pro";
+  vertical-align: top;
+
+  ${props => props.background && css`
+    background-image: url('${props.background}');
+    background-size: cover;
   `}
 
   ${props => props.link && css`
