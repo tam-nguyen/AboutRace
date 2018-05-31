@@ -4,13 +4,19 @@ import './interviews.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
+const GreyBackground = styled.div`
+  background-color: lightgrey;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999999;
+  height: 100%;
+  width:100%;
+`
 const InterviewCard = styled.div`
-  width: 45%;
-  height: 400px;
-  margin: 2.5%;
-  position: relative;
-  display: inline-block;
+  text-align: center;
   background-color: white;
+  padding: 30px;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -26,15 +32,11 @@ const InterviewTitle = styled.div`
   margin-bottom: 45px;
   font-size:30px;
   line-height:1.25;
-  position: relative;
   z-index:99999;
   line-height:1;
   color: inherit;
 `
 const AuthorBioText = styled.div`
-  width: 300px;
-  height: auto;
- 
   font-size: 14px;
   line-height: 1.5;
   font-weight:500;
@@ -43,23 +45,24 @@ const AuthorBioText = styled.div`
 
 const InterviewImage = styled.div`
   background-color:red;
-  width:33%;
-  height:100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  display: inline-block;
+  width:222px;
+  height: 222px;
+  border-radius: 50%;
   background-position: center;
   background-size:cover;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
 const InterviewMain = styled.div`
-  position: absolute;
-  left: 33%;
-  height: 100%;
   padding: 30px;
 `
+const AllInterviews = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
 const AuthorBio = ({ data }) => (
   <div style={{fontFamily: 'Lato'}}
   dangerouslySetInnerHTML={{
@@ -68,16 +71,18 @@ const AuthorBio = ({ data }) => (
   />
 )
 const InterviewSummary = ({ data }) => {
-  console.log(data)
   return (
-    <Link to={`/interviews/${kebabCase(data.title)}`}>
+    <Link style={{
+      flexGrow: 0,
+      flexShrink: 1,
+      flexBasis: '30%'
+    }} to={`/interviews/${kebabCase(data.title)}`}>
       <InterviewCard>
         <InterviewImage background={
           data.relationships.field_interviewee &&
           data.relationships.field_interviewee.localFile.publicURL
         } />
         <InterviewMain>
-         
           <div className="interviewExcerpt">
             {/* {data.field_medium_version && (
               <div
@@ -113,10 +118,13 @@ const InterviewSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
-  <div className={"interviews wrapper"}>
-    {data.allNodeInterview.edges.map((edge, i) => (
-      <InterviewSummary data={edge.node} />
-    ))}
+  <div className={"interviews"}>
+  <GreyBackground />
+    <AllInterviews>
+      {data.allNodeInterview.edges.map((edge, i) => (
+        <InterviewSummary data={edge.node} />
+      ))}
+    </AllInterviews>
   </div>
 )
 
