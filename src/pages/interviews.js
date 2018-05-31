@@ -21,6 +21,7 @@ const IntroText = styled.div`
   z-index:99999;
   max-width: 800px;
   margin: 60px auto;
+  margin-top: 155px;
   text-align: center;
 `
 const InterviewCard = styled.div`
@@ -40,7 +41,7 @@ const InterviewCard = styled.div`
   }
 `
 const InterviewTitle = styled.div`
-  margin-bottom: 45px;
+  margin-bottom: 30px;
   font-size:30px;
   line-height:1.25;
   z-index:99999;
@@ -59,6 +60,8 @@ const InterviewImage = styled.div`
   display: inline-block;
   width:192px;
   height: 192px;
+  margin-top: 15px;
+  margin-bottom:22.5px;
   border-radius: 50%;
   background-position: center;
   background-size:cover;
@@ -66,7 +69,7 @@ const InterviewImage = styled.div`
     props.background ? `url(${props.background})` : `none`};
 `
 const InterviewMain = styled.div`
-  padding: 30px;
+
 `
 const AllInterviews = styled.div`
   display: flex;
@@ -112,7 +115,7 @@ const InterviewSummary = ({ data }) => {
 
 
             
-             <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
+             <InterviewTitle><h4 style={{marginBottom:7.5}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
              <AuthorBioText>
                 <AuthorBio data={data}> </AuthorBio>
              </AuthorBioText>
