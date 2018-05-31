@@ -25,7 +25,6 @@ const IntroText = styled.div`
   text-align: center;
 `
 const InterviewCard = styled.div`
-  text-align: center;
   background-color: white;
   padding: 30px;
   height: 100%;
@@ -49,10 +48,11 @@ const InterviewTitle = styled.div`
   color: inherit;
 `
 const AuthorBioText = styled.div`
-  font-size: 14px;
   line-height: 1.5;
   font-weight:500;
   opacity:0.9;
+  font-style: italic;
+  font-size: 17px;
 `
 
 const InterviewImage = styled.div`
@@ -79,7 +79,7 @@ const AllInterviews = styled.div`
 `
 
 const AuthorBio = ({ data }) => (
-  <div style={{fontFamily: 'Lato'}}
+  <div
   dangerouslySetInnerHTML={{
     __html: data.field_interview_summary && data.field_interview_summary.processed,
   }}
