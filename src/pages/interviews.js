@@ -13,6 +13,16 @@ const GreyBackground = styled.div`
   height: 100%;
   width:100%;
 `
+const IntroText = styled.div`
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  z-index:99999;
+  max-width: 800px;
+  margin: 60px auto;
+  text-align: center;
+`
 const InterviewCard = styled.div`
   text-align: center;
   background-color: white;
@@ -120,6 +130,9 @@ const InterviewSummary = ({ data }) => {
 export default ({ data }) => (
   <div className={"interviews"}>
   <GreyBackground />
+  <IntroText>
+    Need some introductory text here introducing the 'interviews' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
+  </IntroText>
     <AllInterviews>
       {data.allNodeInterview.edges.map((edge, i) => (
         <InterviewSummary data={edge.node} />
