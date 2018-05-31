@@ -5,7 +5,7 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
 const GreyBackground = styled.div`
-  background-color: lightgrey;
+  background-color: #f7f7f7;
   position: fixed;
   top: 0;
   left: 0;
