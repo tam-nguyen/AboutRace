@@ -27,6 +27,7 @@ const InterviewCard = styled.div`
   text-align: center;
   background-color: white;
   padding: 30px;
+  height: 100%;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -86,6 +87,7 @@ const InterviewSummary = ({ data }) => {
     <Link style={{
       flexGrow: 0,
       flexShrink: 1,
+      marginBottom: 60,
       flexBasis: '30%'
     }} to={`/interviews/${kebabCase(data.title)}`}>
       <InterviewCard>
