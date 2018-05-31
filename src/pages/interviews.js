@@ -38,11 +38,6 @@ const InterviewCard = styled.div`
     box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
     transition: all .3s;
   }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
 `
 const InterviewTitle = styled.div`
   margin-bottom: 45px;
@@ -93,7 +88,9 @@ const InterviewSummary = ({ data }) => {
       flexGrow: 0,
       flexShrink: 1,
       marginBottom: 60,
-      flexBasis: '30%'
+      flexBasis: '30%',
+      textDecoration: 'none',
+      color: 'inherit'
     }} to={`/interviews/${kebabCase(data.title)}`}>
       <InterviewCard>
         <InterviewImage background={
