@@ -56,8 +56,8 @@ const AuthorBioText = styled.div`
 const InterviewImage = styled.div`
   background-color:red;
   display: inline-block;
-  width:222px;
-  height: 222px;
+  width:192px;
+  height: 192px;
   border-radius: 50%;
   background-position: center;
   background-size:cover;
@@ -71,6 +71,7 @@ const AllInterviews = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin: 0 60px;
 `
 
 const AuthorBio = ({ data }) => (
