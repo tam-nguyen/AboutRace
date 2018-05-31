@@ -36,7 +36,7 @@ button {
     overflow: hidden;
 }
 .card-large-text {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 300;
     line-height: 1.25;
 }
@@ -56,6 +56,7 @@ button {
 .articleCardImage {
     height: 96px;
     width: 100%;
+    border-bottom: solid thin lightgrey;
     background-color: grey;
 }
 .interviewCardPhoto {

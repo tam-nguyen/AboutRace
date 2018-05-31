@@ -56,8 +56,8 @@ const HomeThemeImage = styled.div`
   background-size: 120%;
   transition: all .5s;
   &:hover {
-    background-size:250%;
-    transition: all 4.5s;
+    background-size:125%;
+    transition: all .5s;
   }
   background-image: ${props =>
                       props.background ? `url(${props.background})` : `none`};
