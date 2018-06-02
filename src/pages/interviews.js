@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import './interviews.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
@@ -28,6 +27,7 @@ const InterviewCard = styled.div`
   background-color: white;
   padding: 30px;
   height: 100%;
+  position: relative;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -47,29 +47,24 @@ const InterviewTitle = styled.div`
   line-height:1;
   color: inherit;
 `
-const AuthorBioText = styled.div`
-  line-height: 1.5;
-  font-weight:500;
-  opacity:0.9;
-  font-style: italic;
-  font-size: 17px;
+const InterviewExcerpt = styled.div`
 `
-
 const InterviewImage = styled.div`
   background-color:red;
   display: inline-block;
-  width:192px;
-  height: 192px;
-  margin-top: 15px;
-  margin-bottom:22.5px;
-  border-radius: 50%;
+  width:50%;
+  position: absolute;
+  height: 100%;
+  top:0;
+  left: 0;
   background-position: center;
   background-size:cover;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
 const InterviewMain = styled.div`
-
+  margin-left: calc(50% + 30px);
+  margin-bottom: 120px;
 `
 const AllInterviews = styled.div`
   display: flex;
@@ -77,21 +72,36 @@ const AllInterviews = styled.div`
   flex-wrap: wrap;
   margin: 0 60px;
 `
-
+const AuthorBioText = styled.div`
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  z-index: 9999999999;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 22.5px 30px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight:500;
+  border-top: solid thin lightgrey;
+  font-family: 'Lato';
+`
 const AuthorBio = ({ data }) => (
   <div
   dangerouslySetInnerHTML={{
-    __html: data.field_interview_summary && data.field_interview_summary.processed,
+    __html: data.field_interviewee_bio && data.field_interviewee_bio.processed,
   }}
   />
 )
+
 const InterviewSummary = ({ data }) => {
   return (
     <Link style={{
       flexGrow: 0,
       flexShrink: 1,
       marginBottom: 60,
-      flexBasis: '30%',
+      flexBasis: 'calc(50% - 30px)',
       textDecoration: 'none',
       color: 'inherit'
     }} to={`/interviews/${kebabCase(data.title)}`}>
@@ -100,26 +110,15 @@ const InterviewSummary = ({ data }) => {
           data.relationships.field_interviewee &&
           data.relationships.field_interviewee.localFile.publicURL
         } />
-        <InterviewMain>
-          <div className="interviewExcerpt">
-            {/* {data.field_medium_version && (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data.field_interview_summary.processed,
-                }}
-              />
-              
-            )}
-             */}
-
-
-
-            
+        <InterviewMain>   
              <InterviewTitle><h4 style={{marginBottom:7.5}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
+             <InterviewExcerpt 
+              dangerouslySetInnerHTML={{
+                    __html: data.field_interview_summary && data.field_interview_summary.processed,
+              }} />
              <AuthorBioText>
                 <AuthorBio data={data}> </AuthorBio>
              </AuthorBioText>
-            </div>
           {/* {data.relationships.field_belongs_to_subtheme ? (
           <ul>
             {data.relationships.field_belongs_to_subtheme.map(subTheme => (
