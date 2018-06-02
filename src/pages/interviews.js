@@ -14,7 +14,7 @@ const GreyBackground = styled.div`
 `
 const IntroText = styled.div`
   font-weight: 200;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.75;
   letter-spacing: 0.02em;
   z-index:99999;
@@ -24,10 +24,13 @@ const IntroText = styled.div`
   text-align: center;
 `
 const InterviewCard = styled.div`
-  background-color: white;
+  background-color: #f5f6f9;
   padding: 30px;
   height: 100%;
   position: relative;
+  border-radius: 6px;
+  // border: solid thin lightgrey;
+  overflow:hidden;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -48,6 +51,11 @@ const InterviewTitle = styled.div`
   color: inherit;
 `
 const InterviewExcerpt = styled.div`
+  line-height: 1.5;
+  font-weight: 500;
+  opacity: 0.9;
+  font-style: italic;
+  font-size: 17px;
 `
 const InterviewImage = styled.div`
   background-color:red;
@@ -64,7 +72,7 @@ const InterviewImage = styled.div`
 `
 const InterviewMain = styled.div`
   margin-left: calc(50% + 30px);
-  margin-bottom: 120px;
+  margin-bottom: 180px;
 `
 const AllInterviews = styled.div`
   display: flex;
@@ -79,8 +87,8 @@ const AuthorBioText = styled.div`
   bottom: 0;
   left:0;
   z-index: 9999999999;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 22.5px 30px;
+  background-color: rgba(255, 255, 255, 0.96);
+  padding: 30px;
   font-size: 14px;
   line-height: 1.5;
   font-weight:500;
