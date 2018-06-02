@@ -28,7 +28,26 @@ import kebabCase from 'lodash/kebabCase'
 //   /* flexbox can change order of rendered elements*/
 //   order: 2;
 // }
-
+const GreyBackground = styled.div`
+  background-color: #f7f7f7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999999;
+  height: 100%;
+  width:100%;
+`
+const IntroText = styled.div`
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  z-index:99999;
+  max-width: 800px;
+  margin: 60px auto;
+  margin-top: 155px;
+  text-align: center;
+`
 const ArticleTitle = styled.div`
   font-family: 'Lato';
   font-size:30px;
@@ -45,6 +64,14 @@ const ArticleImage = styled.div`
 const ArticleSummary = ({ data }) => {
   console.log(data)
   return (
+    <Link style={{
+      flexGrow: 0,
+      flexShrink: 1,
+      marginBottom: 60,
+      flexBasis: '30%',
+      textDecoration: 'none',
+      color: 'inherit'
+    }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
         <ArticleImage
         background={
@@ -55,23 +82,23 @@ const ArticleSummary = ({ data }) => {
           {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
         </ArticleImage>
         
-        <div style={{ margin: 60}}>
+        <div>
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
           
           <h4>{data.field_author && data.field_author.processed}</h4>
           <div className="articleExcerpt">
-            {data.field_medium_version && (
+            {data.field_article_summary && (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: data.field_medium_version.processed,
+                  __html: data.field_article_summary.processed,
                 }}
               />
 
             )}
           </div>
-          <Link style={{textDecoration: 'none'}} to={`/articles/${kebabCase(data.title)}`}><div className={'readButton'}>Read article</div></Link>
+         
           </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
@@ -83,11 +110,16 @@ const ArticleSummary = ({ data }) => {
         <div>No subthemes</div>
       )} */}
       </div>
+      </Link>
   )
 }
 
 export default ({ data }) => (
   <div className={"articles"}>
+    <GreyBackground />
+    <IntroText>
+    Need some introductory text here introducing the 'articles' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
+    </IntroText>
     {data.allNodeArticle.edges.map((edge, i) => (
       <ArticleSummary data={edge.node} />
     ))}
@@ -105,6 +137,9 @@ export const query = graphql`
             processed
           }
           field_medium_version {
+            processed
+          }
+          field_article_summary {
             processed
           }
           relationships {
