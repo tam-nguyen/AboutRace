@@ -29,7 +29,7 @@ const InterviewCard = styled.div`
   height: 100%;
   position: relative;
   border-radius: 6px;
-  // border: solid thin lightgrey;
+  border: solid thin lightgrey;
   overflow:hidden;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
@@ -55,12 +55,12 @@ const InterviewExcerpt = styled.div`
   font-weight: 500;
   opacity: 0.9;
   font-style: italic;
-  font-size: 17px;
+  font-size: 24px;
 `
 const InterviewImage = styled.div`
   background-color:red;
   display: inline-block;
-  width:50%;
+  width:33%;
   position: absolute;
   height: 100%;
   top:0;
@@ -71,7 +71,7 @@ const InterviewImage = styled.div`
     props.background ? `url(${props.background})` : `none`};
 `
 const InterviewMain = styled.div`
-  margin-left: calc(50% + 30px);
+  margin-left: calc(33% + 30px);
   margin-bottom: 180px;
 `
 const AllInterviews = styled.div`
