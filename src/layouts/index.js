@@ -7,7 +7,7 @@ import Header from '../components/Header'
 import './index.css'
 import {Navigation} from '../components/nav.js'
 
-const TemplateWrapper = ({ children, location }) => (
+const TemplateWrapper = ({ children, data, location }) => (
   <div>
     <Helmet
       title="Race: The Power of an Illusion"
@@ -17,7 +17,7 @@ const TemplateWrapper = ({ children, location }) => (
         { name: 'keywords', content: 'sample, something' },
       ]}
     />
-    <Header pathname={location.pathname} />
+    <Header data={data} pathname={location.pathname} />
     <div
       style={{
         margin: '0 auto',
@@ -37,3 +37,15 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
+
+export const ThemesMenuquery = graphql`
+  query ThemesMenuQuery {
+    allTaxonomyTermThemes {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }`

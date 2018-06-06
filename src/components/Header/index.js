@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import getScrollBarWidth from '../../utils/scrollbar-width'
 import './burger.css';
 import { scaleDown as Menu } from 'react-burger-menu'
+import kebabCase from 'lodash/kebabCase'
 
 const TopBar = styled.div`
   // height: 120px;
@@ -25,6 +26,11 @@ const activeLinkStyle = {
   borderBottom: 'solid 3px #ff8400',
 }
 
+const ThemeLinkComponent = ({ data, closeMenu }) => (
+  <Link className={'navItem'} onClick={() => closeMenu()} style={{textDecoration:'none', color:'white', display:'block', marginBottom:15}} to={`/themes/${kebabCase(data.name)}`}>
+  {data.name}
+  </Link>
+)
 
 class Header extends React.Component {
 constructor(props) {
@@ -56,6 +62,7 @@ constructor(props) {
 
   }
 
+
   render () {
     const { modalOpen } = this.state
     const { pathname } = this.props
@@ -65,9 +72,17 @@ constructor(props) {
       <Menu 
        isOpen={this.state.menuOpen}
        onStateChange={(state) => this.handleStateChange(state)}
-       right 
        pageWrapId={ "page-wrap" }
        >
+      <h4>Themes from the film:</h4>
+      
+      {this.props.data.allTaxonomyTermThemes.edges.map(({ node }) => (
+        <ThemeLinkComponent closeMenu={this.closeMenu} data={node}/>
+      ))}
+
+
+
+       <h4>Browse by: </h4>
         <Link className={'navItem'} onClick={() => this.closeMenu()} to="/the-film" style={stylingForPath(`/the-film`)} exact>
           The Film
         </Link>
@@ -83,12 +98,11 @@ constructor(props) {
         <Link className={'navItem'} onClick={() => this.closeMenu()} to="/clips/" style={linkStyle} exact>
           Clips
         </Link>
+
+        <h4>For teachers</h4>
         <Link className={'navItem'} onClick={() => this.closeMenu()} to="/teaching/" style={linkStyle} exact>
-          Teaching
+          Lesson Plans
         </Link>
-        <a id="home" className="menu-item" href="/">Home</a>
-        <a id="about" className="menu-item" href="/interviews">Interviews</a>
-        <a id="contact" className="menu-item" href="/contact">Contact</a>
       </Menu>
       <TopBar>
       <div className={'logo'}>
@@ -115,3 +129,5 @@ constructor(props) {
   }
 }
 export default Header
+
+

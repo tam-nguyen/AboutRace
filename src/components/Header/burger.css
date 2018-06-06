@@ -3,14 +3,14 @@
     position: fixed;
     width: 36px;
     height: 30px;
-    right: 36px;
+    left: 36px;
     top: 36px;
   }
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
     background: #373a47;
-    background: white;
+    background: rgb(255, 132, 0);
   }
   
   /* Position and sizing of clickable cross button */
