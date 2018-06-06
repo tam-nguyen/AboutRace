@@ -30,9 +30,22 @@ class Header extends React.Component {
 constructor(props) {
     super(props)
     this.state = {
-        modalOpen: false
+        modalOpen: false,
+        menuOpen: false
+      }
     }
+
+    handleStateChange (state) {
+      this.setState({menuOpen: state.isOpen})  
     }
+    closeMenu () {
+      this.setState({menuOpen: false})
+    }
+    toggleMenu () {
+      this.setState({menuOpen: !this.state.menuOpen})
+    }
+      
+
     componentDidMount() {
     window.addEventListener('modal', ({detail: { open }}) => {
         this.setState({ modalOpen: open })
@@ -49,29 +62,33 @@ constructor(props) {
     const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
     return (
         <div>
-      <Menu right pageWrapId={ "page-wrap" } >
-        <Link className={'navItem'} to="/the-film" style={stylingForPath(`/the-film`)} exact>
+      <Menu 
+       isOpen={this.state.menuOpen}
+       onStateChange={(state) => this.handleStateChange(state)}
+       right 
+       pageWrapId={ "page-wrap" }
+       >
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/the-film" style={stylingForPath(`/the-film`)} exact>
           The Film
         </Link>
-        <Link className={'navItem'} to="/articles/" style={stylingForPath(`/articles`)} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/articles/" style={stylingForPath(`/articles`)} exact>
           Articles
         </Link>
-        <Link className={'navItem'} to="/interviews/" style={stylingForPath(`/interviews`)} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/interviews/" style={stylingForPath(`/interviews`)} exact>
           Interviews
         </Link>
-        <Link className={'navItem'} to="/FAQs/" style={stylingForPath(`/FAQs`)} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/FAQs/" style={stylingForPath(`/FAQs`)} exact>
           FAQs
         </Link>
-        <Link className={'navItem'} to="/clips/" style={linkStyle} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/clips/" style={linkStyle} exact>
           Clips
         </Link>
-        <Link className={'navItem'} to="/teaching/" style={linkStyle} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/teaching/" style={linkStyle} exact>
           Teaching
         </Link>
         <a id="home" className="menu-item" href="/">Home</a>
         <a id="about" className="menu-item" href="/interviews">Interviews</a>
         <a id="contact" className="menu-item" href="/contact">Contact</a>
-        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
       </Menu>
       <TopBar>
       <div className={'logo'}>
