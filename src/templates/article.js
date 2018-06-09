@@ -68,7 +68,6 @@ const ArticleHeader = styled.div`
 const ArticleMain = styled.div`
   background-color: rgba(255, 255, 255, 1);
   padding: 30px;
-  margin-top: 45vh;
   position: relative;
   z-index:99999999;
 `
@@ -249,7 +248,7 @@ class SingleArticle extends React.Component {
             navigateTo(`?`)
           }}
         />
-        <HeaderDimmer />
+        {/* <HeaderDimmer /> */}
         <ArticleHeader
           background={
             data.nodeArticle.relationships.field_main_image &&
@@ -260,53 +259,73 @@ class SingleArticle extends React.Component {
         <h4 style={{marginBottom: 45, color:'white'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
         <Dimmer />
         </ArticleHeader>
-          <ArticleMain style={{
-            marginLeft: 90
-          }} className="column _60">
-            <LargeCalloutText
-              style={{
-                fontSize: 24,
-                fontWeight: 'normal',
-                lineHeight: 1.5
-              }}
-              dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_large_callout_text.processed,
-              }}
-            />
-            <div
-              style={{lineHeight:1.7}}
-              dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_full_version.processed,
-              }}
-            />
-            <hr style={{width:60, marginTop:60, marginBottom:15}} />
-            <p style={{
-              color: 'lightgrey',
-              letterSpacing: '0.04em',
-              fontStyle: 'italic',
-              fontFamily: 'Lato',
+        
+        <div className="row" style={{
+            marginLeft: 90,
+            marginTop: '45vh',
+          }}>
+          {
+            (data.nodeArticle.relationships.field_tags || []).map(tag =>
+              <Link
+                to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
+                key={`tag-${tag.name}`}
+                className={'tag'}
+              >
+                <b>{tag.name}</b>
+              </Link>
+            )
+          }
+        </div>
 
-            }}>NOTE: <span dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
-              }}
-              /></p>
+        <div className="row" style={{
+            marginLeft: 90,
+            marginTop: '45vh',
+          }}>
+        
+          <div className="column _60">
+            
+            <ArticleMain>
+              <LargeCalloutText
+                style={{
+                  fontSize: 24,
+                  fontWeight: 'normal',
+                  lineHeight: 1.5
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_large_callout_text.processed,
+                }}
+              />
+              <div
+                style={{lineHeight:1.7}}
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_full_version.processed,
+                }}
+              />
+              <hr style={{width:60, marginTop:60, marginBottom:15}} />
+              <p style={{
+                color: 'lightgrey',
+                letterSpacing: '0.04em',
+                fontStyle: 'italic',
+                fontFamily: 'Lato',
 
-          </ArticleMain>
-         
+              }}>NOTE: <span dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
+                }}
+                /></p>
+            </ArticleMain>
+          </div>
         
           <div className="column">
-         
-            
             <div style={{
-            width:180,
-            height:180,
-            backgroundColor:'red',
-            marginBottom:15,
-            overflow:'hidden',
-            display:'inline-block',
-            borderRadius:'50%',
-            marginTop:400
-          }}>
+              width:180,
+              height:180,
+              backgroundColor:'red',
+              marginBottom:15,
+              overflow:'hidden',
+              display:'inline-block',
+              borderRadius:'50%',
+              marginTop:400
+            }}>
             <img style={{
               width:300,
              
@@ -316,17 +335,7 @@ class SingleArticle extends React.Component {
                data.nodeArticle.relationships.field_author_image.localFile.publicURL
             } />
           </div>
-            {
-              (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <Link
-                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
-                  key={`tag-${tag.name}`}
-                  className={'tag'}
-                >
-                  <b>{tag.name}</b>
-                </Link>
-              )
-            }
+           
             <div style={{height: 200}}/>
             <button onClick={() => { this.setState({ teaching: false}) }}>
               All Content
@@ -377,6 +386,7 @@ class SingleArticle extends React.Component {
               )
             }
           </div>
+      </div>
       </div>
     )
   }

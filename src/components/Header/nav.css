@@ -1,10 +1,10 @@
 .logo {
-    position: absolute;
+    position: fixed;
     z-index: 9999999999;
     top: 33px;
     left: 30px;
     font-family: "ff-tisa-web-pro", georgia, serif;
-    font-size: 60px;
+    font-size: 96px;
     letter-spacing: 0.17em;
     /* opacity: 0.7; */
 }
@@ -19,8 +19,12 @@
 }
 .navItem {
     margin-right: 30px;
-    font-family: 'Lato';
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    /* font-family: 'Lato'; */
+    font-size: 20px;
+    /* font-weight: 700; */
+    letter-spacing: 0.0em;
+    display: block;
+    color: white;
+    font-style: italic;
+    text-decoration: none;
   }

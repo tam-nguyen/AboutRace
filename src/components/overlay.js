@@ -71,7 +71,7 @@ const OverlayTitle = styled.div`
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.35em;
-  border: solid;
+  border: solid 1px;
   display: inline-block;
   padding: 15px 30px;
   margin: 0 auto;
@@ -92,7 +92,7 @@ const OverlayBody = styled.div`
   flex-direction: column;
 
   ${props => props.wide ? css`
-      width: 80%;
+      width: 90%;
   ` : css`
       width: 66%;
   `}

@@ -6,6 +6,7 @@ const KeyQuote = styled.div`
   font-size: 28px;
   font-weight: normal;
   margin-bottom: 60px;
+  margin-top: 33vh;
 `
 const AuthorBioText = styled.div`
   width: 300px;
@@ -59,9 +60,9 @@ const Centered = styled.div`
 const AuthorImage = styled.div`
   position: fixed;
   top:0;
-  left:0;
+  left:400px;
   bottom:0;
-  right:55%;
+  right:calc(55% - 400px);
   background-size: cover;
   background-position: center;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};

@@ -35,6 +35,7 @@ const ThemeLinkComponent = ({ data, closeMenu }) => (
 class Header extends React.Component {
 constructor(props) {
     super(props)
+    this.closeMenu = this.closeMenu.bind(this)
     this.state = {
         modalOpen: false,
         menuOpen: false
@@ -69,7 +70,7 @@ constructor(props) {
     const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
     return (
         <div>
-      <Menu 
+      {/* <Menu 
        isOpen={this.state.menuOpen}
        onStateChange={(state) => this.handleStateChange(state)}
        pageWrapId={ "page-wrap" }
@@ -103,13 +104,13 @@ constructor(props) {
         <Link className={'navItem'} onClick={() => this.closeMenu()} to="/teaching/" style={linkStyle} exact>
           Lesson Plans
         </Link>
-      </Menu>
+      </Menu> */}
       <TopBar>
       <div className={'logo'}>
         <Link
           to="/"
           style={{
-            color: 'rgb(158, 156, 156)',
+            color:'rgb(249, 128, 128)',
             opacity: 0.75,
             textDecoration: 'none',
           }}

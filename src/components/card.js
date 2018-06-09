@@ -75,17 +75,17 @@ const StyledCard = styled(Card)`
   display: block;
   height: 100%;
   background-color: white;
-  border-radius:6px;
+  // border-radius:6px;
   overflow: hidden;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   transition: all .3s;
   &:hover {
     -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
     -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
     box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
-    color:rgb(255, 132, 0);
+    // color:rgb(255, 132, 0);
     transition: all .3s;
   }
   
