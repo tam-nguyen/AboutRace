@@ -690,12 +690,10 @@ body.modal-open {
 }
 .wrapper {
   background-color: #f7f7f7;
-  width: 1200px;
   margin: 0 auto;
 }
 .darkwrapper {
   background-color: #333333;
-  width: 1200px;
   margin: 0 auto;
 }
 iframe {
@@ -706,12 +704,15 @@ iframe {
 .totalDimmer {
   height: 100%;
   width: 100%;
-  background-color:rgba(0, 0, 0, 0);
+  background-color:rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   opacity: 0;
   transition: all .25s;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 .totalDimmer:hover {
   background-color:rgba(0, 0, 0, 0.5);
@@ -721,8 +722,12 @@ iframe {
 .filmSubtitle {
   font-size: 20px;
   position: relative;
-  /* top: 1.25em; */
-  left: 1em;
+  top: 1.25em;
+  left: -13em;
   letter-spacing: 0.075em;
   /* font-style: italic; */
+}
+
+.gold {
+  color: #fdeacd;
 }

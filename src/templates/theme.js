@@ -38,7 +38,6 @@ const ThemeDescription = styled.div`
   text-align: center;
 `
 const ThemeHeader = styled.div`
-  width: 100%;
   height: 100vh;
   // opacity: 0.8;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
@@ -48,7 +47,7 @@ const ThemeHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 400px;
   right: 0;
   z-index: -999;
 `

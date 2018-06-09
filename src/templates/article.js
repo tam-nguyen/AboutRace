@@ -50,7 +50,7 @@ const Dimmer = styled.div`
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 const ArticleHeader = styled.div`
-  width: 100%;
+  width: calc(100% - 400px);
   height: 100vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
@@ -60,30 +60,30 @@ const ArticleHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 400px;
   right: 0;
   z-index: -999;
+  text-align: center;
 `
 
 const ArticleMain = styled.div`
   background-color: rgba(255, 255, 255, 1);
   padding: 30px;
-  margin-top: 45vh;
   position: relative;
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 60px;
-    width: 60%;
+    font-size: 36px;
+    width: 100%;
     margin-bottom: 15px;
     line-height: 1.25;
     color: white;
     z-index: 99999999999999;
     position: relative;
-    margin-top: 43vh;
-    left: 120px;
+    margin-top:83vh;
     font-family: 'Lato';
-    font-weight: 200;
+    font-weight: 400;
+    text-align: center;
 `
 
 
@@ -249,7 +249,7 @@ class SingleArticle extends React.Component {
             navigateTo(`?`)
           }}
         />
-        <HeaderDimmer />
+        {/* <HeaderDimmer /> */}
         <ArticleHeader
           background={
             data.nodeArticle.relationships.field_main_image &&
@@ -257,56 +257,77 @@ class SingleArticle extends React.Component {
           }
         >
         <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+        <img style={{width: 30, position: 'relative', top:30, zIndex:9999}} src={require('../assets/images/down2.svg')} />
         <h4 style={{marginBottom: 45, color:'white'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
         <Dimmer />
         </ArticleHeader>
-          <ArticleMain style={{
-            marginLeft: 90
-          }} className="column _60">
-            <LargeCalloutText
-              style={{
-                fontSize: 24,
-                fontWeight: 'normal',
-                lineHeight: 1.5
-              }}
-              dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_large_callout_text.processed,
-              }}
-            />
-            <div
-              style={{lineHeight:1.7}}
-              dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_full_version.processed,
-              }}
-            />
-            <hr style={{width:60, marginTop:60, marginBottom:15}} />
-            <p style={{
-              color: 'lightgrey',
-              letterSpacing: '0.04em',
-              fontStyle: 'italic',
-              fontFamily: 'Lato',
+        
+        <div className="row" style={{
+            marginLeft: 90,
+            marginTop: '45vh',
+          }}>
+          {
+            (data.nodeArticle.relationships.field_tags || []).map(tag =>
+              <Link
+                to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
+                key={`tag-${tag.name}`}
+                className={'tag'}
+              >
+                <b>{tag.name}</b>
+              </Link>
+            )
+          }
+        </div>
 
-            }}>NOTE: <span dangerouslySetInnerHTML={{
-                __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
-              }}
-              /></p>
+        <div className="row" style={{
+            marginLeft: 90,
+            marginTop: '45vh',
+          }}>
+        
+          <div className="column _60">
+            
+            <ArticleMain>
+              <LargeCalloutText
+                style={{
+                  fontSize: 24,
+                  fontWeight: 'normal',
+                  lineHeight: 1.5
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_large_callout_text.processed,
+                }}
+              />
+              <div
+                style={{lineHeight:1.7}}
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_full_version.processed,
+                }}
+              />
+              <hr style={{width:60, marginTop:60, marginBottom:15}} />
+              <p style={{
+                color: 'lightgrey',
+                letterSpacing: '0.04em',
+                fontStyle: 'italic',
+                fontFamily: 'Lato',
 
-          </ArticleMain>
-         
+              }}>NOTE: <span dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
+                }}
+                /></p>
+            </ArticleMain>
+          </div>
         
           <div className="column">
-         
-            
             <div style={{
-            width:180,
-            height:180,
-            backgroundColor:'red',
-            marginBottom:15,
-            overflow:'hidden',
-            display:'inline-block',
-            borderRadius:'50%',
-            marginTop:400
-          }}>
+              width:180,
+              height:180,
+              backgroundColor:'red',
+              marginBottom:15,
+              overflow:'hidden',
+              display:'inline-block',
+              borderRadius:'50%',
+              marginTop:400
+            }}>
             <img style={{
               width:300,
              
@@ -316,17 +337,7 @@ class SingleArticle extends React.Component {
                data.nodeArticle.relationships.field_author_image.localFile.publicURL
             } />
           </div>
-            {
-              (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <Link
-                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
-                  key={`tag-${tag.name}`}
-                  className={'tag'}
-                >
-                  <b>{tag.name}</b>
-                </Link>
-              )
-            }
+           
             <div style={{height: 200}}/>
             <button onClick={() => { this.setState({ teaching: false}) }}>
               All Content
@@ -377,6 +388,7 @@ class SingleArticle extends React.Component {
               )
             }
           </div>
+      </div>
       </div>
     )
   }

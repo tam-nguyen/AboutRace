@@ -5,7 +5,7 @@ import kebabCase from 'lodash/kebabCase'
 
 const ClipCard = styled.div`
 	width: 300px;
-	background-color:#ffe4c1;
+	background-color:#fdeacd;
 	display:inline-block;
 	vertical-align: top;
 	margin-right:30px;
