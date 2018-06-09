@@ -50,7 +50,7 @@ const Dimmer = styled.div`
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 const ArticleHeader = styled.div`
-  width: 100%;
+  width: calc(100% - 400px);
   height: 100vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
@@ -60,9 +60,10 @@ const ArticleHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 400px;
   right: 0;
   z-index: -999;
+  text-align: center;
 `
 
 const ArticleMain = styled.div`
@@ -72,17 +73,17 @@ const ArticleMain = styled.div`
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 60px;
-    width: 60%;
+    font-size: 36px;
+    width: 100%;
     margin-bottom: 15px;
     line-height: 1.25;
     color: white;
     z-index: 99999999999999;
     position: relative;
-    margin-top: 43vh;
-    left: 120px;
+    margin-top:83vh;
     font-family: 'Lato';
-    font-weight: 200;
+    font-weight: 400;
+    text-align: center;
 `
 
 
@@ -256,6 +257,7 @@ class SingleArticle extends React.Component {
           }
         >
         <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+        <img style={{width: 30, position: 'relative', top:30, zIndex:9999}} src={require('../assets/images/down2.svg')} />
         <h4 style={{marginBottom: 45, color:'white'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
         <Dimmer />
         </ArticleHeader>
