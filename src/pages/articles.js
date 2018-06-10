@@ -57,6 +57,7 @@ const ArticleTitle = styled.div`
   line-height:1.25;
   letter-spacing: 0.01em;
   margin-bottom: 15px;
+  text-align: center;
 `
 const ArticleImage = styled.div`
   margin-bottom:15px;
@@ -90,7 +91,7 @@ const ArticleSummary = ({ data }) => {
            {data.title}
           </ArticleTitle>
           
-          <h4 style={{padding: '0px 30px 0 30px'}}>By {data.field_author && data.field_author.processed}</h4>
+          <h4 style={{textAlign: 'center', padding: '0px 30px 0 30px'}}>By {data.field_author && data.field_author.processed}</h4>
           
           <div className="articleExcerpt">
             {data.field_article_summary && (
