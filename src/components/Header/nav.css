@@ -3,12 +3,24 @@
     z-index: 9999999999;
     top: 33px;
     left: 30px;
+    font-weight: 100;
     font-family: "ff-tisa-web-pro", georgia, serif;
-    font-size: 96px;
+    font-size: 72px;
     letter-spacing: 0.17em;
     /* opacity: 0.7; */
 }
-
+.filmSubtitle {
+    font-size: 18px;
+    position: relative;
+    top: 1.5em;
+    left: -13em;
+    font-family: 'Lato';
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    /* font-style: italic; */
+  }
+  
 .nav {
     position: absolute;
     top: 45px;
@@ -18,13 +30,12 @@
     mix-blend-mode: normal;
 }
 .navItem {
-    margin-right: 30px;
-    /* font-family: 'Lato'; */
-    font-size: 20px;
+    font-family: 'Lato';
+    font-size: 16px;
     /* font-weight: 700; */
-    letter-spacing: 0.0em;
+    letter-spacing: 0.045em;
     display: block;
     color: white;
-    font-style: italic;
     text-decoration: none;
+    line-height: 2;
   }

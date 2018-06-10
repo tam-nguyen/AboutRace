@@ -47,7 +47,7 @@ const ThemeHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 400px;
+  left: 360px;
   right: 0;
   z-index: -999;
 `
@@ -86,7 +86,7 @@ const ThemeIntro = styled.div`
   bottom: 5vh;
   left: 50%;
   text-align: center;
-  margin-left: -400px;
+  margin-left: -360px;
   z-index:99999999999999999999;
 
 `

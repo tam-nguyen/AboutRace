@@ -658,9 +658,9 @@ pre tt:after {
   margin-left: 15px;
   border: solid thin lightgrey;
   font-family: 'Lato';
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.15em;
   color: #999;
   text-decoration: none;
   cursor: pointer;
@@ -718,14 +718,6 @@ iframe {
   background-color:rgba(0, 0, 0, 0.5);
   opacity: 1;
   transition: all .25s;
-}
-.filmSubtitle {
-  font-size: 20px;
-  position: relative;
-  top: 1.25em;
-  left: -13em;
-  letter-spacing: 0.075em;
-  /* font-style: italic; */
 }
 
 .gold {

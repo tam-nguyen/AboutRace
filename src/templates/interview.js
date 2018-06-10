@@ -12,13 +12,12 @@ const AuthorBioText = styled.div`
   width: 300px;
   height: auto;
   position: fixed;
-  bottom: 0;
-  left: 45%;
-  margin-left:-300px;
+  top: 510px;
+  left: 400px;
   z-index: 9999999999;
   background-color: white;
   padding: 30px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight:500;
   opacity:0.9;
@@ -59,10 +58,12 @@ const Centered = styled.div`
 `
 const AuthorImage = styled.div`
   position: fixed;
-  top:0;
+  top:90px;
   left:400px;
-  bottom:0;
-  right:calc(55% - 400px);
+  height: 420px;
+  width: 420px;
+  border-radius: 50%;
+  right:calc(55% - 360px);
   background-size: cover;
   background-position: center;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
