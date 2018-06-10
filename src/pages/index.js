@@ -101,7 +101,7 @@ const ThemeComponent = ({ data }) => (
 
 const TrailerClipWrapper = styled.div`
   max-width: 900px;
-  margin: 0 auto 2em;
+  margin: 90px auto 2em;
   position: relative;
   margin-bottom: 190px;
 

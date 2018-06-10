@@ -41,26 +41,26 @@ const Dimmer = styled.div`
   left:0;
   right:0;
   bottom:0;
-  height:41vh;
+  height:21vh;
   mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+69 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.82) 61%, rgba(0,0,0,0.93) 69%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+100 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.57) 61%, rgba(0,0,0,0.93) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 const ArticleHeader = styled.div`
-  width: calc(100% - 400px);
-  height: 100vh;
+  width: calc(100% - 360px);
+  height: 66vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 400px;
+  left: 360px;
   right: 0;
   z-index: -999;
   text-align: center;
@@ -69,21 +69,22 @@ const ArticleHeader = styled.div`
 const ArticleMain = styled.div`
   background-color: rgba(255, 255, 255, 1);
   padding: 30px;
+  padding-top:75px;
   position: relative;
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
     font-size: 36px;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     line-height: 1.25;
-    color: white;
+    // color: white;
     z-index: 99999999999999;
     position: relative;
-    margin-top:83vh;
-    font-family: 'Lato';
+    // font-family: 'Lato';
     font-weight: 400;
     text-align: center;
+    font-style: italic;
 `
 
 
@@ -256,37 +257,40 @@ class SingleArticle extends React.Component {
             data.nodeArticle.relationships.field_main_image.localFile.publicURL
           }
         >
-        <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-        <img style={{width: 30, position: 'relative', top:30, zIndex:9999}} src={require('../assets/images/down2.svg')} />
-        <h4 style={{marginBottom: 45, color:'white'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+        
         <Dimmer />
         </ArticleHeader>
         
-        <div className="row" style={{
+        {/* <div className="row" style={{
             marginLeft: 90,
             marginTop: '45vh',
           }}>
-          {
-            (data.nodeArticle.relationships.field_tags || []).map(tag =>
-              <Link
-                to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
-                key={`tag-${tag.name}`}
-                className={'tag'}
-              >
-                <b>{tag.name}</b>
-              </Link>
-            )
-          }
-        </div>
+          
+        </div> */}
 
         <div className="row" style={{
             marginLeft: 90,
-            marginTop: '45vh',
+            marginTop: '50vh',
           }}>
         
-          <div className="column _60">
-            
+          <div style={{paddingRight:90, margin:'0 auto', width:'100%'}}>
+          <div style={{textAlign:'center', marginBottom:15}}>
+              {
+              (data.nodeArticle.relationships.field_tags || []).map(tag =>
+                <Link
+                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
+                  key={`tag-${tag.name}`}
+                  className={'tag'}
+                >
+                  {tag.name}
+                </Link>
+                )
+              }
+            </div>
             <ArticleMain>
+            <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+            <h4 style={{marginBottom: 45, textAlign: 'center'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+
               <LargeCalloutText
                 style={{
                   fontSize: 24,
@@ -303,40 +307,47 @@ class SingleArticle extends React.Component {
                   __html: data.nodeArticle.field_full_version.processed,
                 }}
               />
-              <hr style={{width:60, marginTop:60, marginBottom:15}} />
-              <p style={{
+              
+                <div style={{textAlign:'center', marginTop:60, marginBottom:60}}>
+                  <div style={{
+                    width:180,
+                    height:180,
+                    backgroundColor:'red',
+                    marginBottom:15,
+                    overflow:'hidden',
+                    display:'inline-block',
+                    borderRadius:'50%',
+                  }}>
+                    <img style={{
+                      width:300,
+                    
+
+                    }} src={
+                      data.nodeArticle.relationships.field_author_image &&
+                      data.nodeArticle.relationships.field_author_image.localFile.publicURL
+                    } />
+                  </div>
+                  <div style={{textAlign:'center', maxWidth:'60%', margin:'0 auto', fontFamily:'Lato', fontSize:'14px'}} dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
+                }}
+                />
+                </div>
+
+                <p style={{
                 color: 'lightgrey',
                 letterSpacing: '0.04em',
-                fontStyle: 'italic',
                 fontFamily: 'Lato',
-
-              }}>NOTE: <span dangerouslySetInnerHTML={{
-                  __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
-                }}
+                textAlign:'center'
+                }}>
+                  NOTE: <span dangerouslySetInnerHTML={{
+                    __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
+                  }}
                 /></p>
             </ArticleMain>
           </div>
         
           <div className="column">
-            <div style={{
-              width:180,
-              height:180,
-              backgroundColor:'red',
-              marginBottom:15,
-              overflow:'hidden',
-              display:'inline-block',
-              borderRadius:'50%',
-              marginTop:400
-            }}>
-            <img style={{
-              width:300,
-             
-
-            }} src={
-               data.nodeArticle.relationships.field_author_image &&
-               data.nodeArticle.relationships.field_author_image.localFile.publicURL
-            } />
-          </div>
+            
            
             <div style={{height: 200}}/>
             <button onClick={() => { this.setState({ teaching: false}) }}>
