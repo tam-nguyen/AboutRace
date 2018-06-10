@@ -49,14 +49,17 @@ const IntroText = styled.div`
   text-align: center;
 `
 const ArticleTitle = styled.div`
-  font-family: 'Lato';
-  font-size:30px;
-  font-weight:700;
+  // font-family: 'Lato';
+  font-style: italic;
+  font-size:22px;
+  padding: 0px 30px 0 30px;
+  font-weight:600;
   line-height:1.25;
   letter-spacing: 0.01em;
   margin-bottom: 15px;
 `
 const ArticleImage = styled.div`
+  margin-bottom:15px;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
@@ -68,26 +71,27 @@ const ArticleSummary = ({ data }) => {
       flexGrow: 0,
       flexShrink: 1,
       marginBottom: 60,
-      flexBasis: '30%',
+      flexBasis: '50%',
       textDecoration: 'none',
       color: 'inherit'
     }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
-        <ArticleImage
-        background={
-          data.relationships.field_main_image &&
-          data.relationships.field_main_image.localFile.publicURL
-        }
-        className={"articleCardImage"}>
-          {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
-        </ArticleImage>
+       
         
-        <div>
+        <ArticleImage
+            background={
+              data.relationships.field_main_image &&
+              data.relationships.field_main_image.localFile.publicURL
+            }
+            className={"articleCardImage"}>
+              {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
+          </ArticleImage>
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
           
-          <h4>{data.field_author && data.field_author.processed}</h4>
+          <h4 style={{padding: '0px 30px 0 30px'}}>By {data.field_author && data.field_author.processed}</h4>
+          
           <div className="articleExcerpt">
             {data.field_article_summary && (
               <div
@@ -99,7 +103,6 @@ const ArticleSummary = ({ data }) => {
             )}
           </div>
          
-          </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
           {data.relationships.field_belongs_to_subtheme.map(subTheme => (
