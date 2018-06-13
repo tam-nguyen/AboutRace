@@ -112,7 +112,6 @@ constructor(props) {
           style={{
             // color:'rgb(249, 128, 128)',
             color:'white',
-            opacity: 0.75,
             textDecoration: 'none',
           }}
         >

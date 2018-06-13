@@ -41,16 +41,19 @@ const TemplateWrapper = ({ children, data, location }) => (
     />
     <Header data={data} pathname={location.pathname} />
     <NavMenu>
-      <h4 className="gold" style={{marginBottom:15}}>Themes from the film:</h4>
+      {/* <h4 className="gold" style={{marginBottom:15}}>Themes from the film:</h4> */}
       
-      {data.allTaxonomyTermThemes.edges.map(({ node }) => (
+      {/* {data.allTaxonomyTermThemes.edges.map(({ node }) => (
         <ThemeLinkComponent data={node}/>
-      ))}
+      ))} */}
 
-      <h4 className="gold" style={{marginTop:60, marginBottom: 15}}>Browse by:</h4>
-        {/* <Link className={'navItem'} to="/the-film">
-          The Film
-        </Link> */}
+      {/* <h4 className="gold" style={{marginTop:60, marginBottom: 15}}>Browse by:</h4> */}
+        <Link className={'navItem'} to="/the-film">
+          About the film
+        </Link>
+        <Link className={'navItem'} to="/articles/">
+          Themes
+        </Link>
         <Link className={'navItem'} to="/articles/">
           Articles
         </Link>
@@ -58,7 +61,7 @@ const TemplateWrapper = ({ children, data, location }) => (
           Interviews
         </Link>
         <Link className={'navItem'} to="/FAQs/">
-          FAQs
+          Q&A
         </Link>
         <Link className={'navItem'} to="/clips/">
           Clips
@@ -66,7 +69,7 @@ const TemplateWrapper = ({ children, data, location }) => (
 
         {/* <h4 className="gold" style={{marginTop:60}}>For teachers</h4> */}
         <Link className={'navItem'} to="/teaching/">
-          Lesson Plans
+          Teaching
         </Link>
     </NavMenu>
     <div

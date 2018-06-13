@@ -51,9 +51,8 @@ const IntroText = styled.div`
 const ArticleTitle = styled.div`
   // font-family: 'Lato';
   font-style: italic;
-  font-size:22px;
+  font-size:30px;
   padding: 0px 30px 0 30px;
-  font-weight:600;
   line-height:1.25;
   letter-spacing: 0.01em;
   margin-bottom: 15px;
@@ -71,7 +70,7 @@ const ArticleSummary = ({ data }) => {
     <Link style={{
       flexGrow: 0,
       flexShrink: 1,
-      marginBottom: 60,
+      marginBottom: 30,
       flexBasis: '50%',
       textDecoration: 'none',
       color: 'inherit'
@@ -91,7 +90,6 @@ const ArticleSummary = ({ data }) => {
            {data.title}
           </ArticleTitle>
           
-          <h4 style={{textAlign: 'center', padding: '0px 30px 0 30px'}}>By {data.field_author && data.field_author.processed}</h4>
           
           <div className="articleExcerpt">
             {data.field_article_summary && (
@@ -103,7 +101,8 @@ const ArticleSummary = ({ data }) => {
 
             )}
           </div>
-         
+          <h4 style={{textAlign: 'center', marginBottom:0, lineHeight:3}}>By {data.field_author && data.field_author.processed}</h4>
+
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
           {data.relationships.field_belongs_to_subtheme.map(subTheme => (

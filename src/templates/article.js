@@ -74,7 +74,7 @@ const ArticleMain = styled.div`
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 36px;
+    font-size: 48px;
     width: 100%;
     margin-bottom: 30px;
     line-height: 1.25;

@@ -125,8 +125,8 @@ export class ArticleCard extends React.Component {
         <Card style={{...style, padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
         <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
         {article.field_short_version && (
-          <div style={{padding: 30}}>
-            <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
+          <div style={{padding: 15}}>
+            <h4 style={{marginBottom:15}}>Article</h4>
             <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
              { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
             <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
@@ -148,14 +148,14 @@ export class ClipCard extends React.Component {
           clip={clip}
           linkable={linkable}
         />
-        <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
+        <p style={{paddingLeft:15, paddingRight:15, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
       </RCCard> :
       // background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL}
       <Card key={`clip-${i}`} title={clip.title} type="Clip" slug="clip" style={style} changed={clip.changed} link={`/clips/${kebabCase(clip.title)}`}>
         <PlayablePoster
           clip={clip}
         />
-        <p style={{paddingLeft:30, paddingRight:30, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
+        <p style={{paddingLeft:15, paddingRight:15, paddingBottom: 20}} className={'caption'}>{clip.title}</p>
       </Card>
     )
   }
@@ -165,8 +165,8 @@ export class FAQCard extends React.Component {
   render() {
     const { faq = {}, i, relatedContent, style = {} } = this.props
     return (
-      <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
-        <h4 style={{fontSize:12, marginBottom:15}}>FAQ</h4>
+      <Card style={{...style, padding:15, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+        <h4 style={{marginBottom:15}}>FAQ</h4>
         <p className='card-large-text'>{faq.title}</p>
       </Card>
     )
@@ -177,10 +177,10 @@ export class InterviewCard extends React.Component {
   render() {
     const { interview = {}, i, relatedContent, style = {} } = this.props
     return (
-      <Card style={{...style, padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
+      <Card style={{...style, padding:15, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
         <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
-        {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
-        <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
+        {/* <h4 style={{marginBottom:15}}>Interview with </h4> */}
+        <h4 style={{marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
         <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>
       </Card>
     )
