@@ -38,15 +38,12 @@ const GreyBackground = styled.div`
   width:100%;
 `
 const IntroText = styled.div`
-  font-weight: 200;
-  font-size: 18px;
-  line-height: 1.75;
-  letter-spacing: 0.02em;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.25;
   z-index:99999;
-  max-width: 800px;
-  margin: 60px auto;
-  margin-top: 155px;
-  text-align: center;
+  margin: 60px 15px;
+  font-family: 'Lato';
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
@@ -85,6 +82,8 @@ const ArticleSummary = ({ data }) => {
             className={"articleCardImage"}>
               {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
           </ArticleImage>
+          <h4 style={{marginBottom:7.5, marginLeft:30, lineHeight:3}}>Article by {data.field_author && data.field_author.processed}</h4>
+
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
@@ -100,7 +99,6 @@ const ArticleSummary = ({ data }) => {
 
             )}
           </div>
-          <h4 style={{marginBottom:0, marginLeft:30, lineHeight:3}}>By {data.field_author && data.field_author.processed}</h4>
 
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
