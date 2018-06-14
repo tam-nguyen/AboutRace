@@ -49,14 +49,13 @@ const IntroText = styled.div`
   text-align: center;
 `
 const ArticleTitle = styled.div`
-  // font-family: 'Lato';
-  font-style: italic;
+  font-family: 'Lato';
   font-size:30px;
+  font-weight: 700;
+  color: black;
   padding: 0px 30px 0 30px;
   line-height:1.25;
-  letter-spacing: 0.01em;
   margin-bottom: 15px;
-  text-align: center;
 `
 const ArticleImage = styled.div`
   margin-bottom:15px;
@@ -101,7 +100,7 @@ const ArticleSummary = ({ data }) => {
 
             )}
           </div>
-          <h4 style={{textAlign: 'center', marginBottom:0, lineHeight:3}}>By {data.field_author && data.field_author.processed}</h4>
+          <h4 style={{marginBottom:0, marginLeft:30, lineHeight:3}}>By {data.field_author && data.field_author.processed}</h4>
 
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>

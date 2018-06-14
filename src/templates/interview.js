@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
 
 const KeyQuote = styled.div`
-  font-size: 28px;
+  font-size: 26px;
   font-weight: normal;
   margin-bottom: 60px;
   margin-top: 33vh;

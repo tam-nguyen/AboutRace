@@ -1,8 +1,8 @@
 .logo {
     position: fixed;
     z-index: 9999999999;
-    top: 33px;
-    left: 120px;
+    top: 60px;
+    left: 30px;
     font-weight: 100;
     /* font-family: "ff-tisa-web-pro", georgia, serif; */
     font-family: 'Lato';
@@ -12,10 +12,10 @@
     /* opacity: 0.7; */
 }
 .filmSubtitle {
-    font-size: 18px;
+    font-size: 9px;
     position: relative;
     top: 1.5em;
-    left: -18em;
+    left: -17em;
     font-family: 'Lato';
     font-weight: 200;
     text-transform: uppercase;

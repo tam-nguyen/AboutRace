@@ -15,15 +15,27 @@ const TopBar = styled.div`
   // background-color: rgba(255, 255, 255, 0.9490196078431372);
 `
 
+const NavMenu = styled.div`
+  width: 360px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  background-color: #151515;
+  padding: 30px;
+  padding-top: 170px;
+  height: 100vh;
+  border-right: solid thin #fdeacd;
+`
+
 const linkStyle = {
   textDecoration: 'none',
-  color: '#ff8400',
-  paddingBottom: 8
+  color: 'white',
 }
 
 const activeLinkStyle = {
   ...linkStyle,
-  borderBottom: 'solid 3px #ff8400',
+  color:'pink'
 }
 
 const ThemeLinkComponent = ({ data, closeMenu }) => (
@@ -105,6 +117,39 @@ constructor(props) {
           Lesson Plans
         </Link>
       </Menu> */}
+
+      <NavMenu>
+      {/* <h4 className="gold" style={{marginBottom:15}}>Themes from the film:</h4> */}
+      
+      {/* {data.allTaxonomyTermThemes.edges.map(({ node }) => (
+        <ThemeLinkComponent data={node}/>
+      ))} */}
+
+      {/* <h4 className="gold" style={{marginTop:60, marginBottom: 15}}>Browse by:</h4> */}
+        <Link className={'navItem'} style={stylingForPath(`/the-film`)} to="/the-film">
+          About the film
+        </Link>
+        <Link className={'navItem'} style={stylingForPath(`/articles`)} to="/articles/">
+          Themes
+        </Link>
+        <Link className={'navItem'} style={stylingForPath(`/articles`)} to="/articles/">
+          Articles
+        </Link>
+        <Link className={'navItem'} style={stylingForPath(`/interviews`)} to="/interviews/">
+          Interviews
+        </Link>
+        <Link className={'navItem'} style={stylingForPath(`/FAQs`)} to="/FAQs/">
+          Q&A
+        </Link>
+        <Link className={'navItem'} style={stylingForPath(`/clips`)} to="/clips/">
+          Clips
+        </Link>
+
+        {/* <h4 className="gold" style={{marginTop:60}}>For teachers</h4> */}
+        <Link className={'navItem'} style={stylingForPath(`/teaching`)} to="/teaching/">
+          Teaching
+        </Link>
+    </NavMenu>
       <TopBar>
       <div className={'logo'}>
         <Link
