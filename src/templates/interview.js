@@ -3,17 +3,24 @@ import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
 
 const KeyQuote = styled.div`
-  font-size: 28px;
+  font-size: 42px;
   font-weight: normal;
   margin-bottom: 60px;
-  margin-top: 33vh;
+  margin-top: 105px;
+  position: relative;
+  left: -440px;
+  width: 900px;
+  // color: hotpink;
+  line-height:1.25;
+  font-style: italic;
+  text-align: center;
 `
 const AuthorBioText = styled.div`
   width: 300px;
   height: auto;
-  position: fixed;
-  top: 510px;
-  left: 400px;
+  position: absolute;
+  top: 860px;
+  left: 60px;
   z-index: 9999999999;
   background-color: white;
   padding: 30px;
@@ -57,9 +64,9 @@ const Centered = styled.div`
   transform: translate(50%, -50%);
 `
 const AuthorImage = styled.div`
-  position: fixed;
-  top:90px;
-  left:400px;
+  position: absolute;
+  top:440px;
+  left:-440px;
   height: 420px;
   width: 420px;
   border-radius: 50%;
@@ -69,7 +76,15 @@ const AuthorImage = styled.div`
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   overflow:hidden;
 `
-  
+const TopText = styled.div`
+  width: calc(100% - 360px);
+  text-align: center;
+  padding: 60px;
+  position: fixed;
+  background-color: rgba(255,255,255,0.92);
+  min-height: 60px;
+  z-index: 999999999999999;
+`
 
 const AuthorBio = ({ data }) => (
   <div style={{fontFamily: 'Lato'}}>{data.nodeInterview.field_interviewee_bio.processed}</div>
@@ -136,12 +151,16 @@ class SingleInterview extends React.Component {
           quickFact={this.state.quickFact}
           closeHandler={() => this.setState({ quickFact: null })}
         />
+        <TopText>
+        {/* <img style={{width: 30, transform:'rotate(90deg)'}} src={require('../assets/images/down2.svg')} /> */}
+          <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4>
+        </TopText>
         <AuthorBioText>
           <AuthorBio data={data}> </AuthorBio>
         </AuthorBioText>
          
           <InterviewMain style={{maxWidth:580}} className="column">
-          <KeyQuote style={{lineHeight:1.5, fontStyle:'italic'}}
+          <KeyQuote
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,
               }}

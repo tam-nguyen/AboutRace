@@ -36,9 +36,10 @@ button {
     overflow: hidden;
 }
 .card-large-text {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 1.25;
+    margin-bottom: 15px;
 }
 .RCcard-large-text {
     font-size: 14px;
@@ -54,7 +55,7 @@ button {
     float: left;
 }
 .articleCardImage {
-    height: 296px;
+    height: 96px;
     width: 100%;
     border-bottom: solid thin lightgrey;
     background-color: grey;

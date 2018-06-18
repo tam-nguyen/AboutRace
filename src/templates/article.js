@@ -50,41 +50,52 @@ background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgb
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 const ArticleHeader = styled.div`
-  width: calc(100% - 360px);
-  height: 66vh;
+  width: calc(75vw - 360px);
+  height: calc(75vw - 360px);
+  border-radius: 50%;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center bottom;
+  background-position: center;
+  // border: solid 4px black;
   background-color: lightgrey;
+  margin-bottom:60px;
   position: fixed;
-  top: 0;
-  left: 360px;
-  right: 0;
+  left: 38%;
+  top:-12vh;
   z-index: -999;
   text-align: center;
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.96);
   padding: 30px;
-  padding-top:75px;
   position: relative;
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 36px;
+    font-size: 42px;
     width: 100%;
     margin-bottom: 30px;
-    line-height: 1.25;
+    line-height: 1.125;
     // color: white;
-    z-index: 99999999999999;
+    z-index: 99999999;
     position: relative;
-    // font-family: 'Lato';
-    font-weight: 400;
-    text-align: center;
-    font-style: italic;
+    font-family: 'Lato';
+    font-weight: 700;
+    // text-align: center;
+    // font-style: italic;
+`
+const TopText = styled.div`
+  width: calc(100% - 360px);
+  // text-align: center;
+  padding: 60px 45px;
+  top:0;
+  position: fixed;
+  background-color: rgba(255,255,255,0.92);
+  min-height: 60px;
+  z-index: 999999999;
 `
 
 
@@ -120,7 +131,7 @@ class QuickFactOverlay extends React.Component {
         <OverlayBody>
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <img style={{width: 50, marginTop:30}} src={require('../assets/images/close.svg')} />
+            <img style={{width: 50, marginTop:34}} src={require('../assets/images/close.svg')} />
             </div>
             <h3>{quickFact.title}</h3>
             <div
@@ -167,7 +178,7 @@ class TagOverlay extends React.Component {
             
           <OverlayHeader>
             <div onClick={this.props.closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-            <img style={{width: 50, marginTop:30}} src={require('../assets/images/close.svg')} />
+            <img style={{width: 50, marginTop:34}} src={require('../assets/images/close.svg')} />
             </div>
             <div style={{
               textAlign:'center'
@@ -177,28 +188,7 @@ class TagOverlay extends React.Component {
            
           </OverlayHeader>
           <div>
-            <OverlayFilter>
-            <p style={{textAlign:'center', fontFamily:'Lato', fontWeight:'800', position:'relative', top:-15}}>Brief glossary-style description text here explaining tag and maybe raising issues in which it comes up.</p>
-              {
-                [`faq`, `article`, `clip`].filter(itemType => itemExists(itemType)).map(articleType => (
-                  <span
-                    key={articleType}
-                    style={{ marginRight: 20, cursor: `pointer` }}
-                    onClick={ () => {
-                      const newQueryParams = { ... queryParams }
-                      if (newQueryParams[`type`] == articleType){
-                        delete newQueryParams[`type`]
-                      } else {
-                        newQueryParams[`type`] = articleType;
-                      }
-                      navigateTo(`?${queryString.stringify(newQueryParams)}`)
-                    }}
-                  >
-                    { articleType }
-                  </span>
-                ))
-              }
-            </OverlayFilter>
+            
             <div style={{ width: `100%`, display: 'flex', 'flexWrap': 'wrap'}}>
               {
                 getCards(quickClipLinks, queryParams[`type`], null, true)
@@ -234,7 +224,7 @@ class SingleArticle extends React.Component {
       null
 
     return (
-      <div className="row">
+      <div style={{position:'relative'}}>
         <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
@@ -250,155 +240,153 @@ class SingleArticle extends React.Component {
             navigateTo(`?`)
           }}
         />
-        {/* <HeaderDimmer /> */}
+        
+       
+        <div className="column" style={{height:'150px'}}>
         <ArticleHeader
           background={
             data.nodeArticle.relationships.field_main_image &&
             data.nodeArticle.relationships.field_main_image.localFile.publicURL
           }
         >
-        
-        <Dimmer />
         </ArticleHeader>
-        
-        {/* <div className="row" style={{
-            marginLeft: 90,
-            marginTop: '45vh',
-          }}>
-          
-        </div> */}
+        </div>
+        <div style={{backgroundColor:'rgba(255,255,255,0.92)', marginTop:'calc(50vh - 60px)'}}>
+          <div className="row">
+            <div style={{textAlign:'center', paddingTop:60}} className="column">
+              <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+              <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+            </div>
+          </div>
 
-        <div className="row" style={{
-            marginLeft: 90,
-            marginTop: '50vh',
-          }}>
-        
-          <div style={{paddingRight:90, margin:'0 auto', width:'100%'}}>
-          <div style={{textAlign:'center', marginBottom:15}}>
+          <div className="row" style={{
+            
+            }}>
+          
+            <div className="column _75">
+              <ArticleMain>
+                
+                <LargeCalloutText
+                  style={{
+                    fontSize: 24,
+                    fontWeight: 'normal',
+                    lineHeight: 1.5
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: data.nodeArticle.field_large_callout_text.processed,
+                  }}
+                />
+                <div
+                  style={{lineHeight:1.7}}
+                  dangerouslySetInnerHTML={{
+                    __html: data.nodeArticle.field_full_version.processed,
+                  }}
+                />
+                
+                  <div style={{textAlign:'center', marginTop:60, marginBottom:60}}>
+                  
+                  </div>
+
+                  <p style={{
+                  color: 'lightgrey',
+                  letterSpacing: '0.04em',
+                  fontFamily: 'Lato',
+                  textAlign:'center'
+                  }}>
+                    NOTE: <span dangerouslySetInnerHTML={{
+                      __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
+                    }}
+                  /></p>
+              </ArticleMain>
+            </div>
+          
+            <div className="column">
+            <div style={{ marginBottom:15}}>
+                {
+                (data.nodeArticle.relationships.field_tags || []).map(tag =>
+                  <Link
+                    to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
+                    key={`tag-${tag.name}`}
+                    className={'tag'}
+                  >
+                    {tag.name}
+                  </Link>
+                  )
+                }
+              </div>
+              <div style={{
+                      width:180,
+                      height:180,
+                      backgroundColor:'red',
+                      marginBottom:15,
+                      overflow:'hidden',
+                      display:'inline-block',
+                      borderRadius:'50%',
+                    }}>
+                      <img style={{
+                        width:300,
+                      
+
+                      }} src={
+                        data.nodeArticle.relationships.field_author_image &&
+                        data.nodeArticle.relationships.field_author_image.localFile.publicURL
+                      } />
+                    </div>
+                    <div style={{maxWidth:300, fontFamily:'Lato', fontSize:'14px'}} dangerouslySetInnerHTML={{
+                    __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
+                  }}
+                  />
+              <div style={{height: 200}}/>
+              <button onClick={() => { this.setState({ teaching: false}) }}>
+                All Content
+              </button>
+              <button onClick={() => { this.setState({ teaching: true}) }}>
+                Teaching
+              </button>
               {
-              (data.nodeArticle.relationships.field_tags || []).map(tag =>
-                <Link
-                  to={`?${queryString.stringify({ ...queryParams, tag: kebabCase(tag.name) })}`}
-                  key={`tag-${tag.name}`}
-                  className={'tag'}
-                >
-                  {tag.name}
-                </Link>
+                (data.nodeArticle.relationships.field_article_related_content || [])
+                .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
+                .map((node, i) => {
+                    if (node.__typename == `node__quickfact`) {
+                      const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
+
+                      return (
+                        <QuickFactCard
+                          link={`?${queryString.stringify(newQueryParams)}`}
+                          quickfact={node}
+                          i={i}
+                          style={{ cursor: `pointer`, textAlign:'left', border: `1px solid #888888`, padding: 20}}
+                        />
+                      )
+                    } else if (node.__typename == `node__article`) {
+                      return (
+                        <ArticleCard
+                          i={i}
+                          article={node}
+                          relatedContent
+                        />
+                      )
+                    } else if (node.__typename == `node__faq`) {
+                      return (
+                        <FAQCard
+                          i={i}
+                          faq={node}
+                        />
+                      )
+                    } else if (node.__typename == `node__clip`) {
+                      return (
+                        <ClipCard
+                          i={i}
+                          clip={node}
+                          playable
+                        />
+                      )
+                    }
+                  }
                 )
               }
             </div>
-            <ArticleMain>
-            <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-            <h4 style={{marginBottom: 45, textAlign: 'center'}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
-
-              <LargeCalloutText
-                style={{
-                  fontSize: 24,
-                  fontWeight: 'normal',
-                  lineHeight: 1.5
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: data.nodeArticle.field_large_callout_text.processed,
-                }}
-              />
-              <div
-                style={{lineHeight:1.7}}
-                dangerouslySetInnerHTML={{
-                  __html: data.nodeArticle.field_full_version.processed,
-                }}
-              />
-              
-                <div style={{textAlign:'center', marginTop:60, marginBottom:60}}>
-                  <div style={{
-                    width:180,
-                    height:180,
-                    backgroundColor:'red',
-                    marginBottom:15,
-                    overflow:'hidden',
-                    display:'inline-block',
-                    borderRadius:'50%',
-                  }}>
-                    <img style={{
-                      width:300,
-                    
-
-                    }} src={
-                      data.nodeArticle.relationships.field_author_image &&
-                      data.nodeArticle.relationships.field_author_image.localFile.publicURL
-                    } />
-                  </div>
-                  <div style={{textAlign:'center', maxWidth:'60%', margin:'0 auto', fontFamily:'Lato', fontSize:'14px'}} dangerouslySetInnerHTML={{
-                  __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
-                }}
-                />
-                </div>
-
-                <p style={{
-                color: 'lightgrey',
-                letterSpacing: '0.04em',
-                fontFamily: 'Lato',
-                textAlign:'center'
-                }}>
-                  NOTE: <span dangerouslySetInnerHTML={{
-                    __html: data.nodeArticle.field_old_article_discl && data.nodeArticle.field_old_article_discl.processed,
-                  }}
-                /></p>
-            </ArticleMain>
-          </div>
-        
-          <div className="column">
-            
-           
-            <div style={{height: 200}}/>
-            <button onClick={() => { this.setState({ teaching: false}) }}>
-              All Content
-            </button>
-            <button onClick={() => { this.setState({ teaching: true}) }}>
-              Teaching
-            </button>
-            {
-              (data.nodeArticle.relationships.field_article_related_content || [])
-              .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
-              .map((node, i) => {
-                  if (node.__typename == `node__quickfact`) {
-                    const newQueryParams = { ...queryParams, quickfact: kebabCase(node.title) }
-
-                    return (
-                      <QuickFactCard
-                        link={`?${queryString.stringify(newQueryParams)}`}
-                        quickfact={node}
-                        i={i}
-                        style={{ cursor: `pointer`, textAlign:'left', border: `1px solid #888888`, padding: 20}}
-                      />
-                    )
-                  } else if (node.__typename == `node__article`) {
-                    return (
-                      <ArticleCard
-                        i={i}
-                        article={node}
-                        relatedContent
-                      />
-                    )
-                  } else if (node.__typename == `node__faq`) {
-                    return (
-                      <FAQCard
-                        i={i}
-                        faq={node}
-                      />
-                    )
-                  } else if (node.__typename == `node__clip`) {
-                    return (
-                      <ClipCard
-                        i={i}
-                        clip={node}
-                        playable
-                      />
-                    )
-                  }
-                }
-              )
-            }
-          </div>
+        </div>
       </div>
       </div>
     )

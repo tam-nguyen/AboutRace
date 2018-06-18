@@ -13,15 +13,12 @@ const GreyBackground = styled.div`
   width:100%;
 `
 const IntroText = styled.div`
-  font-weight: 200;
-  font-size: 24px;
-  line-height: 1.75;
-  letter-spacing: 0.02em;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.25;
   z-index:99999;
-  max-width: 800px;
-  margin: 60px auto;
-  margin-top: 155px;
-  text-align: center;
+  margin: 60px 45px;
+  font-family: 'Lato';
 `
 const InterviewCard = styled.div`
   background-color: #f5f6f9;

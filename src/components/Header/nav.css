@@ -1,23 +1,25 @@
 .logo {
     position: fixed;
     z-index: 9999999999;
-    top: 33px;
+    top: 60px;
     left: 30px;
     font-weight: 100;
-    font-family: "ff-tisa-web-pro", georgia, serif;
-    font-size: 72px;
+    /* font-family: "ff-tisa-web-pro", georgia, serif; */
+    font-family: 'Lato';
+    font-size: 84px;
     letter-spacing: 0.17em;
+    font-weight: 700;
     /* opacity: 0.7; */
 }
 .filmSubtitle {
-    font-size: 18px;
+    font-size: 9px;
     position: relative;
-    top: 1.5em;
-    left: -13em;
+    top: 2.5em;
+    left: -17em;
     font-family: 'Lato';
-    font-weight: 200;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.065em;
     /* font-style: italic; */
   }
   
@@ -31,11 +33,14 @@
 }
 .navItem {
     font-family: 'Lato';
-    font-size: 16px;
-    /* font-weight: 700; */
+    font-size: 30px;
+    font-weight: 700;
     letter-spacing: 0.045em;
     display: block;
     color: white;
     text-decoration: none;
-    line-height: 2;
-  }
+    line-height: 1.5;
+}
+.navItem:hover {
+    color: pink;
+}

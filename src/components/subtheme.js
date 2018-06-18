@@ -67,6 +67,15 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
+const ArticleTitle = styled.div`
+  font-family: 'Lato';
+  font-size:30px;
+  font-weight: 700;
+  color: black;
+  padding: 0px 30px 0 0px;
+  line-height:1.25;
+  margin-bottom: 15px;
+`
 
 class PlayablePoster extends React.Component {
   constructor(props){
@@ -117,7 +126,7 @@ export class ArticleCard extends React.Component {
     const { article, i, relatedContent, style = {} } = this.props 
     return (
       relatedContent ?
-        <RCCard style={{...style, padding:15}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
+        <RCCard style={{...style, padding:30}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
         {article.field_short_version && (
           <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
         )}
@@ -126,10 +135,12 @@ export class ArticleCard extends React.Component {
         <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
         {article.field_short_version && (
           <div style={{padding: 30}}>
-            <h4 style={{fontSize:12, marginBottom:15}}>Article</h4>
-            <p className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
-             { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
-            <h6 style={{textAlign:'right', fontStyle:'italic', fontWeight:'normal', letterSpacing:'0.02em', marginBottom: 0, fontSize:14, fontStyle:'italic'}}>{article.title}</h6>
+            <h4 style={{marginBottom:15}}>Article by {article.field_author && article.field_author.processed}</h4>
+            {/* { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>} */}
+            <ArticleTitle>{article.title}</ArticleTitle>
+            "<span className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
+             
+            
            
           </div>
         )}
@@ -166,7 +177,7 @@ export class FAQCard extends React.Component {
     const { faq = {}, i, relatedContent, style = {} } = this.props
     return (
       <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
-        <h4 style={{fontSize:12, marginBottom:15}}>FAQ</h4>
+        <h4 style={{marginBottom:15}}>Q&A</h4>
         <p className='card-large-text'>{faq.title}</p>
       </Card>
     )
@@ -177,10 +188,10 @@ export class InterviewCard extends React.Component {
   render() {
     const { interview = {}, i, relatedContent, style = {} } = this.props
     return (
-      <Card style={{...style, padding:60, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
+      <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
         <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
-        {/* <h4 style={{fontSize:12, marginBottom:15}}>Interview with </h4> */}
-        <h4 style={{fontSize:12, marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
+        {/* <h4 style={{marginBottom:15}}>Interview with </h4> */}
+        <h4 style={{marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
         <p style={{fontStyle:'italic', textAlign:'center'}} className={'card-large-text'}>{interview.field_key_quote.processed}</p>
       </Card>
     )
@@ -236,8 +247,8 @@ const FilterButtonStyle = {
 
 const FilterButtonStyleActive = {
   ...FilterButtonStyle,
-  fontWeight: `800`,
-  borderBottom: `solid 2px rgb(255, 132, 0)`,
+  fontWeight: `700`,
+  borderBottom: `solid 2px hotpink`,
 }
 
 const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
@@ -250,11 +261,11 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
     <span style={{
             marginRight: 15,
             fontFamily: 'Lato',
-            fontWeight:800,
+            fontWeight:700,
             fontSize: 14,
-            letterSpacing: '0.06em',
+            letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color:'rgb(255, 132, 0)'
+            color:'hotpink'
           }}
           >Sort by: </span>
           <button onClick={() => {
@@ -290,7 +301,8 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
-              )
+              ),
+              fontWeight:700, letterSpacing:'0.2em', color:'hotpink'
             }}
           >
             {filterType}

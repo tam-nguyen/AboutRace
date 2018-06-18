@@ -38,26 +38,21 @@ const GreyBackground = styled.div`
   width:100%;
 `
 const IntroText = styled.div`
-  font-weight: 200;
-  font-size: 18px;
-  line-height: 1.75;
-  letter-spacing: 0.02em;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.25;
   z-index:99999;
-  max-width: 800px;
-  margin: 60px auto;
-  margin-top: 155px;
-  text-align: center;
+  margin: 60px 15px;
+  font-family: 'Lato';
 `
 const ArticleTitle = styled.div`
-  // font-family: 'Lato';
-  font-style: italic;
-  font-size:22px;
+  font-family: 'Lato';
+  font-size:30px;
+  font-weight: 700;
+  color: black;
   padding: 0px 30px 0 30px;
-  font-weight:600;
   line-height:1.25;
-  letter-spacing: 0.01em;
   margin-bottom: 15px;
-  text-align: center;
 `
 const ArticleImage = styled.div`
   margin-bottom:15px;
@@ -71,7 +66,7 @@ const ArticleSummary = ({ data }) => {
     <Link style={{
       flexGrow: 0,
       flexShrink: 1,
-      marginBottom: 60,
+      marginBottom: 30,
       flexBasis: '50%',
       textDecoration: 'none',
       color: 'inherit'
@@ -87,11 +82,12 @@ const ArticleSummary = ({ data }) => {
             className={"articleCardImage"}>
               {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
           </ArticleImage>
+          <h4 style={{marginBottom:7.5, marginLeft:30, lineHeight:3}}>Article by {data.field_author && data.field_author.processed}</h4>
+
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
           
-          <h4 style={{textAlign: 'center', padding: '0px 30px 0 30px'}}>By {data.field_author && data.field_author.processed}</h4>
           
           <div className="articleExcerpt">
             {data.field_article_summary && (
@@ -103,7 +99,7 @@ const ArticleSummary = ({ data }) => {
 
             )}
           </div>
-         
+
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
           {data.relationships.field_belongs_to_subtheme.map(subTheme => (

@@ -47,7 +47,8 @@ class UnstyledOverlay extends React.Component {
 }
 
 const Overlay = styled(UnstyledOverlay)`
-  background-color: rgba(241, 239, 239, 0.94);
+  // background-color: rgba(241, 239, 239, 0.94);
+  background-color: rgba(255,255,255,0.92);
   position: fixed;
   left: 0;
   top: 0;
@@ -82,11 +83,9 @@ const OverlayTitle = styled.div`
 `
 const OverlayBody = styled.div`
   opacity: 1;
-  padding: 20px;
-  min-height: 100vh;
   margin: 0 auto;
-  margin-top: 150px;
-  padding-bottom: 120px;
+  margin-top: 180px;
+  padding-bottom: 60px;
   display: flex;
   justify-content: center;
   flex-direction: column;

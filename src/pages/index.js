@@ -35,7 +35,7 @@ import {ClipPoster} from '../components/allClips.js'
 // `
 
 const HomeBackground = styled.div`
-  background-color: #151515;
+  // background-color: #151515;
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +63,28 @@ const HomeThemeImage = styled.div`
                       props.background ? `url(${props.background})` : `none`};
 `
 
-
+const SeriesComponent = ({ data }) => (
+  <div>
+    <div style={{
+      // color:'white',
+      margin:'0 auto',
+      maxWidth:700
+    }}
+    dangerouslySetInnerHTML={{
+      __html: data.taxonomyTermTheSeries.field_original_statement_from_ex && data.taxonomyTermTheSeries.field_original_statement_from_ex.processed,
+    }}
+    />
+    <div style={{
+      // color:'white',
+      margin:'0 auto',
+      maxWidth:700
+    }}
+    dangerouslySetInnerHTML={{
+      __html: data.field_updated_statement_from_the && data.field_updated_statement_from_the.processed,
+    }}
+    />
+  </div>
+)
 
 const ThemeComponent = ({ data }) => (
   <div style={{
@@ -103,7 +124,7 @@ const TrailerClipWrapper = styled.div`
   max-width: 900px;
   margin: 90px auto 2em;
   position: relative;
-  margin-bottom: 190px;
+  margin-bottom: 15px;
 
   &:before {
     content: '';
@@ -125,7 +146,7 @@ export default ({ data }) => (
     <TrailerClipWrapper>
       <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </TrailerClipWrapper>
-  
+    <SeriesComponent data={data} />
     <div style={{
       color: 'white',
       textAlign: 'center',
@@ -145,6 +166,15 @@ export default ({ data }) => (
 
 export const query = graphql`
   query IndexQuery {
+    taxonomyTermTheSeries {
+      id
+      field_original_statement_from_ex {
+        processed
+      }
+      field_updated_statement_from_the {
+        processed
+      }
+    }
     allTaxonomyTermThemes {
       edges {
         node {

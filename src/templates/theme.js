@@ -111,8 +111,8 @@ class ThemePage extends React.Component {
       <div>
        
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-        <HeaderDimmer />
-         <Dimmer />
+        {/* <HeaderDimmer />
+         <Dimmer /> */}
            <ThemeIntro>
             <ThemeTitle>{theme.name}</ThemeTitle>
             {theme.description ? (
