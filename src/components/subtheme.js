@@ -136,7 +136,7 @@ export class ArticleCard extends React.Component {
         {article.field_short_version && (
           <div style={{padding: 30}}>
             <h4 style={{marginBottom:15}}>Article by {article.field_author && article.field_author.processed}</h4>
-            { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>}
+            {/* { article.field_author && <h6 style={{textAlign:'right', marginBottom:7.5, fontSize:14}} dangerouslySetInnerHTML={{ __html: article.field_author.processed}}/>} */}
             <ArticleTitle>{article.title}</ArticleTitle>
             "<span className={'card-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
              
@@ -177,7 +177,7 @@ export class FAQCard extends React.Component {
     const { faq = {}, i, relatedContent, style = {} } = this.props
     return (
       <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
-        <h4 style={{marginBottom:15}}>FAQ</h4>
+        <h4 style={{marginBottom:15}}>Q&A</h4>
         <p className='card-large-text'>{faq.title}</p>
       </Card>
     )
@@ -247,8 +247,8 @@ const FilterButtonStyle = {
 
 const FilterButtonStyleActive = {
   ...FilterButtonStyle,
-  fontWeight: `800`,
-  borderBottom: `solid 2px rgb(255, 132, 0)`,
+  fontWeight: `700`,
+  borderBottom: `solid 2px hotpink`,
 }
 
 const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
@@ -261,11 +261,11 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
     <span style={{
             marginRight: 15,
             fontFamily: 'Lato',
-            fontWeight:800,
+            fontWeight:700,
             fontSize: 14,
-            letterSpacing: '0.06em',
+            letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color:'rgb(255, 132, 0)'
+            color:'hotpink'
           }}
           >Sort by: </span>
           <button onClick={() => {
@@ -301,7 +301,8 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
               float: (
                 (filterSlug === `recent`) ?
                 `none` : `none`
-              )
+              ),
+              fontWeight:700, letterSpacing:'0.2em', color:'hotpink'
             }}
           >
             {filterType}

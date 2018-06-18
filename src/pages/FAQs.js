@@ -7,6 +7,15 @@ import kebabCase from 'lodash/kebabCase'
 const FAQTitle = styled.div`
     
 `
+const IntroText = styled.div`
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.25;
+  z-index:99999;
+  margin: 60px 45px;
+  font-family: 'Lato';
+`
+
 
 const FAQSummary = ({ data }) => {
   console.log(data)
@@ -44,10 +53,15 @@ const FAQSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
+  <div>
+  <IntroText>
+      The experts answer your questions about issues from the film.
+    </IntroText>
   <div className={"articles"}>
     {data.allNodeFaq.edges.map((edge, i) => (
       <FAQSummary data={edge.node} />
     ))}
+  </div>
   </div>
 )
 

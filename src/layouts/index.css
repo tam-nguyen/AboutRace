@@ -646,7 +646,9 @@ pre tt:after {
   flex: 1.5;
   max-width: 720px;
 }
-
+._75 {
+  flex: 1.75;
+}
 ._25 {
   flex: .15;
 }

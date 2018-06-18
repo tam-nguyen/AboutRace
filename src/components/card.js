@@ -93,6 +93,7 @@ const StyledCard = styled(Card)`
     box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
     // color:rgb(255, 132, 0);
     transition: all .3s;
+    // transform: translateY(-1px);
   }
   
   font-family: "ff-tisa-web-pro";

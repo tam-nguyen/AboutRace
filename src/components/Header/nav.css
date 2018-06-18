@@ -14,12 +14,12 @@
 .filmSubtitle {
     font-size: 9px;
     position: relative;
-    top: 1.5em;
+    top: 2.5em;
     left: -17em;
     font-family: 'Lato';
-    font-weight: 200;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.065em;
     /* font-style: italic; */
   }
   

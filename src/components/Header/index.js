@@ -129,7 +129,7 @@ constructor(props) {
         <Link className={'navItem'} style={stylingForPath(`/the-film`)} to="/the-film">
           About the film
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/articles`)} to="/articles/">
+        <Link className={'navItem'} style={stylingForPath(`/themes`)} to="/themes/">
           Themes
         </Link>
         <Link className={'navItem'} style={stylingForPath(`/articles`)} to="/articles/">
