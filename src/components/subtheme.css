@@ -55,9 +55,9 @@ button {
     float: left;
 }
 .articleCardImage {
-    height: 96px;
+    height: 100%;
+    flex: 1 1 auto;
     width: 100%;
-    border-bottom: solid thin lightgrey;
     background-color: grey;
 }
 .interviewCardPhoto {

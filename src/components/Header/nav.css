@@ -10,6 +10,7 @@
     letter-spacing: 0.17em;
     font-weight: 700;
     /* opacity: 0.7; */
+    display: none;
 }
 .filmSubtitle {
     font-size: 9px;
@@ -33,14 +34,14 @@
 }
 .navItem {
     font-family: 'Lato';
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 400;
     letter-spacing: 0.045em;
     display: block;
-    color: white;
+    color: #151515;
     text-decoration: none;
-    line-height: 1.5;
+    line-height: 2.5;
 }
 .navItem:hover {
-    color: pink;
+    color: snow;
 }

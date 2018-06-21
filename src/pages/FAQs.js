@@ -56,6 +56,7 @@ export default ({ data }) => (
   <div>
   <IntroText>
       The experts answer your questions about issues from the film.
+      Does race have a biological basis? Has the idea of race always been with us? Why does race still matter?
     </IntroText>
   <div className={"articles"}>
     {data.allNodeFaq.edges.map((edge, i) => (

@@ -16,26 +16,23 @@ const TopBar = styled.div`
 `
 
 const NavMenu = styled.div`
-  width: 360px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  color: white;
-  background-color: #151515;
+  width: 200px;
   padding: 30px;
-  padding-top: 170px;
-  height: 100vh;
   border-right: solid thin #fdeacd;
 `
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'white',
 }
 
 const activeLinkStyle = {
   ...linkStyle,
-  color:'pink'
+  // color:' #ce2727',
+  color: 'snow',
+  borderLeft: '12px solid white',
+  paddingLeft: 18,
+  position: 'relative',
+  left: -30
 }
 
 const ThemeLinkComponent = ({ data, closeMenu }) => (
@@ -81,7 +78,16 @@ constructor(props) {
     const { pathname } = this.props
     const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
     return (
-        <div>
+        <div style={{
+          display:'flex', 
+          justifyContent:'center',
+          height: '100vh',
+          position: 'fixed',
+          flexDirection: 'column',
+          // backgroundColor: 'rgba(41, 41, 41, 0.8196078431372549)',
+          // backgroundColor: 'rgba(141, 179, 63, 0.82)',
+          backgroundColor: 'rgba(168, 179, 63, 0.82)'
+        }}>
       {/* <Menu 
        isOpen={this.state.menuOpen}
        onStateChange={(state) => this.handleStateChange(state)}
@@ -156,7 +162,6 @@ constructor(props) {
           to="/"
           style={{
             // color:'rgb(249, 128, 128)',
-            color:'white',
             textDecoration: 'none',
           }}
         >

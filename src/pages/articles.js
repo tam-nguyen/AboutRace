@@ -47,15 +47,19 @@ const IntroText = styled.div`
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
-  font-size:30px;
+  font-size:20px;
   font-weight: 700;
   color: black;
   padding: 0px 30px 0 30px;
   line-height:1.25;
-  margin-bottom: 15px;
+  color: darkred;
+  margin-bottom: 7.5px;
 `
 const ArticleImage = styled.div`
-  margin-bottom:15px;
+  margin-bottom:30px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
@@ -73,8 +77,8 @@ const ArticleSummary = ({ data }) => {
     }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
-        
-        <ArticleImage
+        <div style={{flex: '1 1 auto', position: 'relative', borderBottom: 'solid 3px darkred', marginBottom:30}}>
+          <ArticleImage
             background={
               data.relationships.field_main_image &&
               data.relationships.field_main_image.localFile.publicURL
@@ -82,12 +86,13 @@ const ArticleSummary = ({ data }) => {
             className={"articleCardImage"}>
               {data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}
           </ArticleImage>
-          <h4 style={{marginBottom:7.5, marginLeft:30, lineHeight:3}}>Article by {data.field_author && data.field_author.processed}</h4>
-
+        </div>
+        <div style={{paddingBottom:30}}>
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          
+          <p style={{marginBottom:7.5, color:'darkred', fontFamily:'Lato', fontSize:16, fontWeight:300, lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
+
           
           <div className="articleExcerpt">
             {data.field_article_summary && (
@@ -99,7 +104,7 @@ const ArticleSummary = ({ data }) => {
 
             )}
           </div>
-
+        </div>
         {/* {data.relationships.field_belongs_to_subtheme ? (
         <ul>
           {data.relationships.field_belongs_to_subtheme.map(subTheme => (
