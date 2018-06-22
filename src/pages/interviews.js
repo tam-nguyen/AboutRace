@@ -17,8 +17,11 @@ const IntroText = styled.div`
   font-size: 48px;
   line-height: 1.25;
   z-index:99999;
-  margin: 60px 45px;
+  padding: 60px 45px;
+  margin-bottom: 60px;
   font-family: 'Lato';
+  color: snow;
+  background-color: #2b2b2b;
 `
 const InterviewCard = styled.div`
   background-color: #f5f6f9;
@@ -75,7 +78,7 @@ const AllInterviews = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0 60px;
+  margin: 0 45px;
 `
 const AuthorBioText = styled.div`
   width: 100%;
@@ -140,16 +143,19 @@ const InterviewSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
-  <div className={"interviews"}>
-  <GreyBackground />
-  <IntroText>
-    Need some introductory text here introducing the 'interviews' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
-  </IntroText>
-    <AllInterviews>
-      {data.allNodeInterview.edges.map((edge, i) => (
-        <InterviewSummary data={edge.node} />
-      ))}
-    </AllInterviews>
+  <div>
+    <IntroText>
+      Need some introductory text here introducing the 'interviews' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
+    </IntroText>
+    <div className={"interviews"}>
+    <GreyBackground />
+  
+      <AllInterviews>
+        {data.allNodeInterview.edges.map((edge, i) => (
+          <InterviewSummary data={edge.node} />
+        ))}
+      </AllInterviews>
+    </div>
   </div>
 )
 

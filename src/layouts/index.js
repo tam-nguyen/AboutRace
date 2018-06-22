@@ -32,8 +32,8 @@ const TemplateWrapper = ({ children, data, location }) => (
     <div
       style={{
         position: 'absolute',
-        left:360,
-        width:'calc(100% - 360px)',
+        left:200,
+        width:'calc(100% - 200px)',
 
       }}
     >

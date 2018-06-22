@@ -50,51 +50,52 @@ background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgb
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 const ArticleHeader = styled.div`
-  width: calc(75vw - 360px);
-  height: calc(75vw - 360px);
-  border-radius: 50%;
+  width: 100%;
+  height: 100vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 110%;
   background-position: center;
   // border: solid 4px black;
   background-color: lightgrey;
-  margin-bottom:60px;
   position: fixed;
-  left: 38%;
-  top:-12vh;
+  left: 200px;
+  top:0;
   z-index: -999;
   text-align: center;
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 6px;
   padding: 30px;
   position: relative;
+  max-width: 735px;
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
     font-size: 42px;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 22.5px;
     line-height: 1.125;
     // color: white;
     z-index: 99999999;
     position: relative;
-    font-family: 'Lato';
-    font-weight: 700;
-    // text-align: center;
-    // font-style: italic;
+    // font-family: 'Lato';
+    // font-weight: 700;
+    font-style: italic;
 `
 const TopText = styled.div`
-  width: calc(100% - 360px);
+  width: calc(100% - 200px);
   // text-align: center;
-  padding: 60px 45px;
+  padding: 30px 45px;
   top:0;
   position: fixed;
   background-color: rgba(255,255,255,0.92);
+  // background-color: rgba(255, 244, 198, 0.92);
   min-height: 60px;
+  border-bottom: solid thin lightgrey;
   z-index: 999999999;
 `
 
@@ -224,7 +225,7 @@ class SingleArticle extends React.Component {
       null
 
     return (
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', height: '100vh'}}>
         <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
@@ -241,8 +242,13 @@ class SingleArticle extends React.Component {
           }}
         />
         
-       
-        <div className="column" style={{height:'150px'}}>
+        <TopText>
+          <Link style={{color:'inherit'}} to="/articles/">
+            <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+            {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
+            <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>Back to articles</h4>
+          </Link>
+        </TopText>
         <ArticleHeader
           background={
             data.nodeArticle.relationships.field_main_image &&
@@ -250,10 +256,9 @@ class SingleArticle extends React.Component {
           }
         >
         </ArticleHeader>
-        </div>
-        <div style={{backgroundColor:'rgba(255,255,255,0.92)', marginTop:'calc(50vh - 60px)'}}>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)'}}>
           <div className="row">
-            <div style={{textAlign:'center', paddingTop:60}} className="column">
+            <div style={{textAlign:'center', paddingTop:45}} className="column">
               <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
               <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
             </div>
@@ -263,7 +268,7 @@ class SingleArticle extends React.Component {
             
             }}>
           
-            <div className="column _75">
+            <div style={{marginLeft:45}} className="column _75">
               <ArticleMain>
                 
                 <LargeCalloutText
@@ -301,7 +306,37 @@ class SingleArticle extends React.Component {
             </div>
           
             <div className="column">
-            <div style={{ marginBottom:15}}>
+              <div style={{
+                      width:180,
+                      height:180,
+                      backgroundColor:'red',
+                      marginBottom:15,
+                      overflow:'hidden',
+                      display:'inline-block',
+                      borderRadius:'50%',
+                    }}>
+                      <img style={{
+                        width:180,
+                      
+
+                      }} src={
+                        data.nodeArticle.relationships.field_author_image &&
+                        data.nodeArticle.relationships.field_author_image.localFile.publicURL
+                      } />
+                    </div>
+                    <div style={{
+                          maxWidth: 300,
+                          fontFamily: 'Lato',
+                          fontWeight: 700,
+                          fontSize: 14,
+                          marginBottom: 60,
+                          letterSpacing: '0.04em'
+                    }} dangerouslySetInnerHTML={{
+                    __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
+                  }}
+                  />
+              <div style={{ marginBottom:15}}>
+                <h4>tags:</h4>
                 {
                 (data.nodeArticle.relationships.field_tags || []).map(tag =>
                   <Link
@@ -314,31 +349,9 @@ class SingleArticle extends React.Component {
                   )
                 }
               </div>
-              <div style={{
-                      width:180,
-                      height:180,
-                      backgroundColor:'red',
-                      marginBottom:15,
-                      overflow:'hidden',
-                      display:'inline-block',
-                      borderRadius:'50%',
-                    }}>
-                      <img style={{
-                        width:300,
-                      
-
-                      }} src={
-                        data.nodeArticle.relationships.field_author_image &&
-                        data.nodeArticle.relationships.field_author_image.localFile.publicURL
-                      } />
-                    </div>
-                    <div style={{maxWidth:300, fontFamily:'Lato', fontSize:'14px'}} dangerouslySetInnerHTML={{
-                    __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
-                  }}
-                  />
               <div style={{height: 200}}/>
-              <button onClick={() => { this.setState({ teaching: false}) }}>
-                All Content
+              <button style={{marginRight:30}} onClick={() => { this.setState({ teaching: false}) }}>
+                Related Content
               </button>
               <button onClick={() => { this.setState({ teaching: true}) }}>
                 Teaching

@@ -24,7 +24,7 @@ export default ({ data }) => {
       Teach topics from the film with specially curated lesson plans, handouts, articles, and interviews.
     </IntroText>
 
-      <h2>Lesson Plans</h2>
+        <h2>Lesson Plans</h2>
       <div className="row" style={{padding: '0 30px'}}>
       {
         data.allNodeLessonPlan.edges.map(edge => (
@@ -39,7 +39,7 @@ export default ({ data }) => {
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_grade_levels && edge.node.field_grade_levels.processed }} />
             </div>
             <div>
-              <h4 style={{marginBottom:15}}>Description:</h4>
+              <h4 style={{marginBottom:15}}>Overview:</h4>
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_lesson_summary && edge.node.field_lesson_summary.processed }} />
             </div>
             <div>

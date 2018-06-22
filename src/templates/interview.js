@@ -3,17 +3,18 @@ import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
 
 const KeyQuote = styled.div`
-  font-size: 42px;
-  font-weight: normal;
+  font-size: 60px;
+  font-weight: 500;
   margin-bottom: 60px;
-  margin-top: 105px;
-  position: relative;
-  left: -440px;
-  width: 900px;
-  // color: hotpink;
+  padding: 192px 120px 108px 120px;
+  width: 100%;
   line-height:1.25;
-  font-style: italic;
+  // font-style: italic;
   text-align: center;
+  border-bottom: solid thin lightgrey;
+  font-family: "orpheuspro";
+  background-color:#2b2b2b;
+  color: snow;
 `
 const AuthorBioText = styled.div`
   width: 300px;
@@ -31,17 +32,19 @@ const AuthorBioText = styled.div`
 `
 const InterviewTitle = styled.div`
   margin-bottom: 45px;
-  font-size:48px;
+  font-size:60px;
+  font-weight: 500;
   line-height:1.25;
   position: relative;
   z-index:99999;
   line-height:1;
+  font-family: "orpheuspro";
+
 `
 const InterviewMain = styled.div`
   padding: 30px;
-  position:absolute;
-  left:72.5%;
-  margin-left:-290px !important;
+  margin-left:72.5%;
+  position: relative;
 `
 
 const Overlay = styled.div`
@@ -70,20 +73,21 @@ const AuthorImage = styled.div`
   height: 420px;
   width: 420px;
   border-radius: 50%;
-  right:calc(55% - 360px);
+  right:calc(55% - 200px);
   background-size: cover;
   background-position: center;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   overflow:hidden;
 `
 const TopText = styled.div`
-  width: calc(100% - 360px);
-  text-align: center;
-  padding: 60px;
+  width: calc(100% - 200px);
+  // text-align: center;
+  padding: 30px 45px;
+  top:0;
   position: fixed;
   background-color: rgba(255,255,255,0.92);
-  min-height: 60px;
-  z-index: 999999999999999;
+  border-bottom: solid thin lightgrey;
+  z-index: 999999999;
 `
 
 const AuthorBio = ({ data }) => (
@@ -153,18 +157,20 @@ class SingleInterview extends React.Component {
         />
         <TopText>
         {/* <img style={{width: 30, transform:'rotate(90deg)'}} src={require('../assets/images/down2.svg')} /> */}
-          <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4>
+          {/* <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4> */}
+          <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+          <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>Back to interviews</h4>
         </TopText>
         <AuthorBioText>
           <AuthorBio data={data}> </AuthorBio>
         </AuthorBioText>
-         
-          <InterviewMain style={{maxWidth:580}} className="column">
-          <KeyQuote
+        <KeyQuote
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,
               }}
             />
+          <InterviewMain style={{maxWidth:580}} className="column">
+         
 
           <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
           <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
