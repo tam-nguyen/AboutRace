@@ -13,12 +13,12 @@ const ClipsIntro = styled.div
 `
 
 export default ({ data }) => (
-	<div className='wrapper'>
-	    <ClipsIntro>
-	  		Various clips from the film featured here. Buy a copy of the film here.
-	  	</ClipsIntro>
-	  	<AllClips data={data} />
-  	</div>
+	<div className='darkwrapper'>
+		<ClipsIntro>
+			Various clips from the film featured here. Buy a copy of the film here.
+		</ClipsIntro>
+		<AllClips data={data} />
+	</div>
 )
 
 export const query = graphql`
