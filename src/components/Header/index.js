@@ -18,7 +18,6 @@ const TopBar = styled.div`
 const NavMenu = styled.div`
   width: 200px;
   padding: 30px;
-  border-right: solid thin #fdeacd;
 `
 
 const linkStyle = {

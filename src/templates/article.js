@@ -67,7 +67,7 @@ const ArticleHeader = styled.div`
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.96);
   border-radius: 6px;
   padding: 30px;
   position: relative;
@@ -85,6 +85,10 @@ const ArticleTitle = styled.div`
     // font-family: 'Lato';
     // font-weight: 700;
     font-style: italic;
+    font-family: "orpheuspro";
+    font-size: 54px;
+    font-weight: 500;
+    font-style: normal;
 `
 const TopText = styled.div`
   width: calc(100% - 200px);
@@ -309,8 +313,8 @@ class SingleArticle extends React.Component {
               <div style={{
                       width:180,
                       height:180,
-                      backgroundColor:'red',
                       marginBottom:15,
+                      border:'solid thin lightgrey',
                       overflow:'hidden',
                       display:'inline-block',
                       borderRadius:'50%',
