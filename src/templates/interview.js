@@ -3,15 +3,18 @@ import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
 
 const KeyQuote = styled.div`
-  font-size: 42px;
-  font-weight: normal;
+  font-size: 60px;
+  font-weight: 500;
   margin-bottom: 60px;
   padding: 192px 120px 108px 120px;
   width: 100%;
   line-height:1.25;
-  font-style: italic;
+  // font-style: italic;
   text-align: center;
   border-bottom: solid thin lightgrey;
+  font-family: "orpheuspro";
+  background-color:#2b2b2b;
+  color: snow;
 `
 const AuthorBioText = styled.div`
   width: 300px;
@@ -29,11 +32,14 @@ const AuthorBioText = styled.div`
 `
 const InterviewTitle = styled.div`
   margin-bottom: 45px;
-  font-size:48px;
+  font-size:60px;
+  font-weight: 500;
   line-height:1.25;
   position: relative;
   z-index:99999;
   line-height:1;
+  font-family: "orpheuspro";
+
 `
 const InterviewMain = styled.div`
   padding: 30px;

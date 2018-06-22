@@ -67,7 +67,8 @@ const ArticleHeader = styled.div`
 `
 
 const ArticleMain = styled.div`
-  // background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 6px;
   padding: 30px;
   position: relative;
   max-width: 735px;
@@ -91,8 +92,8 @@ const TopText = styled.div`
   padding: 30px 45px;
   top:0;
   position: fixed;
-  // background-color: rgba(255,255,255,0.92);
-  background-color: rgba(255, 244, 198, 0.92);
+  background-color: rgba(255,255,255,0.92);
+  // background-color: rgba(255, 244, 198, 0.92);
   min-height: 60px;
   border-bottom: solid thin lightgrey;
   z-index: 999999999;
@@ -255,7 +256,7 @@ class SingleArticle extends React.Component {
           }
         >
         </ArticleHeader>
-        <div style={{backgroundColor:'rgba(255, 244, 198, 0.92)', marginTop:'calc(100vh - 174px)'}}>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)'}}>
           <div className="row">
             <div style={{textAlign:'center', paddingTop:45}} className="column">
               <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
@@ -267,7 +268,7 @@ class SingleArticle extends React.Component {
             
             }}>
           
-            <div className="column _75">
+            <div style={{marginLeft:45}} className="column _75">
               <ArticleMain>
                 
                 <LargeCalloutText
@@ -323,7 +324,14 @@ class SingleArticle extends React.Component {
                         data.nodeArticle.relationships.field_author_image.localFile.publicURL
                       } />
                     </div>
-                    <div style={{maxWidth:300, fontFamily:'Lato', fontSize:'14px', marginBottom:60}} dangerouslySetInnerHTML={{
+                    <div style={{
+                          maxWidth: 300,
+                          fontFamily: 'Lato',
+                          fontWeight: 700,
+                          fontSize: 14,
+                          marginBottom: 60,
+                          letterSpacing: '0.04em'
+                    }} dangerouslySetInnerHTML={{
                     __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
                   }}
                   />
@@ -342,8 +350,8 @@ class SingleArticle extends React.Component {
                 }
               </div>
               <div style={{height: 200}}/>
-              <button onClick={() => { this.setState({ teaching: false}) }}>
-                All Content
+              <button style={{marginRight:30}} onClick={() => { this.setState({ teaching: false}) }}>
+                Related Content
               </button>
               <button onClick={() => { this.setState({ teaching: true}) }}>
                 Teaching

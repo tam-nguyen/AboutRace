@@ -42,8 +42,11 @@ const IntroText = styled.div`
   font-size: 48px;
   line-height: 1.25;
   z-index:99999;
-  margin: 60px 15px;
+  padding: 60px 30px;
+  margin-bottom: 60px;
   font-family: 'Lato';
+  color: snow;
+  background-color: #2b2b2b;
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
@@ -52,7 +55,6 @@ const ArticleTitle = styled.div`
   color: black;
   padding: 0px 30px 0 30px;
   line-height:1.25;
-  color: darkred;
   margin-bottom: 7.5px;
 `
 const ArticleImage = styled.div`
@@ -71,13 +73,13 @@ const ArticleSummary = ({ data }) => {
       flexGrow: 0,
       flexShrink: 1,
       marginBottom: 30,
-      flexBasis: '50%',
+      flexBasis: '33%',
       textDecoration: 'none',
       color: 'inherit'
     }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
-        <div style={{flex: '1 1 auto', position: 'relative', borderBottom: 'solid 3px darkred', marginBottom:30}}>
+        <div style={{flex: '1 1 auto', position: 'relative', marginBottom:30}}>
           <ArticleImage
             background={
               data.relationships.field_main_image &&
@@ -91,7 +93,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, color:'darkred', fontFamily:'Lato', fontSize:16, fontWeight:300, lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{marginBottom:7.5, fontFamily:'Lato', fontSize:16, fontWeight:300, lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">
@@ -120,14 +122,17 @@ const ArticleSummary = ({ data }) => {
 }
 
 export default ({ data }) => (
-  <div className={"articles"}>
-    <GreyBackground />
+  <div>
     <IntroText>
-    Need some introductory text here introducing the 'articles' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
-    </IntroText>
-    {data.allNodeArticle.edges.map((edge, i) => (
-      <ArticleSummary data={edge.node} />
-    ))}
+        Need some introductory text here introducing the 'articles' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
+      </IntroText>
+    <div className={"articles"}>
+      <GreyBackground />
+      
+      {data.allNodeArticle.edges.map((edge, i) => (
+        <ArticleSummary data={edge.node} />
+      ))}
+    </div>
   </div>
 )
 
