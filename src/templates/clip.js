@@ -10,15 +10,7 @@ import {
   ArticleCard
 } from '../components/subtheme'
 
-const DarkBackground = styled.div`
-  background-color: black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -999999;
-  height: 100%;
-  width:100%;
-`
+
 const ChosenClipCard = styled.div`
   height: 414px;
   width: 720px;
@@ -64,7 +56,6 @@ class ClipTemplate extends React.Component {
     const { data } = this.props
     return (
       <div className='darkwrapper'>
-        <DarkBackground />
         <ChosenClip clip={data.nodeClip} />
         <div style={{ padding: 10, margin: 10, border: `1px solid black`}}>
           <button onClick={() => { this.setState({ teaching: false}) }}>

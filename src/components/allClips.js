@@ -5,16 +5,26 @@ import kebabCase from 'lodash/kebabCase'
 
 const ClipCard = styled.div`
 	width: 300px;
-	background-color:#fdeacd;
+	background-color:#292929;
+	color: white;
 	display:inline-block;
 	vertical-align: top;
 	margin-right:30px;
 	margin-bottom: 30px;
 	transition: all .3s;
+	border-radius: 6px;
 	&:hover {
 	  transition: all .3s;
 	}
 	cursor: pointer;
+`
+const ClipCaption = styled.div`
+	font-family: 'Lato';
+	font-size: 14px;
+	line-height: 1.5;
+	font-weight: 300;
+	letter-spacing: 0.04em;
+	padding: 15px 30px 30px 30px;
 `
 const ClipPoster = styled.div`
 	height:200px;
@@ -30,16 +40,18 @@ export const Clip = ({ clip, link }) =>  {
 			<ClipCard>
 				{
 					link ?
-						<Link to={`/clips/${kebabCase(clip.title)}`}>
-							<ClipPoster background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL} >
-
-							</ClipPoster>
+						<Link style={{color:'inherit', textDecoration:'none'}} to={`/clips/${kebabCase(clip.title)}`}>
+							<ClipPoster background={clip.relationships.field_poster_image && clip.relationships.field_poster_image.localFile.publicURL} />
+							<ClipCaption>
+								{clip.title}
+							</ClipCaption>
 						</Link> :
-						<iframe src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+						
+							<iframe src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							
+						
 				}
-				<div className="caption">
-					{clip.title}
-				</div>
+				
 			</ClipCard>
 		)
 }
