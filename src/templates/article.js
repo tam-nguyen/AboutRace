@@ -250,7 +250,7 @@ class SingleArticle extends React.Component {
           <Link style={{color:'inherit'}} to="/articles/">
             <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
             {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
-            <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>Back to articles</h4>
+            <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all articles</h4>
           </Link>
         </TopText>
         <ArticleHeader

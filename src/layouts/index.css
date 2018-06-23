@@ -668,11 +668,11 @@ pre tt:after {
   text-decoration: none;
   cursor: pointer;
   font-weight: 400;
-  transition: background-color .5s;
+  transition: background-color .3s;
 }
 .tag:hover {
   background-color: rgba(59, 59, 59, 0.3);
-  transition: background-color .5s;
+  transition: background-color .3s;
 }
 
 /* @media screen and (min-width: 800px) {

@@ -159,7 +159,7 @@ class SingleInterview extends React.Component {
         {/* <img style={{width: 30, transform:'rotate(90deg)'}} src={require('../assets/images/down2.svg')} /> */}
           {/* <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4> */}
           <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
-          <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>Back to interviews</h4>
+          <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all interviews</h4>
         </TopText>
         <AuthorBioText>
           <AuthorBio data={data}> </AuthorBio>
