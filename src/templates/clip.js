@@ -12,12 +12,12 @@ import {
 
 
 const ChosenClipCard = styled.div`
-  height: 414px;
-  width: 720px;
-  margin-bottom: 30px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: auto;
   margin-right: 30px;
-  display: inline-block;
-  vertical-align:top;
 `
 const ChosenClipCaption = styled.div`
   font-size: 22px;
@@ -29,9 +29,11 @@ const ChosenClipCaption = styled.div`
   letter-spacing: 0.02em;
 `
 const Chosen = styled.div`
-  background-color:#404040;
+  background-color:black;
+  height:480px;
   margin-bottom: 60px;
-  padding: 30px;
+  padding: 0px;
+  position: relative;
   display: flex;
   align-items: center;
 `

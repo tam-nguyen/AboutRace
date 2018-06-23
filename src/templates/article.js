@@ -67,7 +67,7 @@ const ArticleHeader = styled.div`
 `
 
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.96);
   border-radius: 6px;
   padding: 30px;
   position: relative;
@@ -85,6 +85,10 @@ const ArticleTitle = styled.div`
     // font-family: 'Lato';
     // font-weight: 700;
     font-style: italic;
+    font-family: "orpheuspro";
+    font-size: 54px;
+    font-weight: 500;
+    font-style: normal;
 `
 const TopText = styled.div`
   width: calc(100% - 200px);
@@ -246,7 +250,7 @@ class SingleArticle extends React.Component {
           <Link style={{color:'inherit'}} to="/articles/">
             <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
             {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
-            <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>Back to articles</h4>
+            <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all articles</h4>
           </Link>
         </TopText>
         <ArticleHeader
@@ -309,8 +313,8 @@ class SingleArticle extends React.Component {
               <div style={{
                       width:180,
                       height:180,
-                      backgroundColor:'red',
                       marginBottom:15,
+                      border:'solid thin lightgrey',
                       overflow:'hidden',
                       display:'inline-block',
                       borderRadius:'50%',
