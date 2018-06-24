@@ -123,9 +123,10 @@ const ArticleSummary = ({ data }) => {
 
 export default ({ data }) => (
   <div>
-    <IntroText>
-        Need some introductory text here introducing the 'articles' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
-      </IntroText>
+    <IntroText dangerouslySetInnerHTML={{
+                  __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
+                }} />
+        
     <div className={"articles"}>
       <GreyBackground />
       
@@ -138,6 +139,11 @@ export default ({ data }) => (
 
 export const query = graphql`
   query ArticlesQuery {
+    taxonomyTermArticlesPage {
+      description {
+        processed
+      }
+    }
     allNodeArticle {
       edges {
         node {
