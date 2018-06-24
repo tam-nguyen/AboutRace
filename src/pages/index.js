@@ -45,7 +45,7 @@ const HomeBackground = styled.div`
 `
 
 const HomeThemeImage = styled.div`
-  height: 400px;
+  height: 200px;
   color: white;
   font-family: 'Lato';
   font-size:24px;
