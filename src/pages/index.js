@@ -63,28 +63,28 @@ const HomeThemeImage = styled.div`
                       props.background ? `url(${props.background})` : `none`};
 `
 
-const SeriesComponent = ({ data }) => (
-  // <div>
-  //   <div style={{
-  //     // color:'white',
-  //     margin:'0 auto',
-  //     maxWidth:700
-  //   }}
-  //   dangerouslySetInnerHTML={{
-  //     __html: data.taxonomyTermTheSeries.field_original_statement_from_ex && data.taxonomyTermTheSeries.field_original_statement_from_ex.processed,
-  //   }}
-  //   />
-  //   <div style={{
-  //     // color:'white',
-  //     margin:'0 auto',
-  //     maxWidth:700
-  //   }}
-  //   dangerouslySetInnerHTML={{
-  //     __html: data.field_updated_statement_from_the && data.field_updated_statement_from_the.processed,
-  //   }}
-  //   />
-  // </div>
-)
+// const SeriesComponent = ({ data }) => (
+//   // <div>
+//   //   <div style={{
+//   //     // color:'white',
+//   //     margin:'0 auto',
+//   //     maxWidth:700
+//   //   }}
+//   //   dangerouslySetInnerHTML={{
+//   //     __html: data.taxonomyTermTheSeries.field_original_statement_from_ex && data.taxonomyTermTheSeries.field_original_statement_from_ex.processed,
+//   //   }}
+//   //   />
+//   //   <div style={{
+//   //     // color:'white',
+//   //     margin:'0 auto',
+//   //     maxWidth:700
+//   //   }}
+//   //   dangerouslySetInnerHTML={{
+//   //     __html: data.field_updated_statement_from_the && data.field_updated_statement_from_the.processed,
+//   //   }}
+//   //   />
+//   // </div>
+// )
 
 const ThemeComponent = ({ data }) => (
   <div style={{
@@ -146,7 +146,7 @@ export default ({ data }) => (
     <TrailerClipWrapper>
       <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </TrailerClipWrapper>
-    <SeriesComponent data={data} />
+    {/* <SeriesComponent data={data} /> */}
     <div style={{
       color: 'white',
       textAlign: 'center',
