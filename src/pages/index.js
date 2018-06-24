@@ -166,15 +166,7 @@ export default ({ data }) => (
 
 export const query = graphql`
   query IndexQuery {
-    taxonomyTermTheSeries {
-      id
-      field_original_statement_from_ex {
-        processed
-      }
-      field_updated_statement_from_the {
-        processed
-      }
-    }
+    
     allTaxonomyTermThemes {
       edges {
         node {

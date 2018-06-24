@@ -144,9 +144,9 @@ const InterviewSummary = ({ data }) => {
 
 export default ({ data }) => (
   <div>
-    <IntroText>
-      Need some introductory text here introducing the 'interviews' as originally part of the 2004 film, suggesting their content may be dated, and that they are not intended to represent a comprehensive collection of views on race, so much as a sampling of voices... (etc.)
-    </IntroText>
+    <IntroText dangerouslySetInnerHTML={{
+                  __html: data.taxonomyTermInterviewsPage.description && data.taxonomyTermInterviewsPage.description.processed,
+                }} />
     <div className={"interviews"}>
     <GreyBackground />
   
@@ -161,6 +161,12 @@ export default ({ data }) => (
 
 export const query = graphql`
   query InterviewsQuery {
+    taxonomyTermInterviewsPage {
+      id
+      description {
+        processed
+      }
+    }
     allNodeInterview {
         edges {
           node {
