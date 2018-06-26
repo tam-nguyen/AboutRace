@@ -45,15 +45,10 @@ const HomeBackground = styled.div`
 `
 
 const HomeThemeImage = styled.div`
-  height: 400px;
+  height: 100%;
   color: white;
-  font-family: 'Lato';
-  font-size:24px;
-  line-height:1.5;
-  text-align: center;
-  letter-spacing: 0.04em;
   background-position: center center;
-  background-size: 120%;
+  background-size: 100%;
   transition: all .5s;
   &:hover {
     background-size:125%;
@@ -61,6 +56,27 @@ const HomeThemeImage = styled.div`
   }
   background-image: ${props =>
                       props.background ? `url(${props.background})` : `none`};
+`
+const ThemeOverview = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  // transform: translateX(90%);
+  width: 40%;
+  color: #2b2b2b;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(255,255,255, .88);
+  transition: all .3s;
+  &:hover {
+    // transform: translateX(-50%);
+    transition: all .3s;
+  }
 `
 
 // const SeriesComponent = ({ data }) => (
@@ -88,14 +104,16 @@ const HomeThemeImage = styled.div`
 
 const ThemeComponent = ({ data }) => (
   <div style={{
-    backgroundColor: 'red',
-    width: '100%',
-    height: 400,
-    marginBottom: 0,
+    border: 'solid thin lightgrey',
+    borderRadius:6,
+    width: '90%',
+    marginLeft:'5%',
+    height: '60vh',
+    marginBottom: 60,
     marginRight: 0,
     display:'inline-block',
     verticalAlign:'top',
-    borderRadius: 0,
+    position:'relative',
     overflow: 'hidden'
 
     }}
@@ -103,7 +121,20 @@ const ThemeComponent = ({ data }) => (
     <Link style={{textDecoration:'none'}} to={`/themes/${kebabCase(data.name)}`}>
       <HomeThemeImage background={data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}>
        <div className='totalDimmer'>
-        {data.name}
+        <ThemeOverview>
+          <p style={{marginBottom:0}} dangerouslySetInnerHTML={{
+                    __html: data.description && data.description.processed,
+              }}  />
+          </ThemeOverview>
+
+        <h4 style={{marginBottom:7.5}}>Explore</h4>
+        <span style={{
+          fontFamily: 'Lato',
+          fontSize:36,
+          lineHeight:1.25,
+          textAlign: 'left',
+          letterSpacing: '0.04em'
+        }}>{data.name}</span>
         </div>
       </HomeThemeImage>
     </Link>
@@ -172,6 +203,9 @@ export const query = graphql`
         node {
           id
           name
+          description {
+            processed
+          }
           relationships {
             field_theme_image {
               localFile {
