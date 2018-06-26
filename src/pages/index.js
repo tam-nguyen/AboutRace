@@ -45,15 +45,14 @@ const HomeBackground = styled.div`
 `
 
 const HomeThemeImage = styled.div`
+<<<<<<< HEAD
   height: 200px;
+=======
+  height: 100%;
+>>>>>>> d51b0ab0af0595b72d73a05a2d199371bc6dd23f
   color: white;
-  font-family: 'Lato';
-  font-size:24px;
-  line-height:1.5;
-  text-align: center;
-  letter-spacing: 0.04em;
   background-position: center center;
-  background-size: 120%;
+  background-size: 100%;
   transition: all .5s;
   &:hover {
     background-size:125%;
@@ -109,14 +108,16 @@ const ThemeOverview = styled.div`
 
 const ThemeComponent = ({ data }) => (
   <div style={{
-    backgroundColor: 'red',
-    width: '100%',
-    height: 400,
-    marginBottom: 0,
+    border: 'solid thin lightgrey',
+    borderRadius:6,
+    width: '90%',
+    marginLeft:'5%',
+    height: '60vh',
+    marginBottom: 60,
     marginRight: 0,
     display:'inline-block',
     verticalAlign:'top',
-    borderRadius: 0,
+    position:'relative',
     overflow: 'hidden'
 
     }}
@@ -124,7 +125,20 @@ const ThemeComponent = ({ data }) => (
     <Link style={{textDecoration:'none'}} to={`/themes/${kebabCase(data.name)}`}>
       <HomeThemeImage background={data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}>
        <div className='totalDimmer'>
-        {data.name}
+        <ThemeOverview>
+          <p style={{marginBottom:0}} dangerouslySetInnerHTML={{
+                    __html: data.description && data.description.processed,
+              }}  />
+          </ThemeOverview>
+
+        <h4 style={{marginBottom:7.5}}>Explore</h4>
+        <span style={{
+          fontFamily: 'Lato',
+          fontSize:36,
+          lineHeight:1.25,
+          textAlign: 'left',
+          letterSpacing: '0.04em'
+        }}>{data.name}</span>
         </div>
       </HomeThemeImage>
     </Link>
@@ -193,6 +207,9 @@ export const query = graphql`
         node {
           id
           name
+          description {
+            processed
+          }
           relationships {
             field_theme_image {
               localFile {
