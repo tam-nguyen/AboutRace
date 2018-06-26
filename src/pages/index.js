@@ -62,6 +62,27 @@ const HomeThemeImage = styled.div`
   background-image: ${props =>
                       props.background ? `url(${props.background})` : `none`};
 `
+const ThemeOverview = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  // transform: translateX(90%);
+  width: 40%;
+  color: #2b2b2b;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(234, 241, 238, 1);
+  transition: all .3s;
+  &:hover {
+    // transform: translateX(-50%);
+    transition: all .3s;
+  }
+`
 
 // const SeriesComponent = ({ data }) => (
 //   // <div>

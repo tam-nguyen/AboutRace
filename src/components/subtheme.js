@@ -70,8 +70,9 @@ const reorder = (arr, order) => {
 const ArticleTitle = styled.div`
   font-family: 'Lato';
   font-size:30px;
-  font-weight: 700;
-  color: black;
+  font-weight: 400;
+  color: #2b2b2b;
+  letter-spacing: 0.03em;
   padding: 0px 30px 0 0px;
   line-height:1.25;
   margin-bottom: 15px;

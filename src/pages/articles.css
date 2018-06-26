@@ -17,9 +17,10 @@
     flex-wrap: wrap;
     position: relative;
     flex-direction: column;
-    -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-    box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+    -webkit-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    -moz-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    
     transition: all .3s;
     /* border: solid 4px black; */
 }
@@ -50,9 +51,9 @@
   }
 
 .articleExcerpt {
-    line-height: 1.5;
+    line-height: 1.25;
     font-family: 'Lato';
-    font-size: 17px;
+    font-size: 16px;
     letter-spacing: 0.02em;
     padding: 0 30px 0px 30px;
     margin-bottom: 15px;

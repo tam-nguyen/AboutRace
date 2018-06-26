@@ -51,8 +51,9 @@ const IntroText = styled.div`
 const ArticleTitle = styled.div`
   font-family: 'Lato';
   font-size:20px;
-  font-weight: 700;
-  color: black;
+  font-weight: 400;
+  color: #2b2b2b;
+  letter-spacing: 0.03em;
   padding: 0px 30px 0 30px;
   line-height:1.25;
   margin-bottom: 7.5px;
@@ -93,7 +94,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, fontFamily:'Lato', fontSize:16, fontWeight:300, lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.03em', lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">

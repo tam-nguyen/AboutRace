@@ -260,7 +260,7 @@ class SingleArticle extends React.Component {
           }
         >
         </ArticleHeader>
-        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)'}}>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', marginLeft: 30}}>
           <div className="row">
             <div style={{textAlign:'center', paddingTop:45}} className="column">
               <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
