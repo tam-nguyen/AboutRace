@@ -80,7 +80,7 @@ const ArticleSummary = ({ data }) => {
     }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
-        <div style={{flex: '1 1 auto', position: 'relative', marginBottom:30}}>
+        <div style={{flex: '1 1 auto', position: 'relative', marginBottom:15}}>
           <ArticleImage
             background={
               data.relationships.field_main_image &&
@@ -94,7 +94,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.03em', lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.03em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">

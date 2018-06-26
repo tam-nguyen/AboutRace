@@ -68,7 +68,6 @@ const ArticleHeader = styled.div`
 
 const ArticleMain = styled.div`
   background-color: rgba(255, 255, 255, 0.96);
-  border-radius: 6px;
   padding: 30px;
   position: relative;
   max-width: 735px;
@@ -260,19 +259,14 @@ class SingleArticle extends React.Component {
           }
         >
         </ArticleHeader>
-        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', marginLeft: 30}}>
-          <div className="row">
-            <div style={{textAlign:'center', paddingTop:45}} className="column">
-              <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-              <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
-            </div>
-          </div>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
+          
 
           <div className="row" style={{
             
             }}>
           
-            <div style={{marginLeft:45}} className="column _75">
+            <div style={{marginLeft:0, marginRight:30}} className="column _75">
               <ArticleMain>
                 
                 <LargeCalloutText
@@ -309,7 +303,13 @@ class SingleArticle extends React.Component {
               </ArticleMain>
             </div>
           
-            <div className="column">
+            <div style={{textAlign:'center'}} className="column">
+              <div className="row">
+                <div style={{textAlign:'center', paddingTop:45}} className="column">
+                  <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+                  <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+                </div>
+              </div>
               <div style={{
                       width:180,
                       height:180,
@@ -333,6 +333,7 @@ class SingleArticle extends React.Component {
                           fontFamily: 'Lato',
                           fontWeight: 700,
                           fontSize: 14,
+                          margin: '0 auto',
                           marginBottom: 60,
                           letterSpacing: '0.04em'
                     }} dangerouslySetInnerHTML={{
