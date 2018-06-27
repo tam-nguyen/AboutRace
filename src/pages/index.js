@@ -45,11 +45,7 @@ const HomeBackground = styled.div`
 `
 
 const HomeThemeImage = styled.div`
-<<<<<<< HEAD
-  height: 200px;
-=======
   height: 100%;
->>>>>>> d51b0ab0af0595b72d73a05a2d199371bc6dd23f
   color: white;
   background-position: center center;
   background-size: 100%;
@@ -68,14 +64,19 @@ const ThemeOverview = styled.div`
   bottom: 0;
   // transform: translateX(90%);
   width: 40%;
-  color: #2b2b2b;
+  // color: #25292b;
+  color: white;
   font-size: 16px;
   font-weight: normal;
+  font-family: 'Lato';
   padding: 60px;
+  line-height: 1.5;
+  letter-spacing: 0.011em;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(234, 241, 238, 1);
+  // background-color: rgb(197, 215, 224);
+  background-color: rgba(37, 41, 43, 0.78);
   transition: all .3s;
   &:hover {
     // transform: translateX(-50%);
@@ -108,8 +109,7 @@ const ThemeOverview = styled.div`
 
 const ThemeComponent = ({ data }) => (
   <div style={{
-    border: 'solid thin lightgrey',
-    borderRadius:6,
+    borderRadius:45,
     width: '90%',
     marginLeft:'5%',
     height: '60vh',
@@ -118,8 +118,8 @@ const ThemeComponent = ({ data }) => (
     display:'inline-block',
     verticalAlign:'top',
     position:'relative',
-    overflow: 'hidden'
-
+    overflow: 'hidden',
+    boxShadow: 'rgba(39, 39, 39, 0.58) 0px 3px 57px 0px'
     }}
   >
     <Link style={{textDecoration:'none'}} to={`/themes/${kebabCase(data.name)}`}>
@@ -131,13 +131,13 @@ const ThemeComponent = ({ data }) => (
               }}  />
           </ThemeOverview>
 
-        <h4 style={{marginBottom:7.5}}>Explore</h4>
+        <h4 style={{marginBottom:7.5, letterSpacing:'0.2em', fontSize:18}}>Look closer:</h4>
         <span style={{
           fontFamily: 'Lato',
-          fontSize:36,
-          lineHeight:1.25,
+          fontSize:48,
+          lineHeight:1,
           textAlign: 'left',
-          letterSpacing: '0.04em'
+          letterSpacing: '0.011em'
         }}>{data.name}</span>
         </div>
       </HomeThemeImage>
@@ -178,20 +178,25 @@ const TrailerClipWrapper = styled.div`
 
 export default ({ data }) => (
   <div>
+    <div style={{textAlign:'center', fontSize:96, lineHeight:1.5, fontFamily:'Lato', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700}}>Race</div>
+    <div style={{textAlign: 'center', fontFamily:'Lato', fontSize:60}}>The Power of an Illusion</div>
     <TrailerClipWrapper>
       <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </TrailerClipWrapper>
     {/* <SeriesComponent data={data} /> */}
-    <div style={{
+   
+    <div className='wrapper'>
+      <HomeBackground />
+      <div style={{
       color: 'white',
       textAlign: 'center',
       fontFamily: 'Lato',
-      marginBottom: 30,
-      textTransform: 'uppercase',
-      letterSpacing: '0.12em'
+      fontSize:36,
+      fontWeight:300,
+      letterSpacing: '0.04em',
+      paddingTop:120,
+      marginBottom: 75
     }}>Explore themes from the film:</div>
-    <div className='wrapper'>
-      <HomeBackground />
       {data.allTaxonomyTermThemes.edges.map(({ node }) => (
         <ThemeComponent data={node} />
       ))}

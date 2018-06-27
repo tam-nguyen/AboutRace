@@ -51,6 +51,7 @@ const IntroText = styled.div`
   color: snow;
   // background-color: #2b2b2b;
   background-color: #323232;
+  background-color: #25292b;
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
