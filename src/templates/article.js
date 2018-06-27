@@ -220,6 +220,25 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
+    let background = data.nodeArticle.relationships.field_main_image &&
+            data.nodeArticle.relationships.field_main_image.localFile.publicURL;
+
+    const {allImageSharp} = data;
+
+    allImageSharp.edges.map( ({node}) => {
+      const {
+        original,
+        resolutions
+      } = node;
+
+      const isBackground = original.src.toLowerCase() === background.toLowerCase();
+
+      if(isBackground) {
+        background = resolutions.src;
+      }
+
+    })
+
     return (
       <div style={{position:'relative', height: '100vh'}}>
         <ArticleBackground />
@@ -250,10 +269,7 @@ class SingleArticle extends React.Component {
           </div>
         </TopText>
         <ArticleHeader
-          background={
-            data.nodeArticle.relationships.field_main_image &&
-            data.nodeArticle.relationships.field_main_image.localFile.publicURL
-          }
+          background={background}
         >
         </ArticleHeader>
         <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', position:'relative', zIndex:999, marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
@@ -417,6 +433,21 @@ export default SingleArticle;
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
+    allImageSharp {
+      edges {
+        node {
+          id
+          original {
+            width
+            height
+            src
+          }
+          resolutions(width: 400) {
+            src
+          }
+        }
+      }
+    }
     nodeArticle(id: { eq: $id }) {
       id
       field_old_article_discl {
@@ -480,6 +511,7 @@ export const pageQuery = graphql`
         field_main_image {
           localFile {
             publicURL
+
           }
         }
       }
