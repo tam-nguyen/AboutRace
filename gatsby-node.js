@@ -15,6 +15,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
   return new Promise((resolve, reject) => {
     const themeTemplate = path.resolve(`src/templates/theme.js`)
+    const subThemeTemplate = path.resolve(`src/templates/subtheme.js`)
     const articleTemplate = path.resolve(`src/templates/article.js`)
     const clipTemplate = path.resolve(`src/templates/clip.js`)
     const interviewTemplate = path.resolve(`src/templates/interview.js`)
@@ -29,9 +30,30 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               node {
                 id
                 name
+                relationships {
+                  field_theme_image {
+                    localFile {
+                      publicURL
+                    }
+                  }
+                  subthemes: backref_field_belongs_to_theme {
+                    id
+                    name
+                  }
+                }
               }
             }
           }
+
+          allTaxonomyTermSubthemes {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
+
           allNodeArticle {
             edges {
               node {
@@ -77,8 +99,28 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
       // Create blog posts pages.
       _.each(result.data.allTaxonomyTermThemes.edges, edge => {
+        const {field_theme_image, subthemes} = edge.node.relationships;
+        const {name} = edge.node;
+        const themeName = name;
+        const path = `/themes/${kebabCase(name)}`;
+        
+        subthemes.map( ({id, name}) => 
+          createPage({
+            path: `/subthemes/${kebabCase(name)}`, // required
+            component: subThemeTemplate,
+            context: {
+              id,
+              field_theme_image,
+              theme: {
+                path,
+                name: themeName
+              }
+            },
+          })
+        )
+        
         createPage({
-          path: `/themes/${kebabCase(edge.node.name)}`, // required
+          path,
           component: themeTemplate,
           context: {
             id: edge.node.id,

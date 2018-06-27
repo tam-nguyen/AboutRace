@@ -51,16 +51,6 @@ const ThemeComponent = ({ data }) => (
           }}
         />
       </Link>
-   
-      {/* {data.relationships.subthemes ? (
-        <ul>
-          {data.relationships.subthemes.map(subTheme => (
-            <SubThemeComponent data={subTheme} />
-          ))}
-        </ul>
-      ) : (
-        <div>No subthemes</div>
-      )} */}
     </div>
   )
   
@@ -70,9 +60,11 @@ export default ({ data }) => (
     <IntroText>
     Explore themes raised in the film more deeply via collections of interviews, articles, questions, and clips.
   </IntroText>
-    {data.allTaxonomyTermThemes.edges.map((edge, i) => (
-      <ThemeComponent key={i} data={edge.node} />
-    ))}
+    {
+      data.allTaxonomyTermThemes.edges.map((edge, i) =>
+        <ThemeComponent key={i} data={edge.node} />
+      )
+    }
   </div>
 )
 
