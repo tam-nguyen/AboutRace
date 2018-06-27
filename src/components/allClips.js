@@ -32,7 +32,7 @@ const ClipPoster = styled.div`
 	background-color:red;
 	background-size:cover;
 	background-position: center;
-    background-image: ${props => props.background ?  `url(${props.background})` : `none`};
+  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
 `
 
 export const Clip = ({ clip, link }) =>  {

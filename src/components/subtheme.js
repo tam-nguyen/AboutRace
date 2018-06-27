@@ -1,16 +1,20 @@
-const React = require('react')
-const range = require('range')
-const ReactFlex = require('react-flex')
-require('react-flex/index.css')
+
 import Img from 'gatsby-image'
-const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
-import Link, { navigateTo } from 'gatsby-link';
+import Link from 'gatsby-link';
 import Card from './card.js';
 import RCCard from './rccard.js';
-const queryString = require('query-string');
-import './subtheme.css';
+import { Overlay, OverlayHeader, OverlayBody }  from './overlay'
 import kebabCase from 'lodash/kebabCase'
+import './subtheme.css';
+
+require('react-flex/index.css')
+
+const React = require('react')
+const range = require('range');
+const ReactFlex = require('react-flex');
+const FlipMove = require('react-flip-move');
+const queryString = require('query-string');
 
 const Video = styled.video`
   width: 100%;
@@ -92,13 +96,6 @@ class PlayablePoster extends React.Component {
 
     if (this.state.play) {
       return (
-        /*
-        <Video controls>
-          <source
-            src={this.props.clip.field_external_video_url.uri}
-          />
-        </Video>
-        */
         <div className={'poster'}>
           <iframe src="https://player.vimeo.com/video/18769983?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
@@ -124,7 +121,8 @@ class PlayablePoster extends React.Component {
 
 export class ArticleCard extends React.Component {
   render() {
-    const { article, i, relatedContent, style = {} } = this.props 
+    const { article, i, relatedContent, style = {}, onOpen } = this.props
+    const link = `/articles/${kebabCase(article.title)}` 
     return (
       relatedContent ?
         <RCCard style={{...style, padding:30}} key={`article-${i}`} article={article} imgSrc={article.relationships.field_main_image && article.relationships.field_main_image.localFile && article.relationships.field_main_image.localFile.publicURL } title={article.title} type="Article" slug="article" changed={article.changed}>
@@ -132,7 +130,15 @@ export class ArticleCard extends React.Component {
           <p className={'RCcard-large-text'} dangerouslySetInnerHTML={{ __html: article.field_short_version.processed }} />
         )}
         </RCCard> :
-        <Card style={{...style, padding:0}} key={`article-${i}`} title={article.title} type="Article" slug="article" changed={article.changed} link={`/articles/${kebabCase(article.title)}`}>
+        <Card
+          style={{...style, padding:0}}
+          key={`article-${i}`}
+          title={article.title}
+          type="Article"
+          slug="article"
+          changed={article.changed}
+          onClick={ () => onOpen(link)}
+        >
         <div className='articleCardImage' style={{ backgroundImage: article.relationships.field_main_image ? `url(${article.relationships.field_main_image.localFile.publicURL})` : null}}/>
         {article.field_short_version && (
           <div style={{padding: 30}}>
@@ -215,8 +221,8 @@ export class QuickFactCard extends React.Component {
   }
 }
 
-export const getCards = (relationships, queryFilter, relatedContent, linkableClip) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} article={article} i={i} relatedContent={relatedContent} />)),
+export const getCards = (relationships, queryFilter, relatedContent, linkableClip, onOpen) => [
+  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} interview={interview} i={i} relatedContent={relatedContent} />)),
@@ -271,9 +277,6 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
           >Sort by: </span>
           <button onClick={() => {
             toggleFilter(null)
-            // const newQueryParams = { ... queryParams }
-            // delete newQueryParams[name]
-            // navigateTo(`?${queryString.stringify(newQueryParams)}`)
           }}
           style={
             (!filter ? FilterButtonStyleActive : FilterButtonStyle)
@@ -289,20 +292,10 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
             key={filterType}
             onClick={() => {
               toggleFilter(filterSlug)
-              // const newQueryParams = { ... queryParams }
-              // if (newQueryParams[name] == filterSlug){
-              //   delete newQueryParams[name]
-              // } else {
-              //   newQueryParams[name] = filterSlug;
-              // }
-              // navigateTo(`?${queryString.stringify(newQueryParams)}`)
             }}
             style={{
               ...(filter == filterSlug ? FilterButtonStyleActive : FilterButtonStyle),
-              float: (
-                (filterSlug === `recent`) ?
-                `none` : `none`
-              ),
+              float: 'none',
               fontWeight:700, letterSpacing:'0.2em', color:'hotpink'
             }}
           >
@@ -313,18 +306,60 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
   </div>
 )
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+
+const PopupCard = styled.div`
+  position: relative;
+  width: 33vw;
+  height: 33vw;
+  min-width: 300px;
+  min-height: 300px;
+  background-color: gray;
+  border-radius: 100px;
+  border: 1px solid grey;
+  // padding: 50px;
+  overflow: hidden;
+`
+
+const CloseButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+`
+
+const TopImage = styled.div`
+  height:50%;
+  width:100%;
+  background-color:red;
+  background-size:cover;
+  background-position: center;
+  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
+`
+
+const Description = styled.div`
+`
 
 class SubthemeSection extends React.Component {
 
   constructor(props){
-    console.log('creating subsection')
     super(props)
 
     this.updateOrder(props, null)
     this.state = { 
       numCards: NUM_CARDS_TO_SHOW,
-      filter: null, 
+      filter: null,
+      popup: false,
+      card: null
     }
+
+    this.close = this.close.bind(this)
+    this.open = this.open.bind(this)
     this.toggleFilter = this.toggleFilter.bind(this)
   }
 
@@ -340,7 +375,8 @@ class SubthemeSection extends React.Component {
     return (
       // nextProps.filter !== this.props.filter ||
       nextState.numCards !== this.state.numCards ||
-      nextState.filter !== this.state.filter
+      nextState.filter !== this.state.filter ||
+      nextState.popup !== this.state.popup
     );
   }
 
@@ -356,19 +392,33 @@ class SubthemeSection extends React.Component {
     this.order = shuffle(range.range(length))
   }
 
+  close = () => {
+    this.setState({
+      popup: !this.state.popup,
+      card: null
+    })
+  }
+
+  open = (link, data) => {
+    console.log('open', link, data)
+    this.setState({
+      popup: true,
+      card: {...data, link}
+    })
+  }
+
   render() {
     const subtheme = this.props.data
-    console.log(this.state)
     const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
-    const { filter } = this.state;
+    const { filter, popup, card } = this.state;
 
     const allCards = filter ?
-      getCards(subtheme.relationships, filter, null, true).sort((a, b) => (b.props.changed - a.props.changed)) :
-      reorder(getCards(subtheme.relationships, filter, null, true), this.order)
-      // getCards(subtheme.relationships, filter, null, true)
+      getCards(subtheme.relationships, filter, null, true, this.open).sort((a, b) => (b.props.changed - a.props.changed)) :
+      reorder(getCards(subtheme.relationships, filter, null, true, this.open), this.order)
+      // getCards(subtheme.relationships, filter, null, true, this.open)
 
     const description = subtheme.description
       ? <div
@@ -380,14 +430,28 @@ class SubthemeSection extends React.Component {
 
     return (
       <div className={this.props.className}>
+        <Overlay id="subtheme-overlay" visible={popup}>
+          <OverlayBody>
+            <Row>
+              { 
+                card && <PopupCard>
+                  <CloseButton onClick={this.close}>Close</CloseButton>
+                  <TopImage background={card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL} />
+                  <h1>{card.title}</h1>
+                  <Description
+                    dangerouslySetInnerHTML={{ __html:card.field_short_version.processed}}
+                  />
+                  <Link to={card.link}>Read the article</Link>
+                </PopupCard>
+              }
+            </Row>
+          </OverlayBody>
+        </Overlay>
 
         <SubthemeTitle>{subtheme.name}</SubthemeTitle>
          { description }
 
         <Filters
-          // queryParams={this.props.queryParams}
-          // filters={this.state.filters}
-          // value={this.state.filters[filter]}
           toggleFilter={this.toggleFilter}
           name={this.props.name}
           filter={filter}
