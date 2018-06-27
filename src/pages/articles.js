@@ -29,7 +29,10 @@ import kebabCase from 'lodash/kebabCase'
 //   order: 2;
 // }
 const GreyBackground = styled.div`
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
+  // background-color: #d3e6de;
+  // background-color: rgba(239, 255, 248, 0.92);
+  background-color: rgba(103, 165, 195, 0.14901960784313725);
   position: fixed;
   top: 0;
   left: 0;
@@ -46,7 +49,8 @@ const IntroText = styled.div`
   margin-bottom: 60px;
   font-family: 'Lato';
   color: snow;
-  background-color: #2b2b2b;
+  // background-color: #2b2b2b;
+  background-color: #323232;
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
@@ -94,7 +98,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.03em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.04em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">

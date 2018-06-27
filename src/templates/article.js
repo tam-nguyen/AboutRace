@@ -12,62 +12,40 @@ const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
 
-// const MainContent = styled.div`
-//   max-width: 700px;
-//   margin-left: 48%;
-//   margin-right: 12%;
-// `
 const LargeCalloutText = styled.div`
 
 `
-const HeaderDimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
+
+const ArticleBackground = styled.div`
+  // background-color: rgba(239, 255, 248, 0.92);
+  // background-color:#d3e6de;
+  background-color: rgba(103, 165, 195, 0.14901960784313725);
+  position: fixed;
   top:0;
-  z-index: 99999999;
-  height:210px;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+16,fcfcfc+100&0.93+16,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.93) 16%, rgba(252,252,252,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed000000', endColorstr='#00fcfcfc',GradientType=0 ); /* IE6-9 */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -9999;
 `
-const Dimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:21vh;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+100 */
-background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.57) 61%, rgba(0,0,0,0.93) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
-`
+
 const ArticleHeader = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: calc(100% - 380px);
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
-  background-size: 110%;
+  background-size: cover;
   background-position: center;
   // border: solid 4px black;
   background-color: lightgrey;
   position: fixed;
-  left: 200px;
-  top:0;
+  left: 290px;
+  top:90px;
+  bottom: 90px;
   z-index: -999;
-  text-align: center;
+  border-radius: 60px;
 `
-
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.6);
   padding: 30px;
   position: relative;
   max-width: 735px;
@@ -95,11 +73,11 @@ const TopText = styled.div`
   padding: 30px 45px;
   top:0;
   position: fixed;
-  background-color: rgba(255,255,255,0.92);
+  // background-color: rgba(255,255,255,0.92);
   // background-color: rgba(255, 244, 198, 0.92);
   min-height: 60px;
-  border-bottom: solid thin lightgrey;
-  z-index: 999999999;
+  // border-bottom: solid thin lightgrey;
+  z-index: 99;
 `
 
 
@@ -229,6 +207,7 @@ class SingleArticle extends React.Component {
 
     return (
       <div style={{position:'relative', height: '100vh'}}>
+        <ArticleBackground />
         <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
@@ -259,7 +238,7 @@ class SingleArticle extends React.Component {
           }
         >
         </ArticleHeader>
-        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', position:'relative', zIndex:999, marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
           
 
           <div className="row" style={{

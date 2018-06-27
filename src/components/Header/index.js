@@ -86,7 +86,9 @@ constructor(props) {
           // backgroundColor: 'rgba(41, 41, 41, 0.8196078431372549)',
           // backgroundColor: 'rgba(141, 179, 63, 0.82)',
           // backgroundColor: 'rgba(168, 179, 63, 0.82)',
-          backgroundColor:'rgba(63, 179, 136, 0.66)'
+          // backgroundColor:'rgba(63, 179, 136, 0.66)',
+          // backgroundColor:'#6ab297',
+          backgroundColor: '#adc6d2'
         }}>
       {/* <Menu 
        isOpen={this.state.menuOpen}
