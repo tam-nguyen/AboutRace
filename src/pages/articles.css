@@ -7,7 +7,7 @@
   
 .articleCard {
     background-color: white;
-    height: 400px;
+    min-height: 400px;
     margin: 15px;
     border-radius: 24px;
     overflow: hidden;

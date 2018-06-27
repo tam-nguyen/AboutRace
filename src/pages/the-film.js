@@ -82,9 +82,14 @@ const EpisodeItem = ({ episode, queryParams }) => (
 const getEpisodeByNumber = episodeNumber => episodes.find(episode => episode.episodeNumber === episodeNumber)
 const safeGet = (object, fieldName) => object ? object[fieldName] : null
 
-const closeHandler = () => {
-  navigateTo(`?`)
-}
+const closeHandler = () => navigateTo(`?`)
+
+const CloseButton = styled.div`
+    float: right;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+`
 
 export default ({ data, transition, location }) => {
   const queryParams = queryString.parse(location.search)
@@ -99,9 +104,7 @@ export default ({ data, transition, location }) => {
         {(transcript || credits) &&
             <OverlayBody>
                 <OverlayHeader>
-                    <div onClick={closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-                    <b>Close</b>
-                    </div>
+                    <CloseButton onClick={closeHandler}>Close</CloseButton>
                     <div style={{
                     textAlign:'center'
                     }}>
