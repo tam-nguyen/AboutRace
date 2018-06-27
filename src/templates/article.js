@@ -324,35 +324,35 @@ class SingleArticle extends React.Component {
                 </div>
               </div>
               <div style={{
-                      width:180,
-                      height:180,
-                      marginBottom:15,
-                      border:'solid thin lightgrey',
-                      overflow:'hidden',
-                      display:'inline-block',
-                      borderRadius:'50%',
-                    }}>
-                      <img style={{
-                        width:180,
-                      
-
-                      }} src={
-                        data.nodeArticle.relationships.field_author_image &&
-                        data.nodeArticle.relationships.field_author_image.localFile.publicURL
-                      } />
-                    </div>
-                    <div style={{
-                          maxWidth: 300,
-                          fontFamily: 'Lato',
-                          fontWeight: 700,
-                          fontSize: 14,
-                          margin: '0 auto',
-                          marginBottom: 60,
-                          letterSpacing: '0.04em'
-                    }} dangerouslySetInnerHTML={{
-                    __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
-                  }}
-                  />
+                  width:180,
+                  height:180,
+                  marginBottom:15,
+                  border:'solid thin lightgrey',
+                  overflow:'hidden',
+                  display:'inline-block',
+                  borderRadius:'50%',
+                }}
+              >
+                <img style={{
+                  width:180,
+                }} src={
+                  data.nodeArticle.relationships.field_author_image &&
+                  data.nodeArticle.relationships.field_author_image.localFile.publicURL
+                } />
+              </div>
+              <div style={{
+                  maxWidth: 300,
+                  fontFamily: 'Lato',
+                  fontWeight: 700,
+                  fontSize: 14,
+                  margin: '0 auto',
+                  marginBottom: 60,
+                  letterSpacing: '0.04em'
+                }} 
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
+                }}
+              />
               <div style={{ marginBottom:15}}>
                 <h4>tags:</h4>
                 {
