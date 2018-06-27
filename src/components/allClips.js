@@ -49,7 +49,6 @@ export const Clip = ({ clip, link }) =>  {
 						
 							<iframe src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 							
-						
 				}
 				
 			</ClipCard>
@@ -57,11 +56,13 @@ export const Clip = ({ clip, link }) =>  {
 }
 
 
-const AllClips = ({ data }) => (
+const AllClips = ({ data, selected }) => (
   <div style={{padding: '0 30px'}}>
-    {data.allNodeClip.edges.map((edge, i) => (
-      <Clip clip={edge.node} link={true} />
-    ))}
+    {
+    	data.allNodeClip.edges.filter( el => selected === 'all' ? true : el.node.field_episode === parseInt(selected) ).map((edge, i) =>
+	      <Clip key={`clip-${i}`} clip={edge.node} link={true} />
+	    )
+	  }
   </div>
 )
 
