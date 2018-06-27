@@ -197,8 +197,23 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
-    console.log(`quickfact`)
-    console.log(quickFact)
+    const {
+      nodeArticle: {
+        relationships: {
+          field_belongs_to_subtheme
+        }
+      }
+    } = data;
+
+    let themesObject = {};
+
+    field_belongs_to_subtheme.map( ({relationships: {field_belongs_to_theme}}) => {
+      field_belongs_to_theme.map( ({name}) => {
+        themesObject[name] = true;
+      })
+    })
+
+    const themes = Object.keys(themesObject);
 
     const tag = queryParams.tag ?
       (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
@@ -230,6 +245,9 @@ class SingleArticle extends React.Component {
             {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
             <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all articles</h4>
           </Link>
+          <div>
+          FILED UNDER: {themes.join(' and ')}
+          </div>
         </TopText>
         <ArticleHeader
           background={
@@ -349,6 +367,7 @@ class SingleArticle extends React.Component {
 
                       return (
                         <QuickFactCard
+                          key={`quick-fact-card-${i}`}
                           link={`?${queryString.stringify(newQueryParams)}`}
                           quickfact={node}
                           i={i}
@@ -358,6 +377,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__article`) {
                       return (
                         <ArticleCard
+                          key={`article-${i}`}
                           i={i}
                           article={node}
                           relatedContent
@@ -366,6 +386,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__faq`) {
                       return (
                         <FAQCard
+                          key={`faqcard-${i}`}
                           i={i}
                           faq={node}
                         />
@@ -373,6 +394,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__clip`) {
                       return (
                         <ClipCard
+                          key={`clip-card-${i}`}
                           i={i}
                           clip={node}
                           playable
@@ -411,6 +433,16 @@ export const pageQuery = graphql`
       }
       title
       relationships {
+        field_belongs_to_subtheme {
+          id
+          name
+          relationships {
+            field_belongs_to_theme {
+              id
+              name
+            }
+          }
+        }
         field_article_related_content {
           __typename
           ... on node__faq {

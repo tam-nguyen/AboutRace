@@ -126,21 +126,25 @@ const ArticleSummary = ({ data }) => {
   )
 }
 
-export default ({ data }) => (
-  <div>
-    <IntroText dangerouslySetInnerHTML={{
-                  __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
-                }} />
+export default ({ data }) => {
+  console.log(data)
+
+  return (
+    <div>
+      <IntroText dangerouslySetInnerHTML={{
+        __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
+      }} />
+          
+      <div className={"articles"}>
+        <GreyBackground />
         
-    <div className={"articles"}>
-      <GreyBackground />
-      
-      {data.allNodeArticle.edges.map((edge, i) => (
-        <ArticleSummary data={edge.node} />
-      ))}
+        {data.allNodeArticle.edges.map((edge, i) => (
+          <ArticleSummary key={i} data={edge.node} />
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export const query = graphql`
   query ArticlesQuery {
