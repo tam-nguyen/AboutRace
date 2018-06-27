@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
+import Filter from '../components/Filter'
 
 const queryString = require('query-string');
 
@@ -13,56 +14,6 @@ const ClipsIntro = styled.div
 	margin-bottom:60px;
 	line-height:1.5;
 `
-
-const Row = styled.div
-`
-	display: flex;
-	flex-direction: row;
-	padding: 10px;
-	color: white;
-`
-
-const Element = styled.div
-`
-	cursor: pointer;
-	margin-left: 10px;
-	font-weight: ${props => props.selected ?  `bold` : `normal`};
-`
-
-class Filter extends Component {
-	render() {
-		const {selected, onSelected} = this.props;
-		return (
-			<Row>
-				Sort by:&nbsp;
-				<Element
-					selected={selected === 'all'}
-					onClick={() => onSelected('all')}
-				>
-					All
-				</Element>
-				<Element
-					selected={selected === '1'}
-					onClick={() => onSelected('1')}
-				>
-					Episode One
-				</Element>
-				<Element
-					selected={selected === '2'}
-					onClick={() => onSelected('2')}
-				>
-					Episode Two
-				</Element>
-				<Element
-					selected={selected === '3'}
-					onClick={() => onSelected('3')}
-				>
-					Episode Three
-				</Element>
-			</Row>
-		)
-	}
-}///
 
 class Clips extends Component {
 	constructor(props) {
@@ -77,7 +28,7 @@ class Clips extends Component {
 	onSelected = selected => {
 		let queryParams = queryString.parse(window.location.search)
 		queryParams.episode = selected;
-		const search = queryString.stringify({ ...queryParams});
+		const search = `?` + queryString.stringify({ ...queryParams});
 
 		history.pushState({}, window.document.title, search)
 
@@ -88,8 +39,6 @@ class Clips extends Component {
 		const queryParams = queryString.parse(window.location.search)
 		const { episode } = queryParams;
 		const selected = episode ? episode : 'all';
-
-		console.log(!!queryParams)
 
 		this.setState({selected})
 	}

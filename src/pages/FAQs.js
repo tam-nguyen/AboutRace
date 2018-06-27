@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import './FAQs.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import Filter from '../components/Filter'
+
+const queryString = require('query-string');
 
 const FAQTitle = styled.div`
     
 `
+
 const IntroText = styled.div`
   font-weight: 300;
   font-size: 48px;
@@ -18,27 +22,14 @@ const IntroText = styled.div`
 
 
 const FAQSummary = ({ data }) => {
-  console.log(data)
   return (
       <div className={"articleCard"}>
        
         <div className="articleExcerpt">
-          { /* 
-            We are not using it - delete this?
-
-          data.field_medium_version && (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.field_medium_version.processed,
-              }}
-            />
-          ) */}
           
           <FAQTitle>
             <Link to={`/faqs/${data.fields.slug}`}>
               {
-                // if field_question_summary is filled use it,
-                // if not - fallback to field_title (which is required)
                 data.field_question_summary 
                   ? data.field_question_summary.processed
                   : data.field_title.processed
@@ -50,21 +41,63 @@ const FAQSummary = ({ data }) => {
        
       </div>
   )
+}///
+
+class FAQ extends Component {
+  constructor(props) {
+    super(props);
+    const selected = 'all'
+
+    this.state = {
+      selected
+    };
+  }
+
+  onSelected = selected => {
+    let queryParams = queryString.parse(window.location.search)
+    queryParams.episode = selected;
+    const search = `?` + queryString.stringify({ ...queryParams});
+
+    history.pushState({}, window.document.title, search)
+
+    this.setState({selected})
+  }
+
+  componentDidMount() {
+    const queryParams = queryString.parse(window.location.search)
+    const { episode } = queryParams;
+    const selected = episode ? episode : 'all';
+
+    this.setState({selected})
+  }
+
+  render() {
+    const { selected } = this.state;
+    const {data} = this.props;
+
+    return (
+      <div>
+        <Filter color='black' selected={selected} onSelected={this.onSelected}/>
+        <IntroText>
+          The experts answer your questions about issues from the film.
+          Does race have a biological basis? Has the idea of race always been with us? Why does race still matter?
+        </IntroText>
+        <div className={"articles"}>
+        {
+          data.allNodeFaq.edges.map((edge, i) =>
+            <FAQSummary key={`FAQ-${i}`} data={edge.node} />
+          )
+        }
+        </div>
+      </div>
+    )
+  }
 }
 
-export default ({ data }) => (
-  <div>
-  <IntroText>
-      The experts answer your questions about issues from the film.
-      Does race have a biological basis? Has the idea of race always been with us? Why does race still matter?
-    </IntroText>
-  <div className={"articles"}>
-    {data.allNodeFaq.edges.map((edge, i) => (
-      <FAQSummary data={edge.node} />
-    ))}
-  </div>
-  </div>
-)
+// TODO: uncomment this once episode information is in the data
+// data.allNodeFaq.edges.filter( el => selected === 'all' ? true : el.node.field_episode === parseInt(selected) ).map((edge, i) =>
+
+export default FAQ;
 
 export const query = graphql`
   query FAQsQuery {
