@@ -102,19 +102,19 @@ export default FAQ;
 export const query = graphql`
   query FAQsQuery {
     allNodeFaq {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            field_title {
-              processed
-            }
-            field_question_summary {
-              processed
-            }
+      edges {
+        node {
+          fields {
+            slug
+          }
+          field_title {
+            processed
+          }
+          field_question_summary {
+            processed
           }
         }
       }
+    }
   }
 `
