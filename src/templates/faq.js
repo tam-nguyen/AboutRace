@@ -47,8 +47,6 @@ class SingleFAQ extends React.Component {
 
     let index = -1;
 
-    console.log(data)
-
     allNodeFaq.edges.map( (edge, i) => {
       if(edge.node.fields.slug === slug)
         index = i

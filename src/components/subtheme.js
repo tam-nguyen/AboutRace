@@ -315,6 +315,7 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
 
 
 class SubthemeSection extends React.Component {
+
   constructor(props){
     console.log('creating subsection')
     super(props)
@@ -342,16 +343,19 @@ class SubthemeSection extends React.Component {
       nextState.filter !== this.state.filter
     );
   }
+
   componentWillUpdate(nextProps, nextState) {
     if (this.state.filter !== nextState.filter) {
       this.updateOrder(nextProps, nextState.filter)
     }
   }
+
   updateOrder(props, filter) {
     if (props.filter) return;
     const length = getCards(props.data.relationships, filter).length;
     this.order = shuffle(range.range(length))
   }
+
   render() {
     const subtheme = this.props.data
     console.log(this.state)
@@ -391,20 +395,9 @@ class SubthemeSection extends React.Component {
         />
         <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
           {
-            allCards.slice(0, this.state.numCards)
+            allCards
           }
         </FlipMove>
-        {
-          allCards.length >= this.state.numCards ?
-           <div style={{width:'100%', textAlign:'center'}}>
-              <button style={{ margin: '30px auto', color:'rgba(59, 59, 59, 0.8)' }} onClick={() => { this.setState({ numCards: this.state.numCards + NUM_CARDS_TO_SHOW }); } }>
-                Show More <i className="fa fa-angle-down"></i>
-              </button>
-           </div> :
-            null
-        }
-
-
       </div>
     )
   }

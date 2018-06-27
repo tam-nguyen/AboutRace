@@ -85,6 +85,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+
       _.each(result.data.allNodeArticle.edges, edge => {
         createPage({
           path: `/articles/${kebabCase(edge.node.title)}`, // required
@@ -94,6 +95,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+
       _.each(result.data.allNodeInterview.edges, edge => {
         createPage({
           path: `/interviews/${kebabCase(edge.node.title)}`, // required
@@ -103,6 +105,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+
       _.each(result.data.allNodeFaq.edges, edge => {
         createPage({
           path: `/faqs/${edge.node.fields.slug}`, // required
@@ -112,6 +115,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+
       _.each(result.data.allNodeClip.edges, edge => {
         createPage({
           path: `/clips/${kebabCase(edge.node.title)}`, // required
@@ -121,6 +125,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           },
         })
       })
+      
       resolve()
     })
   })

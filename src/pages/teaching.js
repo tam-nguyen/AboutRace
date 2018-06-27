@@ -37,7 +37,7 @@ const CloseButton = styled.div`
   font-weight: bold;
 `
 
-export default ({ data }) => {
+export default ({ data, location }) => {
 
   const queryParams = queryString.parse(location.search)
   const { lesson } = queryParams;
