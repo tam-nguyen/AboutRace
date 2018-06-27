@@ -4,6 +4,8 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
 
+const queryString = require('query-string');
+
 
 const ClipsIntro = styled.div
 `
@@ -65,13 +67,30 @@ class Filter extends Component {
 class Clips extends Component {
 	constructor(props) {
 	  super(props);
-	
+		const selected = 'all'
+
 	  this.state = {
-	  	selected: 'all'
+	  	selected
 	  };
 	}
 
 	onSelected = selected => {
+		let queryParams = queryString.parse(window.location.search)
+		queryParams.episode = selected;
+		const search = queryString.stringify({ ...queryParams});
+
+		history.pushState({}, window.document.title, search)
+
+		this.setState({selected})
+	}
+
+	componentDidMount() {
+		const queryParams = queryString.parse(window.location.search)
+		const { episode } = queryParams;
+		const selected = episode ? episode : 'all';
+
+		console.log(!!queryParams)
+
 		this.setState({selected})
 	}
 

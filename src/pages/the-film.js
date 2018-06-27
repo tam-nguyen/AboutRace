@@ -65,7 +65,8 @@ const EpisodeItem = ({ episode, queryParams }) => (
             <div style={{margin: '0 -15px'}}>
                 <Link to={`?${queryString.stringify({ ...queryParams, transcript: episode.episodeNumber })}`} className="tag">Transcript</Link>
                 <Link to={`?${queryString.stringify({ ...queryParams, credits: episode.episodeNumber })}`} className="tag">Credits</Link>
-                <button className="tag">Clips</button>
+                <Link to={`/clips?${queryString.stringify({ ...queryParams, episode: episode.field_episode })}`} className="tag">Clips</Link>
+                {/*<button className="tag">Clips</button>*/}
             </div>
             <div>
                 <ExpandableText>
