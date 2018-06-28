@@ -33,7 +33,7 @@ const TemplateWrapper = ({ children, data, location }) => (
       style={{
         position: 'absolute',
         left:200,
-        width:'calc(100% - 200px)',
+        minWidth:'calc(100% - 200px)',
 
       }}
     >

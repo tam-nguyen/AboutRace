@@ -12,63 +12,40 @@ const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
 
-// const MainContent = styled.div`
-//   max-width: 700px;
-//   margin-left: 48%;
-//   margin-right: 12%;
-// `
 const LargeCalloutText = styled.div`
 
 `
-const HeaderDimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
+
+const ArticleBackground = styled.div`
+  // background-color: rgba(239, 255, 248, 0.92);
+  // background-color:#d3e6de;
+  background-color: rgba(103, 165, 195, 0.14901960784313725);
+  position: fixed;
   top:0;
-  z-index: 99999999;
-  height:210px;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+16,fcfcfc+100&0.93+16,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.93) 16%, rgba(252,252,252,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed000000', endColorstr='#00fcfcfc',GradientType=0 ); /* IE6-9 */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -9999;
 `
-const Dimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:21vh;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+100 */
-background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.57) 61%, rgba(0,0,0,0.93) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.57) 61%,rgba(0,0,0,0.93) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
-`
+
 const ArticleHeader = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: calc(100% - 380px);
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
-  background-size: 110%;
+  background-size: cover;
   background-position: center;
   // border: solid 4px black;
   background-color: lightgrey;
   position: fixed;
-  left: 200px;
-  top:0;
+  left: 290px;
+  top:90px;
+  bottom: 90px;
   z-index: -999;
-  text-align: center;
+  border-radius: 60px;
 `
-
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.96);
-  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
   padding: 30px;
   position: relative;
   max-width: 735px;
@@ -96,11 +73,11 @@ const TopText = styled.div`
   padding: 30px 45px;
   top:0;
   position: fixed;
-  background-color: rgba(255,255,255,0.92);
+  // background-color: rgba(255,255,255,0.92);
   // background-color: rgba(255, 244, 198, 0.92);
   min-height: 60px;
-  border-bottom: solid thin lightgrey;
-  z-index: 999999999;
+  // border-bottom: solid thin lightgrey;
+  z-index: 99;
 `
 
 
@@ -220,16 +197,51 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
-    console.log(`quickfact`)
-    console.log(quickFact)
+    const {
+      nodeArticle: {
+        relationships: {
+          field_belongs_to_subtheme
+        }
+      }
+    } = data;
+
+    let themesObject = {};
+
+    field_belongs_to_subtheme.map( ({relationships: {field_belongs_to_theme}}) => {
+      field_belongs_to_theme.map( ({name}) => {
+        themesObject[name] = true;
+      })
+    })
+
+    const themes = Object.keys(themesObject);
 
     const tag = queryParams.tag ?
       (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
       )[0] :
       null
 
+    let background = data.nodeArticle.relationships.field_main_image &&
+            data.nodeArticle.relationships.field_main_image.localFile.publicURL;
+
+    const {allImageSharp} = data;
+
+    allImageSharp.edges.map( ({node}) => {
+      const {
+        original,
+        resolutions
+      } = node;
+
+      const isBackground = original.src.toLowerCase() === `${background}`.toLowerCase();
+
+      if(isBackground) {
+        background = resolutions.src;
+      }
+
+    })
+
     return (
       <div style={{position:'relative', height: '100vh'}}>
+        <ArticleBackground />
         <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
@@ -252,27 +264,20 @@ class SingleArticle extends React.Component {
             {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
             <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all articles</h4>
           </Link>
+          <div>
+          FILED UNDER: {themes.join(' and ')}
+          </div>
         </TopText>
         <ArticleHeader
-          background={
-            data.nodeArticle.relationships.field_main_image &&
-            data.nodeArticle.relationships.field_main_image.localFile.publicURL
-          }
+          background={background}
         >
         </ArticleHeader>
-        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)'}}>
-          <div className="row">
-            <div style={{textAlign:'center', paddingTop:45}} className="column">
-              <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
-              <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
-            </div>
-          </div>
-
-          <div className="row" style={{
-            
-            }}>
+        <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', position:'relative', zIndex:999, marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
           
-            <div style={{marginLeft:45}} className="column _75">
+
+          <div className="row">
+          
+            <div style={{marginLeft:0, marginRight:30}} className="column _75">
               <ArticleMain>
                 
                 <LargeCalloutText
@@ -309,36 +314,43 @@ class SingleArticle extends React.Component {
               </ArticleMain>
             </div>
           
-            <div className="column">
+            <div style={{textAlign:'center'}} className="column">
+              <div className="row">
+                <div style={{textAlign:'center', paddingTop:45}} className="column">
+                  <ArticleTitle>{data.nodeArticle.title}</ArticleTitle>
+                  <h4 style={{marginBottom: 45}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4>
+                </div>
+              </div>
               <div style={{
-                      width:180,
-                      height:180,
-                      marginBottom:15,
-                      border:'solid thin lightgrey',
-                      overflow:'hidden',
-                      display:'inline-block',
-                      borderRadius:'50%',
-                    }}>
-                      <img style={{
-                        width:180,
-                      
-
-                      }} src={
-                        data.nodeArticle.relationships.field_author_image &&
-                        data.nodeArticle.relationships.field_author_image.localFile.publicURL
-                      } />
-                    </div>
-                    <div style={{
-                          maxWidth: 300,
-                          fontFamily: 'Lato',
-                          fontWeight: 700,
-                          fontSize: 14,
-                          marginBottom: 60,
-                          letterSpacing: '0.04em'
-                    }} dangerouslySetInnerHTML={{
-                    __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
-                  }}
-                  />
+                  width:180,
+                  height:180,
+                  marginBottom:15,
+                  border:'solid thin lightgrey',
+                  overflow:'hidden',
+                  display:'inline-block',
+                  borderRadius:'50%',
+                }}
+              >
+                <img style={{
+                  width:180,
+                }} src={
+                  data.nodeArticle.relationships.field_author_image &&
+                  data.nodeArticle.relationships.field_author_image.localFile.publicURL
+                } />
+              </div>
+              <div style={{
+                  maxWidth: 300,
+                  fontFamily: 'Lato',
+                  fontWeight: 700,
+                  fontSize: 14,
+                  margin: '0 auto',
+                  marginBottom: 60,
+                  letterSpacing: '0.04em'
+                }} 
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeArticle.field_author_bio && data.nodeArticle.field_author_bio.processed,
+                }}
+              />
               <div style={{ marginBottom:15}}>
                 <h4>tags:</h4>
                 {
@@ -369,6 +381,7 @@ class SingleArticle extends React.Component {
 
                       return (
                         <QuickFactCard
+                          key={`quick-fact-card-${i}`}
                           link={`?${queryString.stringify(newQueryParams)}`}
                           quickfact={node}
                           i={i}
@@ -378,6 +391,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__article`) {
                       return (
                         <ArticleCard
+                          key={`article-${i}`}
                           i={i}
                           article={node}
                           relatedContent
@@ -386,6 +400,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__faq`) {
                       return (
                         <FAQCard
+                          key={`faqcard-${i}`}
                           i={i}
                           faq={node}
                         />
@@ -393,6 +408,7 @@ class SingleArticle extends React.Component {
                     } else if (node.__typename == `node__clip`) {
                       return (
                         <ClipCard
+                          key={`clip-card-${i}`}
                           i={i}
                           clip={node}
                           playable
@@ -415,6 +431,21 @@ export default SingleArticle;
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
+    allImageSharp {
+      edges {
+        node {
+          id
+          original {
+            width
+            height
+            src
+          }
+          resolutions(width: 400) {
+            src
+          }
+        }
+      }
+    }
     nodeArticle(id: { eq: $id }) {
       id
       field_old_article_discl {
@@ -431,6 +462,16 @@ export const pageQuery = graphql`
       }
       title
       relationships {
+        field_belongs_to_subtheme {
+          id
+          name
+          relationships {
+            field_belongs_to_theme {
+              id
+              name
+            }
+          }
+        }
         field_article_related_content {
           __typename
           ... on node__faq {
@@ -468,6 +509,7 @@ export const pageQuery = graphql`
         field_main_image {
           localFile {
             publicURL
+
           }
         }
       }

@@ -45,7 +45,11 @@ const HomeBackground = styled.div`
 `
 
 const HomeThemeImage = styled.div`
+<<<<<<< HEAD
+  height: 200px;
+=======
   height: 100%;
+>>>>>>> d51b0ab0af0595b72d73a05a2d199371bc6dd23f
   color: white;
   background-position: center center;
   background-size: 100%;
@@ -71,7 +75,7 @@ const ThemeOverview = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(255,255,255, .88);
+  background-color: rgba(234, 241, 238, 1);
   transition: all .3s;
   &:hover {
     // transform: translateX(-50%);
@@ -172,28 +176,31 @@ const TrailerClipWrapper = styled.div`
   }
 `
 
-export default ({ data }) => (
-  <div>
-    <TrailerClipWrapper>
-      <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    </TrailerClipWrapper>
-    {/* <SeriesComponent data={data} /> */}
-    <div style={{
-      color: 'white',
-      textAlign: 'center',
-      fontFamily: 'Lato',
-      marginBottom: 30,
-      textTransform: 'uppercase',
-      letterSpacing: '0.12em'
-    }}>Explore themes from the film:</div>
-    <div className='wrapper'>
-      <HomeBackground />
-      {data.allTaxonomyTermThemes.edges.map(({ node }) => (
-        <ThemeComponent data={node} />
-      ))}
+export default ({ data }) => {
+  console.log(data)
+  return (
+    <div>
+      <TrailerClipWrapper>
+        <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </TrailerClipWrapper>
+      {/* <SeriesComponent data={data} /> */}
+      <div style={{
+        color: 'white',
+        textAlign: 'center',
+        fontFamily: 'Lato',
+        marginBottom: 30,
+        textTransform: 'uppercase',
+        letterSpacing: '0.12em'
+      }}>Explore themes from the film:</div>
+      <div className='wrapper'>
+        <HomeBackground />
+        {data.allTaxonomyTermThemes.edges.map(({ node }) => (
+          <ThemeComponent data={node} />
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export const query = graphql`
   query IndexQuery {

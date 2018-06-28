@@ -197,7 +197,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 23%, 0.8);
+  color: #484848;
   font-family: "ff-tisa-web-pro", georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -622,6 +622,12 @@ pre tt:after {
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 }
 

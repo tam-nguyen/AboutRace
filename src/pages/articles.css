@@ -7,9 +7,9 @@
   
 .articleCard {
     background-color: white;
-    height: 400px;
+    min-height: 400px;
     margin: 15px;
-    border-radius: 6px;
+    border-radius: 24px;
     overflow: hidden;
     display: flex;
     align-content: stretch;
@@ -17,17 +17,19 @@
     flex-wrap: wrap;
     position: relative;
     flex-direction: column;
-    -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-    -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-    box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-    transition: all .3s;
+    -webkit-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    -moz-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.26);
+    
+    transition: all .75s;
     /* border: solid 4px black; */
 }
 .articleCard:hover {
-    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    transition: all .3s;
+    -webkit-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.86);
+    -moz-box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.86);
+    box-shadow: 0px 3px 36px 0px rgba(117, 117, 117, 0.86);
+    transform: translateY(-1px);
+    transition: all .75;
   }
 
 .articleCard:nth-child(even) {
@@ -50,11 +52,9 @@
   }
 
 .articleExcerpt {
-    line-height: 1.5;
-    font-family: 'Lato';
-    font-size: 17px;
-    letter-spacing: 0.02em;
+    line-height: 1.25;
+    font-size: 16px;
     padding: 0 30px 0px 30px;
-    margin-bottom: 15px;
+    margin-bottom: 7.5px;
     font-weight: 400;
 }

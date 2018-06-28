@@ -29,7 +29,10 @@ import kebabCase from 'lodash/kebabCase'
 //   order: 2;
 // }
 const GreyBackground = styled.div`
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
+  // background-color: #d3e6de;
+  // background-color: rgba(239, 255, 248, 0.92);
+  background-color: rgba(103, 165, 195, 0.14901960784313725);
   position: fixed;
   top: 0;
   left: 0;
@@ -46,13 +49,15 @@ const IntroText = styled.div`
   margin-bottom: 60px;
   font-family: 'Lato';
   color: snow;
-  background-color: #2b2b2b;
+  // background-color: #2b2b2b;
+  background-color: #323232;
 `
 const ArticleTitle = styled.div`
   font-family: 'Lato';
   font-size:20px;
-  font-weight: 700;
-  color: black;
+  font-weight: 400;
+  color: #2b2b2b;
+  letter-spacing: 0.03em;
   padding: 0px 30px 0 30px;
   line-height:1.25;
   margin-bottom: 7.5px;
@@ -79,7 +84,7 @@ const ArticleSummary = ({ data }) => {
     }} to={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
-        <div style={{flex: '1 1 auto', position: 'relative', marginBottom:30}}>
+        <div style={{flex: '1 1 auto', position: 'relative', marginBottom:15}}>
           <ArticleImage
             background={
               data.relationships.field_main_image &&
@@ -93,7 +98,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, fontFamily:'Lato', fontSize:16, fontWeight:300, lineHeight:1.25, marginLeft:30, marginBottom:15}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.04em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">
@@ -121,21 +126,25 @@ const ArticleSummary = ({ data }) => {
   )
 }
 
-export default ({ data }) => (
-  <div>
-    <IntroText dangerouslySetInnerHTML={{
-                  __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
-                }} />
+export default ({ data }) => {
+  console.log(data)
+
+  return (
+    <div>
+      <IntroText dangerouslySetInnerHTML={{
+        __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
+      }} />
+          
+      <div className={"articles"}>
+        <GreyBackground />
         
-    <div className={"articles"}>
-      <GreyBackground />
-      
-      {data.allNodeArticle.edges.map((edge, i) => (
-        <ArticleSummary data={edge.node} />
-      ))}
+        {data.allNodeArticle.edges.map((edge, i) => (
+          <ArticleSummary key={i} data={edge.node} />
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export const query = graphql`
   query ArticlesQuery {

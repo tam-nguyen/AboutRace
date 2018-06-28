@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
+import Filter from '../components/Filter'
+
+const queryString = require('query-string');
 
 
 const ClipsIntro = styled.div
@@ -12,14 +15,51 @@ const ClipsIntro = styled.div
 	line-height:1.5;
 `
 
-export default ({ data }) => (
-	<div className='darkwrapper'>
-		<ClipsIntro>
-			Various clips from the film featured here. Buy a copy of the film here.
-		</ClipsIntro>
-		<AllClips data={data} />
-	</div>
-)
+class Clips extends Component {
+	constructor(props) {
+	  super(props);
+		const selected = 'all'
+
+	  this.state = {
+	  	selected
+	  };
+	}
+
+	onSelected = selected => {
+		let queryParams = queryString.parse(window.location.search)
+		queryParams.episode = selected;
+		const search = `?` + queryString.stringify({ ...queryParams});
+
+		history.pushState({}, window.document.title, search)
+
+		this.setState({selected})
+	}
+
+	componentDidMount() {
+		const queryParams = queryString.parse(window.location.search)
+		const { episode } = queryParams;
+		const selected = episode ? episode : 'all';
+
+		this.setState({selected})
+	}
+
+	render() {
+		const { selected } = this.state;
+		const { data } = this.props;
+
+		return (
+			<div className='darkwrapper'>
+				<Filter selected={selected} onSelected={this.onSelected}/>
+				<ClipsIntro>
+					Various clips from the film featured here. Buy a copy of the film here.
+				</ClipsIntro>
+				<AllClips data={data} selected={selected}/>
+			</div>
+		)
+	}
+}
+
+export default Clips;
 
 export const query = graphql`
   query ClipsQuery {

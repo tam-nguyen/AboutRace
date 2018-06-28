@@ -1,11 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import './FAQs.css'
-import Link from 'gatsby-link'
+import Link, {navigateTo} from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 import {
   getCards,
 } from '../components/subtheme'
+
+const queryString = require('query-string');
+
+const Wrapper = styled.div`
+  margin: 250px auto 0px;
+  max-width: 100%;
+`
 
 const IntroText = styled.div`
   font-weight: 300;
@@ -16,39 +24,74 @@ const IntroText = styled.div`
   font-family: 'Lato';
 `
 
-export default ({ data }) => {
+const SubTitle = styled.h4`
+  margin-bottom: 15px;
+`
+
+const closeHandler = () => navigateTo(`?`)
+
+const CloseButton = styled.div`
+  float: right;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+`
+
+export default ({ data, location }) => {
+
+  const queryParams = queryString.parse(location.search)
+  const { lesson } = queryParams;
+  const lessonData = !lesson ? null : (data.allNodeLessonPlan.edges.filter( edge => edge.node.id === lesson)[0]).node
 
   return (
-    <div>
-    <IntroText>
-      Teach topics from the film with specially curated lesson plans, handouts, articles, and interviews.
-    </IntroText>
+    <Wrapper>
+      <Overlay id="film-overlay" visible={!!lesson}>
+        { 
+          lessonData && 
+          <OverlayBody>
+            <OverlayHeader>
+              <CloseButton onClick={closeHandler}>Close</CloseButton>
+              <div>{lessonData.title}</div>
+            </OverlayHeader>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: lessonData.field_lesson_plan.processed,
+              }}
+            />
+          </OverlayBody>
+        }
+      </Overlay>
+      <IntroText>
+        Teach topics from the film with specially curated lesson plans, handouts, articles, and interviews.
+      </IntroText>
 
-        <h2>Lesson Plans</h2>
+      <h2>Lesson Plans</h2>
       <div className="row" style={{padding: '0 30px'}}>
       {
-        data.allNodeLessonPlan.edges.map(edge => (
-          <div className="articleCard" style={{padding:30}}>
+        data.allNodeLessonPlan.edges.map((edge, i) => (
+          <div className="articleCard" style={{padding:30}} key={`teaching-${i}`}>
             <h2>{edge.node.title}</h2>
             <div>
-              <h4 style={{marginBottom:15}}>Subjects:</h4>
+              <SubTitle>Subjects:</SubTitle>
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_subjects && edge.node.field_subjects.processed }} />
             </div>
             <div>
-              <h4 style={{marginBottom:15}}>Grade Levels:</h4>
+              <SubTitle>Grade Levels:</SubTitle>
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_grade_levels && edge.node.field_grade_levels.processed }} />
             </div>
             <div>
-              <h4 style={{marginBottom:15}}>Overview:</h4>
+              <SubTitle>Overview:</SubTitle>
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_lesson_summary && edge.node.field_lesson_summary.processed }} />
             </div>
             <div>
-              <h4 style={{marginBottom:15}}>Objectives:</h4>
+              <SubTitle>Objectives:</SubTitle>
               <p dangerouslySetInnerHTML={{ __html: edge.node.field_objectives && edge.node.field_objectives.processed }} />
             </div>
-            <button>
-              View lesson plan
-            </button>
+            <Link to={`?${queryString.stringify({ ...queryParams, lesson: edge.node.id })}`}>
+              <button>
+                View lesson plan
+              </button>
+            </Link>
           </div>
         ))
       }
@@ -66,7 +109,7 @@ export default ({ data }) => {
           interviews: data.allNodeInterview.edges.map(edge => edge.node),
         })
       }
-   </div>
+   </Wrapper>
   )
 }
 

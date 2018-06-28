@@ -4,8 +4,8 @@ const queryString = require('query-string');
 
 require('react-flex/index.css')
 import Img from 'gatsby-image'
+import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
-import Card from '../components/card.js'
 import SubthemeSection from '../components/subtheme.js'
 
 const FlipMove = require('react-flip-move');
@@ -13,7 +13,6 @@ import styled from 'styled-components';
 
 
 const ThemeTitle = styled.div`
-  margin-top: 10vh;
   margin-bottom:15px;
   color: inherit;
   font-family: "lato";
@@ -22,7 +21,7 @@ const ThemeTitle = styled.div`
   font-size: 42px;
   line-height: 1
   letter-spacing: 0.04em;
-  color:white;
+  // color:white;
   text-align: center;
 `
 const ThemeDescription = styled.div`
@@ -34,7 +33,7 @@ const ThemeDescription = styled.div`
   z-index:99999;
   max-width: 800px;
   margin: 0 auto;
-  color:white;
+  // color:white;
   text-align: center;
 `
 const ThemeHeader = styled.div`
@@ -82,56 +81,183 @@ const Dimmer = styled.div`
 `
 
 const ThemeIntro = styled.div`
-  position: absolute;
-  bottom: 5vh;
-  left: 50%;
-  text-align: center;
-  margin-left: -200px;
-  z-index:99999999999999999999;
-
+  background-color: rgba(247,247,247,0.97);
+  padding: 45px 30px;
+  border-bottom: solid thin grey;
+  margin-left: 50px;
+  margin-right: 500px;
+  height: 100vh;
 `
 const ThemeMain = styled.div`
   position: absolute;
-  top: 100vh;
   width:100%;
+`
+
+const ThemesMenu = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const MenuItem = styled(Link)`
+  cursor: pointer;
+  textDecoration: none;
+  color:inherit;
+  height: 25px;
+  width: 25px;
+  background-color: ${props => props.selected ? `#000` : `#bbb`};
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 2.5px;
+  box-shadow: 0px 0px 5px #fff;
+`
+
+const AllThemesLink = styled(Link)`
+  cursor: pointer;
+  text-decoration: none !important;
+  color:inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const Huge = styled.div`
+  font-size: 50px;
+  line-height: 50px;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const CardLink = styled(Link)`
+  cursor: pointer;
+  text-decoration: none !important;
+  color:inherit;
+  width: 100%;
+`
+
+const Card = styled.div`
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  padding: 10px;
+  margin-bottom: 10px;
+`
+
+const CardTitle = styled.h4`
+`
+
+const ChevronButton = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 50px;
 `
 
 class ThemePage extends React.Component {
   render() {
-    const theme = this.props.data.taxonomyTermThemes
+    const {data, location} = this.props;
+    const {taxonomyTermThemes, allTaxonomyTermThemes} = data;
+    const theme = taxonomyTermThemes;
+
+    const themeLinks = allTaxonomyTermThemes.edges.map( edge => `/themes/${kebabCase(edge.node.name)}`);
 
     const queryParams = queryString.parse(this.props.location.search);
 
-    const getShortname = (subtheme) => {
+    const getShortname = subtheme => {
       const parts = subtheme.name.split('-');
       return encodeURIComponent(kebabCase(parts[parts.length - 1]))
     }
+
+    const getDescription = subtheme => {
+      let result = '<br/>';
+      if(subtheme.description)
+        if(subtheme.description.processed)
+          result = subtheme.description.processed;
+
+      return result;
+    }
+
+    const getLink = subtheme => {
+      let result = `/subthemes/${kebabCase(subtheme.name)}`
+
+      return result;
+    }
+
+    const sorted = theme.relationships.subthemes.sort((a, b) => {
+      var nameA = getShortname(a);
+      var nameB = getShortname(b);
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
 
     return (
       <div>
        
         <ThemeHeader background={theme.relationships.field_theme_image && theme.relationships.field_theme_image.localFile.publicURL}>
-        {/* <HeaderDimmer />
-         <Dimmer /> */}
-           <ThemeIntro>
+           &nbsp;
+        </ThemeHeader>
+        <ThemeMain>
+
+          <ThemesMenu>
+            {
+              themeLinks.map((link, i) => 
+                <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
+              )
+            }
+          </ThemesMenu>
+
+          <ThemeIntro>
+            <AllThemesLink to='/themes'>
+              <Huge>‹</Huge>
+              <h4>All Themes</h4>
+            </AllThemesLink>
             <ThemeTitle>{theme.name}</ThemeTitle>
-            {theme.description ? (
+            {
+              theme.description
+              ?
               <ThemeDescription
                 dangerouslySetInnerHTML={{ __html: theme.description.processed }}
               />
-            ) : null}
-            <img style={{width: 30}} src={require('../assets/images/down2.svg')} />
+              :
+              null
+            }
+
+            {
+              sorted.map((subtheme, i) => 
+                <CardLink key={`subtheme-${i}`} to={getLink(subtheme)}>
+                  <Card>
+                    <Row>
+                      <Col style={{flex:1}}>
+                        <CardTitle>{getShortname(subtheme)}</CardTitle>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: getDescription(subtheme) }}
+                        />
+                      </Col>
+                      <Col>
+                        <ChevronButton>›</ChevronButton>
+                      </Col>
+                    </Row>
+                  </Card>
+                </CardLink>
+              )
+            }
           </ThemeIntro>
-        </ThemeHeader>
-        <ThemeMain>
-          {
-            theme.relationships.subthemes.sort((a, b) => {
-                var nameA = getShortname(a);
-                var nameB = getShortname(b);
-                if (nameA < nameB) return -1;
-                if (nameA > nameB) return 1;
-                return 0;
-              }).map(subtheme => (
+
+          {/*
+            sorted.map(subtheme => (
                 <SubthemeSection
                   data={subtheme}
                   key={getShortname(subtheme)}
@@ -140,7 +266,7 @@ class ThemePage extends React.Component {
                   queryParams={queryParams}
                 />
               ))
-          }
+          */}
         </ThemeMain>
 
         <br />
@@ -153,6 +279,14 @@ export default ThemePage
 
 export const pageQuery = graphql`
   query themeQuery($id: String) {
+    allTaxonomyTermThemes {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
     taxonomyTermThemes(id: { eq: $id }) {
       id
       name
