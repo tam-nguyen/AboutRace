@@ -45,7 +45,7 @@ const ArticleHeader = styled.div`
   border-radius: 60px;
 `
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 30px;
   position: relative;
   max-width: 735px;

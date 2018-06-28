@@ -691,14 +691,14 @@ html {
   overflow: visible;
   /* background-color: black; */
   
-
+  /* background-color: #25292b; */
 }
 
 body.modal-open {
   overflow-y: hidden;
 }
 .wrapper {
-  background-color: #f7f7f7;
+  background-color: rgb(72, 82, 86);
   margin: 0 auto;
 }
 .darkwrapper {
