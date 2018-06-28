@@ -80,9 +80,8 @@ const Dimmer = styled.div`
 `
 
 const ThemeIntro = styled.div`
-  background-color: rgba(247,247,247,0.97);
+  background-color: rgba(255,255,255,0.92);
   padding: 45px 75px;
-  border-bottom: solid thin grey;
   margin-left: 60px;
   min-height: 100vh;
   width: 800px;
@@ -138,21 +137,26 @@ const CardLink = styled(Link)`
 `
 
 const Card = styled.div`
-  border-radius: 5px;
-  border: 1px solid #bbb;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 30px;
 `
 
-const CardTitle = styled.h4`
+const CardTitle = styled.div`
+  font-family: 'Lato';
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  text-transform: capitalize;
 `
 
 const ChevronButton = styled.div`
   height: 100%;
+  margin-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 50px;
 `
 
 class ThemePage extends React.Component {
@@ -238,7 +242,7 @@ class ThemePage extends React.Component {
                         />
                       </Col>
                       <Col>
-                        <ChevronButton>›</ChevronButton>
+                        <ChevronButton><img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, transform: 'rotate(180deg)', verticalAlign:'middle'}} src={require('../assets/images/back.svg')} /></ChevronButton>
                       </Col>
                     </Row>
                   </Card>
