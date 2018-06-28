@@ -52,6 +52,9 @@ const ThemeOverview = styled.div`
     // transform: translateX(-50%);
     transition: all .3s;
   }
+  & > p {
+    margin-bottom: 0;
+  }
 `
 
 const ThemeComponent = ({ data }) => (
@@ -72,12 +75,10 @@ const ThemeComponent = ({ data }) => (
     <Link style={{textDecoration:'none'}} to={`/themes/${kebabCase(data.name)}`}>
       <ThemeImage background={data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL}>
        <div className='totalDimmer'>
-        <ThemeOverview>
-          <p style={{marginBottom:0}} dangerouslySetInnerHTML={{
+        <ThemeOverview dangerouslySetInnerHTML={{
                     __html: data.description && data.description.processed,
               }}  />
-          </ThemeOverview>
-
+         
         <h4 style={{marginBottom:7.5, letterSpacing:'0.2em', fontSize:18}}>Look closer:</h4>
         <span style={{
           fontFamily: 'Lato',
