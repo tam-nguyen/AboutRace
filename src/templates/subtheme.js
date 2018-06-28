@@ -57,7 +57,7 @@ const StyledLink = styled(Link)`
 
 class SubThemePage extends React.Component {
   render() {
-    const {data, pathContext} = this.props;
+    const {data, pathContext, location} = this.props;
     const {field_theme_image, theme} = pathContext;
     const {allTaxonomyTermSubthemes, taxonomyTermSubthemes} = data;
     const subtheme = taxonomyTermSubthemes;
@@ -87,7 +87,7 @@ class SubThemePage extends React.Component {
         <ThemesMenu>
           {
             themeLinks.map((link, i) => 
-              <MenuItem key={`menuitem-${i}`} to={link} selected={link === window.location.pathname}/>
+              <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
             )
           }
         </ThemesMenu>

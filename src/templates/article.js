@@ -231,7 +231,7 @@ class SingleArticle extends React.Component {
         resolutions
       } = node;
 
-      const isBackground = original.src.toLowerCase() === background.toLowerCase();
+      const isBackground = original.src.toLowerCase() === `${background}`.toLowerCase();
 
       if(isBackground) {
         background = resolutions.src;
@@ -275,9 +275,7 @@ class SingleArticle extends React.Component {
         <div style={{backgroundColor:'rgba(255, 255, 255, 0.92)', marginTop:'calc(100vh - 174px)', width:'calc(100% - 60px)', position:'relative', zIndex:999, marginLeft: 30, boxShadow: '0px 0px 36px -4px rgba(117, 117, 117, 0.8)'}}>
           
 
-          <div className="row" style={{
-            
-            }}>
+          <div className="row">
           
             <div style={{marginLeft:0, marginRight:30}} className="column _75">
               <ArticleMain>

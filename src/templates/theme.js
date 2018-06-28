@@ -167,7 +167,7 @@ const ChevronButton = styled.div`
 
 class ThemePage extends React.Component {
   render() {
-    const {data} = this.props;
+    const {data, location} = this.props;
     const {taxonomyTermThemes, allTaxonomyTermThemes} = data;
     const theme = taxonomyTermThemes;
 
@@ -214,7 +214,7 @@ class ThemePage extends React.Component {
           <ThemesMenu>
             {
               themeLinks.map((link, i) => 
-                <MenuItem key={`menuitem-${i}`} to={link} selected={link === window.location.pathname}/>
+                <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
               )
             }
           </ThemesMenu>
