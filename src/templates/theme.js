@@ -86,7 +86,7 @@ const ThemeIntro = styled.div`
   border-bottom: solid thin grey;
   margin-left: 50px;
   margin-right: 500px;
-  height: 100vh;
+  min-height: 100vh;
 `
 const ThemeMain = styled.div`
   position: absolute;
