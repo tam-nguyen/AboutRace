@@ -145,10 +145,10 @@ const Card = styled.div`
 
 const CardTitle = styled.div`
   font-family: 'Lato';
-  font-size: 30px;
-  font-weight: 300;
+  font-size: 24px;
   margin-bottom: 15px;
   text-transform: capitalize;
+  line-height: 1.25;
 `
 
 const ChevronButton = styled.div`
