@@ -12,7 +12,7 @@ const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 
 const Container = styled.div`
-
+  margin-left: 75px;
 `
 const ThemeImage = styled.div`
   height: 100vh;
@@ -74,35 +74,39 @@ class SubThemePage extends React.Component {
     const background = field_theme_image && field_theme_image.localFile.publicURL;
       
     return (
-      <Container>
+      <div>
         <ThemeImage background={background} />
-        <StyledLink to={theme.path}>
-          <h2>‹ {theme.name}</h2>
-        </StyledLink>
+        <Container>
 
-        <h1>{taxonomyTermSubthemes.name}</h1>
-        <p
-          dangerouslySetInnerHTML={{ __html: taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`}}
-        />
+          <StyledLink to={theme.path}>
+              <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+              <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>{theme.name}</h4>
+          </StyledLink>
 
-        <ThemesMenu>
-          {
-            themeLinks.map((link, i) => 
-              <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
-            )
-          }
-        </ThemesMenu>
-
-        {
-          <SubthemeSection
-            data={subtheme}
-            key={getShortname(subtheme)}
-            name={getShortname(subtheme)}
-            filter={queryParams[getShortname(subtheme)]}
-            queryParams={queryParams}
+          <h1>{taxonomyTermSubthemes.name}</h1>
+          <p
+            dangerouslySetInnerHTML={{ __html: taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`}}
           />
-        }
-      </Container>
+
+          <ThemesMenu>
+            {
+              themeLinks.map((link, i) => 
+                <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
+              )
+            }
+          </ThemesMenu>
+
+          {
+            <SubthemeSection
+              data={subtheme}
+              key={getShortname(subtheme)}
+              name={getShortname(subtheme)}
+              filter={queryParams[getShortname(subtheme)]}
+              queryParams={queryParams}
+            />
+          }
+        </Container>
+      </div>
     )
   }
 }
