@@ -13,28 +13,27 @@ import styled from 'styled-components';
 
 
 const ThemeTitle = styled.div`
+  margin-top: 15px;
   margin-bottom:15px;
   color: inherit;
   font-family: "lato";
   font-weight: 800;
   text-rendering: optimizeLegibility;
-  font-size: 42px;
+  font-size: 54px;
   line-height: 1
   letter-spacing: 0.04em;
   // color:white;
-  text-align: center;
 `
 const ThemeDescription = styled.div`
-  font-weight: 200;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 1.75;
+  line-height: 1.5;
   letter-spacing: 0.02em;
   position:relative;
   z-index:99999;
   max-width: 800px;
   margin: 0 auto;
-  // color:white;
-  text-align: center;
+  font-family: 'Lato';
 `
 const ThemeHeader = styled.div`
   height: 100vh;
@@ -81,12 +80,11 @@ const Dimmer = styled.div`
 `
 
 const ThemeIntro = styled.div`
-  background-color: rgba(247,247,247,0.97);
-  padding: 45px 30px;
-  border-bottom: solid thin grey;
-  margin-left: 50px;
-  margin-right: 500px;
+  background-color: rgba(255,255,255,0.92);
+  padding: 45px 75px;
+  margin-left: 60px;
   min-height: 100vh;
+  width: 800px;
 `
 const ThemeMain = styled.div`
   position: absolute;
@@ -96,7 +94,7 @@ const ThemeMain = styled.div`
 const ThemesMenu = styled.div`
   position: fixed;
   top: 0px;
-  left: 250px;
+  left: 275px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -107,28 +105,19 @@ const MenuItem = styled(Link)`
   cursor: pointer;
   textDecoration: none;
   color:inherit;
-  height: 25px;
-  width: 25px;
-  background-color: ${props => props.selected ? `#000` : `#bbb`};
+  height: 18px;
+  width: 18px;
+  background-color: ${props => props.selected ? `#4b5256` : `#adc6d2`};
   border-radius: 50%;
   display: inline-block;
-  margin-top: 10px;
+  margin-bottom: 15px;
   margin-left: 2.5px;
-  box-shadow: 0px 0px 5px #fff;
 `
 
 const AllThemesLink = styled(Link)`
   cursor: pointer;
   text-decoration: none !important;
   color:inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
-
-const Huge = styled.div`
-  font-size: 50px;
-  line-height: 50px;
 `
 
 const Row = styled.div`
@@ -148,21 +137,26 @@ const CardLink = styled(Link)`
 `
 
 const Card = styled.div`
-  border-radius: 5px;
-  border: 1px solid #bbb;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 30px;
 `
 
-const CardTitle = styled.h4`
+const CardTitle = styled.div`
+  font-family: 'Lato';
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  text-transform: capitalize;
 `
 
 const ChevronButton = styled.div`
   height: 100%;
+  margin-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 50px;
 `
 
 class ThemePage extends React.Component {
@@ -221,8 +215,9 @@ class ThemePage extends React.Component {
 
           <ThemeIntro>
             <AllThemesLink to='/themes'>
-              <Huge>‹</Huge>
-              <h4>All Themes</h4>
+              {/* <Huge>‹</Huge> */}
+              <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+              <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>All Themes</h4>
             </AllThemesLink>
             <ThemeTitle>{theme.name}</ThemeTitle>
             {
@@ -247,7 +242,7 @@ class ThemePage extends React.Component {
                         />
                       </Col>
                       <Col>
-                        <ChevronButton>›</ChevronButton>
+                        <ChevronButton><img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, transform: 'rotate(180deg)', verticalAlign:'middle'}} src={require('../assets/images/back.svg')} /></ChevronButton>
                       </Col>
                     </Row>
                   </Card>
