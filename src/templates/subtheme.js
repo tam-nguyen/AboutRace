@@ -12,17 +12,17 @@ const FlipMove = require('react-flip-move');
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: 10px;
-  padding-left: 30px;
+
+`
+const ThemeImage = styled.div`
   height: 100vh;
   width: 100%;
-  // opacity: 0.8;
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: lightgrey;
   position: fixed;
+  z-index: -999999999999999;
 `
 
 const ThemesMenu = styled.div`
@@ -74,7 +74,8 @@ class SubThemePage extends React.Component {
     const background = field_theme_image && field_theme_image.localFile.publicURL;
       
     return (
-      <Container background={background}>
+      <Container>
+        <ThemeImage background={background} />
         <StyledLink to={theme.path}>
           <h2>‹ {theme.name}</h2>
         </StyledLink>
