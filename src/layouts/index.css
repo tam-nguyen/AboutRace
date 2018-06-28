@@ -623,6 +623,12 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 }
 
 

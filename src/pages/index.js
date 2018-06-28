@@ -201,8 +201,8 @@ export default ({ data }) => (
         <ThemeComponent data={node} />
       ))}
     </div>
-  </div>
-)
+  )
+}
 
 export const query = graphql`
   query IndexQuery {

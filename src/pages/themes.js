@@ -51,16 +51,6 @@ const ThemeComponent = ({ data }) => (
           }}
         />
       </Link>
-   
-      {/* {data.relationships.subthemes ? (
-        <ul>
-          {data.relationships.subthemes.map(subTheme => (
-            <SubThemeComponent data={subTheme} />
-          ))}
-        </ul>
-      ) : (
-        <div>No subthemes</div>
-      )} */}
     </div>
   )
   
@@ -70,31 +60,33 @@ export default ({ data }) => (
     <IntroText>
     Explore themes raised in the film more deeply via collections of interviews, articles, questions, and clips.
   </IntroText>
-    {data.allTaxonomyTermThemes.edges.map((edge, i) => (
-      <ThemeComponent data={edge.node} />
-    ))}
+    {
+      data.allTaxonomyTermThemes.edges.map((edge, i) =>
+        <ThemeComponent key={i} data={edge.node} />
+      )
+    }
   </div>
 )
 
 export const query = graphql`
   query ThemesQuery {
     allTaxonomyTermThemes {
-        edges {
-          node {
-            id
-            name
-            description {
-                processed
+      edges {
+        node {
+          id
+          name
+          description {
+            processed
+          }
+          relationships {
+            field_theme_image {
+              localFile {
+                publicURL
               }
-            relationships {
-                field_theme_image {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
+            }
           }
         }
       }
+    }
   }
 `

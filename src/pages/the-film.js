@@ -65,7 +65,8 @@ const EpisodeItem = ({ episode, queryParams }) => (
             <div style={{margin: '0 -15px'}}>
                 <Link to={`?${queryString.stringify({ ...queryParams, transcript: episode.episodeNumber })}`} className="tag">Transcript</Link>
                 <Link to={`?${queryString.stringify({ ...queryParams, credits: episode.episodeNumber })}`} className="tag">Credits</Link>
-                <button className="tag">Clips</button>
+                <Link to={`/clips?${queryString.stringify({ ...queryParams, episode: episode.field_episode })}`} className="tag">Clips</Link>
+                {/*<button className="tag">Clips</button>*/}
             </div>
             <div>
                 <ExpandableText>
@@ -81,9 +82,14 @@ const EpisodeItem = ({ episode, queryParams }) => (
 const getEpisodeByNumber = episodeNumber => episodes.find(episode => episode.episodeNumber === episodeNumber)
 const safeGet = (object, fieldName) => object ? object[fieldName] : null
 
-const closeHandler = () => {
-  navigateTo(`?`)
-}
+const closeHandler = () => navigateTo(`?`)
+
+const CloseButton = styled.div`
+    float: right;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+`
 
 export default ({ data, transition, location }) => {
   const queryParams = queryString.parse(location.search)
@@ -98,9 +104,7 @@ export default ({ data, transition, location }) => {
         {(transcript || credits) &&
             <OverlayBody>
                 <OverlayHeader>
-                    <div onClick={closeHandler} style={{float: `right`, color: `red`, cursor: `pointer`}}>
-                    <b>Close</b>
-                    </div>
+                    <CloseButton onClick={closeHandler}>Close</CloseButton>
                     <div style={{
                     textAlign:'center'
                     }}>
