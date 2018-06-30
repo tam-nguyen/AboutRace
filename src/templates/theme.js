@@ -30,7 +30,6 @@ const ThemeDescription = styled.div`
   line-height: 1.5;
   letter-spacing: 0.02em;
   position:relative;
-  z-index:99999;
   max-width: 800px;
   margin: 0 auto;
   font-family: 'Lato';

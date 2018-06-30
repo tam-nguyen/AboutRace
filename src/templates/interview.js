@@ -48,6 +48,7 @@ const InterviewColumn = styled.div`
   font-size: 17px;
   max-width: 760px;
   line-height: 1.75;
+  margin-left: 30px !important;
 `
 
 const Overlay = styled.div`
@@ -72,6 +73,7 @@ const Centered = styled.div`
 const AuthorImage = styled.div`
   height: 420px;
   width: 420px;
+  border: solid thin lightgrey;
   border-radius: 50%;
   right:calc(55% - 200px);
   background-size: cover;
