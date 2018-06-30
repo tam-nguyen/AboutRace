@@ -80,14 +80,14 @@ const AuthorImage = styled.div`
   overflow:hidden;
 `
 const TopText = styled.div`
-  width: calc(100% - 200px);
-  // text-align: center;
+  width: 100%;
+  text-align: center;
   padding: 30px 45px;
   top:0;
   position: fixed;
-  background-color: rgba(255,255,255,0.92);
-  border-bottom: solid thin lightgrey;
-  z-index: 999999999;
+  color: white;
+;
+  background-color: rgba(0,0,0,0.82);
 `
 
 const AuthorBio = ({ data }) => (
@@ -158,7 +158,7 @@ class SingleInterview extends React.Component {
         <TopText>
         {/* <img style={{width: 30, transform:'rotate(90deg)'}} src={require('../assets/images/down2.svg')} /> */}
           {/* <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4> */}
-          <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+          <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back-white.svg')} />
           <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all interviews</h4>
         </TopText>
         <AuthorBioText>
@@ -169,7 +169,7 @@ class SingleInterview extends React.Component {
                 __html: data.nodeInterview.field_key_quote.processed,
               }}
             />
-          <InterviewMain style={{maxWidth:580}} className="column">
+          <InterviewMain style={{maxWidth:760, lineHeight:1.75}} className="column">
          
 
           <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>

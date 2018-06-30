@@ -95,6 +95,15 @@ const AuthorBioText = styled.div`
   border-top: solid thin lightgrey;
   font-family: 'Lato';
 `
+const TopText = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 36px 45px;
+  top:0;
+  background-color: #25292b;
+  color: white;
+`
+
 const AuthorBio = ({ data }) => (
   <div
   dangerouslySetInnerHTML={{
@@ -144,6 +153,9 @@ const InterviewSummary = ({ data }) => {
 
 export default ({ data }) => (
   <div>
+    <TopText>          
+      <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>interviews</h4>
+    </TopText>
     <IntroText dangerouslySetInnerHTML={{
                   __html: data.taxonomyTermInterviewsPage.description && data.taxonomyTermInterviewsPage.description.processed,
                 }} />

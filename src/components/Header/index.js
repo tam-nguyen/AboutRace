@@ -27,11 +27,7 @@ const linkStyle = {
 const activeLinkStyle = {
   ...linkStyle,
   // color:' #ce2727',
-  color: 'snow',
-  borderLeft: '12px solid white',
-  paddingLeft: 18,
-  position: 'relative',
-  left: -30
+  
 }
 
 const ThemeLinkComponent = ({ data, closeMenu }) => (
@@ -82,6 +78,8 @@ constructor(props) {
           justifyContent:'center',
           height: '100vh',
           position: 'fixed',
+          top: 0,
+          zIndex:99999,
           flexDirection: 'column',
           // backgroundColor: 'rgba(41, 41, 41, 0.8196078431372549)',
           // backgroundColor: 'rgba(141, 179, 63, 0.82)',
@@ -90,43 +88,38 @@ constructor(props) {
           // backgroundColor:'#6ab297',
           backgroundColor: '#adc6d2'
         }}>
-      {/* <Menu 
+      <Menu customBurgerIcon={ <img src={require('../../assets/images/burger.svg')} /> }
+            customCrossIcon={ <img src={require('../../assets/images/close.svg')} /> }
        isOpen={this.state.menuOpen}
        onStateChange={(state) => this.handleStateChange(state)}
        pageWrapId={ "page-wrap" }
+       strokeWidth={10}
+       borderRadius={12}
        >
-      <h4>Themes from the film:</h4>
-      
-      {this.props.data.allTaxonomyTermThemes.edges.map(({ node }) => (
-        <ThemeLinkComponent closeMenu={this.closeMenu} data={node}/>
-      ))}
-
-
-
-       <h4>Browse by: </h4>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/the-film" style={stylingForPath(`/the-film`)} exact>
-          The Film
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
+          About the film
         </Link>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/articles/" style={stylingForPath(`/articles`)} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
+          Themes
+        </Link>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
           Articles
         </Link>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/interviews/" style={stylingForPath(`/interviews`)} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
           Interviews
         </Link>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/FAQs/" style={stylingForPath(`/FAQs`)} exact>
-          FAQs
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/FAQs`)} to="/FAQs/" exact>
+          Q&A
         </Link>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/clips/" style={linkStyle} exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
           Clips
         </Link>
-
-        <h4>For teachers</h4>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/teaching/" style={linkStyle} exact>
-          Lesson Plans
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
+          Teaching
         </Link>
-      </Menu> */}
+      </Menu>
 
-      <NavMenu>
+      <NavMenu style={{display:'none'}}>
       {/* <h4 className="gold" style={{marginBottom:15}}>Themes from the film:</h4> */}
       
       {/* {data.allTaxonomyTermThemes.edges.map(({ node }) => (
@@ -134,30 +127,29 @@ constructor(props) {
       ))} */}
 
       {/* <h4 className="gold" style={{marginTop:60, marginBottom: 15}}>Browse by:</h4> */}
-        <Link className={'navItem'} style={stylingForPath(`/the-film`)} to="/the-film">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
           About the film
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/themes`)} to="/themes/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
           Themes
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/articles`)} to="/articles/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
           Articles
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/interviews`)} to="/interviews/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
           Interviews
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/FAQs`)} to="/FAQs/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/FAQs`)} to="/FAQs/" exact>
           Q&A
         </Link>
-        <Link className={'navItem'} style={stylingForPath(`/clips`)} to="/clips/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
           Clips
         </Link>
-
-        {/* <h4 className="gold" style={{marginTop:60}}>For teachers</h4> */}
-        <Link className={'navItem'} style={stylingForPath(`/teaching`)} to="/teaching/">
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
           Teaching
         </Link>
-    </NavMenu>
+      </NavMenu>
+
       <TopBar>
       <div className={'logo'}>
         <Link

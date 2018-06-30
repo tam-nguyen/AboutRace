@@ -45,7 +45,7 @@ const ThemeHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 200px;
+  left: 00px;
   right: 0;
   z-index: -999;
 `
@@ -94,7 +94,7 @@ const ThemeMain = styled.div`
 const ThemesMenu = styled.div`
   position: fixed;
   top: 0px;
-  left: 275px;
+  left: 15px;
   height: 100vh;
   display: flex;
   flex-direction: column;

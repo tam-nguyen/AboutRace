@@ -19,7 +19,7 @@ const LargeCalloutText = styled.div`
 const ArticleBackground = styled.div`
   // background-color: rgba(239, 255, 248, 0.92);
   // background-color:#d3e6de;
-  background-color: rgba(103, 165, 195, 0.14901960784313725);
+  // background-color: rgba(103, 165, 195, 0.14901960784313725);
   position: fixed;
   top:0;
   bottom: 0;
@@ -29,7 +29,8 @@ const ArticleBackground = styled.div`
 `
 
 const ArticleHeader = styled.div`
-  width: calc(100% - 380px);
+  width: 100%;
+  height: 88vh;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
   background-repeat: no-repeat;
@@ -38,16 +39,16 @@ const ArticleHeader = styled.div`
   // border: solid 4px black;
   background-color: lightgrey;
   position: fixed;
-  left: 290px;
-  top:90px;
-  bottom: 90px;
+  left:0px;
+  top:0px;
   z-index: -999;
-  border-radius: 60px;
 `
 const ArticleMain = styled.div`
-  background-color: rgba(255, 255, 255, 0.8);
+  // background-color: rgba(255, 255, 255, 0.8);
+  background-color: white;
   padding: 30px;
   position: relative;
+  top:-300px;
   max-width: 735px;
   z-index:99999999;
 `
