@@ -71,6 +71,14 @@ const ArticleImage = styled.div`
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
+const TopText = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 36px 45px;
+  top:0;
+  background-color: #25292b;
+  color: white;
+`
 
 const ArticleSummary = ({ data }) => {
   console.log(data)
@@ -132,6 +140,9 @@ export default ({ data }) => {
 
   return (
     <div>
+      <TopText>          
+         <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>articles</h4>
+      </TopText>
       <IntroText dangerouslySetInnerHTML={{
         __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
       }} />

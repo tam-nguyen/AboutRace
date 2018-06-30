@@ -4,7 +4,6 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 
 const GreyBackground = styled.div`
-  background-color: #f7f7f7;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,62 +16,62 @@ const IntroText = styled.div`
   font-size: 48px;
   line-height: 1.25;
   z-index:99999;
-  padding: 60px 45px;
+  padding: 15px 45px 60px 45px;
   margin-bottom: 60px;
   font-family: 'Lato';
   color: snow;
-  background-color: #2b2b2b;
+  background-color: #25292b;
 `
 const InterviewCard = styled.div`
-  background-color: #f5f6f9;
-  padding: 30px;
-  height: 100%;
+  // background-color: #f5f6f9;
+  // padding: 30px;
+  // height: 100%;
   position: relative;
-  border-radius: 6px;
-  border: solid thin lightgrey;
+  // border-radius: 6px;
+  // border: solid thin lightgrey;
   overflow:hidden;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  transition: all .3s;
+  // -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+  // transition: all .3s;
   &:hover {
-    -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    transition: all .3s;
+    // -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    // -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    // box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
+    // transition: all .3s;
   }
 `
 const InterviewTitle = styled.div`
-  margin-bottom: 30px;
-  font-size:30px;
-  line-height:1.25;
+  margin-bottom: 11.25px;
+  font-size:20px;
+  font-family:'Lato';
   z-index:99999;
   line-height:1;
   color: inherit;
+  font-weight: 700;
 `
 const InterviewExcerpt = styled.div`
   line-height: 1.5;
   font-weight: 500;
   opacity: 0.9;
-  font-style: italic;
-  font-size: 24px;
+  font-size: 14px;
+  & > p {
+    margin-bottom: 7.5px;
+  }
 `
 const InterviewImage = styled.div`
   background-color:red;
-  display: inline-block;
-  width:33%;
-  position: absolute;
-  height: 100%;
-  top:0;
-  left: 0;
+  border-radius: 50%;
+  height: 145px;
+  width: 145px;
+  margin-bottom: 15px;
   background-position: center;
   background-size:cover;
   background-image: ${props =>
     props.background ? `url(${props.background})` : `none`};
 `
 const InterviewMain = styled.div`
-  margin-left: calc(33% + 30px);
-  margin-bottom: 180px;
+
 `
 const AllInterviews = styled.div`
   display: flex;
@@ -95,6 +94,15 @@ const AuthorBioText = styled.div`
   border-top: solid thin lightgrey;
   font-family: 'Lato';
 `
+const TopText = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 36px 45px;
+  top:0;
+  background-color: #25292b;
+  color: white;
+`
+
 const AuthorBio = ({ data }) => (
   <div
   dangerouslySetInnerHTML={{
@@ -109,7 +117,7 @@ const InterviewSummary = ({ data }) => {
       flexGrow: 0,
       flexShrink: 1,
       marginBottom: 60,
-      flexBasis: 'calc(50% - 30px)',
+      flexBasis: 'calc(25% - 30px)',
       textDecoration: 'none',
       color: 'inherit'
     }} to={`/interviews/${kebabCase(data.title)}`}>
@@ -119,14 +127,22 @@ const InterviewSummary = ({ data }) => {
           data.relationships.field_interviewee.localFile.publicURL
         } />
         <InterviewMain>   
-             <InterviewTitle><h4 style={{marginBottom:7.5}}>Interview with</h4>{data.field_interviewee_name.processed}</InterviewTitle>
+             <InterviewTitle>
+              <div style={{
+                      fontSize:14,
+                      fontWeight:600,
+                      letterSpacing:'0.04em',
+                      marginBottom:7.5}}>
+                      Interview with
+              </div>{data.field_interviewee_name.processed}</InterviewTitle>
              <InterviewExcerpt 
               dangerouslySetInnerHTML={{
                     __html: data.field_interview_summary && data.field_interview_summary.processed,
               }} />
-             <AuthorBioText>
+              <Link style={{fontFamily:'Lato', textDecoration:'none', color:'#5599B4', fontSize:13, letterSpacing:'0.04em', fontWeight:700}} to={`/interviews/${kebabCase(data.title)}`}>Read interview</Link>
+             {/* <AuthorBioText>
                 <AuthorBio data={data}> </AuthorBio>
-             </AuthorBioText>
+             </AuthorBioText> */}
           {/* {data.relationships.field_belongs_to_subtheme ? (
           <ul>
             {data.relationships.field_belongs_to_subtheme.map(subTheme => (
@@ -144,6 +160,9 @@ const InterviewSummary = ({ data }) => {
 
 export default ({ data }) => (
   <div>
+    <TopText>          
+      <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>interviews</h4>
+    </TopText>
     <IntroText dangerouslySetInnerHTML={{
                   __html: data.taxonomyTermInterviewsPage.description && data.taxonomyTermInterviewsPage.description.processed,
                 }} />

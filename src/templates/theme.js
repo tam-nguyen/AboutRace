@@ -30,7 +30,6 @@ const ThemeDescription = styled.div`
   line-height: 1.5;
   letter-spacing: 0.02em;
   position:relative;
-  z-index:99999;
   max-width: 800px;
   margin: 0 auto;
   font-family: 'Lato';
@@ -45,7 +44,7 @@ const ThemeHeader = styled.div`
   background-color: lightgrey;
   position: fixed;
   top: 0;
-  left: 200px;
+  left: 00px;
   right: 0;
   z-index: -999;
 `
@@ -94,7 +93,7 @@ const ThemeMain = styled.div`
 const ThemesMenu = styled.div`
   position: fixed;
   top: 0px;
-  left: 275px;
+  left: 15px;
   height: 100vh;
   display: flex;
   flex-direction: column;
