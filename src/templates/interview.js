@@ -1,12 +1,14 @@
 const React = require('react')
 import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
+import Link, { navigateTo } from 'gatsby-link';
+
 
 const KeyQuote = styled.div`
   font-size: 60px;
   font-weight: 500;
   margin-bottom: 60px;
-  padding: 192px 120px 108px 120px;
+  padding: 162px 120px 138px 120px;
   width: 100%;
   line-height:1.25;
   // font-style: italic;
@@ -19,9 +21,7 @@ const KeyQuote = styled.div`
 const AuthorBioText = styled.div`
   width: 300px;
   height: auto;
-  position: absolute;
-  top: 860px;
-  left: 60px;
+  
   z-index: 9999999999;
   background-color: white;
   padding: 30px;
@@ -36,15 +36,18 @@ const InterviewTitle = styled.div`
   font-weight: 500;
   line-height:1.25;
   position: relative;
-  z-index:99999;
   line-height:1;
   font-family: "orpheuspro";
 
 `
-const InterviewMain = styled.div`
+const InterviewColumn = styled.div`
   padding: 30px;
-  margin-left:72.5%;
+  top:-150px;
+  background-color:white;
   position: relative;
+  font-size: 17px;
+  max-width: 760px;
+  line-height: 1.75;
 `
 
 const Overlay = styled.div`
@@ -67,9 +70,6 @@ const Centered = styled.div`
   transform: translate(50%, -50%);
 `
 const AuthorImage = styled.div`
-  position: absolute;
-  top:440px;
-  left:-440px;
   height: 420px;
   width: 420px;
   border-radius: 50%;
@@ -84,10 +84,8 @@ const TopText = styled.div`
   text-align: center;
   padding: 30px 45px;
   top:0;
-  position: fixed;
+  position: absolute;
   color: white;
-;
-  background-color: rgba(0,0,0,0.82);
 `
 
 const AuthorBio = ({ data }) => (
@@ -156,46 +154,47 @@ class SingleInterview extends React.Component {
           closeHandler={() => this.setState({ quickFact: null })}
         />
         <TopText>
-        {/* <img style={{width: 30, transform:'rotate(90deg)'}} src={require('../assets/images/down2.svg')} /> */}
-          {/* <h4 style={{marginBottom:0}}>Interview with {data.nodeInterview.field_interviewee_name.processed}</h4> */}
+        <Link style={{color:'inherit'}} to="/interviews/">
           <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back-white.svg')} />
           <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all interviews</h4>
+        </Link>
         </TopText>
-        <AuthorBioText>
-          <AuthorBio data={data}> </AuthorBio>
-        </AuthorBioText>
+        
         <KeyQuote
               dangerouslySetInnerHTML={{
                 __html: data.nodeInterview.field_key_quote.processed,
               }}
             />
-          <InterviewMain style={{maxWidth:760, lineHeight:1.75}} className="column">
-         
-
-          <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
-          <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.nodeInterview.field_full_length_version.processed,
-              }}
-            />
-              <div style={{height: 200}}/>
-              {
-                (data.nodeInterview.relationships.backref_field_related_content || []).map(quickFact => (
-                    <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
-                      <h3>{quickFact.title}</h3>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: quickFact.field_quickfact.processed,
-                        }}
-                        onClick={() => this.setState({ quickFact: quickFact })}
-                      />
-                    </div>
+          <InterviewColumn className="column">
+            <InterviewTitle><h4 style={{marginBottom:15}}>Interview with</h4>{data.nodeInterview.field_interviewee_name.processed}</InterviewTitle>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.nodeInterview.field_full_length_version.processed,
+                }}
+              />
+                <div style={{height: 200}}/>
+                {
+                  (data.nodeInterview.relationships.backref_field_related_content || []).map(quickFact => (
+                      <div style={{ cursor: `pointer`, border: `1px solid #888888`, padding: 20}}>
+                        <h3>{quickFact.title}</h3>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: quickFact.field_quickfact.processed,
+                          }}
+                          onClick={() => this.setState({ quickFact: quickFact })}
+                        />
+                      </div>
+                    )
                   )
-                )
-              }
-          </InterviewMain>
-          <div className="column _25" />
+                }
+          </InterviewColumn>
+          <div className="column _25">
+            <AuthorImage background={data.nodeInterview.relationships.field_interviewee && data.nodeInterview.relationships.field_interviewee.localFile.publicURL} />
+
+            <AuthorBioText>
+              <AuthorBio data={data}> </AuthorBio>
+            </AuthorBioText>
+          </div>
       </div>
     )
   }

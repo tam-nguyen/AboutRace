@@ -18,8 +18,8 @@
   .bm-cross-button {
     height: 30px;
     width: 30px;
-    left: 36px;
-    margin-top: 36px;
+    left: 42px !important;
+    margin-top: 31px!important;
   }
   
   /* Color/shape of close button cross */
@@ -28,7 +28,7 @@
   
   /* General sidebar styles */
   .bm-menu {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
     padding-top: 80px;
