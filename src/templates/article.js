@@ -47,8 +47,6 @@ const ArticleMain = styled.div`
   // background-color: rgba(255, 255, 255, 0.8);
   background-color: white;
   padding: 30px;
-  position: relative;
-  top:-300px;
   max-width: 735px;
   z-index:99999999;
 `
@@ -69,8 +67,8 @@ const ArticleTitle = styled.div`
   font-style: normal;
 `
 const TopText = styled.div`
-  width: calc(100% - 200px);
-  // text-align: center;
+  width: 100%;
+  text-align: center;
   padding: 30px 45px;
   top:0;
   position: fixed;
@@ -187,6 +185,11 @@ class TagOverlay extends React.Component {
 const BreadcrumbLink = styled(Link)`
   cursor: pointer;
   text-decoration: none;
+  color: white;
+  font-family: 'Lato';
+  letter-spacing: 0.03em;
+  background-color: #2b2b2b;
+  padding: 7.5px;
 `;
 
 const Breadcrumbs = ({titles}) => {
@@ -202,7 +205,7 @@ const Breadcrumbs = ({titles}) => {
   `;
 
   return (
-    <Container>
+    <Container style={{marginTop:30}}>
       FILED UNDER:&nbsp;
       {
         links.map( ({url, title}, index) => 
