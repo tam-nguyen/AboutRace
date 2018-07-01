@@ -30,7 +30,8 @@ class Clips extends Component {
 		queryParams.episode = selected;
 		const search = `?` + queryString.stringify({ ...queryParams});
 
-		history.pushState({}, window.document.title, search)
+		// uncomment if you want to have url changed
+		// history.pushState({}, window.document.title, search)
 
 		this.setState({selected})
 	}

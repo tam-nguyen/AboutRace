@@ -18,7 +18,7 @@ const ArrowContainer = styled(Link)`
   flex-direction: column;
   color: orange;
   align-items: center;
-   text-decoration: none;
+  text-decoration: none;
 `
 
 const ArrowButton = styled.div`

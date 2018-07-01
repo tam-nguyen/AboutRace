@@ -39,10 +39,23 @@ const Chosen = styled.div`
 `
 
 export const ChosenClip = ({ clip, link }) =>  {
+  const src = `${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`;
+
+  /*
+    webkitAllowFullScreen="true"
+    mozAllowFullScreen="true"
+  */
+
 	return (
 		<Chosen>
 		  <ChosenClipCard>
-			 <iframe width='720px' height='100%' src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			 <iframe 
+        width='720px' 
+        height='100%' 
+        src={src} 
+        frameBorder="0" 
+        allowFullScreen="true"
+      />
 			</ChosenClipCard>
      <ChosenClipCaption> {clip.title}</ChosenClipCaption>
 		</Chosen>
@@ -50,12 +63,15 @@ export const ChosenClip = ({ clip, link }) =>  {
 }
 
 class ClipTemplate extends React.Component {
+  
   constructor(){
     super()
     this.state = {}
   }
+
   render() {
     const { data } = this.props
+
     return (
       <div className='darkwrapper'>
         <ChosenClip clip={data.nodeClip} />
@@ -73,6 +89,7 @@ class ClipTemplate extends React.Component {
                 if (node.__typename == `node__article`) {
                   return (
                     <ArticleCard
+                      key={`article-${i}`}
                       i={i}
                       article={node}
                       relatedContent
@@ -81,6 +98,7 @@ class ClipTemplate extends React.Component {
                 } else if (node.__typename == `node__faq`) {
                   return (
                     <FAQCard
+                      key={`faqcard-${i}`}
                       i={i}
                       faq={node}
                     />
@@ -88,6 +106,7 @@ class ClipTemplate extends React.Component {
                 } else if (node.__typename == `node__clip`) {
                   return (
                     <ClipCard
+                      key={`clip-${i}`}
                       i={i}
                       clip={node}
                       playable
