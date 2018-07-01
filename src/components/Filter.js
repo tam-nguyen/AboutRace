@@ -16,6 +16,11 @@ const Element = styled.div
   font-weight: ${props => props.selected ?  `bold` : `normal`};
 `
 
+const Title = styled.div
+`
+  text-decoration: underline;
+`
+
 class Filter extends Component {
   render() {
     const {selected, onSelected, color} = this.props;
@@ -32,19 +37,19 @@ class Filter extends Component {
           selected={selected === '1'}
           onClick={() => onSelected('1')}
         >
-          Episode One
+          <Title>Episode One:</Title> The Difference Between Us
         </Element>
         <Element
           selected={selected === '2'}
           onClick={() => onSelected('2')}
         >
-          Episode Two
+          <Title>Episode Two:</Title> The Story We Tell
         </Element>
         <Element
           selected={selected === '3'}
           onClick={() => onSelected('3')}
         >
-          Episode Three
+          <Title>Episode Three:</Title> The House We Live In
         </Element>
       </Row>
     )
