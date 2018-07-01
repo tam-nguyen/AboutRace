@@ -199,7 +199,6 @@ export class InterviewCard extends React.Component {
       <Card
         style={{
           ...style, 
-          border: '1px solid red',
           padding:30, display:'flex', 
           flexDirection: 'column', 
           justifyContent:'center'
@@ -366,6 +365,7 @@ class SubthemeSection extends React.Component {
     super(props)
 
     this.updateOrder(props, null)
+
     this.state = { 
       numCards: NUM_CARDS_TO_SHOW,
       filter: null,
@@ -397,14 +397,28 @@ class SubthemeSection extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (this.state.filter !== nextState.filter) {
-      this.updateOrder(nextProps, nextState.filter)
+      // this.updateOrder(nextProps, nextState.filter)
     }
+  }
+
+  getShuffle = length => {
+    let storedOrder = localStorage.getItem('shuffle');
+    if(storedOrder){
+      console.log('from cache');
+      storedOrder = JSON.parse(storedOrder)
+    }else{
+      storedOrder = shuffle(range.range(length))
+      localStorage.setItem('shuffle', JSON.stringify(storedOrder));
+    }
+
+    return storedOrder
   }
 
   updateOrder(props, filter) {
     if (props.filter) return;
     const length = getCards(props.data.relationships, filter).length;
-    this.order = shuffle(range.range(length))
+    this.order = this.getShuffle(length)
+    console.log(this.order)
   }
 
   close = () => {
@@ -430,10 +444,12 @@ class SubthemeSection extends React.Component {
 
     const { filter, popup, card } = this.state;
 
+    const rawCards = getCards(subtheme.relationships, filter, null, true, this.open)
+
     const allCards = filter ?
-      getCards(subtheme.relationships, filter, null, true, this.open).sort((a, b) => (b.props.changed - a.props.changed)) :
-      reorder(getCards(subtheme.relationships, filter, null, true, this.open), this.order)
-      // getCards(subtheme.relationships, filter, null, true, this.open)
+      rawCards.sort((a, b) => (b.props.changed - a.props.changed)) :
+      reorder(rawCards, this.order)
+      rawCards
 
     const description = subtheme.description
       ? <div
