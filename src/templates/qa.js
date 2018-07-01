@@ -29,7 +29,7 @@ const ArrowButton = styled.div`
 const ArrowTitle = styled.div`
 `
 
-class SingleFAQ extends React.Component {
+class SingleQA extends React.Component {
   render() {
     const { data } = this.props;
     const { 
@@ -96,7 +96,7 @@ class SingleFAQ extends React.Component {
   }
 }
 
-export default SingleFAQ
+export default SingleQA
 
 export const faqQuery = graphql`
   query faqQuery($id: String) {
