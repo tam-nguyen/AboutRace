@@ -193,9 +193,24 @@ export class FAQCard extends React.Component {
 
 export class InterviewCard extends React.Component {
   render() {
-    const { interview = {}, i, relatedContent, style = {} } = this.props
+    const { interview = {}, i, relatedContent, style = {}, onOpen } = this.props
+    const link = `/interviews/${kebabCase(interview.title)}` 
     return (
-      <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`interview-${i}`} type="Interview" title={interview.title} slug="interview" changed={interview.changed} link={`/interviews/${kebabCase(interview.title)}`}>
+      <Card
+        style={{
+          ...style, 
+          border: '1px solid red',
+          padding:30, display:'flex', 
+          flexDirection: 'column', 
+          justifyContent:'center'
+        }}
+        key={`interview-${i}`}
+        type="Interview"
+        title={interview.title}
+        slug="interview"
+        changed={interview.changed}
+        onClick={ () => onOpen(link)}
+      >
         <div className="interviewCardPhoto" style={{backgroundImage: interview.relationships.field_interviewee ? `url(${interview.relationships.field_interviewee.localFile.publicURL})` : null }}/>
         {/* <h4 style={{marginBottom:15}}>Interview with </h4> */}
         <h4 style={{marginTop:15, marginBottom:15, lineHeight:1.5, textAlign:'center'}}>{interview.title}</h4>
@@ -225,7 +240,7 @@ export const getCards = (relationships, queryFilter, relatedContent, linkableCli
   ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} interview={interview} i={i} relatedContent={relatedContent} />)),
+  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} onOpen={ link => onOpen(link, interview) } interview={interview} i={i} relatedContent={relatedContent} />)),
   ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
 ]
 
@@ -439,7 +454,9 @@ class SubthemeSection extends React.Component {
                   <TopImage background={card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL} />
                   <h1>{card.title}</h1>
                   <Description
-                    dangerouslySetInnerHTML={{ __html:card.field_short_version.processed}}
+                    dangerouslySetInnerHTML={{ 
+                      __html: card.field_short_version ? card.field_short_version.processed : null
+                    }}
                   />
                   <Link to={card.link}>Read the article</Link>
                 </PopupCard>

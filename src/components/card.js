@@ -8,13 +8,17 @@ import kebabCase from 'lodash/kebabCase'
 
 import styled, { css } from 'styled-components';
 
+const Container = styled.div`
+  cursor: pointer;
+`;
+
 class CardWrapper extends React.Component {
   render() {
     const { link, children, ...rest } = this.props
     if (link) {
       return <Link to={link} {...rest}>{children}</Link>
     } else {
-      return <div {...rest}>{children}</div>
+      return <Container {...rest}>{children}</Container>
     }
   }
 }
