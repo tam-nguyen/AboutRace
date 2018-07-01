@@ -108,7 +108,7 @@ constructor(props) {
         <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
           Interviews
         </Link>
-        <Link className={'navItem'} onClick={() => this.closeMenu()} to="/qa/" exact>
+        <Link className={'navItem'} onClick={() => this.closeMenu()} style={linkStyle} to="/qa/" exact>
           Q&A
         </Link>
         <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>

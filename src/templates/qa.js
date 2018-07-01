@@ -71,7 +71,7 @@ class SingleQA extends React.Component {
     return (
     	<Row>
         {
-          isPreviousSlug && <ArrowContainer to={`/faqs/${previousSlug}`}>
+          isPreviousSlug && <ArrowContainer to={`/qa/${previousSlug}`}>
             <ArrowButton>&#8249;</ArrowButton>
             <ArrowTitle>PREVIOUS</ArrowTitle>
           </ArrowContainer>
@@ -85,7 +85,7 @@ class SingleQA extends React.Component {
 	      />
 
         {
-          isNextSlug && <ArrowContainer to={`/faqs/${nextSlug}`}>
+          isNextSlug && <ArrowContainer to={`/qa/${nextSlug}`}>
             <ArrowButton>&#8250;</ArrowButton>
             <ArrowTitle>NEXT</ArrowTitle>
           </ArrowContainer>
