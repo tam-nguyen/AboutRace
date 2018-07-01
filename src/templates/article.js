@@ -53,20 +53,20 @@ const ArticleMain = styled.div`
   z-index:99999999;
 `
 const ArticleTitle = styled.div`
-    font-size: 42px;
-    width: 100%;
-    margin-bottom: 22.5px;
-    line-height: 1.125;
-    // color: white;
-    z-index: 99999999;
-    position: relative;
-    // font-family: 'Lato';
-    // font-weight: 700;
-    font-style: italic;
-    font-family: "orpheuspro";
-    font-size: 54px;
-    font-weight: 500;
-    font-style: normal;
+  font-size: 42px;
+  width: 100%;
+  margin-bottom: 22.5px;
+  line-height: 1.125;
+  // color: white;
+  z-index: 99999999;
+  position: relative;
+  // font-family: 'Lato';
+  // font-weight: 700;
+  font-style: italic;
+  font-family: "orpheuspro";
+  font-size: 54px;
+  font-weight: 500;
+  font-style: normal;
 `
 const TopText = styled.div`
   width: calc(100% - 200px);
@@ -184,6 +184,38 @@ class TagOverlay extends React.Component {
   }
 }
 
+const BreadcrumbLink = styled(Link)`
+  cursor: pointer;
+  text-decoration: none;
+`;
+
+const Breadcrumbs = ({titles}) => {
+
+  const links = titles.map( title => {
+    const url = `/themes/${kebabCase(title)}`;
+    return {url, title};
+  });
+
+  const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+  `;
+
+  return (
+    <Container>
+      FILED UNDER:&nbsp;
+      {
+        links.map( ({url, title}, index) => 
+          <div>
+            <BreadcrumbLink to={url}>{title}</BreadcrumbLink>
+            &nbsp;{ index == (links.length - 1) ? null : 'and' }&nbsp;
+          </div>
+        )
+      }
+    </Container>
+  )
+}///
+
 class SingleArticle extends React.Component {
   constructor(props) {
     super(props)
@@ -214,7 +246,7 @@ class SingleArticle extends React.Component {
       })
     })
 
-    const themes = Object.keys(themesObject);
+    const themes = Object.keys(themesObject)
 
     const tag = queryParams.tag ?
       (data.nodeArticle.relationships.field_tags || []).filter(tag => (kebabCase(tag.name) == queryParams.tag)
@@ -265,9 +297,7 @@ class SingleArticle extends React.Component {
             {/* <h4 style={{marginBottom:0}}>By {data.nodeArticle.field_author && data.nodeArticle.field_author.processed}</h4> */}
             <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>all articles</h4>
           </Link>
-          <div>
-          FILED UNDER: {themes.join(' and ')}
-          </div>
+          <Breadcrumbs titles={themes} />
         </TopText>
         <ArticleHeader
           background={background}

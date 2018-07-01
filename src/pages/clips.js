@@ -48,8 +48,6 @@ class Clips extends Component {
 		const { selected } = this.state;
 		const { data } = this.props;
 
-		console.log(data)
-
 		return (
 			<div className='darkwrapper'>
 				<Filter selected={selected} onSelected={this.onSelected}/>
