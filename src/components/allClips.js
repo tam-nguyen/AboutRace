@@ -56,15 +56,22 @@ export const Clip = ({ clip, link }) =>  {
 }
 
 
-const AllClips = ({ data, selected }) => (
-  <div style={{padding: '0 30px'}}>
-    {
-    	data.allNodeClip.edges.filter( el => selected === 'all' ? true : el.node.field_episode === parseInt(selected) ).map((edge, i) =>
-	      <Clip key={`clip-${i}`} clip={edge.node} link={true} />
-	    )
-	  }
-  </div>
-)
+const AllClips = ({ data, selected }) => {
+	let array = data.allNodeClip.edges
+
+	if(selected)
+		array = array.filter( el => selected === 'all' ? true : el.node.field_episode === parseInt(selected) )
+	
+	return (
+	  <div style={{padding: '0 30px'}}>
+	    {
+	    	array.map((edge, i) =>
+		      <Clip key={`clip-${i}`} clip={edge.node} link={true} />
+		    )
+		  }
+	  </div>
+	)
+}
 
 export default AllClips
 
