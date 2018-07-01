@@ -471,7 +471,7 @@ export const pageQuery = graphql`
             height
             src
           }
-          resolutions(width: 400) {
+          resolutions(width: 1000) {
             src
           }
         }
