@@ -19,7 +19,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const articleTemplate = path.resolve(`src/templates/article.js`)
     const clipTemplate = path.resolve(`src/templates/clip.js`)
     const interviewTemplate = path.resolve(`src/templates/interview.js`)
-    const faqTemplate = path.resolve(`src/templates/faq.js`)
+    const qaTemplate = path.resolve(`src/templates/qa.js`)
     
     // Query for markdown nodes to use in creating pages.
     graphql(
@@ -150,8 +150,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
       _.each(result.data.allNodeFaq.edges, edge => {
         createPage({
-          path: `/faqs/${edge.node.fields.slug}`, // required
-          component: faqTemplate,
+          path: `/qa/${edge.node.fields.slug}`, // required
+          component: qaTemplate,
           context: {
             id: edge.node.id,
           },

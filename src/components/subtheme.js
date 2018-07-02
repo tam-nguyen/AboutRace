@@ -65,7 +65,7 @@ const shuffle = (arr) => {
  
 const reorder = (arr, order) => {
   const newArr = new Array(arr.length);
-  order.forEach((item, i) => {
+  order && order.forEach((item, i) => {
     newArr[i] = arr[item];
   })
   return newArr;
@@ -183,7 +183,19 @@ export class FAQCard extends React.Component {
   render() {
     const { faq = {}, i, relatedContent, style = {} } = this.props
     return (
-      <Card style={{...style, padding:30, display:'flex', flexDirection: 'column', justifyContent:'center'}} key={`faq-${i}`}  slug="faq" changed={faq.changed} type="FAQ" link={`/faqs/${kebabCase(faq.title)}`}>
+      <Card
+        style={{
+          ...style, 
+          padding:30, 
+          display:'flex', 
+          flexDirection: 'column', 
+          justifyContent:'center'
+        }}
+        key={`faq-${i}`}
+        slug="faq"
+        changed={faq.changed}
+        type="FAQ" 
+        link={`/qa/${kebabCase(faq.title)}`}>
         <h4 style={{marginBottom:15}}>Q&A</h4>
         <p className='card-large-text'>{faq.title}</p>
       </Card>
@@ -235,13 +247,18 @@ export class QuickFactCard extends React.Component {
   }
 }
 
-export const getCards = (relationships, queryFilter, relatedContent, linkableClip, onOpen) => [
-  ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} onOpen={ link => onOpen(link, interview) } interview={interview} i={i} relatedContent={relatedContent} />)),
-  ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
-]
+export const getCards = (relationships, queryFilter, relatedContent, linkableClip, onOpen) => {
+  if(!onOpen)
+    onOpen = link => {}
+
+  return [
+    ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} onOpen={ link => onOpen(link, interview) } interview={interview} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
+  ]
+}
 
 const DISPLAY_NAMES_TO_SLUG = new Map([
   [`articles`, `article`],
@@ -402,13 +419,17 @@ class SubthemeSection extends React.Component {
   }
 
   getShuffle = length => {
-    let storedOrder = localStorage.getItem('shuffle');
+    // weird Gatsby hack
+    const isBrowser = typeof window !== 'undefined';
+    if (!isBrowser) return;
+
+    let storedOrder = window.localStorage.getItem('shuffle');
     if(storedOrder){
       console.log('from cache');
       storedOrder = JSON.parse(storedOrder)
     }else{
       storedOrder = shuffle(range.range(length))
-      localStorage.setItem('shuffle', JSON.stringify(storedOrder));
+      window.localStorage.setItem('shuffle', JSON.stringify(storedOrder));
     }
 
     return storedOrder

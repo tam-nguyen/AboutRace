@@ -29,7 +29,7 @@ const ArrowButton = styled.div`
 const ArrowTitle = styled.div`
 `
 
-class SingleFAQ extends React.Component {
+class SingleQA extends React.Component {
   render() {
     const { data } = this.props;
     const { 
@@ -71,7 +71,7 @@ class SingleFAQ extends React.Component {
     return (
     	<Row>
         {
-          isPreviousSlug && <ArrowContainer to={`/faqs/${previousSlug}`}>
+          isPreviousSlug && <ArrowContainer to={`/qa/${previousSlug}`}>
             <ArrowButton>&#8249;</ArrowButton>
             <ArrowTitle>PREVIOUS</ArrowTitle>
           </ArrowContainer>
@@ -85,7 +85,7 @@ class SingleFAQ extends React.Component {
 	      />
 
         {
-          isNextSlug && <ArrowContainer to={`/faqs/${nextSlug}`}>
+          isNextSlug && <ArrowContainer to={`/qa/${nextSlug}`}>
             <ArrowButton>&#8250;</ArrowButton>
             <ArrowTitle>NEXT</ArrowTitle>
           </ArrowContainer>
@@ -96,7 +96,7 @@ class SingleFAQ extends React.Component {
   }
 }
 
-export default SingleFAQ
+export default SingleQA
 
 export const faqQuery = graphql`
   query faqQuery($id: String) {

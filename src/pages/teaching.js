@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import './FAQs.css'
 import Link, {navigateTo} from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
