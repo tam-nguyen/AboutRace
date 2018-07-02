@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import './FAQs.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import Filter from '../components/Filter'
 
 const queryString = require('query-string');
 
-const FAQTitle = styled.div`
+const Title = styled.div`
     
 `
 
@@ -21,21 +20,21 @@ const IntroText = styled.div`
 `
 
 
-const FAQSummary = ({ data }) => {
+const Summary = ({ data }) => {
   return (
       <div className={"articleCard"}>
        
         <div className="articleExcerpt">
           
-          <FAQTitle>
-            <Link to={`/faqs/${data.fields.slug}`}>
+          <Title>
+            <Link to={`/qa/${data.fields.slug}`}>
               {
                 data.field_question_summary 
                   ? data.field_question_summary.processed
                   : data.field_title.processed
               }
             </Link>
-          </FAQTitle>
+          </Title>
           
         </div>
        
@@ -43,7 +42,7 @@ const FAQSummary = ({ data }) => {
   )
 }///
 
-class FAQ extends Component {
+class QA extends Component {
   constructor(props) {
     super(props);
     const selected = 'all'
@@ -85,7 +84,7 @@ class FAQ extends Component {
         <div className={"articles"}>
         {
           data.allNodeFaq.edges.map((edge, i) =>
-            <FAQSummary key={`FAQ-${i}`} data={edge.node} />
+            <Summary key={`QA-${i}`} data={edge.node} />
           )
         }
         </div>
@@ -97,10 +96,10 @@ class FAQ extends Component {
 // TODO: uncomment this once episode information is in the data
 // data.allNodeFaq.edges.filter( el => selected === 'all' ? true : el.node.field_episode === parseInt(selected) ).map((edge, i) =>
 
-export default FAQ;
+export default QA;
 
 export const query = graphql`
-  query FAQsQuery {
+  query QAQuery {
     allNodeFaq {
       edges {
         node {
