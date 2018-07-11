@@ -1,6 +1,6 @@
 import React from "react"
 import Img from 'gatsby-image'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import SubthemeSection from '../components/subtheme.js'
 import styled from 'styled-components'
