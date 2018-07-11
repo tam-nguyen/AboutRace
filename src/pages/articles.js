@@ -55,7 +55,6 @@ const TopText = styled.div`
 `
 
 const ArticleSummary = ({ data }) => {
-  console.log(data)
   return (
     <Link style={{
       flexGrow: 0,
@@ -110,7 +109,6 @@ const ArticleSummary = ({ data }) => {
 }
 
 export default ({ data }) => {
-  console.log(data)
 
   return (
     <div>

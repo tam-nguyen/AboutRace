@@ -56,7 +56,6 @@ const StyledLink = styled(Link)`
 
 class SubThemePage extends React.Component {
   render() {
-    console.log(this.props)
     const {data, pageContext, location} = this.props;
     const {field_theme_image, theme} = pageContext;
     const {allTaxonomyTermSubthemes, taxonomyTermSubthemes} = data;

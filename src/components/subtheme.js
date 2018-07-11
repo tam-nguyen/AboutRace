@@ -262,8 +262,6 @@ const DISPLAY_NAMES_TO_SLUG = new Map([
 ])
 
 const itemExists = (itemTag, parent) => {
-  // console.log(parent.relationships)
-  // console.log(itemTag)
   return parent.relationships[itemTag]
 
 }
@@ -418,7 +416,6 @@ class SubthemeSection extends React.Component {
 
     let storedOrder = window.localStorage.getItem('shuffle');
     if(storedOrder){
-      console.log('from cache');
       storedOrder = JSON.parse(storedOrder)
     }else{
       storedOrder = shuffle(range.range(length))
@@ -432,7 +429,6 @@ class SubthemeSection extends React.Component {
     if (props.filter) return;
     const length = getCards(props.data.relationships, filter).length;
     this.order = this.getShuffle(length)
-    console.log(this.order)
   }
 
   close = () => {
@@ -443,7 +439,6 @@ class SubthemeSection extends React.Component {
   }
 
   open = (link, data) => {
-    console.log('open', link, data)
     this.setState({
       popup: true,
       card: {...data, link}
