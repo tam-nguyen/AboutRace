@@ -1,12 +1,8 @@
-const React = require('react')
-const range = require('range')
-const ReactFlex = require('react-flex')
-require('react-flex/index.css')
-import Img from 'gatsby-image'
 import Link from 'gatsby-link'
-import kebabCase from 'lodash/kebabCase'
 
 import styled, { css } from 'styled-components';
+
+const React = require('react')
 
 const Container = styled.div`
   cursor: pointer;
@@ -42,27 +38,27 @@ const CardGridItem = styled.div`
   margin-right: 15px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px;
 
-  ${props => props.type == `Article` && css`
+  ${props => props.type === `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * ARTICLE_MULTIPLIER}px;
   `}
 
-  ${props => props.type == `Interview` && css`
+  ${props => props.type === `Interview` && css`
   flex: ${FLEX} ${FLEX * INTERVIEW_MULTIPLIER} ${BASE_CARD_WIDTH * INTERVIEW_MULTIPLIER}px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * INTERVIEW_MULTIPLIER}px;
   `}
 
-  ${props => props.type == `Clip` && css`
+  ${props => props.type === `Clip` && css`
   flex: ${FLEX * CLIP_MULTIPLIER} ${FLEX * CLIP_MULTIPLIER} ${BASE_CARD_WIDTH * CLIP_MULTIPLIER}px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * CLIP_MULTIPLIER}px;
   `}
 
-  ${props => props.type == `QuickFact` && css`
+  ${props => props.type === `QuickFact` && css`
     flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * QUICK_FACT_MULTIPLIER} ${BASE_CARD_WIDTH * QUICK_FACT_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * QUICK_FACT_MULTIPLIER}px;
   `}
  
-  ${props => props.type == `FAQ` && css`
+  ${props => props.type === `FAQ` && css`
     flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * FAQ_MULTIPLIER} ${BASE_CARD_WIDTH * FAQ_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * FAQ_MULTIPLIER}px;
   `}

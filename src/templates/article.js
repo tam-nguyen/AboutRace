@@ -1,4 +1,3 @@
-const React = require('react')
 import styled, { css } from 'styled-components'
 import {
   getCards,
@@ -8,9 +7,11 @@ import {
   ArticleCard
 } from '../components/subtheme'
 import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
-const queryString = require('query-string');
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
+
+const React = require('react')
+const queryString = require('query-string');
 
 const LargeCalloutText = styled.div`
 

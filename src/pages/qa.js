@@ -57,7 +57,7 @@ class QA extends Component {
     queryParams.episode = selected;
     const search = `?` + queryString.stringify({ ...queryParams});
 
-    history.pushState({}, window.document.title, search)
+    window.history.pushState({}, window.document.title, search)
 
     this.setState({selected})
   }

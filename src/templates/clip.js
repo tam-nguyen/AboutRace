@@ -1,4 +1,3 @@
-const React = require('react')
 import AllClips, { Clip } from '../components/allClips.js'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
@@ -10,6 +9,7 @@ import {
   ArticleCard
 } from '../components/subtheme'
 
+const React = require('react')
 
 const ChosenClipCard = styled.div`
   height: 100%;

@@ -44,7 +44,7 @@ const getUserConfirmation = (pathname, callback) => {
 const history = createHistory({ getUserConfirmation })
 // block must return a string to conform
 history.block((location, action) => location.pathname)
-exports.replaceHistory = () => history
+// exports.replaceHistory = () => history
 
 class ReplaceComponentRenderer extends React.Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class ReplaceComponentRenderer extends React.Component {
     window.removeEventListener(historyExitingEventType, this.listenerHandler)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
       this.setState({ exiting: false, nextPageResources: {} })
     }
@@ -105,9 +105,9 @@ class ReplaceComponentRenderer extends React.Component {
 }
 
 // eslint-disable-next-line react/display-name
-exports.replaceComponentRenderer = ({ props, loader }) => {
-  if (props.layout) {
-    return undefined
-  }
-  return createElement(ReplaceComponentRenderer, { ...props, loader })
-}
+// exports.replaceComponentRenderer = ({ props, loader }) => {
+//   if (props.layout) {
+//     return undefined
+//   }
+//   return createElement(ReplaceComponentRenderer, { ...props, loader })
+// }

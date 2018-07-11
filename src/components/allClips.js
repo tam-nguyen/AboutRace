@@ -47,7 +47,7 @@ export const Clip = ({ clip, link }) =>  {
 							</ClipCaption>
 						</Link> :
 						
-							<iframe src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							<iframe title={clip.title} src={`${clip.field_external_video_url && clip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 							
 				}
 				

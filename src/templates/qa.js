@@ -1,10 +1,10 @@
-const React = require('react')
 import styled from 'styled-components'
 import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
 
 import kebabCase from 'lodash/kebabCase'
 import Link, { navigateTo } from 'gatsby-link';
 
+const React = require('react')
 const queryString = require('query-string')
 
 const Row = styled.div`

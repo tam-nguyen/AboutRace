@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import Link, {navigateTo} from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
-const queryString = require('query-string');
 
 import episodes from '../utils/episodes-data'
+
+const queryString = require('query-string');
 
 const HeaderDimmer = styled.div`
   width: 100%;
