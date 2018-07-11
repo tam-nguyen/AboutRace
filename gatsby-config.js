@@ -3,7 +3,8 @@ module.exports = {
     title: 'Race: The Power of an Illusion',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `@ehp/gatsby-source-drupal`,
       options: {

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
-import Link, { navigateTo } from 'gatsby-link'
+import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 
 const KeyQuote = styled.div`

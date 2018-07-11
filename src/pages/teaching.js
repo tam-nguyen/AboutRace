@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Link, {navigateTo} from 'gatsby-link'
+import { Link, push} from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 import {
@@ -28,7 +28,7 @@ const SubTitle = styled.h4`
   margin-bottom: 15px;
 `
 
-const closeHandler = () => navigateTo(`?`)
+const closeHandler = () => push(`?`)
 
 const CloseButton = styled.div`
   float: right;
