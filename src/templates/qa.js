@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
 
 import kebabCase from 'lodash/kebabCase'
-import Link, { navigateTo } from 'gatsby-link'
+import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 
 const queryString = require('query-string')

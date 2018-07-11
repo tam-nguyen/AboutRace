@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import Filter from '../components/Filter'
 import { graphql } from 'gatsby'

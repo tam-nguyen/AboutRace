@@ -9,7 +9,7 @@ import {
 } from '../components/subtheme'
 import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
 import kebabCase from 'lodash/kebabCase'
-import Link, { navigateTo } from 'gatsby-link'
+import { Link, push } from 'gatsby'
 import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
@@ -283,7 +283,7 @@ class SingleArticle extends React.Component {
         <QuickFactOverlay
           quickFact={quickFact}
           closeHandler={() => {
-            navigateTo(`?`)
+            push(`?`)
           }}
           transition={transition}
         />
@@ -292,7 +292,7 @@ class SingleArticle extends React.Component {
           tag={tag}
           transition={transition}
           closeHandler={() => {
-            navigateTo(`?`)
+            push(`?`)
           }}
         />
         
