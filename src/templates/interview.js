@@ -1,8 +1,8 @@
-const React = require('react')
+import React from "react"
 import styled from 'styled-components'
 import { getCards } from '../components/subtheme'
-import Link, { navigateTo } from 'gatsby-link';
-
+import Link, { navigateTo } from 'gatsby-link'
+import { graphql } from 'gatsby'
 
 const KeyQuote = styled.div`
   font-size: 60px;

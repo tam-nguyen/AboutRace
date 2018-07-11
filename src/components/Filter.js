@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-const Row = styled.div
-`
+const Row = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px;
   color: ${props => props.color ? props.color : `white`};
 `
 
-const Element = styled.div
-`
+const Element = styled.div`
   cursor: pointer;
   margin-left: 10px;
   font-weight: ${props => props.selected ?  `bold` : `normal`};
 `
 
-const Title = styled.div
-`
+const Title = styled.div`
   text-decoration: underline;
 `
 

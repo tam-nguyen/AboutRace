@@ -1,15 +1,14 @@
-const React = require('react')
-const ReactFlex = require('react-flex')
-const queryString = require('query-string');
-
-require('react-flex/index.css')
+import React from "react"
 import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import SubthemeSection from '../components/subtheme.js'
+import styled from 'styled-components'
+import { graphql } from 'gatsby'
+
+const queryString = require('query-string');
 
 const FlipMove = require('react-flip-move');
-import styled from 'styled-components';
 
 const Container = styled.div`
   margin-left: 75px;
@@ -57,8 +56,8 @@ const StyledLink = styled(Link)`
 
 class SubThemePage extends React.Component {
   render() {
-    const {data, pathContext, location} = this.props;
-    const {field_theme_image, theme} = pathContext;
+    const {data, pageContext, location} = this.props;
+    const {field_theme_image, theme} = pageContext;
     const {allTaxonomyTermSubthemes, taxonomyTermSubthemes} = data;
     const subtheme = taxonomyTermSubthemes;
 

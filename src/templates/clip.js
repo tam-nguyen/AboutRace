@@ -1,4 +1,4 @@
-const React = require('react')
+import React from "react"
 import AllClips, { Clip } from '../components/allClips.js'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
@@ -9,7 +9,7 @@ import {
   ClipCard,
   ArticleCard
 } from '../components/subtheme'
-
+import { graphql } from 'gatsby'
 
 const ChosenClipCard = styled.div`
   height: 100%;
@@ -72,9 +72,14 @@ class ClipTemplate extends React.Component {
   render() {
     const { data } = this.props
 
+    if(!data) return null
+
+    const nodeClip = data ? data.nodeClip : null;
+    const field_re = (nodeClip && nodeClip.relationships.field_re) ? nodeClip.relationships.field_re : []
+
     return (
       <div className='darkwrapper'>
-        <ChosenClip clip={data.nodeClip} />
+        { nodeClip? <ChosenClip clip={nodeClip} /> : null }
         <div style={{ padding: 10, margin: 10, border: `1px solid black`}}>
           <button onClick={() => { this.setState({ teaching: false}) }}>
             All Content
@@ -83,8 +88,7 @@ class ClipTemplate extends React.Component {
             Teaching
           </button>
           {
-            (data.nodeClip.relationships.field_re || [])
-            .filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
+            field_re.filter(node => (!this.state.teaching || node.field_include_in_the_teaching_se) )
             .map((node, i) => {
                 if (node.__typename == `node__article`) {
                   return (
@@ -138,5 +142,5 @@ export const clipQuery = graphql`
         }
       }
     }
-}
+  }
 `

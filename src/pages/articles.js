@@ -3,35 +3,9 @@ import styled from 'styled-components'
 import './articles.css'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import { graphql } from 'gatsby'
 
-
-
-// const ContentNodeComponent = ({ data }) => <li>{data.name}</li>
-
-// const SubThemeComponent = ({ data }) => (
-//   <li>
-//     Subtheme: <strong>{data.name}</strong> <code>{data.id}</code>
-//     {/* {data.relationships.field_belongs_to_theme ? (
-//       <ul>
-//         {data.relationships.field_belongs_to_theme.map(article => (
-//           <ContentNodeComponent data={article} />
-//         ))}
-//       </ul>
-//     ) : (
-//       <span style={{ color: 'red' }}> (no articles)</span>
-//     )} */}
-//   </li>
-// )
-
-
-// .card:nth-child(odd) .card__image {
-//   /* flexbox can change order of rendered elements*/
-//   order: 2;
-// }
 const GreyBackground = styled.div`
-  // background-color: #f7f7f7;
-  // background-color: #d3e6de;
-  // background-color: rgba(239, 255, 248, 0.92);
   background-color: rgba(103, 165, 195, 0.14901960784313725);
   position: fixed;
   top: 0;
@@ -81,7 +55,6 @@ const TopText = styled.div`
 `
 
 const ArticleSummary = ({ data }) => {
-  console.log(data)
   return (
     <Link style={{
       flexGrow: 0,
@@ -136,7 +109,6 @@ const ArticleSummary = ({ data }) => {
 }
 
 export default ({ data }) => {
-  console.log(data)
 
   return (
     <div>

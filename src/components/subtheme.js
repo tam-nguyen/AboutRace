@@ -1,31 +1,19 @@
-
-import Img from 'gatsby-image'
+import React from "react"
 import styled from 'styled-components';
 import Link from 'gatsby-link';
 import Card from './card.js';
 import RCCard from './rccard.js';
-import { Overlay, OverlayHeader, OverlayBody }  from './overlay'
+import { 
+  Overlay, 
+  OverlayBody 
+} from './overlay'
 import kebabCase from 'lodash/kebabCase'
 import './subtheme.css';
 
-require('react-flex/index.css')
 
-const React = require('react')
 const range = require('range');
-const ReactFlex = require('react-flex');
 const FlipMove = require('react-flip-move');
-const queryString = require('query-string');
 
-const Video = styled.video`
-  width: 100%;
-  display: block;
-`
-const FAQQuestion = styled.div`
-  background-color:rgba(255,255,255,0.82);
-  height:auto;
-  padding:30px;
-  margin:0 auto;
-`
 const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
@@ -97,7 +85,7 @@ class PlayablePoster extends React.Component {
     if (this.state.play) {
       return (
         <div className={'poster'}>
-          <iframe src="https://player.vimeo.com/video/18769983?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <iframe title='player' src="https://player.vimeo.com/video/18769983?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
       )
     }
@@ -106,14 +94,14 @@ class PlayablePoster extends React.Component {
       return (
         <Link to={`../clips/${kebabCase(this.props.clip.title)}`}>
           <div className={'poster'}>
-            <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
+            <img alt='poster image' src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
           </div>
         </Link>
       )
     }
     return (
       <div className={'poster'} onClick={() => this.setState({ play: true })}>
-        <img src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
+        <img alt='another image' src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
       </div>
     );
   }
@@ -181,7 +169,12 @@ export class ClipCard extends React.Component {
 
 export class FAQCard extends React.Component {
   render() {
-    const { faq = {}, i, relatedContent, style = {} } = this.props
+    const { 
+      faq = {},
+      i,
+      // relatedContent,
+      style = {} 
+    } = this.props
     return (
       <Card
         style={{
@@ -252,11 +245,11 @@ export const getCards = (relationships, queryFilter, relatedContent, linkableCli
     onOpen = link => {}
 
   return [
-    ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter == `recent` || queryFilter == `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
-    ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter == `recent` || queryFilter == `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
-    ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter == `recent` || queryFilter == `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
-    ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter == `recent` || queryFilter == `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} onOpen={ link => onOpen(link, interview) } interview={interview} i={i} relatedContent={relatedContent} />)),
-    ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter == `recent` || queryFilter == `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.articles).filter(article => !queryFilter || queryFilter === `recent` || queryFilter === `article`).map((article, i) => (<ArticleCard key={`article-${article.title}`} onOpen={ link => onOpen(link, article) } article={article} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.clips).filter(clip => !queryFilter || queryFilter === `recent` || queryFilter === `clip`).map((clip, i) => (<ClipCard key={`clip-${clip.title}`} linkable={linkableClip} clip={clip} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.faqs).filter(faq => !queryFilter || queryFilter === `recent` || queryFilter === `faq`).map((faq, i) => (<FAQCard key={`faq-${faq.title}`} faq={faq} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.interviews).filter(interview => !queryFilter || queryFilter === `recent` || queryFilter === `interview`).map((interview, i) => (<InterviewCard key={`interview-${interview.title}`} onOpen={ link => onOpen(link, interview) } interview={interview} i={i} relatedContent={relatedContent} />)),
+    ...defaultToEmpty(relationships.quickfacts).filter(quickfact => !queryFilter || queryFilter === `recent` || queryFilter === `quickfact`).map((quickfact, i) => (<QuickFactCard key={`quickfact-${quickfact.title}`} quickfact={quickfact} i={i} relatedContent={relatedContent} />)),
   ]
 }
 
@@ -269,8 +262,6 @@ const DISPLAY_NAMES_TO_SLUG = new Map([
 ])
 
 const itemExists = (itemTag, parent) => {
-  // console.log(parent.relationships)
-  // console.log(itemTag)
   return parent.relationships[itemTag]
 
 }
@@ -325,7 +316,7 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => (
               toggleFilter(filterSlug)
             }}
             style={{
-              ...(filter == filterSlug ? FilterButtonStyleActive : FilterButtonStyle),
+              ...(filter === filterSlug ? FilterButtonStyleActive : FilterButtonStyle),
               float: 'none',
               fontWeight:700, letterSpacing:'0.2em', color:'hotpink'
             }}
@@ -425,7 +416,6 @@ class SubthemeSection extends React.Component {
 
     let storedOrder = window.localStorage.getItem('shuffle');
     if(storedOrder){
-      console.log('from cache');
       storedOrder = JSON.parse(storedOrder)
     }else{
       storedOrder = shuffle(range.range(length))
@@ -439,7 +429,6 @@ class SubthemeSection extends React.Component {
     if (props.filter) return;
     const length = getCards(props.data.relationships, filter).length;
     this.order = this.getShuffle(length)
-    console.log(this.order)
   }
 
   close = () => {
@@ -450,7 +439,6 @@ class SubthemeSection extends React.Component {
   }
 
   open = (link, data) => {
-    console.log('open', link, data)
     this.setState({
       popup: true,
       card: {...data, link}
@@ -459,7 +447,6 @@ class SubthemeSection extends React.Component {
 
   render() {
     const subtheme = this.props.data
-    const { Flex, Item } = ReactFlex
 
     // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
 
@@ -470,7 +457,7 @@ class SubthemeSection extends React.Component {
     const allCards = filter ?
       rawCards.sort((a, b) => (b.props.changed - a.props.changed)) :
       reorder(rawCards, this.order)
-      rawCards
+      // rawCards
 
     const description = subtheme.description
       ? <div
@@ -511,11 +498,11 @@ class SubthemeSection extends React.Component {
           filter={filter}
           subtheme={subtheme}
         />
-        <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
+        <div>
           {
-            allCards
+            allCards.map( (c, k) => <div key={k}>{c}</div>)
           }
-        </FlipMove>
+        </div>
       </div>
     )
   }

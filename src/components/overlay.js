@@ -1,4 +1,4 @@
-const React = require('react')
+import React from "react"
 import styled, { css } from 'styled-components'
 import getScrollBarWidth from '../utils/scrollbar-width'
 
@@ -12,7 +12,7 @@ class UnstyledOverlay extends React.Component {
     this.onVisibleChange(this.props.visible)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.visible !== this.props.visible) {
       this.onVisibleChange(nextProps.visible)
     }
@@ -46,7 +46,7 @@ class UnstyledOverlay extends React.Component {
   }
 }
 
-const Overlay = styled(UnstyledOverlay)`
+export const Overlay = styled(UnstyledOverlay)`
   // background-color: rgba(241, 239, 239, 0.94);
   background-color: rgba(255,255,255,0.92);
   position: fixed;
@@ -64,10 +64,10 @@ const Overlay = styled(UnstyledOverlay)`
     display: inline;
   `}
 `
-const OverlayFilter = styled.div`
+export const OverlayFilter = styled.div`
   margin-bottom: 30px;
 `
-const OverlayTitle = styled.div`
+export const OverlayTitle = styled.div`
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
@@ -81,7 +81,7 @@ const OverlayTitle = styled.div`
   font-family: 'Lato';
   font-size: 30px;
 `
-const OverlayBody = styled.div`
+export const OverlayBody = styled.div`
   opacity: 1;
   margin: 0 auto;
   margin-top: 180px;
@@ -97,7 +97,7 @@ const OverlayBody = styled.div`
   `}
 `
 
-const OverlayHeader = styled.div`
+export const OverlayHeader = styled.div`
   position: fixed;
   top: 30px;
   left: 0;
@@ -105,4 +105,4 @@ const OverlayHeader = styled.div`
   padding: 0 12.5%;
 `
 
-export default { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }
+// export default { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }

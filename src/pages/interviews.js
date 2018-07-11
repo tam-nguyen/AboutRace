@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
+import { graphql } from 'gatsby'
 
 const GreyBackground = styled.div`
   position: fixed;

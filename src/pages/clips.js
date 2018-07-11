@@ -4,9 +4,9 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
 import Filter from '../components/Filter'
+import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
-
 
 const ClipsIntro = styled.div
 `

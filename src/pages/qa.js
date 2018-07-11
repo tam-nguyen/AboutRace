@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import Filter from '../components/Filter'
+import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
 
@@ -57,7 +58,7 @@ class QA extends Component {
     queryParams.episode = selected;
     const search = `?` + queryString.stringify({ ...queryParams});
 
-    history.pushState({}, window.document.title, search)
+    window.history.pushState({}, window.document.title, search)
 
     this.setState({selected})
   }

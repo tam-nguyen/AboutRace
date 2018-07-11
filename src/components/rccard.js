@@ -1,11 +1,6 @@
-const React = require('react')
-const range = require('range')
-const ReactFlex = require('react-flex')
-require('react-flex/index.css')
-import Img from 'gatsby-image'
+import React from "react"
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
-
 import styled, { css } from 'styled-components';
 
 class RCCard extends React.Component {
@@ -61,12 +56,12 @@ const StyledRCCard = styled(RCCard)`
     background-size: cover;
   `}
   
-  ${props => props.type == `Article` && css`
+  ${props => props.type === `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * ARTICLE_MULTIPLIER}px;
   `}
 
-  ${props => props.type == `QuickFact` && css`
+  ${props => props.type === `QuickFact` && css`
     flex: ${FLEX * QUICK_FACT_MULTIPLIER} ${FLEX * QUICK_FACT_MULTIPLIER} ${BASE_CARD_WIDTH * QUICK_FACT_MULTIPLIER}px;
     max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT * QUICK_FACT_MULTIPLIER}px;
   `}

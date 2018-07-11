@@ -1,3 +1,5 @@
+import { graphql } from 'gatsby'
+
 export const PosterImageClipFragment = graphql`
   fragment PosterImageClipFragment on node__clip {
     title
