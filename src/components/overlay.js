@@ -1,7 +1,6 @@
+import React from "react"
 import styled, { css } from 'styled-components'
 import getScrollBarWidth from '../utils/scrollbar-width'
-
-const React = require('react')
 
 // hacky:
 // because url is changed when we open modals, component get's remounted

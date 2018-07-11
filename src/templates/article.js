@@ -1,3 +1,4 @@
+import React from "react"
 import styled, { css } from 'styled-components'
 import {
   getCards,
@@ -8,9 +9,9 @@ import {
 } from '../components/subtheme'
 import { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }  from '../components/overlay'
 import kebabCase from 'lodash/kebabCase'
-import Link, { navigateTo } from 'gatsby-link';
+import Link, { navigateTo } from 'gatsby-link'
+import { graphql } from 'gatsby'
 
-const React = require('react')
 const queryString = require('query-string');
 
 const LargeCalloutText = styled.div`

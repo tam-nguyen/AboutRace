@@ -3,7 +3,8 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
 import {ClipPoster} from '../components/allClips.js'
- 
+import { graphql } from 'gatsby'
+
 const ThemesBackground = styled.div`
   // background-color: #151515;
   position: fixed;

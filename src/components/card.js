@@ -1,8 +1,6 @@
+import React from "react"
 import Link from 'gatsby-link'
-
 import styled, { css } from 'styled-components';
-
-const React = require('react')
 
 const Container = styled.div`
   cursor: pointer;

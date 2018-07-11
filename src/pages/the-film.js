@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import Link, {navigateTo} from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
-
 import episodes from '../utils/episodes-data'
+import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
 

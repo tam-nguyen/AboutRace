@@ -1,3 +1,4 @@
+import React from "react"
 import styled from 'styled-components';
 import Link from 'gatsby-link';
 import Card from './card.js';
@@ -10,7 +11,6 @@ import kebabCase from 'lodash/kebabCase'
 import './subtheme.css';
 
 
-const React = require('react')
 const range = require('range');
 const FlipMove = require('react-flip-move');
 
@@ -503,11 +503,11 @@ class SubthemeSection extends React.Component {
           filter={filter}
           subtheme={subtheme}
         />
-        <FlipMove style={{ display: 'flex', 'flexWrap': 'wrap', justifyContent: 'center' }} >
+        <div>
           {
-            allCards
+            allCards.map( (c, k) => <div key={k}>{c}</div>)
           }
-        </FlipMove>
+        </div>
       </div>
     )
   }

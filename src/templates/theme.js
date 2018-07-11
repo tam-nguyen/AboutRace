@@ -1,10 +1,11 @@
+import React from "react"
 import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import SubthemeSection from '../components/subtheme.js'
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { graphql } from 'gatsby'
 
-const React = require('react')
 const queryString = require('query-string');
 const FlipMove = require('react-flip-move');
 

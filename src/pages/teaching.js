@@ -6,6 +6,7 @@ import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 import {
   getCards,
 } from '../components/subtheme'
+import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
 

@@ -105,9 +105,11 @@ class ReplaceComponentRenderer extends React.Component {
 }
 
 // eslint-disable-next-line react/display-name
-// exports.replaceComponentRenderer = ({ props, loader }) => {
-//   if (props.layout) {
-//     return undefined
-//   }
-//   return createElement(ReplaceComponentRenderer, { ...props, loader })
-// }
+const replaceComponentRenderer = ({ props, loader }) => {
+  if (props.layout) {
+    return undefined
+  }
+  return createElement(ReplaceComponentRenderer, { ...props, loader })
+}
+
+export {replaceComponentRenderer}

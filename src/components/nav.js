@@ -1,7 +1,5 @@
-const React = require('react')
+import React from "react"
 import Link from 'gatsby-link'
-
-
 
 class Navigation extends React.Component {
     render() {

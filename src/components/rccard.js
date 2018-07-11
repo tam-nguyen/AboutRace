@@ -1,9 +1,7 @@
+import React from "react"
 import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
-
 import styled, { css } from 'styled-components';
-
-const React = require('react')
 
 class RCCard extends React.Component {
     render() {
