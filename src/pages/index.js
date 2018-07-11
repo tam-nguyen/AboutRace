@@ -4,36 +4,6 @@ import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
 import {ClipPoster} from '../components/allClips.js'
 
-// const ContentNodeComponent = ({ data }) => (
-//   <li>
-//     <strong>{data.__typename}</strong>: {data.title}
-//   </li>
-// )
-
-// const SubThemeComponent = ({ data }) => (
-//   <li>
-//     Subtheme: <strong>{data.name}</strong>
-//     {data.relationships.contentNodes ? (
-//       <ul>
-//         {data.relationships.contentNodes.map(contentNode => (
-//           <ContentNodeComponent data={contentNode} />
-//         ))}
-//       </ul>
-//     ) : (
-//       <span style={{ color: 'red' }}> (no contentNodes)</span>
-//     )}
-//   </li>
-// )
-
-// const TopArea = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   height: 170px;
-//   background-color:#3a3a3a;
-// `
-
 const HomeBackground = styled.div`
   // background-color: #151515;
   position: fixed;
