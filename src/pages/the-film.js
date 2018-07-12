@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, push } from 'gatsby'
+import { Link, push, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 import episodes from '../utils/episodes-data'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const queryString = require('query-string');
 
@@ -98,70 +98,60 @@ export default ({ data, transition, location }) => {
   const credits = queryParams.credits ? getEpisodeByNumber(queryParams.credits) : null
 
   return (
-    <Wrapper>
-        <HeaderDimmer />
-        <Overlay id="film-overlay" visible={!!transcript || !!credits} style={transition && transition.style}>
-        {(transcript || credits) &&
-            <OverlayBody>
-                <OverlayHeader>
-                    <CloseButton onClick={closeHandler}>Close</CloseButton>
-                    <div style={{
-                    textAlign:'center'
-                    }}>
-                        <h1>{transcript ? transcript.title : credits.title}</h1>
+    <Layout location={location}>
+        <Wrapper>
+            <HeaderDimmer />
+            <Overlay id="film-overlay" visible={!!transcript || !!credits} style={transition && transition.style}>
+            {(transcript || credits) &&
+                <OverlayBody>
+                    <OverlayHeader>
+                        <CloseButton onClick={closeHandler}>Close</CloseButton>
+                        <div style={{
+                        textAlign:'center'
+                        }}>
+                            <h1>{transcript ? transcript.title : credits.title}</h1>
+                        </div>
+                    </OverlayHeader>
+                    <div
+                    dangerouslySetInnerHTML={{
+                        __html: transcript ? safeGet(transcript, 'transcript') : safeGet(credits, 'credits'),
+                    }}
+                    />
+                </OverlayBody>
+            }
+            </Overlay>
+            <div className="row">
+                <div className="column _25"/>
+                <div className="column">
+                    <h1>Race: The Power of an Illusion</h1>
+                    <p><strong>Statement from executive producer</strong></p>
+                    <div className="row" style={{margin: '0 -15px'}}>
+                        <div className="column">
+                            <p>Race is one topic where we all think we're experts. Yet ask 10 people to define race or name "the races," and you're likely to get 10 different answers. Few issues are characterized by more contradictory assumptions and myths, each voiced with absolute certainty.</p>
+
+                            <p>In producing this series, we felt it was important to go back to first principles and ask, What is this thing called "race?" - a question so basic it is rarely raised. What we discovered is that most of our common assumptions about race - for instance, that the world's people can be divided biologically along racial lines - are wrong. Yet the consequences of racism are very real.</p>
+
+                            <p>How do we make sense of these two seeming contradictions? Our hope is that this series can help us all navigate through our myths and misconceptions, and scrutinize some of the assumptions we take for granted. In that sense, the real subject of the film is not so much race but the viewer, or more precisely, the notions about race we all hold.</p>
+
+                            <p>We hope this series can help clear away the biological underbrush and leave starkly visible the underlying social, economic, and political conditions that disproportionately channel advantages and opportunities to white people. Perhaps then we can shift the conversation from discussing diversity and respecting cultural difference to building a more just and equitable society.</p>
+
+                            <p><strong>April 2003</strong></p>
+                        </div>
+                        <div>
+                            <div className="tag">Buy on DVD</div>
+                            <br/>
+                            <div className="tag">Stream on demand</div>
+                            <br/>
+                            <div className="tag">Contact</div>
+                        </div>
                     </div>
-                </OverlayHeader>
-                <div
-                dangerouslySetInnerHTML={{
-                    __html: transcript ? safeGet(transcript, 'transcript') : safeGet(credits, 'credits'),
-                }}
-                />
-            </OverlayBody>
-        }
-        </Overlay>
-        <div className="row">
-            <div className="column _25"/>
-            <div className="column">
-                <h1>Race: The Power of an Illusion</h1>
-                <p><strong>Statement from executive producer</strong></p>
-                <div className="row" style={{margin: '0 -15px'}}>
-                    <div className="column">
-                        <p>Race is one topic where we all think we're experts. Yet ask 10 people to define race or name "the races," and you're likely to get 10 different answers. Few issues are characterized by more contradictory assumptions and myths, each voiced with absolute certainty.</p>
-
-                        <p>In producing this series, we felt it was important to go back to first principles and ask, What is this thing called "race?" - a question so basic it is rarely raised. What we discovered is that most of our common assumptions about race - for instance, that the world's people can be divided biologically along racial lines - are wrong. Yet the consequences of racism are very real.</p>
-
-                        <p>How do we make sense of these two seeming contradictions? Our hope is that this series can help us all navigate through our myths and misconceptions, and scrutinize some of the assumptions we take for granted. In that sense, the real subject of the film is not so much race but the viewer, or more precisely, the notions about race we all hold.</p>
-
-                        <p>We hope this series can help clear away the biological underbrush and leave starkly visible the underlying social, economic, and political conditions that disproportionately channel advantages and opportunities to white people. Perhaps then we can shift the conversation from discussing diversity and respecting cultural difference to building a more just and equitable society.</p>
-
-                        <p><strong>April 2003</strong></p>
-                    </div>
-                    <div>
-                        <div className="tag">Buy on DVD</div>
-                        <br/>
-                        <div className="tag">Stream on demand</div>
-                        <br/>
-                        <div className="tag">Contact</div>
+                    <div style={{marginTop: 50}}>
+                        {episodes.map(episode => <EpisodeItem key={`episode-${episode.episodeNumber}`} episode={episode} queryParams={queryParams} />)}
                     </div>
                 </div>
-                <div style={{marginTop: 50}}>
-                    {episodes.map(episode => <EpisodeItem key={`episode-${episode.episodeNumber}`} episode={episode} queryParams={queryParams} />)}
-                </div>
+                <div className="column _25"/>
             </div>
-            <div className="column _25"/>
-        </div>
-    </Wrapper>
+        </Wrapper>
+    </Layout>
   )
 }
-
-// export const query = graphql`
-//   query FAQssQuery {
-//     allNodeFaq {
-//         edges {
-//           node {
-//             title
-//           }
-//         }
-//       }
-//   }
-// `

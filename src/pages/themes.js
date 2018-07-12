@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
 import {ClipPoster} from '../components/allClips.js'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const ThemesBackground = styled.div`
-  // background-color: #151515;
   position: fixed;
   top: 0;
   left: 0;
@@ -33,9 +32,7 @@ const ThemeOverview = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  // transform: translateX(90%);
   width: 40%;
-  // color: #25292b;
   color: white;
   font-size: 16px;
   font-weight: normal;
@@ -46,11 +43,9 @@ const ThemeOverview = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  // background-color: rgb(197, 215, 224);
   background-color: rgba(37, 41, 43, 0.78);
   transition: all .3s;
   &:hover {
-    // transform: translateX(-50%);
     transition: all .3s;
   }
   & > p {
@@ -94,26 +89,32 @@ const ThemeComponent = ({ data }) => (
   </div>
 )
 
-export default ({ data }) => (
-  <div>   
+export default ({ data, location }) => (
+  <Layout location={location}>
     <div className='wrapper'>
       <ThemesBackground />
       <div style={{
-      color: 'white',
-      textAlign: 'center',
-      fontFamily: 'Lato',
-      fontSize:36,
-      fontWeight:300,
-      letterSpacing: '0.04em',
-      paddingTop:120,
-      marginBottom: 75
-    }}>Explore themes from the film:</div>
-      {data.allTaxonomyTermThemes.edges.map(({ node }) => (
-        <ThemeComponent data={node} />
-      ))}
+        color: 'white',
+        textAlign: 'center',
+        fontFamily: 'Lato',
+        fontSize:36,
+        fontWeight:300,
+        letterSpacing: '0.04em',
+        paddingTop:120,
+        marginBottom: 75
+      }}>
+        Explore themes from the film:
+      </div>
+      
+      {
+        data.allTaxonomyTermThemes.edges.map(({ node }) => (
+          <ThemeComponent data={node} />
+        ))
+      }
+
     </div>
-    </div>
-  )
+  </Layout>
+)
 
 
 export const query = graphql`
