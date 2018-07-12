@@ -1,18 +1,17 @@
 import React from "react"
-import { Link } from 'gatsby'
+import styled from 'styled-components'
+
+const Nav = styled.div`
+top: 30px;
+right: 20px;
+`
+const NavItem = styled.div`
+float: left;
+margin-right: 30px;
+`
 
 class Navigation extends React.Component {
     render() {
-        const Nav = styled.div`
-           
-            top: 30px;
-            right: 20px;
-        `
-        const NavItem = styled.div`
-            float: left;
-            margin-right: 30px;
-        `
-
         return(
             <Nav>
                 <NavItem>The Film</NavItem>

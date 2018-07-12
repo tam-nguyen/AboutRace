@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, graphql} from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import Filter from '../components/Filter'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const queryString = require('query-string');
 
@@ -73,23 +73,27 @@ class QA extends Component {
 
   render() {
     const { selected } = this.state;
-    const {data} = this.props;
+    const { data, location } = this.props;
 
     return (
-      <div>
+      <Layout location={location}>
+        <div
+          style={{
+            backgroundColor: 'gray'
+          }}
+        >
         <Filter color='black' selected={selected} onSelected={this.onSelected}/>
         <IntroText>
           The experts answer your questions about issues from the film.
           Does race have a biological basis? Has the idea of race always been with us? Why does race still matter?
         </IntroText>
-        <div className={"articles"}>
         {
           data.allNodeFaq.edges.map((edge, i) =>
             <Summary key={`QA-${i}`} data={edge.node} />
           )
         }
         </div>
-      </div>
+      </Layout>
     )
   }
 }

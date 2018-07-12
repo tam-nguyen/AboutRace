@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import './articles.css'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const GreyBackground = styled.div`
   background-color: rgba(103, 165, 195, 0.14901960784313725);
@@ -23,7 +23,6 @@ const IntroText = styled.div`
   margin-bottom: 60px;
   font-family: 'Lato';
   color: snow;
-  // background-color: #2b2b2b;
   background-color: #323232;
   background-color: #25292b;
 `
@@ -94,24 +93,14 @@ const ArticleSummary = ({ data }) => {
             )}
           </div>
         </div>
-        {/* {data.relationships.field_belongs_to_subtheme ? (
-        <ul>
-          {data.relationships.field_belongs_to_subtheme.map(subTheme => (
-            <ArticleSummary data={subTheme} />
-          ))}
-        </ul>
-      ) : (
-        <div>No subthemes</div>
-      )} */}
       </div>
-      </Link>
+    </Link>
   )
 }
 
-export default ({ data }) => {
-
+export default ({ data, location }) => {
   return (
-    <div>
+    <Layout location={location}>
       <TopText>          
          <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>articles</h4>
       </TopText>
@@ -126,7 +115,7 @@ export default ({ data }) => {
           <ArticleSummary key={i} data={edge.node} />
         ))}
       </div>
-    </div>
+    </Layout>
   )
 }
 

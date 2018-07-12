@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const GreyBackground = styled.div`
   position: fixed;
@@ -24,23 +24,8 @@ const IntroText = styled.div`
   background-color: #25292b;
 `
 const InterviewCard = styled.div`
-  // background-color: #f5f6f9;
-  // padding: 30px;
-  // height: 100%;
   position: relative;
-  // border-radius: 6px;
-  // border: solid thin lightgrey;
   overflow:hidden;
-  // -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  // -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  // box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  // transition: all .3s;
-  &:hover {
-    // -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    // -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    // box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.78);
-    // transition: all .3s;
-  }
 `
 const InterviewTitle = styled.div`
   margin-bottom: 11.25px;
@@ -159,8 +144,8 @@ const InterviewSummary = ({ data }) => {
   )
 }
 
-export default ({ data }) => (
-  <div>
+export default ({ data, location }) => (
+  <Layout location={location}>
     <TopText>          
       <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>interviews</h4>
     </TopText>
@@ -176,7 +161,7 @@ export default ({ data }) => (
         ))}
       </AllInterviews>
     </div>
-  </div>
+  </Layout>
 )
 
 export const query = graphql`

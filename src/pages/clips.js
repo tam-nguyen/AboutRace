@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
 import Filter from '../components/Filter'
-import { graphql } from 'gatsby'
+import Layout from "../components/layout"
 
 const queryString = require('query-string');
 
@@ -46,16 +46,18 @@ class Clips extends Component {
 
 	render() {
 		const { selected } = this.state;
-		const { data } = this.props;
+		const { data, location } = this.props;
 
 		return (
-			<div className='darkwrapper'>
-				<Filter selected={selected} onSelected={this.onSelected}/>
-				<ClipsIntro>
-					Various clips from the film featured here. Buy a copy of the film here.
-				</ClipsIntro>
-				<AllClips data={data} selected={selected}/>
-			</div>
+			<Layout location={location}>
+				<div className='darkwrapper'>
+					<Filter selected={selected} onSelected={this.onSelected}/>
+					<ClipsIntro>
+						Various clips from the film featured here. Buy a copy of the film here.
+					</ClipsIntro>
+					<AllClips data={data} selected={selected}/>
+				</div>
+			</Layout>
 		)
 	}
 }
