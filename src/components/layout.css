@@ -681,26 +681,14 @@ pre tt:after {
   transition: background-color .3s;
 }
 
-/* @media screen and (min-width: 800px) {
-  .column {
-    flex: 1;
-  }
-} */
-
 html {
   overflow: visible;
-  /* background-color: black; */
-  
-  /* background-color: #25292b; */
 }
 
 body.modal-open {
   overflow-y: hidden;
 }
-.wrapper {
-  background-color: rgb(72, 82, 86);
-  margin: 0 auto;
-}
+
 .darkwrapper {
   background-color: #333333;
   margin: 0 auto;

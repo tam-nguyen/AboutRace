@@ -50,6 +50,17 @@ const ThemeOverview = styled.div`
   }
 `
 
+const Title = styled.div`
+  color: white;
+  text-align: center;
+  font-family: Lato;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  padding-top: 120;
+  margin-bottom: 75px;
+`;
+
 const ThemeComponent = ({ data }) => (
   <div style={{
     borderRadius:45,
@@ -91,47 +102,12 @@ const ThemeComponent = ({ data }) => (
   </div>
 )
 
-const TrailerClipWrapper = styled.div`
-  max-width: 900px;
-  margin: 90px auto 2em;
-  position: relative;
-  margin-bottom: 15px;
-
-  &:before {
-    content: '';
-    display: block;
-    padding-top: ${100 / 16 * 9}%;
-  }
-
-  iframe {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-`
 
 export default ({ data, location }) => (
   <Layout location={location}>
-    <div className='wrapper'>
-      <div style={{textAlign:'center', color: 'white', fontSize:96, lineHeight:1.5, fontFamily:'Lato', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700}}>Race</div>
-      <div style={{textAlign: 'center', color: 'white', fontFamily:'Lato', fontSize:60}}>The Power of an Illusion</div>
-      <TrailerClipWrapper>
-        <iframe width='720px' height='100%' src={`${data.trailerClip.field_external_video_url && data.trailerClip.field_external_video_url.uri}?title=0&byline=0&portrait=0`} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </TrailerClipWrapper>
-    
+    <div>
       <HomeBackground />
-      <div style={{
-      color: 'white',
-      textAlign: 'center',
-      fontFamily: 'Lato',
-      fontSize:36,
-      fontWeight:300,
-      letterSpacing: '0.04em',
-      paddingTop:120,
-      marginBottom: 75
-    }}>Explore themes from the film:</div>
+      <Title>Explore themes from the film:</Title>
       {data.allTaxonomyTermThemes.edges.map(({ node }, key) => (
         <ThemeComponent key={key} data={node} />
       ))}
