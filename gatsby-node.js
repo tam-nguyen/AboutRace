@@ -2,6 +2,12 @@ const _ = require("lodash");
 const kebabCase = require("lodash/kebabCase");
 const path = require("path");
 
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPlugin({
+    name: `@babel/plugin-proposal-export-default-from`,
+  })
+}
+
 /**
  * Implement Gatsby's Node APIs in this file.
  *

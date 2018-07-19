@@ -28,7 +28,7 @@ export default () => {
   outer.style.overflow = 'scroll'
   var w2 = inner.offsetWidth
 
-  if (w1 == w2) {
+  if (w1 === w2) {
     w2 = outer.clientWidth
   }
 

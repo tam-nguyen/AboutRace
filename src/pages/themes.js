@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
-import {ClipPoster} from '../components/allClips.js'
 import Layout from "../components/layout"
 
 const ThemesBackground = styled.div`

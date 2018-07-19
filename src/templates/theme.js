@@ -1,13 +1,10 @@
 import React from "react"
-import Img from 'gatsby-image'
 import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import SubthemeSection from '../components/subtheme.js'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
 const queryString = require('query-string');
-const FlipMove = require('react-flip-move');
 
 const ThemeTitle = styled.div`
   margin-top: 15px;
@@ -19,7 +16,6 @@ const ThemeTitle = styled.div`
   font-size: 54px;
   line-height: 1
   letter-spacing: 0.04em;
-  // color:white;
 `
 const ThemeDescription = styled.div`
   font-weight: 400;
@@ -44,35 +40,6 @@ const ThemeHeader = styled.div`
   left: 00px;
   right: 0;
   z-index: -999;
-`
-const HeaderDimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
-  top:0;
-  z-index: 99999999;
-  height:210px;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+16,fcfcfc+100&0.93+16,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.93) 16%, rgba(252,252,252,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.93) 16%,rgba(252,252,252,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed000000', endColorstr='#00fcfcfc',GradientType=0 ); /* IE6-9 */
-`
-const Dimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:41vh;
-  mix-blend-mode: multiply;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+61&0+0,0.93+69 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.82) 61%, rgba(0,0,0,0.93) 69%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.82) 61%,rgba(0,0,0,0.93) 69%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ed000000',GradientType=0 ); /* IE6-9 */
 `
 
 const ThemeIntro = styled.div`
@@ -163,8 +130,6 @@ class ThemePage extends React.Component {
 
     const themeLinks = allTaxonomyTermThemes.edges.map( edge => `/themes/${kebabCase(edge.node.name)}`);
 
-    const queryParams = queryString.parse(this.props.location.search);
-
     const getShortname = subtheme => {
       const parts = subtheme.name.split('-');
       return encodeURIComponent(kebabCase(parts[parts.length - 1]))
@@ -246,18 +211,6 @@ class ThemePage extends React.Component {
               )
             }
           </ThemeIntro>
-
-          {/*
-            sorted.map(subtheme => (
-                <SubthemeSection
-                  data={subtheme}
-                  key={getShortname(subtheme)}
-                  name={getShortname(subtheme)}
-                  filter={queryParams[getShortname(subtheme)]}
-                  queryParams={queryParams}
-                />
-              ))
-          */}
         </ThemeMain>
 
         <br />

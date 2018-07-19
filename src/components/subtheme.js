@@ -1,15 +1,13 @@
 import React from "react"
 import styled from 'styled-components';
 import { Link } from 'gatsby'
-import Card from './card.js';
-import RCCard from './rccard.js';
+import Card from './Card';
+import RCCard from './RCCard.js';
 import { 
   Overlay, 
   OverlayBody 
 } from './overlay'
 import kebabCase from 'lodash/kebabCase'
-import './subtheme.css';
-
 
 const range = require('range');
 const FlipMove = require('react-flip-move');
@@ -19,14 +17,12 @@ const SubthemeTitle = styled.div`
   text-rendering: optimizeLegibility;
   font-size: 42px;
   font-weight:300;
-  // text-transform: uppercase;
   padding: 15px;
   font-family: 'Lato';
   text-align: center;
   color: rgba(59, 59, 59, 0.8);
   margin-bottom: 15px;
   margin-top: 15px;
-  // letter-spacing: 0.04em;
 `
 const NUM_CARDS_TO_SHOW = 3;
 
@@ -70,6 +66,14 @@ const ArticleTitle = styled.div`
   margin-bottom: 15px;
 `
 
+const Poster = styled.div`
+  width: 100%;
+  height: 66%;
+  background-color: grey;
+  margin-bottom: 15px;
+  overflow: hidden;
+`
+
 class PlayablePoster extends React.Component {
   constructor(props){
     super(props)
@@ -78,31 +82,31 @@ class PlayablePoster extends React.Component {
   render() {
     if (!this.props.clip.relationships.field_poster_image) {
       return (
-        <div className={'poster'}/>
+        <Poster />
       );
     }
 
     if (this.state.play) {
       return (
-        <div className={'poster'}>
+        <Poster>
           <iframe title='player' src="https://player.vimeo.com/video/18769983?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
+        </Poster>
       )
     }
 
     if (this.props.linkable) {
       return (
         <Link to={`../clips/${kebabCase(this.props.clip.title)}`}>
-          <div className={'poster'}>
+          <Poster>
             <img alt='poster image' src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
-          </div>
+          </Poster>
         </Link>
       )
     }
     return (
-      <div className={'poster'} onClick={() => this.setState({ play: true })}>
+      <Poster onClick={() => this.setState({ play: true })}>
         <img alt='another image' src={this.props.clip.relationships.field_poster_image.localFile.publicURL} />
-      </div>
+      </Poster>
     );
   }
 }
@@ -344,7 +348,6 @@ const PopupCard = styled.div`
   background-color: gray;
   border-radius: 100px;
   border: 1px solid grey;
-  // padding: 50px;
   overflow: hidden;
 `
 
@@ -457,7 +460,6 @@ class SubthemeSection extends React.Component {
     const allCards = filter ?
       rawCards.sort((a, b) => (b.props.changed - a.props.changed)) :
       reorder(rawCards, this.order)
-      // rawCards
 
     const description = subtheme.description
       ? <div
@@ -468,7 +470,7 @@ class SubthemeSection extends React.Component {
       : null
 
     return (
-      <div className={this.props.className}>
+      <div>
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
             <Row>
