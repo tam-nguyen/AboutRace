@@ -1,10 +1,17 @@
 import React from "react"
 import Helmet from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
+import styled from 'styled-components'
 import Header from '../components/Header'
+import { backgroundColor } from '../colors';
 
 import './layout.css'
 import '../components/Header/nav.css'
+
+const Container = styled.div`
+  background-color: ${backgroundColor};
+  margin: 0 auto;
+`;
 
 export default ({ children, location }) => (
   <StaticQuery
@@ -30,7 +37,7 @@ export default ({ children, location }) => (
       <>
         <Helmet titleTemplate={`%s | ${data.site.siteMetadata.title}`} defaultTitle={data.site.siteMetadata.title} />
         <Header data={data} pathname={location.pathname} />
-        <div> {children} </div>
+        <Container> {children} </Container>
       </>
     )}
   />

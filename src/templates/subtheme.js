@@ -1,67 +1,116 @@
 import React from "react"
-import Img from 'gatsby-image'
-import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import SubthemeSection from '../components/subtheme.js'
-import styled from 'styled-components'
+import {
+  Link,
+  SubthemeContainer,
+} from '../components'
+import styled, { css } from 'styled-components'
 import { graphql } from 'gatsby'
+import {
+  backgroundColor,
+  titleColor,
+  grandColor
+} from '../colors'
 
 const queryString = require('query-string');
 
-const FlipMove = require('react-flip-move');
-
 const Container = styled.div`
-  margin-left: 75px;
-`
-const ThemeImage = styled.div`
-  height: 100vh;
-  width: 100%;
-  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  z-index: -999999999999999;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 200px;
+  background: ${backgroundColor};
+  min-height: 100vh;
 `
 
-const ThemesMenu = styled.div`
-  position: fixed;
-  top: 0px;
-  left: 200px;
-  height: 100vh;
+const gradient = `linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0.15))`
+
+
+const Main = styled.div`
+  background-size: cover !important;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
+  background: ${ props => props.background ? `${gradient}, url(${props.background}) center no-repeat` : `none`};
+  position: relative;
+  z-index: 3;
+`
+
+const Header = styled.div`
+  min-height: 340px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-const MenuItem = styled(Link)`
-  cursor: pointer;
-  textDecoration: none;
-  color:inherit;
-  height: 25px;
-  width: 25px;
-  background-color: ${props => props.selected ? `#000` : `#bbb`};
-  border-radius: 50%;
-  display: inline-block;
-  margin-top: 10px;
-  margin-left: 2.5px;
-  box-shadow: 0px 0px 5px #fff;
+const Title = styled.div`
+  color: ${titleColor};
+  font-family: Lato;
+  font-size: 42pt;
+  font-weight: bold;
+  line-height: 60px;
+  margin-bottom: 2vh;
 `
 
-const StyledLink = styled(Link)`
-  cursor: pointer;
-  text-decoration: none !important;
-  color:inherit;
+const TopLink = styled(Link)`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+`
+
+const Description = styled.div`
+  padding-left: 10vw;
+  padding-right: 10vw;
+  color: #DBDBDB;
+`
+
+const GrandTitle = styled.div`
+  position: fixed;
+  top: 2vh;
+  width: 100vw;
+  font-family: Tisa-Pro;
+  font-size: 24pt;
+  text-align: center;
+  line-height: 30px;
+  letter-spacing: 36px;
+  color: ${grandColor};
+  z-index: 2;
+`
+
+const Menu = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 10vh;
+  width: 100vw;
+  z-index: 2;
+
+  font-family: Lato;
+  font-size: 14pt;
+  line-height 30px;
+
+  text-transform: uppercase;
+`
+
+const MenuLink = styled(Link)`
+  width: 120px;
+  text-align: center;
 `
 
 class SubThemePage extends React.Component {
-  render() {
-    const {data, pageContext, location} = this.props;
-    const {field_theme_image, theme} = pageContext;
-    const {allTaxonomyTermSubthemes, taxonomyTermSubthemes} = data;
-    const subtheme = taxonomyTermSubthemes;
 
-    const themeLinks = allTaxonomyTermSubthemes.edges.map( edge => `/subthemes/${kebabCase(edge.node.name)}`);
+  componentDidMount() {
+    document.body.style.backgroundColor = backgroundColor;
+  }
+
+  render() {
+    const {data, pageContext} = this.props;
+    const {field_theme_image, theme} = pageContext;
+    const {taxonomyTermSubthemes} = data;
+    const subtheme = taxonomyTermSubthemes;
 
     const queryParams = queryString.parse(this.props.location.search);
 
@@ -71,41 +120,50 @@ class SubThemePage extends React.Component {
     }
 
     const background = field_theme_image && field_theme_image.localFile.publicURL;
-      
+    const title = subtheme.name;
+    const description = taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`;
+
+    const links = [
+      { title: 'overview', link: '/the-film' },
+      { title: 'themes', link: '/' },
+      { title: 'articles', link: '/articles' },
+      { title: 'interviews', link: '/interviews' },
+      { title: 'q&a', link: '/qa' },
+      { title: 'clips', link: '/clips' },
+      { title: 'teaching', link: '/teaching' },
+      { title: 'about', link: '/about' },
+    ]
+
     return (
-      <div>
-        <ThemeImage background={background} />
-        <Container>
+      <Container>
 
-          <StyledLink to={theme.path}>
-              <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
-              <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>{theme.name}</h4>
-          </StyledLink>
+        <GrandTitle>
+          RACE: THE POWER OF AN ILLUSION
+        </GrandTitle>
 
-          <h1>{taxonomyTermSubthemes.name}</h1>
-          <p
-            dangerouslySetInnerHTML={{ __html: taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`}}
+        <Menu>
+        {
+          links.map( ({title, link}, key) => <MenuLink to={link} key={key}>{title}</MenuLink> )
+        }
+        </Menu>
+
+        <Main background={background}>
+          <Header>
+            <TopLink to='/'>〈 &nbsp; All themes</TopLink>
+            <Title>{title}</Title>
+            <Description dangerouslySetInnerHTML={{ __html: description }} />
+          </Header>
+
+          <SubthemeContainer
+            data={subtheme}
+            key={getShortname(subtheme)}
+            name={getShortname(subtheme)}
+            filter={queryParams[getShortname(subtheme)]}
+            queryParams={queryParams}
           />
+        </Main>
 
-          <ThemesMenu>
-            {
-              themeLinks.map((link, i) => 
-                <MenuItem key={`menuitem-${i}`} to={link} selected={link === location.pathname}/>
-              )
-            }
-          </ThemesMenu>
-
-          {
-            <SubthemeSection
-              data={subtheme}
-              key={getShortname(subtheme)}
-              name={getShortname(subtheme)}
-              filter={queryParams[getShortname(subtheme)]}
-              queryParams={queryParams}
-            />
-          }
-        </Container>
-      </div>
+      </Container>
     )
   }
 }
@@ -114,14 +172,6 @@ export default SubThemePage
 
 export const pageQuery = graphql`
   query subThemeQuery($id: String) {
-    allTaxonomyTermSubthemes {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
 
     taxonomyTermSubthemes(id: {eq: $id}) {
       name

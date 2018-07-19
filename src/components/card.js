@@ -27,14 +27,18 @@ const QUICK_FACT_MULTIPLIER = 1.5;
 const FAQ_MULTIPLIER = .5;
 
 const CardGridItem = styled.div`
+  position: relative;
+  float: left;
   display: inline-block;
-  height: auto;
-  min-height: 200px;
+  
+  min-width: 324px;
+  min-height: 441px !important;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   margin-bottom: 30px;
   margin-left: 15px;
   margin-right: 15px;
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px;
+  color: black;
 
   ${props => props.type === `Article` && css`
     flex: ${FLEX * ARTICLE_MULTIPLIER} ${FLEX * ARTICLE_MULTIPLIER} ${BASE_CARD_WIDTH * ARTICLE_MULTIPLIER}px;
@@ -62,24 +66,68 @@ const CardGridItem = styled.div`
   `}
 `
 
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+  border-radius: 6px;
+
+  background: rgba(34,34,34, 0.95);
+  backdrop-filter: blur(5px);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 class Card extends React.Component {
-    render() {
-      const { link, className, style, children, ...rest } = this.props
-      return (
-        <CardGridItem {...rest}>
-          <CardWrapper link={link} className={className} style={style}>
-              {this.props.children}
-          </CardWrapper>
-        </CardGridItem>
-      )
-    }
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      isHovering: false
+    };
+  }
+
+  handleMouseHover = () => {
+    this.setState({ isHovering: !this.state.isHovering });
+  }
+
+  render() {
+    const {isHovering} = this.state;
+    const { link, className, style, children, overlay, ...rest } = this.props
+
+    return (
+      <CardGridItem
+        {...rest}
+        onMouseEnter={this.handleMouseHover}
+        onMouseLeave={this.handleMouseHover}
+      >
+        <CardWrapper link={link} className={className} style={style}>
+          {children}
+          {
+            isHovering && overlay
+            ?
+            <Overlay>{overlay}</Overlay>
+            :
+            null
+          }
+        </CardWrapper>
+      </CardGridItem>
+    )
+  }
 }
 
 const StyledCard = styled(Card)`
   display: block;
   height: 100%;
   background-color: white;
-  border-radius:6px;
+  border-radius: 6px;
   overflow: hidden;
   -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
   -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);

@@ -23,7 +23,7 @@ const activeLinkStyle = {
 }
 
 const ThemeLinkComponent = ({ data, closeMenu }) => (
-  <Link className={'navItem'} onClick={() => closeMenu()} style={{textDecoration:'none', color:'white', display:'block', marginBottom:15}} to={`/themes/${kebabCase(data.name)}`}>
+  <Link className='navItem' onClick={() => closeMenu()} style={{textDecoration:'none', color:'white', display:'block', marginBottom:15}} to={`/themes/${kebabCase(data.name)}`}>
   {data.name}
   </Link>
 )
@@ -86,49 +86,49 @@ class Header extends React.Component {
           strokeWidth={10}
           borderRadius={12}
         >
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
             About the film
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
             Themes
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
             Articles
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
             Interviews
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={linkStyle} to="/qa/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={linkStyle} to="/qa/" exact>
             Q&A
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
             Clips
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
             Teaching
           </Link>
         </Menu>
 
         <NavMenu style={{display:'none'}}>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
             About the film
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
             Themes
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
             Articles
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
             Interviews
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/FAQs`)} to="/FAQs/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/qa`)} to="/qa/" exact>
             Q&A
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
             Clips
           </Link>
-          <Link className={'navItem'} onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
             Teaching
           </Link>
         </NavMenu>

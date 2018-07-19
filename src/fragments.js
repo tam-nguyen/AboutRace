@@ -56,13 +56,6 @@ export const InterviewFragment = graphql`
 export const FAQFragment = graphql`
   fragment FAQFragment on node__faq {
     title
-    relationships {
-      field_faq_image {
-        localFile {
-          publicURL
-        }
-      }
-    }
     field_expert_1 {
       value
       format

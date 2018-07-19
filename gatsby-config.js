@@ -11,8 +11,8 @@ module.exports = {
         baseUrl: `http://distributeddesign.institute/RacePI/`
       },
     },
-    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       // We need filesystem source plugin to add publicURL function to File nodes
       resolve: `gatsby-source-filesystem`,
