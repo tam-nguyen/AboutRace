@@ -98,9 +98,11 @@ class ThemeCard extends React.Component {
     const description = data.description && data.description.processed
 
     //preloading images for smoother effect
-    let img = new Image();
-    img.src = background;
-
+    if(typeof window !== 'undefined'){
+      let img = new window.Image();
+      img.src = background;
+    }
+    
     const { subthemes } = data.relationships;
 
     return (
