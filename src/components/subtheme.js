@@ -1,8 +1,8 @@
 import React from "react"
 import styled from 'styled-components';
 import { Link } from 'gatsby'
-import Card from './Card';
-import RCCard from './RCCard.js';
+import Card from './card';
+import RCCard from './rccard.js';
 import { 
   Overlay, 
   OverlayBody 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import AllClips from '../components/allClips.js'
-import Filter from '../components/Filter'
+import Filter from '../components/filter'
 import Layout from "../components/layout"
 
 const queryString = require('query-string');
