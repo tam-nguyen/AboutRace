@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link, graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import AllClips from '../components/allClips.js'
-import Filter from '../components/filter'
-import Layout from "../components/layout"
+import {AllClips, Layout, Filter} from '../components'
 
 const queryString = require('query-string');
 
