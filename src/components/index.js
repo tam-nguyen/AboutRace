@@ -5,7 +5,7 @@ export ThemeCard from './ThemeCard'
 export SubthemeContainer from './SubthemeContainer'
 export AllClips from './allClips'
 export Card from './card';
-export RCCard from './rccard.js';
+export RCCard from './rccard';
 export { 
   Overlay, 
   OverlayBody 

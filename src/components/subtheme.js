@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby'
 import { 
   Card,
-  RCCard
+  RCCard,
   Overlay, 
   OverlayBody 
 } from './'
