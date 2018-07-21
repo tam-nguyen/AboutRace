@@ -1,12 +1,12 @@
 import React from "react"
 import styled from 'styled-components';
 import { Link } from 'gatsby'
-import Card from './card';
-import RCCard from './rccard.js';
 import { 
+  Card,
+  RCCard
   Overlay, 
   OverlayBody 
-} from './overlay'
+} from './'
 import kebabCase from 'lodash/kebabCase'
 
 const range = require('range');
