@@ -1,10 +1,10 @@
 export Layout from './layout'
-export Link from './link'
+export Link from './Link'
 export Title from './Title'
 export ThemeCard from './ThemeCard'
 export SubthemeContainer from './SubthemeContainer'
 export AllClips from './allClips'
-export Card from './card';
+export Card from './Card';
 export RCCard from './rccard';
 export { 
   Overlay, 
