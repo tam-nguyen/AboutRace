@@ -6,6 +6,7 @@ export SubthemeContainer from './SubthemeContainer'
 export AllClips from './allClips'
 export Card from './Card';
 export RCCard from './rccard';
+export Filter from './Filter';
 export { 
   Overlay, 
   OverlayBody 
