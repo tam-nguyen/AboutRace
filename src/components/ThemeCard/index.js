@@ -150,7 +150,7 @@ class ThemeCard extends React.Component {
     super(props);
   
     this.state = {
-      open: !false
+      open: false
     };
   }
 
