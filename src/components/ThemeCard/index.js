@@ -196,9 +196,9 @@ class ThemeCard extends React.Component {
           <Chevron open={open} />
         </Info>
         {
-          <SubThemes gradient={gradient}>
+          open && <SubThemes gradient={gradient}>
             {
-              open && subthemes.map( (data, key) => <SubThemeCard key={key} data={data} color={titleColor}/>)
+              subthemes.map( (data, key) => <SubThemeCard key={key} data={data} color={titleColor}/>)
             }
           </SubThemes>
         }
