@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import styled from 'styled-components';
+import styled from 'styled-components'
+
+import Menu from './Menu'
 
 import {
   black,
@@ -11,18 +13,27 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  
+  justify-content: space-around;
+
   background-color: ${black};
 
   height: 64px;
 
-  text-transform: uppercase;
+  @media (min-width: 1025px) { /* desktop */
+    justify-content: flex-end;
+  }
 
-  font-family: Lato;
-  font-weight: bold;
-  font-size: 12pt;
-  line-height: 30px;
-  letter-spacing: 5px;
+  @media (max-width: 700px) { /* mobile */
+    flex-direction: column;
+
+    height: ${props => props.open ? '100vh' : '70px'};
+
+    padding-top: ${props => props.open ? 64 : 0}px;
+    padding-bottom: ${props => props.open ? 120 : 0}px;
+  }
+
+  transition: all 0.3s ease-out;
 `
 
 const Item = styled(Link)`
@@ -31,7 +42,35 @@ const Item = styled(Link)`
 
   color: ${white};
 
-  margin-right: 41px;
+  text-transform: uppercase;
+
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 10pt;
+  line-height: 30px;
+  letter-spacing: 0;
+
+  margin-right: 0;
+
+  @media (min-width: 1025px) { /* desktop */
+    margin-right: 41px;
+    font-size: 12pt;
+    letter-spacing: 5px;
+  }
+
+  @media (max-width: 700px) { /* mobile */
+    display: none;
+  }
+`
+
+const MobileItem = styled(Item)`
+  display: none;
+
+  @media (max-width: 700px) { /* mobile */
+    display: block;
+    font-size: 15pt;
+    letter-spacing: 5px;
+  }
 `
 
 const pages = [
@@ -48,14 +87,22 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
   
-    this.state = {};
+    this.state = {
+      open: false // mobile only
+    };
   }
 
   render() {
+    const {open} = this.state;
+
     return (
-      <Container>
+      <Container open={open}>
+        <Menu open={open} onClick={ e => this.setState({open: !open})}/>
         {
           pages.map( ({name, link}, index) => <Item to={link} key={index}>{name}</Item>)
+        }
+        {
+          open && pages.map( ({name, link}, index) => <MobileItem to={link} key={index}>{name}</MobileItem>)
         }
       </Container>
     );
