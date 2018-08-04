@@ -211,7 +211,7 @@ const Breadcrumbs = ({titles}) => {
       FILED UNDER:&nbsp;
       {
         links.map( ({url, title}, index) => 
-          <div>
+          <div key={'Breadcrumb-'+index}>
             <BreadcrumbLink to={url}>{title}</BreadcrumbLink>
             &nbsp;{ index == (links.length - 1) ? null : 'and' }&nbsp;
           </div>

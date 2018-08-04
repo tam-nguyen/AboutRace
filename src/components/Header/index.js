@@ -89,7 +89,7 @@ class Header extends React.Component {
           <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
             About the film
           </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
+          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/" exact>
             Themes
           </Link>
           <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
