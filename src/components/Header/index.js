@@ -27,7 +27,7 @@ const Container = styled.div`
   @media (max-width: 812px) { /* mobile */
     flex-direction: column;
 
-    height: ${props => props.open ? '100vh' : '70px'};
+    height: ${props => props.open ? '75vh' : '70px'};
 
     padding-top: ${props => props.open ? 64 : 0}px;
     padding-bottom: ${props => props.open ? 120 : 0}px;
