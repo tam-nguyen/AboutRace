@@ -22,7 +22,6 @@ export default ({ data, location }) => (
   <Layout location={location}>
     <div>
       <HomeBackground />
-      <Title>Explore themes from the film:</Title>
       {
         data.allTaxonomyTermThemes.edges.map( ({ node }, key) =>
           <ThemeCard key={key} data={node} />

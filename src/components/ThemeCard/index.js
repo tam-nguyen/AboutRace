@@ -3,30 +3,35 @@ import styled from 'styled-components'
 
 import SubThemeCard from './SubThemeCard'
 
+import {
+  red,
+  white,
+} from '../../colors'
+
 const gradient = `linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(1,1,2,0.64) 25%,rgba(1,1,2,1) 100%)`
 
 const Container = styled.div`
-  border-radius: 45;
-  width: 90%;
-  margin-left: 5%;
-  margin-bottom: 60px;
-  margin-right: 0;
-  display: inline-block;
-  vertical-align: top;
   position: relative;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  vertical-align: top;
   overflow: hidden;
   box-shadow: rgba(39, 39, 39, 0.58) 0px 3px 57px 0px;
   user-select: none;
-  border-radius: 60px;
   color: white;
-  
+`;
+
+const MainImage = styled.div`
+  height: 60vh;
+
   background-size: cover !important;
   background-attachment: fixed;
   transition: all .5s ease;
 
   &:hover {
-    background-size: 125% auto !important;
-    transition: all .5s ease;
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
     background: ${ props => props.background ? `${gradient}, url(${props.background}) center no-repeat` : `none`};
   }
@@ -35,43 +40,109 @@ const Container = styled.div`
   background: ${ props => props.backgrounGrayscale ? `url(${props.backgrounGrayscale}) center no-repeat` : `none`};
   background: ${ props => props.backgrounGrayscale ? `${gradient}, url(${props.backgrounGrayscale}) center no-repeat` : `none`}; 
 
-  height: ${props => props.open ? '100vh' : '60vh'};
-`;
+  @media (min-width: 1025px) { /* desktop */
+    height: 60vh;
+  }
+
+  @media (max-width: 700px) { /* mobile */
+    height: 30vh;
+  }
+`
+
+const Info = styled.div`
+  position: absolute;
+  top: 30vh;
+  left: 0;
+
+  width: 50vw;
+  height: auto;
+
+  min-width: 698px;
+  min-height: 231px;
+
+  padding-top: 23px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 2em;
+
+  background: ${props => props.gradient ? props.gradient : null };
+
+  @media (min-width: 1025px) { /* desktop */
+    height: 30vh;
+  }
+
+  @media (max-width: 700px) { /* mobile */
+    position: inherit;
+
+    top: 0;
+
+    min-width: 100vw;
+    height: auto;
+    padding-bottom: 2em;
+    width: 100vw;
+  }
+`
 
 const Title = styled.div`
   font-family: Lato;
-  font-size: 48px;
-  line-height: 1;
   text-align: left;
-  letter-spacing: 0.011em;
-  padding-top: 30vh;
-  padding-bottom: 5vh;
-  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 54px;
+
+  color: ${props => props.color ? props.color : white };
+
+  font-size: 30pt;
+  font-weight: 600;
 `;
 
 const Description = styled.div`
   font-family: Lato;
-  text-align: center;
-  padding-left: 10vw;
-  padding-right: 10vw;
+  font-size: 20pt;
+  line-height: 28px;
 `;
 
-const Chevron = styled.div`
+const ChevronContainer = styled.div`
   cursor: pointer;
   position: absolute;
-  right: 1vw;
-  top: 30vh;
-  font-family: 'Lato';
-  font-size: 100px;
-  color: white;
+  
+  right: 35px;
+  bottom: 23px;
 
-  transform: ${ props => props.open ? 'rotate(90deg)' : 'none'};
+  width: 18px;
+  height: 30px;
+
+  transform: rotate(${props => props.open ? 90 : 0}deg);
+
+  transition: all 0.3s ease-out;
 `
+
+const Chevron = ({open}) => <ChevronContainer open={open}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.177 30.139">
+    <path 
+      fill={red} 
+      d="M15.2,15.034a2.2,2.2,0,0,1,.159-.226Q21.785,7.639,28.224.48a1.027,1.027,0,0,1,1.585.04,1.367,1.367,0,0,1,.02,1.76Q22.912,9.974,16,17.667a1.106,1.106,0,0,1-1.859,0Q7.975,10.763,1.806,3.858c-.494-.554-1-1.1-1.481-1.671A1.372,1.372,0,0,1,.555.2,1.07,1.07,0,0,1,2.013.413Q3.177,1.7,4.338,3q3.147,3.5,6.295,7,2.174,2.421,4.352,4.841a1.261,1.261,0,0,1,.127.2C15.14,15.039,15.168,15.034,15.2,15.034Z"
+      transform="translate(0 30.139) rotate(-90)"
+    />
+  </svg>
+</ChevronContainer>
 
 const SubThemes = styled.div`
   display: grid;
-  grid-template-columns: 30vw 30vw 30vw;
-  /*grid-template-rows: 40vh 40vh;*/
+  grid-template-columns: 45vw 45vw;
+
+  padding-bottom: 30px;
+  grid-gap: 30px;
+  align-items: center;
+
+  background: ${props => props.gradient ? props.gradient : null };
+
+  @media (min-width: 1025px) { /* desktop */
+    grid-template-columns: 30vw 30vw 30vw;
+  }
+
+  @media (max-width: 700px) { /* mobile */
+    grid-template-columns: 100vw;
+  }
 `
 
 class ThemeCard extends React.Component {
@@ -79,7 +150,7 @@ class ThemeCard extends React.Component {
     super(props);
   
     this.state = {
-      open: false
+      open: !false
     };
   }
 
@@ -103,22 +174,31 @@ class ThemeCard extends React.Component {
       img.src = background;
     }
     
-    const { subthemes } = data.relationships;
+    const { subthemes } = data.relationships
+
+    const titleColor = '#54C3F4'
+    const color1 = '#284977'
+    const color2 = '#0B0C0D'
+    const gradient = `linear-gradient(to bottom, ${color1} 0%, ${color2} 100%)`
 
     return (
       <Container
         open={open}
-        background={background}
-        backgrounGrayscale={backgrounGrayscale}
         onClick={() => this.setState({open: !open})}
       >
-        <Title>{data.name}</Title>
-        <Description dangerouslySetInnerHTML={{ __html: description }} />
-        <Chevron open={open}>〉</Chevron>
+        <MainImage
+          background={background}
+          backgrounGrayscale={backgrounGrayscale}
+        />
+        <Info gradient={gradient}>
+          <Title color={titleColor}>{data.name}</Title>
+          <Description dangerouslySetInnerHTML={{ __html: description }} />
+          <Chevron open={open} />
+        </Info>
         {
-          <SubThemes>
+          <SubThemes gradient={gradient}>
             {
-              open && subthemes.map( (data, key) => <SubThemeCard key={key} data={data} />)
+              open && subthemes.map( (data, key) => <SubThemeCard key={key} data={data} color={titleColor}/>)
             }
           </SubThemes>
         }
@@ -126,5 +206,7 @@ class ThemeCard extends React.Component {
     )
   }
 }
+
+// 〉
 
 export default ThemeCard
