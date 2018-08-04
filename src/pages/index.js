@@ -49,7 +49,9 @@ export const query = graphql`
                 publicURL
                 childImageSharp {
                   id
-                  grayscale: resize(width: 1000, grayscale: true) {
+                  resolutions {
+                    height
+                    width
                     src
                   }
                 }

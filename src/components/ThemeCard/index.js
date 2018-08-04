@@ -23,6 +23,7 @@ const Container = styled.div`
 const MainImage = styled.div`
   position: relative;
 
+  min-height: 60vh;
   height: 60vh;
 
   background-size: cover !important;
@@ -36,7 +37,22 @@ const MainImage = styled.div`
   }
 
   @media (max-width: 700px) { /* mobile */
-    height: 100vh;
+    display: none;
+  }
+`
+
+const MobileImage = styled.div`
+  display: none;
+
+  width: 100vw;
+  height: 50vh;
+
+  background-size: cover !important;
+  background-attachment: fixed;
+  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
+
+  @media (max-width: 700px) { /* mobile */
+    display: inherit;
   }
 `
 
@@ -67,6 +83,25 @@ const Info = styled.div`
     height: auto;
     padding-bottom: 2em;
     width: auto;
+
+    top: 0;
+  }
+`
+
+const MobileInfo = styled.div`
+  position: relative;
+
+  display: none;
+
+  padding-top: 23px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 3em;
+
+  background: ${props => props.gradient ? props.gradient : null };
+
+  @media (max-width: 700px) { /* mobile */
+    display: block;
   }
 `
 
@@ -144,14 +179,14 @@ class ThemeCard extends React.Component {
   render() {
     const { open } = this.state;
     const { data } = this.props
-    const background = data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL
-    let backgrounGrayscale = '';
+    // const background = data.relationships.field_theme_image && data.relationships.field_theme_image.localFile.publicURL
+    const {
+      height,
+      width,
+      src
+    } = data.relationships.field_theme_image.localFile.childImageSharp.resolutions
 
-    try{
-      backgrounGrayscale = data.relationships.field_theme_image.localFile.childImageSharp.grayscale.src;
-    }catch(e){
-      backgrounGrayscale = background
-    }
+    const background = src;
 
     const description = data.description && data.description.processed
 
@@ -173,16 +208,23 @@ class ThemeCard extends React.Component {
         open={open}
         onClick={() => this.setState({open: !open})}
       >
-        <MainImage
+        <MobileImage 
+          width={width}
+          height={height}
           background={background}
-          backgrounGrayscale={backgrounGrayscale}
-        >
+        />
+        <MainImage background={background}>
           <Info gradient={gradient}>
             <Title color={titleColor}>{data.name}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
             <Chevron open={open} />
           </Info>
         </MainImage>
+        <MobileInfo gradient={gradient}>
+          <Title color={titleColor}>{data.name}</Title>
+          <Description dangerouslySetInnerHTML={{ __html: description }} />
+          <Chevron open={open} />
+        </MobileInfo>
         {
           open && <SubThemes gradient={gradient}>
             {
