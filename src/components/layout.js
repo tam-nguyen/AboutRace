@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import { backgroundColor } from '../colors';
 
 import './layout.css'
-import '../components/Header/nav.css'
+// import '../components/Header/nav.css'
 
 const Container = styled.div`
   background-color: ${backgroundColor};
