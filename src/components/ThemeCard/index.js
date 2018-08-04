@@ -8,8 +8,6 @@ import {
   white,
 } from '../../colors'
 
-const gradient = `linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(1,1,2,0.64) 25%,rgba(1,1,2,1) 100%)`
-
 const Container = styled.div`
   position: relative;
 
@@ -31,14 +29,7 @@ const MainImage = styled.div`
   background-attachment: fixed;
   transition: all .5s ease;
 
-  &:hover {
-    background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    background: ${ props => props.background ? `${gradient}, url(${props.background}) center no-repeat` : `none`};
-  }
-
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-  background: ${ props => props.backgrounGrayscale ? `url(${props.backgrounGrayscale}) center no-repeat` : `none`};
-  background: ${ props => props.backgrounGrayscale ? `${gradient}, url(${props.backgrounGrayscale}) center no-repeat` : `none`}; 
 
   @media (min-width: 1025px) { /* desktop */
     height: 60vh;
