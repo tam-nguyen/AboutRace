@@ -9,8 +9,6 @@ import {
 } from '../../colors'
 
 const Container = styled.div`
-  position: relative;
-
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -23,6 +21,8 @@ const Container = styled.div`
 `;
 
 const MainImage = styled.div`
+  position: relative;
+
   height: 60vh;
 
   background-size: cover !important;
@@ -36,17 +36,17 @@ const MainImage = styled.div`
   }
 
   @media (max-width: 700px) { /* mobile */
-    height: 30vh;
+    height: 100vh;
   }
 `
 
 const Info = styled.div`
   position: absolute;
-  top: 30vh;
+  bottom: 0;
   left: 0;
 
   width: 50vw;
-  height: auto;
+  height: 50vh;
 
   min-width: 698px;
   min-height: 231px;
@@ -63,14 +63,10 @@ const Info = styled.div`
   }
 
   @media (max-width: 700px) { /* mobile */
-    position: inherit;
-
-    top: 0;
-
-    min-width: 100vw;
+    min-width: 90vw;
     height: auto;
     padding-bottom: 2em;
-    width: 100vw;
+    width: auto;
   }
 `
 
@@ -132,7 +128,7 @@ const SubThemes = styled.div`
   }
 
   @media (max-width: 700px) { /* mobile */
-    grid-template-columns: 100vw;
+    grid-template-columns: 90vw;
   }
 `
 
@@ -180,12 +176,13 @@ class ThemeCard extends React.Component {
         <MainImage
           background={background}
           backgrounGrayscale={backgrounGrayscale}
-        />
-        <Info gradient={gradient}>
-          <Title color={titleColor}>{data.name}</Title>
-          <Description dangerouslySetInnerHTML={{ __html: description }} />
-          <Chevron open={open} />
-        </Info>
+        >
+          <Info gradient={gradient}>
+            <Title color={titleColor}>{data.name}</Title>
+            <Description dangerouslySetInnerHTML={{ __html: description }} />
+            <Chevron open={open} />
+          </Info>
+        </MainImage>
         {
           open && <SubThemes gradient={gradient}>
             {
