@@ -24,7 +24,7 @@ const Container = styled.div`
     justify-content: flex-end;
   }
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     flex-direction: column;
 
     height: ${props => props.open ? '100vh' : '70px'};
@@ -58,7 +58,7 @@ const Item = styled(Link)`
     letter-spacing: 5px;
   }
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: none;
   }
 `
@@ -66,7 +66,7 @@ const Item = styled(Link)`
 const MobileItem = styled(Item)`
   display: none;
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: block;
     font-size: 15pt;
     letter-spacing: 5px;

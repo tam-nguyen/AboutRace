@@ -36,7 +36,7 @@ const MainImage = styled.div`
     height: 60vh;
   }
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: none;
   }
 `
@@ -51,7 +51,7 @@ const MobileImage = styled.div`
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: inherit;
   }
 `
@@ -78,7 +78,7 @@ const Info = styled.div`
     height: 30vh;
   }
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     min-width: 90vw;
     height: auto;
     padding-bottom: 2em;
@@ -100,7 +100,7 @@ const MobileInfo = styled.div`
 
   background: ${props => props.gradient ? props.gradient : null };
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: block;
   }
 `
@@ -162,7 +162,7 @@ const SubThemes = styled.div`
     grid-template-columns: 30vw 30vw 30vw;
   }
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     grid-template-columns: 90vw;
   }
 `

@@ -27,7 +27,7 @@ const Container = styled.div`
 
   display: none;
 
-  @media (max-width: 700px) { /* mobile */
+  @media (max-width: 812px) { /* mobile */
     display: block;
   }
 `

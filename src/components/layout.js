@@ -35,7 +35,13 @@ export default ({ children, location }) => (
     `}
     render={data => (
       <>
-        <Helmet titleTemplate={`%s | ${data.site.siteMetadata.title}`} defaultTitle={data.site.siteMetadata.title} />
+
+        <Helmet 
+          titleTemplate={`%s | ${data.site.siteMetadata.title}`} 
+          defaultTitle={data.site.siteMetadata.title} 
+        >
+          <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+        </Helmet>
         <Typekit kitId="pte4pny" />
         <Header data={data} pathname={location.pathname} />
         <Container> {children} </Container>
