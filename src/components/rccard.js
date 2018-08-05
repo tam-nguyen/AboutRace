@@ -4,24 +4,27 @@ import kebabCase from 'lodash/kebabCase'
 import styled, { css } from 'styled-components';
 
 class RCCard extends React.Component {
-    render() {
-        return (
-        <Link to={`/${this.props.slug}s/${kebabCase(this.props.title)}`} className={this.props.className} style={this.props.style}>
-            {this.props.type ?
-            <h4>{this.props.type}</h4> :
-            null }
-            <div className={'RCimage'} style={{
-              backgroundImage: `url(${this.props.imgSrc})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}>
-            </div>
-            <p>{this.props.title}</p>
+  
+  render() {
+    const link = `/${this.props.slug}s/${kebabCase(this.props.title)}`
+    
+    return (
+      <Link to={link} className={this.props.className} style={this.props.style}>
+          {this.props.type ?
+          <h4>{this.props.type}</h4> :
+          null }
+          <div className={'RCimage'} style={{
+            backgroundImage: `url(${this.props.imgSrc})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}>
+          </div>
+          <p>{this.props.title}</p>
 
-            {this.props.children}
-        </Link>
-        )
-    }
+          {this.props.children}
+      </Link>
+    )
+  }
 }
 
 const BASE_CARD_WIDTH = 350;
@@ -29,6 +32,7 @@ const FLEX = 100;
 const MAX_WIDTH_CONSTANT = .7;
 const ARTICLE_MULTIPLIER = 1.5;
 const QUICK_FACT_MULTIPLIER = 1.5;
+
 
 const StyledRCCard = styled(RCCard)`
   display: inline-block;

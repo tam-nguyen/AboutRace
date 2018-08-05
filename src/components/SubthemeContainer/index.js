@@ -311,7 +311,7 @@ class SubthemeSection extends React.Component {
       
         <FlipContainer>
         {
-          allCards.map( (c, k) => <Card key={k}>{c}</Card>)
+          allCards.map( (c, k) => <div key={k}>{c}</div>)
         }
         </FlipContainer>
       </Grid>
@@ -325,13 +325,13 @@ const FlipContainer = styled(FlipMove)`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px;
+  
   overflow: auto;
-`
 
-const Card = styled.div`
-  min-width: 350px;
-  min-height: 441px;
+  padding-bottom: 286px;
+  width: 100vw;
+
+  justify-content: center;
 `
 
 const color = 'rgba(255, 255, 255, 0.66)'

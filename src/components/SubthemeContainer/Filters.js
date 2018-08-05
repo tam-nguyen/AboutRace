@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { black } from '../../colors'
 import { DISPLAY_NAMES_TO_SLUG } from '../../constants'
 
 const Container = styled.div`
@@ -9,30 +10,28 @@ const Container = styled.div`
   margin-bottom: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: flex-start;
+  padding-top: 45px;
+  padding-left: 138px;
+
+  font-size: 12pt;
+  line-height: 24px;
+  letter-spacing: 0.022em;
+  font-family: 'Lato';
+  color: ${black};
+  opacity: 0.8;
 `
 
 const Label = styled.div`
   margin-right: 15px;
-  font-family: Lato;
-  font-weight: 700;
-  font-size: 14pt;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: hotpink;
 `
 
 const Button = styled.div`
   cursor: pointer;
-  color: hotpink;
   margin-right: 15px;
   margin-bottom: 15px;
-  font-size: 14pt;
-  letter-spacing: 0.125em;
-  font-family: 'Lato';
+  
   font-weight: ${ props => props.selected ? 700 : null};
-  border-bottom: ${ props => props.selected ? `3px solid hotpink` : null };
   text-transform: uppercase;
 `
 
@@ -45,7 +44,7 @@ const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => {
 
   return (
     <Container>
-      <Label>Sort by:</Label>
+      <Label>View:</Label>
         <Button 
           onClick={ () => toggleFilter(null) }
           selected={!filter}
