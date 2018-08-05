@@ -6,15 +6,14 @@ import { Link } from '../';
 import {
   red,
   backgroundColor,
-  white,
-  darkWhite
+  white
 } from '../../colors'
 
 const Container = styled(Link)`
   color: white;
 
   padding-top: 30px;
-  padding-left: 30px;
+  /*padding-left: 30px;*/
   padding-right: 30px;
 
   display: flex;
@@ -24,6 +23,8 @@ const Container = styled(Link)`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
+
+  align-items: center;
 `
 
 const Column = styled.div`
@@ -45,7 +46,6 @@ const Title = styled.div`
   letter-spacing: 0.022em;
   text-transform: uppercase;
 
-  background-color: ${backgroundColor};
   color: ${props => props.color ? props.color : white };
   width: auto;
 
@@ -58,7 +58,7 @@ const Description = styled.div`
   font-size: 20px;
   line-height: 24px;
   
-  color: ${darkWhite};
+  color: ${white};
 `
 
 const ArrowContainer = styled.div`
@@ -76,27 +76,19 @@ class SubThemeCard extends React.Component {
   render() {
     const {
       data,
-      color,
     } = this.props;
-    const title = data.name;
-    const description = data.description ? data.description.value : '';
+
+    const title = data.name.indexOf(':') >= 0 ? data.name.split(':')[1] : data.name
+    const description = data.description ? data.description.value : '!empty content, check drupal!'
     const link = `/subthemes/${kebabCase(title)}`
 
     return (
       <Container to={link}>
         <Row>
-          <Title color={color}>{title}</Title>
-          { title.length > 100 && <div style={{flex:1}}>&nbsp;</div> }
+          <Arrow color={red}/>
+          <Title color={red}>{title}</Title>
         </Row>
-        <Row style={{minWidth: '100%'}}>
-          <Column style={{minWidth: '100%'}}>
-            <Description dangerouslySetInnerHTML={{ __html: description }} />
-            <Row>
-              <div style={{flex:1}}>&nbsp;</div>
-              <Arrow color={red}/>
-            </Row>
-          </Column>
-        </Row>
+        <Description dangerouslySetInnerHTML={{ __html: description }} />
       </Container>
     )
   }

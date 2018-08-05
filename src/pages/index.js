@@ -9,6 +9,8 @@ import {
   ThemeCard
 } from "../components"
 
+import gradientColors from '../gradients'
+
 const HomeBackground = styled.div`
   position: fixed;
   top: 0;
@@ -24,7 +26,7 @@ export default ({ data, location }) => (
       <HomeBackground />
       {
         data.allTaxonomyTermThemes.edges.map( ({ node }, key) =>
-          <ThemeCard key={key} data={node} />
+          <ThemeCard key={key} data={node} color={gradientColors[key]}/>
         )
       }
     </div>
