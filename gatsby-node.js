@@ -2,6 +2,8 @@ const _ = require("lodash");
 const kebabCase = require("lodash/kebabCase");
 const path = require("path");
 
+const gradientColors = require('./src/gradients');
+
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPlugin({
     name: `@babel/plugin-proposal-export-default-from`,
@@ -104,11 +106,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
 
       // Create blog posts pages.
-      _.each(result.data.allTaxonomyTermThemes.edges, edge => {
+      _.each(result.data.allTaxonomyTermThemes.edges, (edge, index) => {
         const {field_theme_image, subthemes} = edge.node.relationships;
         const {name} = edge.node;
         const themeName = name;
         const path = `/themes/${kebabCase(name)}`;
+        const color = gradientColors[index];
         
         subthemes.map( ({id, name}) => 
           createPage({
@@ -117,6 +120,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               id,
               field_theme_image,
+              color,
               theme: {
                 path,
                 name: themeName

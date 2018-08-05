@@ -11,3 +11,5 @@ export {
   Overlay, 
   OverlayBody 
 } from './overlay'
+
+export SVGChevron from './SVGChevron'

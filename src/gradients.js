@@ -19,4 +19,4 @@ const gradientColors = [
   '#FDFBBC',
 ];
 
-export default gradientColors
+module.exports = gradientColors;
