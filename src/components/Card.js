@@ -2,6 +2,10 @@ import React from "react"
 import { Link } from 'gatsby'
 import styled, { css } from 'styled-components';
 
+import {
+  white
+} from '../colors'
+
 const Container = styled.div`
   cursor: pointer;
 `;
@@ -35,8 +39,7 @@ const CardGridItem = styled.div`
   min-height: 441px !important;
   flex: ${FLEX} ${FLEX} ${BASE_CARD_WIDTH}px;
   margin-bottom: 30px;
-  margin-left: 15px;
-  margin-right: 15px;
+  
   max-width: ${BASE_CARD_WIDTH * MAX_WIDTH_CONSTANT}px;
   color: black;
 
@@ -72,6 +75,9 @@ const Overlay = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
+
+  height: 492px;
+  width: 341px;
   
   border-radius: 6px;
 
@@ -123,23 +129,27 @@ class Card extends React.Component {
   }
 }
 
+///
+
 const StyledCard = styled(Card)`
+  position: relative;
   display: block;
-  height: 100%;
-  background-color: white;
-  border-radius: 6px;
+  
+  height: 492px;
+  width: 341px;
+
+  background-color: ${white};
+  border-radius: 3px;
   overflow: hidden;
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
-  box-shadow: 0px 2px 15px 0px rgba(179,179,179,0.38);
+
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
   transition: all .3s;
+
   &:hover {
     -webkit-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
     -moz-box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
     box-shadow: 0px 7px 15px 2px rgba(179,179,179,0.908);
-    // color:rgb(255, 132, 0);
     transition: all .3s;
-    // transform: translateY(-1px);
   }
   
   font-family: "ff-tisa-web-pro";

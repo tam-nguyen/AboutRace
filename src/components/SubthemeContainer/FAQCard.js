@@ -7,8 +7,6 @@ import Card from '../Card';
 import Description from './Description';
 
 const Container = styled(Card)`
-  padding: 30px;
-  height: 441px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -10,7 +10,6 @@ import Overlay from './Overlay'
 import OrangeButton from './OrangeButton'
 
 const Container = styled(Card)`
-  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

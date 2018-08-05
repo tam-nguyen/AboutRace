@@ -7,7 +7,6 @@ import Card from '../Card';
 import Description from './Description';
 
 const Container = styled(Card)`
-  padding: 15px;
 `
 
 const Title = styled.h4`

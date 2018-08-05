@@ -15,7 +15,6 @@ const Caption = styled.div`
   line-height: 1.5;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding:30px;
 `
 
 export class ClipCard extends React.Component {
