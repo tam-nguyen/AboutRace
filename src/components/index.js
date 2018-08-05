@@ -13,3 +13,4 @@ export {
 } from './overlay'
 
 export SVGChevron from './SVGChevron'
+export SVGArrow from './SVGArrow'
