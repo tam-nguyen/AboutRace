@@ -25,6 +25,10 @@ const queryString = require('query-string');
 const Container = styled.div`
   background: ${backgroundColor};
   min-height: 100vh;
+
+  position: relative;
+
+  z-index: 0;
 `
 
 const Main = styled.div`
@@ -36,18 +40,19 @@ const Main = styled.div`
   position: relative;
   z-index: 3;
 `
-
+// min-height: 340px;
 const Header = styled.div`
   position: relative;
 
   z-index: 1;
 
+  padding-top: 95px;
   padding-left: 138px;
 
-  min-height: 340px;
+  min-height: 737px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
 
   background-size: cover !important;
   background-attachment: fixed;
@@ -132,6 +137,13 @@ const Description = styled.div`
   max-width: 600px;
 `
 
+const Subthemes = styled.div`
+  position: absolute;
+  top: 500px;
+
+  z-index: 1;
+`
+
 class SubThemePage extends React.Component {
 
   componentDidMount() {
@@ -182,13 +194,15 @@ class SubThemePage extends React.Component {
             <Description dangerouslySetInnerHTML={{ __html: description }} />
           </Header>
 
-          <SubthemeContainer
-            data={subtheme}
-            key={getShortname(subtheme)}
-            name={getShortname(subtheme)}
-            filter={queryParams[getShortname(subtheme)]}
-            queryParams={queryParams}
-          />
+          <Subthemes>
+            <SubthemeContainer
+              data={subtheme}
+              key={getShortname(subtheme)}
+              name={getShortname(subtheme)}
+              filter={queryParams[getShortname(subtheme)]}
+              queryParams={queryParams}
+            />
+          </Subthemes>
 
         </Container>
       </Layout>

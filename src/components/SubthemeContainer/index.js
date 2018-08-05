@@ -8,7 +8,6 @@ import {
 } from '../overlay'
 import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move';
-// import './subtheme.css';
 
 import Filters from './Filters'
 
@@ -320,6 +319,8 @@ class SubthemeSection extends React.Component {
   }
 }
 
+///
+
 const FlipContainer = styled(FlipMove)`
   display: flex;
   flex-direction: row;
@@ -333,8 +334,14 @@ const Card = styled.div`
   min-height: 441px;
 `
 
+const color = 'rgba(255, 255, 255, 0.66)'
+const backdropColor = 'rgba(245, 238, 182, 0.92)'
+
 const Grid = styled.div`
-  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%);
+  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
+  backdrop-filter: blur(9px);
+
   overflow: auto;
   backdrop-filter: blur(5px);
 `
