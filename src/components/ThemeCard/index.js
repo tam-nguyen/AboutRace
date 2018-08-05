@@ -65,6 +65,7 @@ const MainImage = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     width: 100vw;
+    height: 50vh;
   }
 `
 
