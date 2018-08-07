@@ -41,6 +41,9 @@ export const InterviewFragment = graphql`
   fragment InterviewFragment on node__interview {
     title
     changed
+    field_interviewee_bio {
+      processed
+    }
     field_key_quote {
       processed
     }

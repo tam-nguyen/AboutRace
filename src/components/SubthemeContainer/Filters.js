@@ -20,6 +20,10 @@ const Container = styled.div`
   font-family: 'Lato';
   color: ${black};
   opacity: 0.8;
+
+  @media (max-width: 812px) { /* mobile */
+    display: none;
+  }
 `
 
 const Label = styled.div`

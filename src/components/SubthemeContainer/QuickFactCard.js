@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components';
 import kebabCase from 'lodash/kebabCase'
   
-import Card from '../Card';
+import Card from '../card';
 
 import Description from './Description';
 

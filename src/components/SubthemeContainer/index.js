@@ -15,7 +15,7 @@ import Poster from './Poster'
 import PlayablePoster from './PlayablePoster'
 import ArticleCard from './ArticleCard'
 import ClipCard from './ClipCard'
-import FAQCard from './FAQCard'
+import QACard from './QACard'
 import InterviewCard from './InterviewCard'
 import QuickFactCard from './QuickFactCard'
 
@@ -97,16 +97,16 @@ export const getCards = (relationships, queryFilter, onOpen) => {
     />
   )
 
-  const faqs = defaultToEmpty(relationships.faqs)
-  .filter( faq => 
+  const qa = defaultToEmpty(relationships.faqs)
+  .filter( qa => 
     !queryFilter 
     || queryFilter === `recent` 
-    || queryFilter === `faq`
+    || queryFilter === `qa`
   )
-  .map( faq => 
-    <FAQCard
-      key={'faq-' + faq.title}
-      faq={faq}
+  .map( qa => 
+    <QACard
+      key={'qa-' + qa.title}
+      qa={qa}
     />
   )
 
@@ -140,7 +140,7 @@ export const getCards = (relationships, queryFilter, onOpen) => {
   return [
     ...articles,
     ...clips,
-    ...faqs,
+    ...qa,
     ...interviews,
     ...quickfacts,
   ]
@@ -267,7 +267,7 @@ class SubthemeSection extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
+    // TODO (Conrad): Create custom card component for each type of data (article, clip, qa, etc)
 
     const { filter, popup, card } = this.state;
 

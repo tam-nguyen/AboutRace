@@ -53,12 +53,16 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   
-
   background-size: cover !important;
   background-attachment: fixed;
   transition: all .5s ease;
 
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 36px;
+    padding-right: 36px;
+  }
   
   &::after {
     content: '';
@@ -91,6 +95,11 @@ const ChevronContainer = styled.div`
   transform: rotate(180deg);
 
   transition: all 0.3s ease-out;
+
+  @media (max-width: 812px) { /* mobile */
+    left: 0;
+    top: -30px;
+  }
 `
 
 const Chevron = () => <ChevronContainer>
