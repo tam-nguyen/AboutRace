@@ -1,29 +1,35 @@
 import React from "react"
 import kebabCase from 'lodash/kebabCase'
-import {
-  Link,
-  SubthemeContainer,
-} from '../components'
 import styled, { css } from 'styled-components'
 import { graphql } from 'gatsby'
+
+import {
+  Layout,
+  Link,
+  SubthemeContainer,
+  SVGChevron,
+} from '../components'
+
 import {
   backgroundColor,
   titleColor,
-  grandColor
+  grandColor,
+
+  red,
+  white,
+  getGradient
 } from '../colors'
 
 const queryString = require('query-string');
 
 const Container = styled.div`
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 200px;
   background: ${backgroundColor};
   min-height: 100vh;
+
+  position: relative;
+
+  z-index: 0;
 `
-
-const gradient = `linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0.15))`
-
 
 const Main = styled.div`
   background-size: cover !important;
@@ -31,73 +37,120 @@ const Main = styled.div`
   border-radius: 3px;
   color: white;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-  background: ${ props => props.background ? `${gradient}, url(${props.background}) center no-repeat` : `none`};
   position: relative;
   z-index: 3;
 `
-
+// min-height: 340px;
 const Header = styled.div`
-  min-height: 340px;
+  position: relative;
+
+  z-index: 1;
+
+  padding-top: 95px;
+  padding-left: 138px;
+
+  min-height: 737px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
+  background-size: cover !important;
+  background-attachment: fixed;
+  transition: all .5s ease;
+
+  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: ${ props => props.gradient ? props.gradient : null };
+    filter: opacity(83%);
+  }
+`
+
+const ChevronContainer = styled.div`
+  cursor: pointer;
+
+  position: absolute;
+
+  left: -25px;
+  
+  width: 16px;
+  height: 30px;
+
+  transform: rotate(180deg);
+
+  transition: all 0.3s ease-out;
+
+  @media (max-width: 812px) { /* mobile */
+    left: 0;
+    top: -30px;
+  }
+`
+
+const Chevron = () => <ChevronContainer>
+  <SVGChevron color={red} />
+</ChevronContainer>
+///
+
+const Row = styled.div`
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
 `
 
 const Title = styled.div`
-  color: ${titleColor};
+  color: ${white};
   font-family: Lato;
   font-size: 42pt;
   font-weight: bold;
   line-height: 60px;
-  margin-bottom: 2vh;
+
+  padding-top: 7px;
+  padding-bottom: 7px;
 `
 
 const TopLink = styled(Link)`
-  position: absolute;
-  top: 10px;
-  left: 10px;
+  font-family: Lato;
+  font-size: 18pt;
+  font-weight: 600;
+  line-height: 60px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: ${white};
 `
 
 const Description = styled.div`
-  padding-left: 10vw;
-  padding-right: 10vw;
-  color: #DBDBDB;
+  font-family: 'Tisa Pro';
+  font-size: 20pt;
+  line-height: 24px;
+  color: ${white};
+
+  max-width: 600px;
 `
 
-const GrandTitle = styled.div`
-  position: fixed;
-  top: 2vh;
-  width: 100vw;
-  font-family: Tisa-Pro;
-  font-size: 24pt;
-  text-align: center;
-  line-height: 30px;
-  letter-spacing: 36px;
-  color: ${grandColor};
-  z-index: 2;
-`
+const Subthemes = styled.div`
+  position: absolute;
+  top: 500px;
 
-const Menu = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-  top: 10vh;
-  width: 100vw;
-  z-index: 2;
-
-  font-family: Lato;
-  font-size: 14pt;
-  line-height 30px;
-
-  text-transform: uppercase;
-`
-
-const MenuLink = styled(Link)`
-  width: 120px;
-  text-align: center;
+  z-index: 1;
 `
 
 class SubThemePage extends React.Component {
@@ -107,8 +160,17 @@ class SubThemePage extends React.Component {
   }
 
   render() {
-    const {data, pageContext} = this.props;
-    const {field_theme_image, theme} = pageContext;
+    const {
+      data, 
+      pageContext,
+      location
+    } = this.props;
+
+    const {
+      field_theme_image, 
+      theme,
+      color
+    } = pageContext;
     const {taxonomyTermSubthemes} = data;
     const subtheme = taxonomyTermSubthemes;
 
@@ -120,50 +182,39 @@ class SubThemePage extends React.Component {
     }
 
     const background = field_theme_image && field_theme_image.localFile.publicURL;
-    const title = subtheme.name;
+    const title = subtheme.name.indexOf(':') >=0 ? subtheme.name.split(':')[1] : subtheme.name;
     const description = taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`;
 
-    const links = [
-      { title: 'overview', link: '/the-film' },
-      { title: 'themes', link: '/' },
-      { title: 'articles', link: '/articles' },
-      { title: 'interviews', link: '/interviews' },
-      { title: 'q&a', link: '/qa' },
-      { title: 'clips', link: '/clips' },
-      { title: 'teaching', link: '/teaching' },
-      { title: 'about', link: '/about' },
-    ]
+    const gradient = getGradient(color)
 
     return (
-      <Container>
+      <Layout location={location}>
+        <Container>
 
-        <GrandTitle>
-          RACE: THE POWER OF AN ILLUSION
-        </GrandTitle>
-
-        <Menu>
-        {
-          links.map( ({title, link}, key) => <MenuLink to={link} key={key}>{title}</MenuLink> )
-        }
-        </Menu>
-
-        <Main background={background}>
-          <Header>
-            <TopLink to='/'>〈 &nbsp; All themes</TopLink>
+          <Header 
+            gradient={gradient}
+            background={background}
+          >
+            <Row>
+              <Chevron />
+              <TopLink href='/'>{theme.name}</TopLink>
+            </Row>
             <Title>{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
           </Header>
 
-          <SubthemeContainer
-            data={subtheme}
-            key={getShortname(subtheme)}
-            name={getShortname(subtheme)}
-            filter={queryParams[getShortname(subtheme)]}
-            queryParams={queryParams}
-          />
-        </Main>
+          <Subthemes>
+            <SubthemeContainer
+              data={subtheme}
+              key={getShortname(subtheme)}
+              name={getShortname(subtheme)}
+              filter={queryParams[getShortname(subtheme)]}
+              queryParams={queryParams}
+            />
+          </Subthemes>
 
-      </Container>
+        </Container>
+      </Layout>
     )
   }
 }

@@ -2,12 +2,11 @@ import React from "react"
 import styled from 'styled-components';
 import kebabCase from 'lodash/kebabCase'
   
-import Card from '../Card';
+import Card from '../card';
 
 import Description from './Description';
 
 const Container = styled(Card)`
-  padding: 15px;
 `
 
 const Title = styled.h4`

@@ -9,6 +9,8 @@ import {
   ThemeCard
 } from "../components"
 
+import gradientColors from '../gradients'
+
 const HomeBackground = styled.div`
   position: fixed;
   top: 0;
@@ -22,10 +24,9 @@ export default ({ data, location }) => (
   <Layout location={location}>
     <div>
       <HomeBackground />
-      <Title>Explore themes from the film:</Title>
       {
         data.allTaxonomyTermThemes.edges.map( ({ node }, key) =>
-          <ThemeCard key={key} data={node} />
+          <ThemeCard key={key} data={node} color={gradientColors[key]}/>
         )
       }
     </div>
@@ -50,7 +51,9 @@ export const query = graphql`
                 publicURL
                 childImageSharp {
                   id
-                  grayscale: resize(width: 1000, grayscale: true) {
+                  resolutions {
+                    height
+                    width
                     src
                   }
                 }

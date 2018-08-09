@@ -1,154 +1,112 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import styled from 'styled-components';
-import getScrollBarWidth from '../../utils/scrollbar-width'
-import './burger.css';
-import { scaleDown as Menu } from 'react-burger-menu'
-import kebabCase from 'lodash/kebabCase'
+import Link from '../Link'
+import styled from 'styled-components'
 
-const TopBar = styled.div`
+import Menu from './Menu'
+
+import {
+  black,
+  white,
+} from '../../colors.js'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  justify-content: space-around;
+
+  background-color: ${black};
+
+  height: 64px;
+
+  @media (min-width: 1025px) { /* desktop */
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    flex-direction: column;
+
+    height: ${props => props.open ? '75vh' : '70px'};
+
+    padding-top: ${props => props.open ? 64 : 0}px;
+    padding-bottom: ${props => props.open ? 120 : 0}px;
+  }
+
+  transition: all 0.3s ease-out;
 `
 
-const NavMenu = styled.div`
-  width: 200px;
-  padding: 30px;
+const Item = styled(Link)`
+  text-aligment: center;
+  text-decoration: none;
+
+  color: ${white};
+
+  text-transform: uppercase;
+
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 10pt;
+  line-height: 30px;
+  letter-spacing: 0;
+
+  margin-right: 0;
+
+  @media (min-width: 1025px) { /* desktop */
+    margin-right: 41px;
+    font-size: 12pt;
+    letter-spacing: 5px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    display: none;
+  }
 `
 
-const linkStyle = {
-  textDecoration: 'none',
-}
+const MobileItem = styled(Item)`
+  display: none;
 
-const activeLinkStyle = {
-  ...linkStyle,
-}
+  @media (max-width: 812px) { /* mobile */
+    display: block;
+    font-size: 15pt;
+    letter-spacing: 5px;
+  }
+`
 
-const ThemeLinkComponent = ({ data, closeMenu }) => (
-  <Link className='navItem' onClick={() => closeMenu()} style={{textDecoration:'none', color:'white', display:'block', marginBottom:15}} to={`/themes/${kebabCase(data.name)}`}>
-  {data.name}
-  </Link>
-)
+const pages = [
+  { name: 'themes', link: '/' },
+  { name: 'articles', link: '/articles' },
+  { name: 'interviews', link: '/interviews' },
+  { name: 'q&a', link: '/qa' },
+  { name: 'clips', link: '/clips' },
+  { name: 'teaching', link: '/teaching' },
+  { name: 'about', link: '/about' }
+]
 
 class Header extends React.Component {
   constructor(props) {
-    super(props)
-    this.closeMenu = this.closeMenu.bind(this)
+    super(props);
+  
     this.state = {
-      modalOpen: false,
-      menuOpen: false
-    }
+      open: false // mobile only
+    };
   }
 
-  handleStateChange (state) {
-    this.setState({menuOpen: state.isOpen})  
-  }
-
-  closeMenu () {
-    this.setState({menuOpen: false})
-  }
-
-  toggleMenu () {
-    this.setState({menuOpen: !this.state.menuOpen})
-  }
-    
-  componentDidMount() {
-    window.addEventListener('modal', ({detail: { open }}) => {
-      this.setState({ modalOpen: open })
-    })
-  }
-
-  showSettings (event) {
-    event.preventDefault();
-  }
-
-  render () {
-    const { modalOpen } = this.state
-    const { pathname } = this.props
-    const stylingForPath = (pathFragment => pathname.indexOf(pathFragment) !== -1 ? activeLinkStyle : linkStyle);
-    const burgerIcon = require('../../assets/images/burger.svg');
-    const crossIcon = require('../../assets/images/close.svg');
+  render() {
+    const {open} = this.state;
 
     return (
-      <div style={{
-        display:'flex', 
-        justifyContent:'center',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        zIndex:99999,
-        flexDirection: 'column',
-        backgroundColor: '#adc6d2'
-      }}>
-        <Menu
-          customBurgerIcon={ <img src={burgerIcon} /> }
-          customCrossIcon={ <img src={crossIcon} /> }
-          isOpen={this.state.menuOpen}
-          onStateChange={(state) => this.handleStateChange(state)}
-          strokeWidth={10}
-          borderRadius={12}
-        >
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
-            About the film
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
-            Themes
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
-            Articles
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
-            Interviews
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={linkStyle} to="/qa/" exact>
-            Q&A
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
-            Clips
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
-            Teaching
-          </Link>
-        </Menu>
-
-        <NavMenu style={{display:'none'}}>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/the-film`)} to="/the-film" exact>
-            About the film
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/themes`)} to="/themes/" exact>
-            Themes
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/articles`)} to="/articles/" exact>
-            Articles
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/interviews`)} to="/interviews/" exact>
-            Interviews
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/qa`)} to="/qa/" exact>
-            Q&A
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/clips`)} to="/clips/" exact>
-            Clips
-          </Link>
-          <Link className='navItem' onClick={() => this.closeMenu()} style={stylingForPath(`/teaching`)} to="/teaching/" exact>
-            Teaching
-          </Link>
-        </NavMenu>
-
-        <TopBar>
-        <div className='logo'>
-          <Link
-            to="/"
-            style={{ textDecoration: 'none' }}
-          >
-            RACE
-            <span className='filmSubtitle'>the power of an illusion</span>
-          </Link>
-        </div>
-        
-        </TopBar>
-    </div>
+      <Container open={open}>
+        <Menu open={open} onClick={ e => this.setState({open: !open})}/>
+        {
+          pages.map( ({name, link}, index) => <Item href={link} key={index}>{name}</Item>)
+        }
+        {
+          open && pages.map( ({name, link}, index) => <MobileItem to={link} key={index}>{name}</MobileItem>)
+        }
+      </Container>
     );
   }
 }
+
 export default Header
-
-

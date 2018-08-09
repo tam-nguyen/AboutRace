@@ -211,7 +211,7 @@ const Breadcrumbs = ({titles}) => {
       FILED UNDER:&nbsp;
       {
         links.map( ({url, title}, index) => 
-          <div>
+          <div key={'Breadcrumb-'+index}>
             <BreadcrumbLink to={url}>{title}</BreadcrumbLink>
             &nbsp;{ index == (links.length - 1) ? null : 'and' }&nbsp;
           </div>
@@ -258,24 +258,9 @@ class SingleArticle extends React.Component {
       )[0] :
       null
 
-    let background = data.nodeArticle.relationships.field_main_image &&
-            data.nodeArticle.relationships.field_main_image.localFile.publicURL;
+    const {field_main_image} = data.nodeArticle.relationships;
 
-    const {allImageSharp} = data;
-
-    allImageSharp.edges.map( ({node}) => {
-      const {
-        original,
-        resolutions
-      } = node;
-
-      const isBackground = original.src.toLowerCase() === `${background}`.toLowerCase();
-
-      if(isBackground) {
-        background = resolutions.src;
-      }
-
-    })
+    let background = field_main_image && field_main_image.localFile.childImageSharp.resolutions.src;
 
     return (
       <div style={{position:'relative', height: '100vh'}}>
@@ -467,21 +452,6 @@ export default SingleArticle;
 
 export const pageQuery = graphql`
   query singleQuery($id: String) {
-    allImageSharp {
-      edges {
-        node {
-          id
-          original {
-            width
-            height
-            src
-          }
-          resolutions(width: 1000) {
-            src
-          }
-        }
-      }
-    }
     nodeArticle(id: { eq: $id }) {
       id
       field_old_article_discl {
@@ -545,7 +515,11 @@ export const pageQuery = graphql`
         field_main_image {
           localFile {
             publicURL
-
+            childImageSharp {
+              resolutions(width:1000) {
+                src
+              }
+            }
           }
         }
       }

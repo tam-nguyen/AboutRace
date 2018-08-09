@@ -8,7 +8,6 @@ import {
 } from '../overlay'
 import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move';
-// import './subtheme.css';
 
 import Filters from './Filters'
 
@@ -16,7 +15,7 @@ import Poster from './Poster'
 import PlayablePoster from './PlayablePoster'
 import ArticleCard from './ArticleCard'
 import ClipCard from './ClipCard'
-import FAQCard from './FAQCard'
+import QACard from './QACard'
 import InterviewCard from './InterviewCard'
 import QuickFactCard from './QuickFactCard'
 
@@ -98,16 +97,16 @@ export const getCards = (relationships, queryFilter, onOpen) => {
     />
   )
 
-  const faqs = defaultToEmpty(relationships.faqs)
-  .filter( faq => 
+  const qa = defaultToEmpty(relationships.faqs)
+  .filter( qa => 
     !queryFilter 
     || queryFilter === `recent` 
-    || queryFilter === `faq`
+    || queryFilter === `qa`
   )
-  .map( faq => 
-    <FAQCard
-      key={'faq-' + faq.title}
-      faq={faq}
+  .map( qa => 
+    <QACard
+      key={'qa-' + qa.title}
+      qa={qa}
     />
   )
 
@@ -141,7 +140,7 @@ export const getCards = (relationships, queryFilter, onOpen) => {
   return [
     ...articles,
     ...clips,
-    ...faqs,
+    ...qa,
     ...interviews,
     ...quickfacts,
   ]
@@ -268,7 +267,7 @@ class SubthemeSection extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    // TODO (Conrad): Create custom card component for each type of data (article, clip, faq, etc)
+    // TODO (Conrad): Create custom card component for each type of data (article, clip, qa, etc)
 
     const { filter, popup, card } = this.state;
 
@@ -312,7 +311,7 @@ class SubthemeSection extends React.Component {
       
         <FlipContainer>
         {
-          allCards.map( (c, k) => <Card key={k}>{c}</Card>)
+          allCards.map( (c, k) => <div key={k}>{c}</div>)
         }
         </FlipContainer>
       </Grid>
@@ -320,22 +319,27 @@ class SubthemeSection extends React.Component {
   }
 }
 
+///
+
 const FlipContainer = styled(FlipMove)`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 10px;
+  
   overflow: auto;
+
+  padding-bottom: 286px;
+  width: 100vw;
+
+  justify-content: center;
 `
 
-const Card = styled.div`
-  min-width: 350px;
-  min-height: 441px;
-`
+const color = 'rgba(255, 255, 255, 0.66)'
+const backdropColor = 'rgba(245, 238, 182, 0.92)'
 
 const Grid = styled.div`
-  background-color: rgba(255, 255, 255, 0.5);
-  overflow: auto;
+  background: linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%);
+  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
   backdrop-filter: blur(5px);
 `
 
