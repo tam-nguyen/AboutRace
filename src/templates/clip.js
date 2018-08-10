@@ -1,5 +1,5 @@
 import React from "react"
-import AllClips, { Clip } from '../components/allClips.js'
+import AllClips, { Clip } from '../components/AllClips.js'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import {
