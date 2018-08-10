@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
 
 import Description from './Description'
-import Card from '../card'
+import Card from '../Card'
 import SVGArrow from '../SVGArrow'
 
 import {

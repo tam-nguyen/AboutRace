@@ -3,9 +3,9 @@ export Link from './Link'
 export Title from './Title'
 export ThemeCard from './ThemeCard'
 export SubthemeContainer from './SubthemeContainer'
-export AllClips from './allClips'
-export Card from './card';
-export RCCard from './rccard';
+export AllClips from './AllClips'
+export Card from './Card';
+export RCCard from './RCCard';
 export Filter from './Filter';
 export { 
   Overlay, 
