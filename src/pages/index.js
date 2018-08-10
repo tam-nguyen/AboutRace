@@ -51,6 +51,14 @@ export const query = graphql`
                 publicURL
                 childImageSharp {
                   id
+                  original {
+                    width
+                    height
+                    src
+                  }
+                  sizes {
+                    src
+                  }
                   resolutions {
                     height
                     width
