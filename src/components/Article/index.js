@@ -5,7 +5,8 @@ import get from 'lodash/get'
 
 import {
   Link,
-  SVGArrow
+  SVGArrow,
+  getCards,
 } from '../'
 
 import {
@@ -174,7 +175,7 @@ const SideBar = styled(Column)`
   display: flex;
   flex-direction: column;
 
-  width: 373px;
+  width: 390px;
   background-color: ${whiteShadow};
 
   border-top-right-radius: 3px;
@@ -281,6 +282,15 @@ const BackTo = styled.div`
   padding-bottom: 54px;
 `
 
+const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding-bottom: 200px;
+`
+
 const getFiledUnder = array => {
   let results = []
 
@@ -302,6 +312,32 @@ const getTags = array => {
   return results
 }
 
+const getRelatedContent = array => {
+  const cards = {
+    articles: [],
+    clips: [],
+    faqs: [],
+  }
+
+  array.forEach(item => {
+    switch(item.__typename){
+      case 'node__faq':
+        cards.faqs.push(item)
+        break
+      case 'node__article':
+        cards.articles.push(item)
+        break
+      case 'node__clip':
+        cards.clips.push(item)
+        break
+      default:
+        break;
+    }
+  })
+
+  return getCards(cards)
+}
+
 class Article extends React.Component {
   render() {
     const {data} = this.props
@@ -317,6 +353,8 @@ class Article extends React.Component {
     const tags = getTags(get(this, 'props.data.nodeArticle.relationships.field_tags'))
     const backTo = filedUnder[0]
 
+    const relatedContent = getRelatedContent(get(this, 'props.data.nodeArticle.relationships.field_article_related_content'))
+    
     console.log('Article', this.props)
 
     return (
@@ -339,10 +377,16 @@ class Article extends React.Component {
               <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
               <Tags>
                 {
-                  tags.map( name => <Tag>{name}</Tag>)
+                  tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
                 }
               </Tags>
               <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+
+              <CardsContainer>
+                {
+                  relatedContent
+                }
+              </CardsContainer>
 
               <BackTo>
                 <SubTitle>back to:</SubTitle>
