@@ -244,6 +244,43 @@ const FiledUnderLink = ({children, to}) => <FiledUnderLinkContainer href={to}>
 
 ///
 
+const Tags = styled.div`
+  padding-left: 15px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  overflow: auto;
+`
+
+const Tag = styled.div`
+  padding: 10px;
+
+  font-family: Lato;
+  font-size: 15px;
+  line-height: 36px;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  color: ${red};
+
+  margin-right: 15px;
+`
+
+const BackTo = styled.div`
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 373px;
+
+  padding-bottom: 54px;
+`
+
 const getFiledUnder = array => {
   let results = []
 
@@ -253,6 +290,14 @@ const getFiledUnder = array => {
       link: `/subthemes/${kebabCase(name)}`
     })
   )
+
+  return results
+}
+
+const getTags = array => {
+  let results = []
+
+  results = array.map( ({name}) => name )
 
   return results
 }
@@ -269,6 +314,8 @@ class Article extends React.Component {
     const text = get(this, 'props.data.nodeArticle.field_full_version.processed')
 
     const filedUnder = getFiledUnder(get(this, 'props.data.nodeArticle.relationships.field_belongs_to_subtheme'))
+    const tags = getTags(get(this, 'props.data.nodeArticle.relationships.field_tags'))
+    const backTo = filedUnder[0]
 
     console.log('Article', this.props)
 
@@ -289,6 +336,18 @@ class Article extends React.Component {
               {
                 filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
               }
+              <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
+              <Tags>
+                {
+                  tags.map( name => <Tag>{name}</Tag>)
+                }
+              </Tags>
+              <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+
+              <BackTo>
+                <SubTitle>back to:</SubTitle>
+                <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
+              </BackTo>
             </SideBar>
           </TextInnerContainer>
         </TextContainer>
