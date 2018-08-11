@@ -12,6 +12,7 @@ import {
 import {
   black,
   white,
+  darkWhite,
   whiteShadow,
   backgroundColor,
   red,
@@ -49,6 +50,15 @@ const TopContainer = styled.div`
   height: auto;
 
   background: ${gradient};
+
+  @media (min-width: 1025px) { /* desktop */
+    background-color: ${white};
+    background-image: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    background-color: ${white};
+  }
 `
 
 const BottomContaniner = styled.div`
@@ -57,10 +67,21 @@ const BottomContaniner = styled.div`
   width: 100vw;
   margin-top: -100px;
 
+  padding-top: 60px;
+
   z-index: 2;
 
   background-color: ${black};
   background-image: ${gradient2};
+
+  @media (min-width: 1025px) { /* desktop */
+    background-color: ${white};
+    background-image: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+     
+  }
 `
 
 const MainImage = styled.div`
@@ -83,6 +104,7 @@ const MainImage = styled.div`
   background-size: cover !important;
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
 
   transition: all .5s ease;
 
@@ -92,6 +114,8 @@ const MainImage = styled.div`
     right: 0;
     
     height: 80vh;
+
+    box-shadow: none;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -229,6 +253,7 @@ const SideBar = styled(Column)`
 
 const AuthorImage = styled.div`
   height: 481px;
+  min-width: 373px;
 
   border-top-right-radius: 3px;
 
@@ -255,14 +280,23 @@ const SubTitle = styled.div`
 
   text-transform: uppercase;
 
-  padding-left: 15px;
+  padding-left: 0;
+
+  @media (min-width: 1025px) { /* desktop */
+    padding-left: 15px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 0;
+  }
 `
 
 const FiledUnderLinkContainer = styled(Link)`
   display: flex;
   flex-direction: row;
 
-  padding-left: 15px;
+  padding-left: 0;
+  padding-right: 10px;
 
   font-family: Lato;
   font-size: 18px;
@@ -271,6 +305,16 @@ const FiledUnderLinkContainer = styled(Link)`
   font-weight: 600;
 
   color: ${red};
+
+  @media (min-width: 1025px) { /* desktop */
+    padding-left: 15px;
+    padding-right: 0;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 0;
+    padding-right: 0;
+  }
 `
 
 const FiledUnderLink = ({children, to}) => <FiledUnderLinkContainer href={to}>
@@ -281,17 +325,26 @@ const FiledUnderLink = ({children, to}) => <FiledUnderLinkContainer href={to}>
 ///
 
 const Tags = styled.div`
-  padding-left: 15px;
+  padding-left: 0;
 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   
   overflow: auto;
+
+  @media (min-width: 1025px) { /* desktop */
+    padding-left: 15px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 0;
+  }
 `
 
 const Tag = styled.div`
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 
   font-family: Lato;
   font-size: 15px;
@@ -304,31 +357,114 @@ const Tag = styled.div`
   color: ${red};
 
   margin-right: 15px;
+  margin-bottom: 15px;
+
+  border-radius: 3px;
+  background-color: ${white};
 `
 
 const BackTo = styled.div`
+  width: 100%;
 
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  @media (min-width: 1025px) { /* desktop */
+    position: absolute;
+    right: 0;
+    bottom: 0;
 
-  width: 373px;
+    padding-bottom: 50px;
+  }
 
-  padding-bottom: 54px;
+  @media (max-width: 812px) { /* mobile */
+    
+  }
 `
 
 const CardsContainer = styled.div`
+  display: flex;  
+  flex-direction: row; 
+  flex-wrap: wrap;
+
+  justify-content: flex-start;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 70px;
+
+  @media (min-width: 1025px) { /* desktop */
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 200px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+`
+
+const TextFooter = styled(Row)`
+  position: relative;
+
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 
   justify-content: center;
 
-  padding-bottom: 200px;
+  @media (min-width: 1025px) { /* desktop */
+    display: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    display: none;
+  }
 `
 
 const Footer = styled(Row)`
-  width: 100vw;
-  height: 20vh;
+  display: flex;
+
+  width: auto;
+  min-height: 20vh;
+
+  @media (min-width: 1025px) { /* desktop */
+    display: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    display: flex;
+  }
+`
+
+const MobileRow = styled(Row)`
+  align-items: center;
+  padding-left: 60px;
+
+  margin-top: 60px;
+
+  @media (max-width: 812px) { /* mobile */
+    flex-direction: column;
+    padding-left: 0;
+    margin-top: 0;
+    justify-content: center;
+  }
+`
+
+const FirstMobileRow = styled(MobileRow)`
+  @media (max-width: 812px) { /* mobile */
+    margin-top: -100px;
+  }
+`
+
+const MobileColumn = styled(Column)`
+  padding: 0;
+
+  @media (max-width: 812px) { /* mobile */
+    padding: 60px;
+  }
 `
 
 const getFiledUnder = array => {
@@ -397,6 +533,80 @@ class Article extends React.Component {
     
     console.log('Article', this.props)
 
+    const LocalBackTo = () => (
+      <BackTo>
+        <SubTitle>back to:</SubTitle>
+        <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
+      </BackTo>
+    )
+
+    ///
+
+    const DesktopSideBar = () => (
+      <SideBar>
+        <AuthorImage background={authorImage}/>
+        <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
+        <SubTitle>filed under:</SubTitle>
+        {
+          filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+        }
+        <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
+        <Tags>
+          {
+            tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
+          }
+        </Tags>
+        <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+
+        <CardsContainer>
+          { relatedContent }
+        </CardsContainer>
+
+        <LocalBackTo />
+      </SideBar>
+    )
+
+    ///
+
+    const MobileSideBar = () => (
+      <Column style={{color: darkWhite}}>
+
+        <FirstMobileRow>
+          <AuthorImage background={authorImage}/>
+          <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
+        </FirstMobileRow>
+
+        <MobileRow style={{alignItems: 'flex-start'}}>
+          <MobileColumn>
+            <SubTitle>filed under:</SubTitle>
+            {
+              filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+            }
+          </MobileColumn>
+
+          <MobileColumn>
+            <SubTitle>explore:</SubTitle>
+            <Tags>
+              {
+                tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
+              }
+            </Tags>
+          </MobileColumn>
+        </MobileRow>
+
+        <MobileRow>
+          <SubTitle>see also:</SubTitle>
+        </MobileRow>
+
+        <CardsContainer>
+          { relatedContent }
+        </CardsContainer>
+        
+      </Column>
+    )
+
+    ///
+
     return (
       <Container>
         <TopContainer>
@@ -407,39 +617,17 @@ class Article extends React.Component {
                 <Title>{title}</Title>
                 <Author>by {author}</Author>
                 <Text dangerouslySetInnerHTML={{ __html: text}}/>
+                <TextFooter>
+                  <LocalBackTo />
+                </TextFooter>
               </ContentBar>
-              <SideBar>
-                <AuthorImage background={authorImage}/>
-                <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
-                <SubTitle>filed under:</SubTitle>
-                {
-                  filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
-                }
-                <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
-                <Tags>
-                  {
-                    tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-                  }
-                </Tags>
-                <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
-
-                <CardsContainer>
-                  {
-                    relatedContent
-                  }
-                </CardsContainer>
-
-                <BackTo>
-                  <SubTitle>back to:</SubTitle>
-                  <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
-                </BackTo>
-              </SideBar>
+              <DesktopSideBar />
             </TextInnerContainer>
           </TextContainer>
         </TopContainer>
         <BottomContaniner>
           <Footer>
-            hello
+            <MobileSideBar />
           </Footer>
         </BottomContaniner>
       </Container>
