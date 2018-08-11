@@ -13,11 +13,6 @@ import {
 
 const Container = styled.div`
   background-color: ${white};
-  min-height: 100vh;
-
-  overflow: auto;
-
-  height: auto;
 
   @media (max-width: 812px) { /* mobile */
 

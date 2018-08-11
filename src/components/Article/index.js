@@ -10,6 +10,7 @@ import {
 } from '../'
 
 import {
+  black,
   white,
   whiteShadow,
   backgroundColor,
@@ -21,9 +22,8 @@ const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 10
 const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
-  position: relative;
   width: 100vw;
-
+  
   display: flex;
   flex-direction: column;
 
@@ -39,17 +39,28 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
   width: 100vw;
   height: auto;
 
-  background-color: green;
+  background: ${gradient};
 `
 
 const BottomContaniner = styled.div`
-  width: 100vw;
-  min-height: 10vh;
+  position: relative;
 
-  background-color: purple;
+  width: 100vw;
+  margin-top: -100px;
+
+  z-index: 2;
+
+  background-color: ${black};
+  background-image: ${gradient2};
 `
 
 const MainImage = styled.div`
@@ -89,20 +100,14 @@ const MainImage = styled.div`
 `
 
 const TextContainer = styled.div`
-  position: absolute;
-  
   z-index: 3;
 
   width: 80vw;
-  left: 0;
-  right: 0;
-  top: 50vh;
-
-  margin: auto;
+  margin-top: 50vh;
 
   @media (min-width: 1025px) { /* desktop */
     width: 1000px;
-    top: 70vh;
+    margin-top: 70vh;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -114,9 +119,10 @@ const TextInnerContainer = styled.div`
   position: relative;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   width: auto;
+  height: auto !important;
 
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -322,8 +328,7 @@ const CardsContainer = styled.div`
 
 const Footer = styled(Row)`
   width: 100vw;
-  height: 10vh;
-  background-color: gray;
+  height: 20vh;
 `
 
 const getFiledUnder = array => {
@@ -398,39 +403,37 @@ class Article extends React.Component {
           <MainImage background={background}/>
           <TextContainer>
             <TextInnerContainer>
-              <Row>
-                <ContentBar>
-                  <Title>{title}</Title>
-                  <Author>by {author}</Author>
-                  <Text dangerouslySetInnerHTML={{ __html: text}}/>
-                </ContentBar>
-                <SideBar>
-                  <AuthorImage background={authorImage}/>
-                  <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
-                  <SubTitle>filed under:</SubTitle>
+              <ContentBar>
+                <Title>{title}</Title>
+                <Author>by {author}</Author>
+                <Text dangerouslySetInnerHTML={{ __html: text}}/>
+              </ContentBar>
+              <SideBar>
+                <AuthorImage background={authorImage}/>
+                <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
+                <SubTitle>filed under:</SubTitle>
+                {
+                  filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+                }
+                <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
+                <Tags>
                   {
-                    filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+                    tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
                   }
-                  <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
-                  <Tags>
-                    {
-                      tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-                    }
-                  </Tags>
-                  <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+                </Tags>
+                <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
 
-                  <CardsContainer>
-                    {
-                      relatedContent
-                    }
-                  </CardsContainer>
+                <CardsContainer>
+                  {
+                    relatedContent
+                  }
+                </CardsContainer>
 
-                  <BackTo>
-                    <SubTitle>back to:</SubTitle>
-                    <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
-                  </BackTo>
-                </SideBar>
-              </Row>
+                <BackTo>
+                  <SubTitle>back to:</SubTitle>
+                  <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
+                </BackTo>
+              </SideBar>
             </TextInnerContainer>
           </TextContainer>
         </TopContainer>
