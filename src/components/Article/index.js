@@ -46,6 +46,8 @@ const TopContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  
+
   width: 100vw;
   height: auto;
 
@@ -58,6 +60,7 @@ const TopContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     background-color: ${white};
+    z-index: 1;
   }
 `
 
@@ -420,7 +423,9 @@ const TextFooter = styled(Row)`
   }
 
   @media (max-width: 812px) { /* mobile */
-    display: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 100px;
   }
 `
 
@@ -455,7 +460,7 @@ const MobileRow = styled(Row)`
 
 const FirstMobileRow = styled(MobileRow)`
   @media (max-width: 812px) { /* mobile */
-    margin-top: -100px;
+    margin-top: -150px;
   }
 `
 
