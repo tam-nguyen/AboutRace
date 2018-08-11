@@ -14,3 +14,5 @@ export {
 
 export SVGChevron from './SVGChevron'
 export SVGArrow from './SVGArrow'
+
+export Article from './Article'

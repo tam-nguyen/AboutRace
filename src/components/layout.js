@@ -13,22 +13,13 @@ const Container = styled.div`
   margin: 0 auto;
 `
 
-export default ({ children, location }) => (
+export default ({ children, location, header = true }) => (
   <StaticQuery
     query={graphql`
       query LayoutQuery {
         site {
           siteMetadata {
             title
-          }
-        }
-
-        allTaxonomyTermThemes {
-          edges {
-            node {
-              id
-              name
-            }
           }
         }
       }
@@ -43,7 +34,7 @@ export default ({ children, location }) => (
           <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
         </Helmet>
         <Typekit kitId="pte4pny" />
-        <Header data={data} pathname={location.pathname} />
+        { header && <Header data={data} pathname={location.pathname} /> }
         <Container> {children} </Container>
       </>
     )}
