@@ -17,18 +17,39 @@ import {
 } from '../../colors'
 
 const TICKER = 'ARTICLE'
+const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
+const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
   position: relative;
   width: 100vw;
 
+  display: flex;
+  flex-direction: column;
+
   @media (min-width: 1025px) { /* desktop */
-    
+
   }
 
   @media (max-width: 812px) { /* mobile */
      
   }
+`
+
+const TopContainer = styled.div`
+  position: relative;
+
+  width: 100vw;
+  height: auto;
+
+  background-color: green;
+`
+
+const BottomContaniner = styled.div`
+  width: 100vw;
+  min-height: 10vh;
+
+  background-color: purple;
 `
 
 const MainImage = styled.div`
@@ -40,7 +61,7 @@ const MainImage = styled.div`
   width: auto;
   height: 40vh;
 
-  z-index: 0;
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
@@ -70,7 +91,7 @@ const MainImage = styled.div`
 const TextContainer = styled.div`
   position: absolute;
   
-  z-index: 1;
+  z-index: 3;
 
   width: 80vw;
   left: 0;
@@ -93,7 +114,7 @@ const TextInnerContainer = styled.div`
   position: relative;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   width: auto;
 
@@ -166,11 +187,19 @@ const Text = styled.div`
 const ContentBar = styled(Column)`
   flex: 1;
   padding: 70px;
+
+  z-index: 10;
+
+  background-color: ${white};
+  border-bottom-left-radius: 3px;
+
   box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
 `
 
 const SideBar = styled(Column)`
-  display: none;
+  position: relative;
+
+  display: none !important;
 
   display: flex;
   flex-direction: column;
@@ -184,7 +213,7 @@ const SideBar = styled(Column)`
   box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
 
   @media (min-width: 1025px) { /* desktop */
-    display: flex;
+    display: flex !important;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -291,6 +320,12 @@ const CardsContainer = styled.div`
   padding-bottom: 200px;
 `
 
+const Footer = styled(Row)`
+  width: 100vw;
+  height: 10vh;
+  background-color: gray;
+`
+
 const getFiledUnder = array => {
   let results = []
 
@@ -359,42 +394,51 @@ class Article extends React.Component {
 
     return (
       <Container>
-        <MainImage background={background}/>
-        <TextContainer>
-          <TextInnerContainer>
-            <ContentBar>
-              <Title>{title}</Title>
-              <Author>by {author}</Author>
-              <Text dangerouslySetInnerHTML={{ __html: text}}/>
-            </ContentBar>
-            <SideBar>
-              <AuthorImage background={authorImage}/>
-              <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
-              <SubTitle>filed under:</SubTitle>
-              {
-                filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
-              }
-              <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
-              <Tags>
-                {
-                  tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-                }
-              </Tags>
-              <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+        <TopContainer>
+          <MainImage background={background}/>
+          <TextContainer>
+            <TextInnerContainer>
+              <Row>
+                <ContentBar>
+                  <Title>{title}</Title>
+                  <Author>by {author}</Author>
+                  <Text dangerouslySetInnerHTML={{ __html: text}}/>
+                </ContentBar>
+                <SideBar>
+                  <AuthorImage background={authorImage}/>
+                  <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
+                  <SubTitle>filed under:</SubTitle>
+                  {
+                    filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+                  }
+                  <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
+                  <Tags>
+                    {
+                      tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
+                    }
+                  </Tags>
+                  <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
 
-              <CardsContainer>
-                {
-                  relatedContent
-                }
-              </CardsContainer>
+                  <CardsContainer>
+                    {
+                      relatedContent
+                    }
+                  </CardsContainer>
 
-              <BackTo>
-                <SubTitle>back to:</SubTitle>
-                <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
-              </BackTo>
-            </SideBar>
-          </TextInnerContainer>
-        </TextContainer>
+                  <BackTo>
+                    <SubTitle>back to:</SubTitle>
+                    <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
+                  </BackTo>
+                </SideBar>
+              </Row>
+            </TextInnerContainer>
+          </TextContainer>
+        </TopContainer>
+        <BottomContaniner>
+          <Footer>
+            hello
+          </Footer>
+        </BottomContaniner>
       </Container>
     )
   }
