@@ -64,7 +64,7 @@ const ArticleSummary = ({ data }) => {
       flexBasis: '33%',
       textDecoration: 'none',
       color: 'inherit'
-    }} to={`/articles/${kebabCase(data.title)}`}>
+    }} href={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
         <div style={{flex: '1 1 auto', position: 'relative', marginBottom:15}}>
