@@ -139,6 +139,7 @@ const TextContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     width: 100vw;
+    margin-top: 10vh;
   }
 `
 
@@ -306,8 +307,9 @@ const FiledUnderLinkContainer = styled(Link)`
   line-height: 36px;
   letter-spacing: 0.02em;
   font-weight: 600;
+  text-transform: capitalize;
 
-  color: ${red};
+  color: ${props => props.color};
 
   @media (min-width: 1025px) { /* desktop */
     padding-left: 15px;
@@ -320,10 +322,16 @@ const FiledUnderLinkContainer = styled(Link)`
   }
 `
 
-const FiledUnderLink = ({children, to}) => <FiledUnderLinkContainer href={to}>
-  <SVGArrow style={{width: 25, marginRight: 10}} color={red}/>
-  {children}
-</FiledUnderLinkContainer>
+const FiledUnderLink = ({children, color, to}) => {
+  if(!color) color = red;
+
+  return (
+    <FiledUnderLinkContainer href={to} color={color}>
+      <SVGArrow style={{width: 25, marginRight: 10}} color={color}/>
+      {children}
+    </FiledUnderLinkContainer>
+  )
+}
 
 ///
 
@@ -519,11 +527,71 @@ const getRelatedContent = array => {
   return getCards(cards)
 }
 
+const AllInterviewsContainer = styled(Row)`
+  width: 100vw;
+  justify-content: flex-end;
+
+  padding-top: 90px;
+  padding-right: 60px;
+
+  @media (min-width: 1025px) { /* desktop */
+    display: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    justify-content: center;
+    padding-right: 0;
+  }
+`
+
+const AllInterviewsText = `All ${TICKER.toLowerCase()}s`
+const AllInterviews = () => <AllInterviewsContainer>
+  <FiledUnderLink color={white}>{AllInterviewsText}</FiledUnderLink>
+</AllInterviewsContainer>
+
+///
+
+const CallOutContainer = styled(Row)`
+  display: none;
+
+  color: ${white};
+
+  padding: 40px;
+
+  justify-content: center !important;
+  text-align: center !important;
+
+  @media (min-width: 1025px) { /* desktop */
+    display: none;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    display: flex;
+  }
+`
+
+const CallOut = styled(Row)`
+  font-family: 'Tisa Pro';
+  font-size: 24px;
+  line-height: 30px;
+`
+
+const Copyright = styled(Row)`
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+
+  justify-content: center;
+`
+
 class Article extends React.Component {
   render() {
     const {data} = this.props
 
     const background = get(this, 'props.data.nodeArticle.relationships.field_main_image.localFile.childImageSharp.original.src')
+    const calloutText = get(this, 'props.data.nodeArticle.field_large_callout_text.processed')
+    const copyright = get(this, 'props.data.nodeArticle.field_copyright.processed')
+
     const title = get(this, 'props.data.nodeArticle.title')
     const author = get(this, 'props.data.nodeArticle.field_author.processed')
     const authorImage = get(this, 'props.data.nodeArticle.relationships.field_author_image.localFile.childImageSharp.original.src')
@@ -615,6 +683,13 @@ class Article extends React.Component {
     return (
       <Container>
         <TopContainer>
+          <AllInterviews />
+          <CallOutContainer>
+            <Column>
+              <CallOut dangerouslySetInnerHTML={{ __html: calloutText}} />
+              <Copyright dangerouslySetInnerHTML={{ __html: copyright}} />
+            </Column>
+          </CallOutContainer>
           <MainImage background={background}/>
           <TextContainer>
             <TextInnerContainer>
