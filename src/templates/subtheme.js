@@ -42,11 +42,13 @@ const Main = styled.div`
 `
 // min-height: 340px;
 const Header = styled.div`
-  position: relative;
-
-  z-index: 1;
-
-  padding-top: 95px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -999;
+  padding-top: 155px;
   padding-left: 138px;
 
   min-height: 737px;
@@ -119,27 +121,27 @@ const Row = styled.div`
 const Title = styled.div`
   color: ${white};
   font-family: Lato;
-  font-size: 42pt;
-  font-weight: bold;
+  font-size: 66px;
+  font-weight: 500;
   line-height: 60px;
-
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 15px;
+  padding-bottom: 30px;
 `
 
 const TopLink = styled(Link)`
   font-family: Lato;
-  font-size: 18pt;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 400;
   line-height: 60px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: ${white};
 `
 
 const Description = styled.div`
   font-family: 'Tisa Pro';
-  font-size: 20pt;
+  font-size: 20px;
+  font-weight: normal;
   line-height: 24px;
   color: ${white};
 

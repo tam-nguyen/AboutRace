@@ -18,7 +18,7 @@ const Container = styled.div`
 
   background-color: ${black};
 
-  height: 64px;
+  height: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;
@@ -33,6 +33,11 @@ const Container = styled.div`
     padding-bottom: ${props => props.open ? 120 : 0}px;
   }
 
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  right: 0;
+  left: 0;
   transition: all 0.3s ease-out;
 `
 
@@ -54,8 +59,9 @@ const Item = styled(Link)`
 
   @media (min-width: 1025px) { /* desktop */
     margin-right: 41px;
-    font-size: 12pt;
-    letter-spacing: 5px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    font-weight: 500;
   }
 
   @media (max-width: 812px) { /* mobile */

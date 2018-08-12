@@ -338,8 +338,8 @@ const color = 'rgba(255, 255, 255, 0.66)'
 const backdropColor = 'rgba(245, 238, 182, 0.92)'
 
 const Grid = styled.div`
-  background: linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%);
-  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
+  background-color: rgba(34, 34, 34, 0.92);
+  box-shadow: 0px -12px 15px rgba(51, 51, 51, 0.45);
   backdrop-filter: blur(5px);
 `
 

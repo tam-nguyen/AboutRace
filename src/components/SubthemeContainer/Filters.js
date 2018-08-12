@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { black } from '../../colors'
+import { white } from '../../colors'
 import { DISPLAY_NAMES_TO_SLUG } from '../../constants'
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Container = styled.div`
   line-height: 24px;
   letter-spacing: 0.022em;
   font-family: 'Lato';
-  color: ${black};
+  color: ${white};
   opacity: 0.8;
 
   @media (max-width: 812px) { /* mobile */
@@ -28,14 +28,17 @@ const Container = styled.div`
 
 const Label = styled.div`
   margin-right: 15px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
 `
 
 const Button = styled.div`
   cursor: pointer;
   margin-right: 15px;
   margin-bottom: 15px;
-  
-  font-weight: ${ props => props.selected ? 700 : null};
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  font-weight: ${ props => props.selected ? 700 : 100};
   text-transform: uppercase;
 `
 
