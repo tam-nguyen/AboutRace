@@ -4,7 +4,10 @@ import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move'
 
 import Filters from './Filters'
-import Link from '../Link'
+import {
+  Link,
+  FiledUnderLink
+} from '../'
 
 import {default as XButton} from '../Header/Menu'
 
@@ -17,6 +20,10 @@ import { default as CustomOverlay } from './Overlay'
 import Article from '../Article'
 
 import getCards from '../../utils/getCards'
+
+import {
+  white
+} from '../../colors'
 
 const range = require('range');
 
@@ -128,6 +135,12 @@ const CloseButton = props => (
 
 ///
 
+const AllEntities = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 50px;
+`
+
 const TopImage = styled.div`
   height:50%;
   width:100%;
@@ -169,7 +182,9 @@ class Subtheme extends React.Component {
       numCards: NUM_CARDS_TO_SHOW,
       filter: null,
       popup: false,
-      card: null
+      card: null,
+      entities: '',
+      entitiesLink: '',
     }
 
     this.close = this.close.bind(this)
@@ -233,9 +248,16 @@ class Subtheme extends React.Component {
   }
 
   open = (link, data) => {
+    
+    const typename = data.__typename.replace('node__','')
+    const entities = `all ${typename}s`
+    const entitiesLink = `/${typename}s`
+
     this.setState({
       popup: true,
-      card: {...data, link}
+      card: {...data, link},
+      entities,
+      entitiesLink
     })
 
     setTimeout( () => {
@@ -247,7 +269,7 @@ class Subtheme extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    const { filter, popup, card } = this.state;
+    const { filter, popup, card, entities, entitiesLink } = this.state;
 
     const rawCards = getCards(subtheme.relationships, filter, this.open)
 
@@ -274,6 +296,9 @@ class Subtheme extends React.Component {
                   { card && <Article data={{nodeArticle: card}} overlay={true}/> }
                 </InnerOverlayContainer>
               </OverlayContainer>
+              <AllEntities>
+                <FiledUnderLink color={white} to={entitiesLink}>{entities}</FiledUnderLink>
+              </AllEntities>
               <CloseButton id="close-button" onClick={this.close} />
             </CustomOverlay>
           </OverlayBody>

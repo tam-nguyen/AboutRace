@@ -39,6 +39,7 @@ export const ArticleFragment = graphql`
 
 export const FullArticleFragment = graphql`
   fragment FullArticleFragment on node__article {
+    __typename
     id
     field_include_in_the_teaching_se
     field_short_version {

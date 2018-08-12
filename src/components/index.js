@@ -14,5 +14,6 @@ export {
 
 export SVGChevron from './SVGChevron'
 export SVGArrow from './SVGArrow'
+export FiledUnderLink from './FiledUnderLink'
 
 export Article from './Article'
