@@ -24,7 +24,7 @@ const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 10
 const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   
   display: flex;
   flex-direction: column;
@@ -47,15 +47,13 @@ const TopContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  
-
-  width: 100vw;
+  width: 100%;
   height: auto;
 
   background: ${gradient};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${white};
+    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
     background-image: none;
   }
 
@@ -68,7 +66,7 @@ const TopContainer = styled.div`
 const BottomContaniner = styled.div`
   position: relative;
 
-  width: 100vw;
+  width: 100%;
   margin-top: -100px;
 
   padding-top: 60px;
@@ -79,7 +77,7 @@ const BottomContaniner = styled.div`
   background-image: ${gradient2};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${white};
+    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
     background-image: none;
   }
 
@@ -130,7 +128,7 @@ const MainImage = styled.div`
 const TextContainer = styled.div`
   z-index: 3;
 
-  width: 80vw;
+  width: 80%;
   margin-top: 50vh;
 
   @media (min-width: 1025px) { /* desktop */
@@ -587,7 +585,7 @@ const Copyright = styled(Row)`
 
 class Article extends React.Component {
   render() {
-    const {data} = this.props
+    const {data, overlay} = this.props
 
     const background = get(this, 'props.data.nodeArticle.relationships.field_main_image.localFile.childImageSharp.original.src')
     const calloutText = get(this, 'props.data.nodeArticle.field_large_callout_text.processed')
@@ -681,7 +679,7 @@ class Article extends React.Component {
 
     return (
       <Container>
-        <TopContainer>
+        <TopContainer overlay={overlay}>
           <AllEntities />
           <CallOutContainer>
             <Column>
@@ -704,7 +702,7 @@ class Article extends React.Component {
             </TextInnerContainer>
           </TextContainer>
         </TopContainer>
-        <BottomContaniner>
+        <BottomContaniner overlay={overlay}>
           <Footer>
             <MobileSideBar />
           </Footer>

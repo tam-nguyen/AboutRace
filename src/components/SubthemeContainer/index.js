@@ -85,8 +85,17 @@ const OverlayContainer = styled.div`
 
   padding-top: 90px;
 
-  /*max-width: 1000px;*/
+  width: 100%;
+  max-width: 1200px;
 
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
 `
 
 const CloseButtonContainer = styled.div`
@@ -207,7 +216,10 @@ class Subtheme extends React.Component {
     this.order = this.getShuffle(length)
   }
 
-  close = () => {
+  close = event => {
+    const array = ['close-button', 'subtheme-overlay']
+    if( array.indexOf(event.target.id) == -1 ) return
+
     this.setState({
       popup: !this.state.popup,
       card: null
@@ -244,13 +256,17 @@ class Subtheme extends React.Component {
 
     return (
       <Container>
-        <Overlay id="subtheme-overlay" visible={popup}>
+        <Overlay visible={popup}>
           <OverlayBody>
-            <CustomOverlay gradient={gradient}>
+            <CustomOverlay
+              id="subtheme-overlay"
+              gradient={gradient}
+              onClick={ e => this.close(e)}
+            >
               <OverlayContainer>
-                { card && <Article data={{nodeArticle: card}} />}
+                { card && <Article data={{nodeArticle: card}} overlay={true}/>}
               </OverlayContainer>
-              <CloseButton onClick={this.close} />
+              <CloseButton id="close-button" onClick={this.close} />
             </CustomOverlay>
           </OverlayBody>
         </Overlay>
