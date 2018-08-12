@@ -88,10 +88,33 @@ const TopImage = styled.div`
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
 `
 
-const Description = styled.div`
+const FlipContainer = styled(FlipMove)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  overflow: auto;
+
+  padding-bottom: 286px;
+  width: 100vw;
+
+  justify-content: center;
 `
 
-class SubthemeSection extends React.Component {
+const color = 'rgba(255, 255, 255, 0.66)'
+const backdropColor = 'rgba(245, 238, 182, 0.92)'
+const gradient = ``
+
+const Container = styled.div`
+  background-color: #ffffff;
+  background-image: ${gradient};
+  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
+  backdrop-filter: blur(5px);
+
+  border-bottom: solid thin grey;
+`
+
+class Subtheme extends React.Component {
 
   constructor(props){
     super(props)
@@ -163,6 +186,7 @@ class SubthemeSection extends React.Component {
   }
 
   open = (link, data) => {
+    console.log({link, data})
     this.setState({
       popup: true,
       card: {...data, link}
@@ -189,7 +213,7 @@ class SubthemeSection extends React.Component {
     const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
     return (
-      <Grid>
+      <Container>
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
             <Row>
@@ -210,42 +234,10 @@ class SubthemeSection extends React.Component {
           allCards.map( (c, k) => <div key={k}>{c}</div>)
         }
         </FlipContainer>
-      </Grid>
+      </Container>
     )
   }
 }
 
-///
-
-const FlipContainer = styled(FlipMove)`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
-  overflow: auto;
-
-  padding-bottom: 286px;
-  width: 100vw;
-
-  justify-content: center;
-`
-
-const color = 'rgba(255, 255, 255, 0.66)'
-const backdropColor = 'rgba(245, 238, 182, 0.92)'
-
-const Grid = styled.div`
-  background: linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%);
-  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
-  backdrop-filter: blur(5px);
-`
-
-const SubthemeContainer = styled(SubthemeSection)`
-  background-color: #ffffff;
-  padding: 45px 30px;
-  border-bottom: solid thin grey;
-  margin: 60px 30px;
-
-`
-
-export default SubthemeContainer;
+export default Subtheme;
 
