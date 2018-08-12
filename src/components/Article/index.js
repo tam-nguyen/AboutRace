@@ -122,7 +122,12 @@ const MainImage = styled.div`
   }
 
   @media (max-width: 812px) { /* mobile */
-    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 40vh;
+    min-height: 300px;
   }
 `
 
@@ -139,7 +144,7 @@ const TextContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     width: 100vw;
-    margin-top: 10vh;
+    margin-top: 20vh;
   }
 `
 
@@ -228,6 +233,14 @@ const ContentBar = styled(Column)`
   border-bottom-left-radius: 3px;
 
   box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
+
+  @media (min-width: 1025px) { /* desktop */
+    
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding: 10px;
+  }
 `
 
 const SideBar = styled(Column)`
@@ -264,6 +277,12 @@ const AuthorImage = styled.div`
   background-size: cover !important;
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+
+  @media (max-width: 812px) { /* mobile */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0px;
+  }
 `
 
 const Bio = styled.div`
@@ -371,8 +390,11 @@ const CardsContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     justify-content: center;
+    align-items: center;
     padding-left: 0;
     padding-right: 0;
+
+    min-width: 100vw;
   }
 `
 
@@ -438,7 +460,8 @@ const MobileColumn = styled(Column)`
   padding: 0;
 
   @media (max-width: 812px) { /* mobile */
-    padding: 60px;
+    padding-top: 60px;
+    padding-left: 10px;
   }
 `
 
@@ -495,6 +518,8 @@ const AllEntitiesContainer = styled(Row)`
 
   padding-top: 90px;
   padding-right: 60px;
+
+  z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
     display: none;
@@ -644,12 +669,6 @@ class Article extends React.Component {
       <Container>
         <TopContainer overlay={overlay}>
           <AllEntities />
-          <CallOutContainer>
-            <Column>
-              <CallOut dangerouslySetInnerHTML={{ __html: calloutText}} />
-              <Copyright dangerouslySetInnerHTML={{ __html: copyright}} />
-            </Column>
-          </CallOutContainer>
           <MainImage background={background}/>
           <TextContainer>
             <TextInnerContainer>

@@ -32,6 +32,11 @@ const CardGridItem = styled.div`
   margin: 10px;
 
   color: black;
+
+  @media (max-width: 812px) { /* mobile */
+    margin: 0;
+    margin-bottom: 10px;
+  }
 `
 
 class Card extends React.Component {
@@ -74,6 +79,10 @@ const StyledCard = styled(Card)`
 
   color: inherit;
   text-decoration: inherit;
+
+  @media (max-width: 812px) { /* mobile */
+    max-width: 100vw;
+  }
 `;
 
 export default StyledCard;

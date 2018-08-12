@@ -78,7 +78,8 @@ const Header = styled.div`
     height: 100%;
 
     background: ${ props => props.gradient ? props.gradient : null };
-    filter: opacity(83%);
+    filter: opacity(54%);
+    backdrop-filter: blur(12px);
   }
 `
 
