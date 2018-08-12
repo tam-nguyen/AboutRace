@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import get from 'lodash/get'
 import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
 import {
@@ -20,22 +21,29 @@ const HomeBackground = styled.div`
   width:100%;
 `
 
-export default ({ data, location }) => (
-  <Layout location={location}>
-    <div>
-      <HomeBackground />
-      {
-        data.allTaxonomyTermThemes.edges.map( ({ node }, key) =>
-          <ThemeCard key={key} data={node} color={gradientColors[key]}/>
-        )
-      }
-    </div>
-  </Layout>
-)
+class Index extends React.Component {
+  render() {
+    const edges = get(this, 'props.data.allTaxonomyTermThemes.edges')
 
+    return (
+      <Layout location={this.props.location}>
+        <div>
+          <HomeBackground />
+          {
+            edges.map( ({ node }, key) =>
+              <ThemeCard key={key} data={node} color={gradientColors[key]}/>
+            )
+          }
+        </div>
+      </Layout>
+    )
+  }
+}
 
-export const query = graphql`
-  query IndexQuery {
+export default Index
+
+export const pageQuery = graphql`
+  query {
     
     allTaxonomyTermThemes {
       edges {
@@ -51,6 +59,14 @@ export const query = graphql`
                 publicURL
                 childImageSharp {
                   id
+                  original {
+                    width
+                    height
+                    src
+                  }
+                  sizes {
+                    src
+                  }
                   resolutions {
                     height
                     width

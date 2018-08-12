@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import './articles.css'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-import Layout from "../components/layout"
+import {
+  Layout,
+  Link,
+} from "../components"
 
 const GreyBackground = styled.div`
   background-color: rgba(103, 165, 195, 0.14901960784313725);
@@ -62,7 +64,7 @@ const ArticleSummary = ({ data }) => {
       flexBasis: '33%',
       textDecoration: 'none',
       color: 'inherit'
-    }} to={`/articles/${kebabCase(data.title)}`}>
+    }} href={`/articles/${kebabCase(data.title)}`}>
       <div className={"articleCard"}>
        
         <div style={{flex: '1 1 auto', position: 'relative', marginBottom:15}}>
@@ -98,26 +100,31 @@ const ArticleSummary = ({ data }) => {
   )
 }
 
-export default ({ data, location }) => {
-  return (
-    <Layout location={location}>
-      <TopText>          
-         <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>articles</h4>
-      </TopText>
-      <IntroText dangerouslySetInnerHTML={{
-        __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
-      }} />
+class Articles extends React.Component {
+  render() {
+    const { data, location } = this.props
+    return (
+      <Layout location={location}>
+        <TopText>          
+           <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>articles</h4>
+        </TopText>
+        <IntroText dangerouslySetInnerHTML={{
+          __html: data.taxonomyTermArticlesPage.description && data.taxonomyTermArticlesPage.description.processed,
+        }} />
+            
+        <div className={"articles"}>
+          <GreyBackground />
           
-      <div className={"articles"}>
-        <GreyBackground />
-        
-        {data.allNodeArticle.edges.map((edge, i) => (
-          <ArticleSummary key={i} data={edge.node} />
-        ))}
-      </div>
-    </Layout>
-  )
+          {data.allNodeArticle.edges.map((edge, i) => (
+            <ArticleSummary key={i} data={edge.node} />
+          ))}
+        </div>
+      </Layout>
+    )
+  }
 }
+
+export default Articles
 
 export const query = graphql`
   query ArticlesQuery {

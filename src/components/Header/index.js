@@ -5,18 +5,25 @@ import styled from 'styled-components'
 import Menu from './Menu'
 
 import {
-  black,
+  blackWithOpacity,
   white,
 } from '../../colors.js'
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 10;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   
   justify-content: space-around;
 
-  background-color: ${black};
+  background-color: ${blackWithOpacity(0.83)};
 
   height: 60px;
 
