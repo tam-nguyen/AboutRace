@@ -11,6 +11,8 @@ import {
   OverlayBody 
 } from '../overlay'
 
+import { default as CustomOverlay } from './Overlay'
+
 import getCards from '../../utils/getCards'
 
 const range = require('range');
@@ -216,9 +218,9 @@ class Subtheme extends React.Component {
       <Container>
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
-            <Row>
+            <CustomOverlay>
               <CloseButton onClick={this.close}>Close</CloseButton>
-            </Row>
+            </CustomOverlay>
           </OverlayBody>
         </Overlay>
 

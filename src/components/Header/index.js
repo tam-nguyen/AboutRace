@@ -103,7 +103,7 @@ class Header extends React.Component {
     const {open} = this.state;
 
     return (
-      <Container open={open}>
+      <Container open={open} id="header">
         <Menu open={open} onClick={ e => this.setState({open: !open})}/>
         {
           pages.map( ({name, link}, index) => <Item href={link} key={index}>{name}</Item>)
