@@ -6,8 +6,9 @@ import get from 'lodash/get'
 import {
   Link,
   SVGArrow,
-  getCards,
 } from '../'
+
+import getCards from '../../utils/getCards'
 
 import {
   black,
@@ -508,7 +509,7 @@ const getRelatedContent = array => {
     faqs: [],
   }
 
-  array.forEach(item => {
+  array && array.forEach(item => {
     switch(item.__typename){
       case 'node__faq':
         cards.faqs.push(item)
@@ -527,7 +528,7 @@ const getRelatedContent = array => {
   return getCards(cards)
 }
 
-const AllInterviewsContainer = styled(Row)`
+const AllEntitiesContainer = styled(Row)`
   width: 100vw;
   justify-content: flex-end;
 
@@ -544,10 +545,10 @@ const AllInterviewsContainer = styled(Row)`
   }
 `
 
-const AllInterviewsText = `All ${TICKER.toLowerCase()}s`
-const AllInterviews = () => <AllInterviewsContainer>
-  <FiledUnderLink color={white}>{AllInterviewsText}</FiledUnderLink>
-</AllInterviewsContainer>
+const AllEntitiesText = `All ${TICKER.toLowerCase()}s`
+const AllEntities = () => <AllEntitiesContainer>
+  <FiledUnderLink color={white}>{AllEntitiesText}</FiledUnderLink>
+</AllEntitiesContainer>
 
 ///
 
@@ -604,8 +605,6 @@ class Article extends React.Component {
 
     const relatedContent = getRelatedContent(get(this, 'props.data.nodeArticle.relationships.field_article_related_content'))
     
-    console.log('Article', this.props)
-
     const LocalBackTo = () => (
       <BackTo>
         <SubTitle>back to:</SubTitle>
@@ -683,7 +682,7 @@ class Article extends React.Component {
     return (
       <Container>
         <TopContainer>
-          <AllInterviews />
+          <AllEntities />
           <CallOutContainer>
             <Column>
               <CallOut dangerouslySetInnerHTML={{ __html: calloutText}} />

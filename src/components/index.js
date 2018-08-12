@@ -2,7 +2,7 @@ export Layout from './layout'
 export Link from './Link'
 export Title from './Title'
 export ThemeCard from './ThemeCard'
-export SubthemeContainer, { getCards } from './SubthemeContainer'
+export SubthemeContainer from './SubthemeContainer'
 export AllClips from './AllClips'
 export Card from './Card';
 export RCCard from './RCCard';
