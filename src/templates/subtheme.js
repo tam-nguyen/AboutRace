@@ -232,7 +232,7 @@ export const pageQuery = graphql`
       }
       relationships {
         articles: backref_field_belongs_to_subtheme_node_article {
-          ...ArticleFragment
+          ...FullArticleFragment
         }
         clips: backref_field_belongs_to_subtheme_node_clip {
           ...PosterImageClipFragment

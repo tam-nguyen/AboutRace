@@ -14,6 +14,7 @@ import {
 } from '../overlay'
 
 import { default as CustomOverlay } from './Overlay'
+import Article from '../Article'
 
 import getCards from '../../utils/getCards'
 
@@ -79,6 +80,15 @@ const PopupCard = styled.div`
   overflow: hidden;
 `
 
+const OverlayContainer = styled.div`
+  overflow-y: scroll;
+
+  padding-top: 90px;
+
+  /*max-width: 1000px;*/
+
+`
+
 const CloseButtonContainer = styled.div`
   position: absolute;
   top: 400px;
@@ -100,6 +110,8 @@ const CloseButton = props => (
     />
   </CloseButtonContainer>
 )
+
+///
 
 const TopImage = styled.div`
   height:50%;
@@ -203,7 +215,6 @@ class Subtheme extends React.Component {
   }
 
   open = (link, data) => {
-    console.log({link, data})
     this.setState({
       popup: true,
       card: {...data, link}
@@ -236,6 +247,9 @@ class Subtheme extends React.Component {
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
             <CustomOverlay gradient={gradient}>
+              <OverlayContainer>
+                { card && <Article data={{nodeArticle: card}} />}
+              </OverlayContainer>
               <CloseButton onClick={this.close} />
             </CustomOverlay>
           </OverlayBody>
