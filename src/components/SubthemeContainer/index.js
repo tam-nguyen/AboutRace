@@ -84,9 +84,11 @@ const OverlayContainer = styled.div`
   overflow-y: scroll;
 
   padding-top: 90px;
-
   width: 100%;
-  max-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   -ms-overflow-style: none;  // IE 10+
   overflow: -moz-scrollbars-none;  // Firefox
@@ -96,6 +98,10 @@ const OverlayContainer = styled.div`
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
   }
+`
+
+const InnerOverlayContainer = styled.div`
+  width: 1200px;
 `
 
 const CloseButtonContainer = styled.div`
@@ -258,13 +264,11 @@ class Subtheme extends React.Component {
       <Container>
         <Overlay visible={popup}>
           <OverlayBody>
-            <CustomOverlay
-              id="subtheme-overlay"
-              gradient={gradient}
-              onClick={ e => this.close(e)}
-            >
-              <OverlayContainer>
-                { card && <Article data={{nodeArticle: card}} overlay={true}/>}
+            <CustomOverlay gradient={gradient}>
+              <OverlayContainer id="subtheme-overlay" onClick={this.close}>
+                <InnerOverlayContainer>
+                  { card && <Article data={{nodeArticle: card}} overlay={true}/> }
+                </InnerOverlayContainer>
               </OverlayContainer>
               <CloseButton id="close-button" onClick={this.close} />
             </CustomOverlay>
