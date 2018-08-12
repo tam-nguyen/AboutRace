@@ -221,7 +221,7 @@ class ThemeCard extends React.Component {
       height,
       width,
       src
-    } = data.relationships.field_theme_image.localFile.childImageSharp.resolutions
+    } = data.relationships.field_theme_image.localFile.childImageSharp.original
 
     const background = src
     const title = data.name

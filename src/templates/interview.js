@@ -1,6 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
-import { getCards } from '../components/subtheme'
+import getCards from '../utils/getCards'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 

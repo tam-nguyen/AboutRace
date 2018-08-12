@@ -1,23 +1,17 @@
-import React from "react"
-import styled from 'styled-components';
-import Link from '../Link';
+import React from 'react'
+import styled from 'styled-components'
+import kebabCase from 'lodash/kebabCase'
+import FlipMove from 'react-flip-move'
+
+import Filters from './Filters'
+import Link from '../Link'
 
 import { 
   Overlay, 
   OverlayBody 
 } from '../overlay'
-import kebabCase from 'lodash/kebabCase'
-import FlipMove from 'react-flip-move';
 
-import Filters from './Filters'
-
-import Poster from './Poster'
-import PlayablePoster from './PlayablePoster'
-import ArticleCard from './ArticleCard'
-import ClipCard from './ClipCard'
-import QACard from './QACard'
-import InterviewCard from './InterviewCard'
-import QuickFactCard from './QuickFactCard'
+import getCards from '../../utils/getCards'
 
 const range = require('range');
 
@@ -34,8 +28,6 @@ const SubthemeTitle = styled.div`
   margin-top: 15px;
 `
 const NUM_CARDS_TO_SHOW = 3;
-
-const defaultToEmpty = arr => (arr ? arr : [])
 
 const shuffle = (arr) => {
   var currentIndex = arr.length, temporaryValue, randomIndex;
@@ -64,89 +56,6 @@ const reorder = (arr, order) => {
   return newArr;
 }
 
-export const getCards = (relationships, queryFilter, onOpen) => {
-  if(!onOpen)
-    onOpen = link => {}
-
-  const articles = defaultToEmpty(relationships.articles)
-    .filter(article => 
-      !queryFilter 
-      || queryFilter === `recent` 
-      || queryFilter === `article`
-    )
-    .map(
-      article => 
-        <ArticleCard 
-          key={'article-' + article.title} 
-          onOpen={ link => onOpen(link, article) } 
-          article={article} 
-        />
-    )
-
-  const clips = defaultToEmpty(relationships.clips)
-  .filter(clip => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `clip`
-  )
-  .map( clip => 
-    <ClipCard
-      key={'clip-' + clip.title}
-      linkable={true}
-      clip={clip}
-    />
-  )
-
-  const qa = defaultToEmpty(relationships.faqs)
-  .filter( qa => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `qa`
-  )
-  .map( qa => 
-    <QACard
-      key={'qa-' + qa.title}
-      qa={qa}
-    />
-  )
-
-  const interviews = defaultToEmpty(relationships.interviews)
-  .filter( interview => 
-    !queryFilter
-    || queryFilter === `recent`
-    || queryFilter === `interview`
-  )
-  .map( interview => 
-    <InterviewCard
-      key={'interview-' + interview.title}
-      onOpen={ link => onOpen(link, interview) }
-      interview={interview} 
-    />
-  )
-
-  const quickfacts = defaultToEmpty(relationships.quickfacts)
-  .filter(quickfact => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `quickfact`
-  )
-  .map( quickfact => 
-    <QuickFactCard
-      key={'quickfact-' + quickfact.title} 
-      quickfact={quickfact}
-    />
-  )
-
-  return [
-    ...articles,
-    ...clips,
-    ...qa,
-    ...interviews,
-    ...quickfacts,
-  ]
-}
-
-
 const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -168,9 +77,6 @@ const PopupCard = styled.div`
 
 const CloseButton = styled.div`
   cursor: pointer;
-  position: absolute;
-  top: 30px;
-  right: 30px;
 `
 
 const TopImage = styled.div`
@@ -182,10 +88,33 @@ const TopImage = styled.div`
   background-image: ${props => props.background ?  `url(${props.background})` : `none`};
 `
 
-const Description = styled.div`
+const FlipContainer = styled(FlipMove)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  overflow: auto;
+
+  padding-bottom: 286px;
+  width: 100vw;
+
+  justify-content: center;
 `
 
-class SubthemeSection extends React.Component {
+const color = 'rgba(255, 255, 255, 0.66)'
+const backdropColor = 'rgba(245, 238, 182, 0.92)'
+const gradient = ``
+
+const Container = styled.div`
+  background-color: #ffffff;
+  background-image: ${gradient};
+  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
+  backdrop-filter: blur(5px);
+
+  border-bottom: solid thin grey;
+`
+
+class Subtheme extends React.Component {
 
   constructor(props){
     super(props)
@@ -257,6 +186,7 @@ class SubthemeSection extends React.Component {
   }
 
   open = (link, data) => {
+    console.log({link, data})
     this.setState({
       popup: true,
       card: {...data, link}
@@ -266,8 +196,6 @@ class SubthemeSection extends React.Component {
   render() {
     const {data} = this.props;
     const subtheme = data;
-
-    // TODO (Conrad): Create custom card component for each type of data (article, clip, qa, etc)
 
     const { filter, popup, card } = this.state;
 
@@ -279,25 +207,17 @@ class SubthemeSection extends React.Component {
 
     allCards = allCards.filter( allCards => !!allCards)
 
-    const title = card &&card.title ? card.title : '';
+    const title = card && card.title ? card.title : '';
     const link = card && card.link ? card.link : '';
     const description = card && card.field_short_version ? card.field_short_version.processed : null;
     const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
     return (
-      <Grid>
+      <Container>
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
             <Row>
-              { 
-                card && <PopupCard>
-                  <CloseButton onClick={this.close}>Close</CloseButton>
-                  <TopImage background={background} />
-                  <h1>{title}</h1>
-                  <Description dangerouslySetInnerHTML={{ __html: description }} />
-                  <Link to={link}>Read the article</Link>
-                </PopupCard>
-              }
+              <CloseButton onClick={this.close}>Close</CloseButton>
             </Row>
           </OverlayBody>
         </Overlay>
@@ -314,42 +234,10 @@ class SubthemeSection extends React.Component {
           allCards.map( (c, k) => <div key={k}>{c}</div>)
         }
         </FlipContainer>
-      </Grid>
+      </Container>
     )
   }
 }
 
-///
-
-const FlipContainer = styled(FlipMove)`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
-  overflow: auto;
-
-  padding-bottom: 286px;
-  width: 100vw;
-
-  justify-content: center;
-`
-
-const color = 'rgba(255, 255, 255, 0.66)'
-const backdropColor = 'rgba(245, 238, 182, 0.92)'
-
-const Grid = styled.div`
-  background: linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%);
-  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
-  backdrop-filter: blur(5px);
-`
-
-const SubthemeContainer = styled(SubthemeSection)`
-  background-color: #ffffff;
-  padding: 45px 30px;
-  border-bottom: solid thin grey;
-  margin: 60px 30px;
-
-`
-
-export default SubthemeContainer;
+export default Subtheme;
 

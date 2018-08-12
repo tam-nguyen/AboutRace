@@ -1,5 +1,7 @@
 export const black = '#000000';
+export const blackWithOpacity = opacity => `rgba(0,0,0,${opacity})`;
 export const white = '#FFFFFF';
+export const whiteShadow = '#FCFCFC';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 

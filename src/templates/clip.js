@@ -3,12 +3,13 @@ import AllClips, { Clip } from '../components/AllClips.js'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import {
-  getCards,
   QuickFactCard,
-  FAQCard,
+  QACard,
   ClipCard,
   ArticleCard
-} from '../components/subtheme'
+} from '../components/cards'
+
+import getCards from '../utils/getCards'
 import { graphql } from 'gatsby'
 
 const ChosenClipCard = styled.div`
@@ -101,7 +102,7 @@ class ClipTemplate extends React.Component {
                   )
                 } else if (node.__typename == `node__faq`) {
                   return (
-                    <FAQCard
+                    <QACard
                       key={`faqcard-${i}`}
                       i={i}
                       faq={node}

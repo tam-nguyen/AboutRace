@@ -3,6 +3,8 @@ body {
   margin: 0;
   background-color: black;
 
+  height: auto !important;
+
   /* iOS 11 */
   padding-left: constant(safe-area-inset-left);
   padding-right: constant(safe-area-inset-right);
