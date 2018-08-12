@@ -237,6 +237,10 @@ class Subtheme extends React.Component {
       popup: true,
       card: {...data, link}
     })
+
+    setTimeout( () => {
+      window.document.getElementById('subtheme-overlay').scrollTop = 0
+    }, 1)
   }
 
   render() {
