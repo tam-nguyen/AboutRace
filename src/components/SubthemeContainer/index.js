@@ -6,6 +6,8 @@ import FlipMove from 'react-flip-move'
 import Filters from './Filters'
 import Link from '../Link'
 
+import {default as XButton} from '../Header/Menu'
+
 import { 
   Overlay, 
   OverlayBody 
@@ -77,9 +79,27 @@ const PopupCard = styled.div`
   overflow: hidden;
 `
 
-const CloseButton = styled.div`
-  cursor: pointer;
+const CloseButtonContainer = styled.div`
+  position: absolute;
+  top: 400px;
+  right: 50px;
 `
+
+const XButtonContainer = styled(XButton)`
+  cursor: pointer;
+  display: block;
+  position: relative;
+`
+
+const CloseButton = props => (
+  <CloseButtonContainer>
+    <XButtonContainer 
+      width={30}
+      open={true} 
+      {...props}
+    />
+  </CloseButtonContainer>
+)
 
 const TopImage = styled.div`
   height:50%;
@@ -103,13 +123,8 @@ const FlipContainer = styled(FlipMove)`
   justify-content: center;
 `
 
-const color = 'rgba(255, 255, 255, 0.66)'
-const backdropColor = 'rgba(245, 238, 182, 0.92)'
-const gradient = ``
-
 const Container = styled.div`
   background-color: #ffffff;
-  background-image: ${gradient};
   box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
   backdrop-filter: blur(5px);
 
@@ -214,12 +229,14 @@ class Subtheme extends React.Component {
     const description = card && card.field_short_version ? card.field_short_version.processed : null;
     const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
+    const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
+
     return (
       <Container>
         <Overlay id="subtheme-overlay" visible={popup}>
           <OverlayBody>
-            <CustomOverlay>
-              <CloseButton onClick={this.close}>Close</CloseButton>
+            <CustomOverlay gradient={gradient}>
+              <CloseButton onClick={this.close} />
             </CustomOverlay>
           </OverlayBody>
         </Overlay>

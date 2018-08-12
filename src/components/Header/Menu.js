@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import styled, {keyframes} from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 
 import {
   white,
@@ -9,10 +9,8 @@ import {
 const Container = styled.div`
   cursor: pointer;
 
-  width: 25px;
-  height: 20px;
-
-  position: relative;
+  width: ${props => props.width ? props.width : 25 }px;
+  height: ${props => props.width ? props.width : 20 }px;
 
   display: flex;
   flex-direction: column;
@@ -33,7 +31,7 @@ const Container = styled.div`
 `
 
 const Line = styled.div`
-  width: 25px;
+  width: ${props => props.width ? props.width : 25 }px;
   height: 2px;
   background-color: ${white};
 
@@ -49,6 +47,7 @@ const TopLine = styled(Line)`
 `
 
 const MiddleLine = styled(Line)`
+  display: ${ props => props.open ? 'none' : 'block' };
   opacity: ${ props => props.open ? 0 : 1 };
 
   position: absolute;
@@ -65,13 +64,16 @@ const BottomLine = styled(Line)`
 
 class Menu extends React.Component {
   render() {
-    const {open} = this.props
+    const {
+      open,
+      width
+    } = this.props
 
     return (
-      <Container {...this.props}>
-        <TopLine open={open}/>
-        <MiddleLine open={open}/>
-        <BottomLine open={open}/>
+      <Container {...this.props} width={width}>
+        <TopLine open={open} width={width}/>
+        <MiddleLine open={open} width={width}/>
+        <BottomLine open={open} width={width}/>
       </Container>
     )
   }
