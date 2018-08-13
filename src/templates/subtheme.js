@@ -257,7 +257,7 @@ export const pageQuery = graphql`
           ...PosterImageClipFragment
         }
         interviews: backref_field_which_subtheme_does_this_b_node_interview {
-          ...InterviewFragment
+          ...FullInterviewFragment
         }
         faqs: backref_field_belongs_to_subtheme_node_faq {
           ...FAQFragment

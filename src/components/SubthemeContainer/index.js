@@ -19,6 +19,7 @@ import {
 
 import { default as CustomOverlay } from './Overlay'
 import Article from '../Article'
+import Interview from '../Interview'
 
 import getCards from '../../utils/getCards'
 
@@ -185,6 +186,7 @@ class Subtheme extends React.Component {
       filter: null,
       popup: false,
       card: null,
+      typename: null,
       entities: '',
       entitiesLink: '',
     }
@@ -250,7 +252,6 @@ class Subtheme extends React.Component {
   }
 
   open = (link, data) => {
-    
     const typename = data.__typename.replace('node__','')
     const entities = `all ${typename}s`
     const entitiesLink = `/${typename}s`
@@ -258,6 +259,7 @@ class Subtheme extends React.Component {
     this.setState({
       popup: true,
       card: {...data, link},
+      typename,
       entities,
       entitiesLink
     })
@@ -265,6 +267,30 @@ class Subtheme extends React.Component {
     setTimeout( () => {
       window.document.getElementById('subtheme-overlay').scrollTop = 0
     }, 1)
+  }
+
+  renderOverlay = () => {
+    const {
+      typename,
+      card
+    } = this.state
+
+    let component = null
+
+    console.log({typename, card})
+
+    switch(typename){
+      case 'article':
+        component = <Article data={{nodeArticle: card}} overlay={true}/>
+        break
+      case 'interview':
+        component = <Interview data={{nodeInterview: card}} overlay={true}/>
+        break
+      default:
+        return null
+    }
+
+    return component
   }
 
   render() {
@@ -295,7 +321,7 @@ class Subtheme extends React.Component {
             <CustomOverlay gradient={gradient}>
               <OverlayContainer id="subtheme-overlay" onClick={this.close}>
                 <InnerOverlayContainer>
-                  { card && <Article data={{nodeArticle: card}} overlay={true}/> }
+                  { card && this.renderOverlay() }
                 </InnerOverlayContainer>
               </OverlayContainer>
               <AllEntities>

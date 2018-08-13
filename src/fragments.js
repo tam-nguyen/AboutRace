@@ -172,6 +172,7 @@ export const InterviewFragment = graphql`
 
 export const FullInterviewFragment = graphql`
   fragment FullInterviewFragment on node__interview {
+    __typename
     title
     changed
     field_interviewee_name {

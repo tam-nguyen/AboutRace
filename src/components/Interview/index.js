@@ -138,7 +138,7 @@ const QuoteContainer = styled.div`
     
     height: 80vh;
 
-    background-image: ${gradient};
+    background-image: ${props => props.overlay ? null : gradient};
     box-shadow: none;
   }
 
@@ -488,6 +488,7 @@ const MobileColumn = styled(Column)`
 
 const getFiledUnder = array => {
   let results = []
+  if(!array) return []
 
   array && array.map( ({name}) =>
     results.push({
@@ -597,6 +598,8 @@ class Interview extends React.Component {
   render() {
     const {data, overlay} = this.props
     const nodeName = 'nodeInterview'
+
+    console.log(data)
     
     const background = get(this, `props.data.${nodeName}.relationships.field_main_image.localFile.childImageSharp.original.src`)
     const calloutText = get(this, `props.data.${nodeName}.field_large_callout_text.processed`)
@@ -697,11 +700,9 @@ class Interview extends React.Component {
     return (
       <Container>
         <TopContainer overlay={overlay}>
-          <AllEntities />
-          <QuoteContainer>
-            <Quote>
-              {keyQuote}
-            </Quote>
+          { !overlay && <AllEntities /> }
+          <QuoteContainer overlay={overlay}>
+            <Quote dangerouslySetInnerHTML={{ __html: keyQuote }} />
           </QuoteContainer>
           <TextContainer>
             <TextInnerContainer>
