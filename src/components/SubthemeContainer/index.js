@@ -22,7 +22,8 @@ import Article from '../Article'
 import getCards from '../../utils/getCards'
 
 import {
-  white
+  white,
+  backgroundColor
 } from '../../colors'
 
 const range = require('range');
@@ -164,7 +165,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: #ffffff;
+  background-color: ${backgroundColor};
   box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
   backdrop-filter: blur(5px);
 
@@ -309,6 +310,7 @@ class Subtheme extends React.Component {
           name={this.props.name}
           filter={filter}
           subtheme={subtheme}
+          color={white}
         />
       
         <FlipContainer>
