@@ -53,16 +53,33 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   
-  background-size: cover !important;
-  background-attachment: fixed;
   transition: all .5s ease;
-
-  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
 
   @media (max-width: 812px) { /* mobile */
     padding-left: 36px;
     padding-right: 36px;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-size: cover !important;
+    background-attachment: fixed;
+
+    background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
+    filter: blur(12px);
+  }
+
   
   &::after {
     content: '';
