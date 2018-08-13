@@ -169,6 +169,48 @@ export const InterviewFragment = graphql`
     }
   }
 `
+
+export const FullInterviewFragment = graphql`
+  fragment FullInterviewFragment on node__interview {
+    title
+    changed
+    field_interviewee_name {
+      processed
+    }
+    field_interviewee_bio {
+      processed
+    }
+    field_key_quote {
+      processed
+    }
+    field_full_length_version {
+      processed
+    }
+    relationships {
+      field_interviewee {
+        localFile {
+          publicURL
+        }
+      }
+    }
+    title
+    changed
+    field_interviewee_bio {
+      processed
+    }
+    field_key_quote {
+      processed
+    }
+    relationships {
+      field_interviewee {
+        localFile {
+          publicURL
+        }
+      }
+    }
+  }
+`
+
 export const FAQFragment = graphql`
   fragment FAQFragment on node__faq {
     title

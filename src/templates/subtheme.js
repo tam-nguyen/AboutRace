@@ -1,6 +1,7 @@
 import React from "react"
 import kebabCase from 'lodash/kebabCase'
 import styled, { css } from 'styled-components'
+import get from 'lodash/get'
 import { graphql } from 'gatsby'
 
 import {
@@ -199,7 +200,7 @@ class SubThemePage extends React.Component {
       return encodeURIComponent(kebabCase(parts[parts.length - 1]))
     }
 
-    const background = field_theme_image && field_theme_image.localFile.publicURL;
+    const background = get(this, 'props.pageContext.field_theme_image.localFile.publicURL');
     const title = subtheme.name.indexOf(':') >=0 ? subtheme.name.split(':')[1] : subtheme.name;
     const description = taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`;
 

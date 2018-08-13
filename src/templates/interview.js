@@ -11,11 +11,10 @@ const KeyQuote = styled.div`
   padding: 162px 120px 138px 120px;
   width: 100%;
   line-height:1.25;
-  // font-style: italic;
   text-align: center;
   border-bottom: solid thin lightgrey;
   font-family: "orpheuspro";
-  background-color:#2b2b2b;
+  background-color: #2b2b2b;
   color: snow;
 `
 const AuthorBioText = styled.div`
@@ -207,26 +206,7 @@ export default SingleInterview
 export const interviewsQuery = graphql`
   query interviewQuery($id: String) {
     nodeInterview(id: { eq: $id }) {
-        title
-        field_interviewee_name {
-            processed
-        }
-        field_interviewee_bio {
-            processed
-        }
-        field_key_quote {
-            processed
-        }
-        field_full_length_version {
-            processed
-        }
-        relationships {
-            field_interviewee {
-            localFile {
-                publicURL
-            }
-            }
-        }
+      ...FullInterviewFragment
     }
   }
 `

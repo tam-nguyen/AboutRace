@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move'
+import get from 'lodash/get'
 
 import Filters from './Filters'
 import {
@@ -210,7 +211,7 @@ class Subtheme extends React.Component {
     );
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
     if (this.state.filter !== nextState.filter) {
       // this.updateOrder(nextProps, nextState.filter)
     }
