@@ -20,7 +20,7 @@ import {
   red,
 } from '../../colors'
 
-const TICKER = 'ARTICLE'
+const TICKER = 'INTERVIEW'
 const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
 const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
@@ -87,9 +87,32 @@ const BottomContaniner = styled.div`
   }
 `
 
-const MainImage = styled.div`
+const Quote = styled.div`
+  width: 100%;
+  margin: auto;
+
+  font-family: 'Tisa Pro';
+  font-size: 40px;
+  line-height: 60px;
+
+  text-align: center;
+
+  @media (min-width: 1025px) { /* desktop */
+    width: 835px;
+    font-size: 48px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    width: 100vw;
+    font-size: 24px;
+    line-height: 30px;
+    padding-bottom: 50px;
+  }
+`
+
+const QuoteContainer = styled.div`
   position: absolute;
-  top: 222px;
+  top: 100px;
   left: 60px;
   right: 60px;
 
@@ -104,10 +127,7 @@ const MainImage = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-size: cover !important;
-  background-attachment: fixed;
-  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+  color: ${white};
 
   transition: all .5s ease;
 
@@ -118,6 +138,7 @@ const MainImage = styled.div`
     
     height: 80vh;
 
+    background-image: ${gradient};
     box-shadow: none;
   }
 
@@ -468,7 +489,7 @@ const MobileColumn = styled(Column)`
 const getFiledUnder = array => {
   let results = []
 
-  array.map( ({name}) =>
+  array && array.map( ({name}) =>
     results.push({
       name,
       link: `/subthemes/${kebabCase(name)}`
@@ -481,7 +502,7 @@ const getFiledUnder = array => {
 const getTags = array => {
   let results = []
 
-  results = array.map( ({name}) => name )
+  results = array && array.map( ({name}) => name )
 
   return results
 }
@@ -522,7 +543,8 @@ const AllEntitiesContainer = styled(Row)`
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    display: none;
+    position: absolute;
+    top: 0;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -571,33 +593,34 @@ const Copyright = styled(Row)`
   justify-content: center;
 `
 
-class Article extends React.Component {
+class Interview extends React.Component {
   render() {
     const {data, overlay} = this.props
-    const nodeName = 'nodeArticle'
-
+    const nodeName = 'nodeInterview'
+    
     const background = get(this, `props.data.${nodeName}.relationships.field_main_image.localFile.childImageSharp.original.src`)
     const calloutText = get(this, `props.data.${nodeName}.field_large_callout_text.processed`)
     const copyright = get(this, `props.data.${nodeName}.field_copyright.processed`)
 
     const title = get(this, `props.data.${nodeName}.title`)
-    const author = get(this, `props.data.${nodeName}.field_author.processed`)
-    const authorImage = get(this, `props.data.${nodeName}.relationships.field_author_image.localFile.childImageSharp.original.src`)
-    const authorBio = get(this, `props.data.${nodeName}.field_author_bio.processed`)
-    const text = get(this, `props.data.${nodeName}.field_full_version.processed`)
+    const author = get(this, `props.data.${nodeName}.field_interviewee_name.processed`)
+    const authorImage = get(this, `props.data.${nodeName}.relationships.field_interviewee.localFile.childImageSharp.original.src`)
+    const authorBio = get(this, `props.data.${nodeName}.field_interviewee_bio.processed`)
+    const text = get(this, `props.data.${nodeName}.field_full_length_version.processed`)
+    const keyQuote = get(this, `props.data.${nodeName}.field_key_quote.processed`)
 
-    const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
+    const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_which_subtheme_does_this_b`))
     const tags = getTags(get(this, `props.data.${nodeName}.relationships.field_tags`))
     const backTo = filedUnder[0]
 
     const relatedContent = getRelatedContent(get(this, `props.data.${nodeName}.relationships.field_article_related_content`))
     
-    const LocalBackTo = () => (
+    const LocalBackTo = () => backTo ? (
       <BackTo>
         <SubTitle>back to:</SubTitle>
         <FiledUnderLink key="backTo" to={backTo.link}>{backTo.name}</FiledUnderLink>
       </BackTo>
-    )
+    ) : null
 
     ///
 
@@ -607,15 +630,18 @@ class Article extends React.Component {
         <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
         <SubTitle>filed under:</SubTitle>
         {
-          filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+          filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
         }
         <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
         <Tags>
           {
-            tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
+            tags && tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
           }
         </Tags>
-        <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+        
+        {
+          relatedContent.length > 0 && <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+        }
 
         <CardsContainer>
           { relatedContent }
@@ -639,7 +665,7 @@ class Article extends React.Component {
           <MobileColumn>
             <SubTitle>filed under:</SubTitle>
             {
-              filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+              filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
             }
           </MobileColumn>
 
@@ -647,14 +673,16 @@ class Article extends React.Component {
             <SubTitle>explore:</SubTitle>
             <Tags>
               {
-                tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
+                tags && tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
               }
             </Tags>
           </MobileColumn>
         </MobileRow>
 
         <MobileRow>
-          <SubTitle>see also:</SubTitle>
+          {
+            relatedContent.length > 0 && <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
+          }
         </MobileRow>
 
         <CardsContainer>
@@ -670,11 +698,15 @@ class Article extends React.Component {
       <Container>
         <TopContainer overlay={overlay}>
           <AllEntities />
-          <MainImage background={background}/>
+          <QuoteContainer>
+            <Quote>
+              {keyQuote}
+            </Quote>
+          </QuoteContainer>
           <TextContainer>
             <TextInnerContainer>
               <ContentBar>
-                <Title>{title}</Title>
+                <Title>{title.trim()}</Title>
                 <Author>by {author}</Author>
                 <Text dangerouslySetInnerHTML={{ __html: text}}/>
                 <TextFooter>
@@ -695,4 +727,4 @@ class Article extends React.Component {
   }
 }
 
-export default Article
+export default Interview

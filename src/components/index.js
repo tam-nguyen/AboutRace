@@ -17,3 +17,4 @@ export SVGArrow from './SVGArrow'
 export FiledUnderLink from './FiledUnderLink'
 
 export Article from './Article'
+export Interview from './Interview'

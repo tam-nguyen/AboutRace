@@ -187,24 +187,49 @@ export const FullInterviewFragment = graphql`
       processed
     }
     relationships {
-      field_interviewee {
-        localFile {
-          publicURL
+      field_which_subtheme_does_this_b {
+        id
+        name
+        relationships {
+          field_belongs_to_theme {
+            id
+            name
+          }
         }
       }
-    }
-    title
-    changed
-    field_interviewee_bio {
-      processed
-    }
-    field_key_quote {
-      processed
-    }
-    relationships {
+      field_tags {
+        name
+        relationships {
+          backref_field_tags_node_article {
+            ...ArticleFragment
+          }
+          backref_field_tag_node_faq {
+            ...FAQFragment
+          }
+          backref_field_t_node_clip {
+            ...PosterImageClipFragment
+          }
+        }
+      }
       field_interviewee {
         localFile {
           publicURL
+          childImageSharp {
+            id
+            original {
+              width
+              height
+              src
+            }
+            sizes {
+              src
+            }
+            resolutions {
+              height
+              width
+              src
+            }
+          }
         }
       }
     }

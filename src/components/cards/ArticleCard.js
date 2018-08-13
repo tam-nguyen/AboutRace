@@ -149,8 +149,6 @@ export class ArticleCard extends React.Component {
       <Container
         background={background}
         title={title}
-        type="Article"
-        slug="article"
         changed={article.changed}
         onClick={ () => onOpen(link)}
       >
