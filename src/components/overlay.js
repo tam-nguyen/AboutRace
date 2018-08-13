@@ -26,10 +26,12 @@ class UnstyledOverlay extends React.Component {
     if (wereAllHidden !== areAllHidden) {
       if (visible) {
         document.body.classList.add('modal-open')
+        window.document.getElementById('header').style.display = 'none'
         document.body.style.paddingRight = `${getScrollBarWidth()}px`
         window.dispatchEvent(new CustomEvent('modal', { detail: { open: true, scrollBarWidth: getScrollBarWidth() } }))
       } else {
         document.body.classList.remove('modal-open')
+        window.document.getElementById('header').style.display = 'flex'
         document.body.style.paddingRight = ``
         window.dispatchEvent(new CustomEvent('modal', { detail: { open: false, scrollBarWidth: 0 } }))
       }
@@ -46,15 +48,16 @@ class UnstyledOverlay extends React.Component {
   }
 }
 
+///
+
 export const Overlay = styled(UnstyledOverlay)`
-  // background-color: rgba(241, 239, 239, 0.94);
   background-color: rgba(255,255,255,0.92);
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
-  z-index:999999999999999999999999;
+  z-index: 12;
   opacity: 0;
   display: none;
   overflow-y: auto;
@@ -82,10 +85,12 @@ export const OverlayTitle = styled.div`
   font-size: 30px;
 `
 export const OverlayBody = styled.div`
+  position: relative;
+
   opacity: 1;
-  margin: 0 auto;
+  /*margin: 0 auto;
   margin-top: 180px;
-  padding-bottom: 60px;
+  padding-bottom: 60px;*/
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -104,5 +109,3 @@ export const OverlayHeader = styled.div`
   width: 100%;
   padding: 0 12.5%;
 `
-
-// export default { Overlay, OverlayHeader, OverlayTitle, OverlayFilter, OverlayBody }

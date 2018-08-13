@@ -18,7 +18,7 @@ const Container = styled.div`
   line-height: 24px;
   letter-spacing: 0.022em;
   font-family: 'Lato';
-  color: ${black};
+  color: ${props => props.color ? props.color : black};
   opacity: 0.8;
 
   @media (max-width: 812px) { /* mobile */
@@ -41,13 +41,13 @@ const Button = styled.div`
 
 const itemExists = (itemTag, parent) => parent.relationships[itemTag]
 
-const Filters = ({ queryParams, name, filter, subtheme, toggleFilter }) => {
+const Filters = ({ queryParams, name, filter, subtheme, toggleFilter, color}) => {
   const array = Array
     .from(DISPLAY_NAMES_TO_SLUG.keys())
     .filter(itemType => (itemType === `recently added` || itemExists(itemType, subtheme)))
 
   return (
-    <Container>
+    <Container color={color}>
       <Label>View:</Label>
         <Button 
           onClick={ () => toggleFilter(null) }

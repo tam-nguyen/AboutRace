@@ -4,14 +4,27 @@ import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move'
 
 import Filters from './Filters'
-import Link from '../Link'
+import {
+  Link,
+  FiledUnderLink
+} from '../'
+
+import {default as XButton} from '../Header/Menu'
 
 import { 
   Overlay, 
   OverlayBody 
 } from '../overlay'
 
+import { default as CustomOverlay } from './Overlay'
+import Article from '../Article'
+
 import getCards from '../../utils/getCards'
+
+import {
+  white,
+  backgroundColor
+} from '../../colors'
 
 const range = require('range');
 
@@ -75,8 +88,58 @@ const PopupCard = styled.div`
   overflow: hidden;
 `
 
-const CloseButton = styled.div`
+const OverlayContainer = styled.div`
+  overflow-y: scroll;
+
+  padding-top: 90px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+`
+
+const InnerOverlayContainer = styled.div`
+  width: 1200px;
+`
+
+const CloseButtonContainer = styled.div`
+  position: absolute;
+  top: 400px;
+  right: 50px;
+`
+
+const XButtonContainer = styled(XButton)`
   cursor: pointer;
+  display: block;
+  position: relative;
+`
+
+const CloseButton = props => (
+  <CloseButtonContainer>
+    <XButtonContainer 
+      width={30}
+      open={true} 
+      {...props}
+    />
+  </CloseButtonContainer>
+)
+
+///
+
+const AllEntities = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 50px;
 `
 
 const TopImage = styled.div`
@@ -101,13 +164,8 @@ const FlipContainer = styled(FlipMove)`
   justify-content: center;
 `
 
-const color = 'rgba(255, 255, 255, 0.66)'
-const backdropColor = 'rgba(245, 238, 182, 0.92)'
-const gradient = ``
-
 const Container = styled.div`
-  background-color: #ffffff;
-  background-image: ${gradient};
+  background-color: ${backgroundColor};
   box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
   backdrop-filter: blur(5px);
 
@@ -125,7 +183,9 @@ class Subtheme extends React.Component {
       numCards: NUM_CARDS_TO_SHOW,
       filter: null,
       popup: false,
-      card: null
+      card: null,
+      entities: '',
+      entitiesLink: '',
     }
 
     this.close = this.close.bind(this)
@@ -178,7 +238,10 @@ class Subtheme extends React.Component {
     this.order = this.getShuffle(length)
   }
 
-  close = () => {
+  close = event => {
+    const array = ['close-button', 'subtheme-overlay']
+    if( array.indexOf(event.target.id) == -1 ) return
+
     this.setState({
       popup: !this.state.popup,
       card: null
@@ -186,18 +249,28 @@ class Subtheme extends React.Component {
   }
 
   open = (link, data) => {
-    console.log({link, data})
+    
+    const typename = data.__typename.replace('node__','')
+    const entities = `all ${typename}s`
+    const entitiesLink = `/${typename}s`
+
     this.setState({
       popup: true,
-      card: {...data, link}
+      card: {...data, link},
+      entities,
+      entitiesLink
     })
+
+    setTimeout( () => {
+      window.document.getElementById('subtheme-overlay').scrollTop = 0
+    }, 1)
   }
 
   render() {
     const {data} = this.props;
     const subtheme = data;
 
-    const { filter, popup, card } = this.state;
+    const { filter, popup, card, entities, entitiesLink } = this.state;
 
     const rawCards = getCards(subtheme.relationships, filter, this.open)
 
@@ -212,13 +285,23 @@ class Subtheme extends React.Component {
     const description = card && card.field_short_version ? card.field_short_version.processed : null;
     const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
+    const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
+
     return (
       <Container>
-        <Overlay id="subtheme-overlay" visible={popup}>
+        <Overlay visible={popup}>
           <OverlayBody>
-            <Row>
-              <CloseButton onClick={this.close}>Close</CloseButton>
-            </Row>
+            <CustomOverlay gradient={gradient}>
+              <OverlayContainer id="subtheme-overlay" onClick={this.close}>
+                <InnerOverlayContainer>
+                  { card && <Article data={{nodeArticle: card}} overlay={true}/> }
+                </InnerOverlayContainer>
+              </OverlayContainer>
+              <AllEntities>
+                <FiledUnderLink color={white} to={entitiesLink}>{entities}</FiledUnderLink>
+              </AllEntities>
+              <CloseButton id="close-button" onClick={this.close} />
+            </CustomOverlay>
           </OverlayBody>
         </Overlay>
 
@@ -227,6 +310,7 @@ class Subtheme extends React.Component {
           name={this.props.name}
           filter={filter}
           subtheme={subtheme}
+          color={white}
         />
       
         <FlipContainer>

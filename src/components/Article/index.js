@@ -6,6 +6,7 @@ import get from 'lodash/get'
 import {
   Link,
   SVGArrow,
+  FiledUnderLink
 } from '../'
 
 import getCards from '../../utils/getCards'
@@ -24,7 +25,7 @@ const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 10
 const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   
   display: flex;
   flex-direction: column;
@@ -47,15 +48,13 @@ const TopContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  
-
-  width: 100vw;
+  width: 100%;
   height: auto;
 
   background: ${gradient};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${white};
+    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
     background-image: none;
   }
 
@@ -68,7 +67,7 @@ const TopContainer = styled.div`
 const BottomContaniner = styled.div`
   position: relative;
 
-  width: 100vw;
+  width: 100%;
   margin-top: -100px;
 
   padding-top: 60px;
@@ -79,7 +78,7 @@ const BottomContaniner = styled.div`
   background-image: ${gradient2};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${white};
+    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
     background-image: none;
   }
 
@@ -123,14 +122,19 @@ const MainImage = styled.div`
   }
 
   @media (max-width: 812px) { /* mobile */
-    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 40vh;
+    min-height: 300px;
   }
 `
 
 const TextContainer = styled.div`
   z-index: 3;
 
-  width: 80vw;
+  width: 80%;
   margin-top: 50vh;
 
   @media (min-width: 1025px) { /* desktop */
@@ -140,7 +144,7 @@ const TextContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     width: 100vw;
-    margin-top: 10vh;
+    margin-top: 20vh;
   }
 `
 
@@ -229,6 +233,14 @@ const ContentBar = styled(Column)`
   border-bottom-left-radius: 3px;
 
   box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
+
+  @media (min-width: 1025px) { /* desktop */
+    
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding: 10px;
+  }
 `
 
 const SideBar = styled(Column)`
@@ -265,6 +277,12 @@ const AuthorImage = styled.div`
   background-size: cover !important;
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+
+  @media (max-width: 812px) { /* mobile */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0px;
+  }
 `
 
 const Bio = styled.div`
@@ -295,44 +313,6 @@ const SubTitle = styled.div`
     padding-left: 0;
   }
 `
-
-const FiledUnderLinkContainer = styled(Link)`
-  display: flex;
-  flex-direction: row;
-
-  padding-left: 0;
-  padding-right: 10px;
-
-  font-family: Lato;
-  font-size: 18px;
-  line-height: 36px;
-  letter-spacing: 0.02em;
-  font-weight: 600;
-  text-transform: capitalize;
-
-  color: ${props => props.color};
-
-  @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
-    padding-right: 0;
-  }
-
-  @media (max-width: 812px) { /* mobile */
-    padding-left: 0;
-    padding-right: 0;
-  }
-`
-
-const FiledUnderLink = ({children, color, to}) => {
-  if(!color) color = red;
-
-  return (
-    <FiledUnderLinkContainer href={to} color={color}>
-      <SVGArrow style={{width: 25, marginRight: 10}} color={color}/>
-      {children}
-    </FiledUnderLinkContainer>
-  )
-}
 
 ///
 
@@ -410,8 +390,11 @@ const CardsContainer = styled.div`
 
   @media (max-width: 812px) { /* mobile */
     justify-content: center;
+    align-items: center;
     padding-left: 0;
     padding-right: 0;
+
+    min-width: 100vw;
   }
 `
 
@@ -477,7 +460,8 @@ const MobileColumn = styled(Column)`
   padding: 0;
 
   @media (max-width: 812px) { /* mobile */
-    padding: 60px;
+    padding-top: 60px;
+    padding-left: 10px;
   }
 `
 
@@ -535,6 +519,8 @@ const AllEntitiesContainer = styled(Row)`
   padding-top: 90px;
   padding-right: 60px;
 
+  z-index: 4;
+
   @media (min-width: 1025px) { /* desktop */
     display: none;
   }
@@ -587,7 +573,7 @@ const Copyright = styled(Row)`
 
 class Article extends React.Component {
   render() {
-    const {data} = this.props
+    const {data, overlay} = this.props
 
     const background = get(this, 'props.data.nodeArticle.relationships.field_main_image.localFile.childImageSharp.original.src')
     const calloutText = get(this, 'props.data.nodeArticle.field_large_callout_text.processed')
@@ -681,14 +667,8 @@ class Article extends React.Component {
 
     return (
       <Container>
-        <TopContainer>
+        <TopContainer overlay={overlay}>
           <AllEntities />
-          <CallOutContainer>
-            <Column>
-              <CallOut dangerouslySetInnerHTML={{ __html: calloutText}} />
-              <Copyright dangerouslySetInnerHTML={{ __html: copyright}} />
-            </Column>
-          </CallOutContainer>
           <MainImage background={background}/>
           <TextContainer>
             <TextInnerContainer>
@@ -704,7 +684,7 @@ class Article extends React.Component {
             </TextInnerContainer>
           </TextContainer>
         </TopContainer>
-        <BottomContaniner>
+        <BottomContaniner overlay={overlay}>
           <Footer>
             <MobileSideBar />
           </Footer>
