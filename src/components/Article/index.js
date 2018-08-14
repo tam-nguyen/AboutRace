@@ -88,7 +88,7 @@ const BottomContaniner = styled.div`
 `
 
 const MainImage = styled.div`
-  position: absolute;
+  position: fixed;
   top: 222px;
   left: 60px;
   right: 60px;
@@ -135,11 +135,11 @@ const TextContainer = styled.div`
   z-index: 3;
 
   width: 80%;
-  margin-top: 50vh;
+  padding-top: 40vh;
 
   @media (min-width: 1025px) { /* desktop */
     width: 1000px;
-    margin-top: 70vh;
+    padding-top: 60vh;
   }
 
   @media (max-width: 812px) { /* mobile */

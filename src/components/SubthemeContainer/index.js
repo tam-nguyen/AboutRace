@@ -115,9 +115,11 @@ const InnerOverlayContainer = styled.div`
 `
 
 const CloseButtonContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 400px;
   right: 50px;
+
+  z-index: 4;
 `
 
 const XButtonContainer = styled(XButton)`
