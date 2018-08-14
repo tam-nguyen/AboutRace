@@ -18,3 +18,4 @@ export FiledUnderLink from './FiledUnderLink'
 
 export Article from './Article'
 export Interview from './Interview'
+export QA from './QA'
