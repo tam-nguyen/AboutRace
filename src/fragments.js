@@ -72,7 +72,7 @@ export const FullArticleFragment = graphql`
       field_article_related_content {
         __typename
         ... on node__faq {
-          ...FAQFragment
+          ...QAFragment
         }
         ... on node__clip {
           ...PosterImageClipFragment
@@ -91,7 +91,7 @@ export const FullArticleFragment = graphql`
             ...ArticleFragment
           }
           backref_field_tag_node_faq {
-            ...FAQFragment
+            ...QAFragment
           }
           backref_field_t_node_clip {
             ...PosterImageClipFragment
@@ -205,7 +205,7 @@ export const FullInterviewFragment = graphql`
             ...ArticleFragment
           }
           backref_field_tag_node_faq {
-            ...FAQFragment
+            ...QAFragment
           }
           backref_field_t_node_clip {
             ...PosterImageClipFragment
@@ -237,8 +237,8 @@ export const FullInterviewFragment = graphql`
   }
 `
 
-export const FAQFragment = graphql`
-  fragment FAQFragment on node__faq {
+export const QAFragment = graphql`
+  fragment QAFragment on node__faq {
     title
     field_expert_1 {
       value
@@ -246,6 +246,81 @@ export const FAQFragment = graphql`
       processed
     }
     changed
+  }
+`
+
+export const FullQAFragment = graphql`
+  fragment FullQAFragment on node__faq {
+    id
+    title
+    fields {
+      slug
+    }
+    field_title {
+      processed
+    }
+    field_question_summary {
+      processed
+    }
+    field_expert_1 {
+      processed
+    }
+    field_expert_1_answer {
+      processed
+    }
+    field_expert_2 {
+      processed
+    }
+    field_expert_3_name {
+      processed
+    }
+    field_expert_4_name {
+      processed
+    }
+    field_expert_4_answer {
+      processed
+    }
+    relationships {
+      field_belongs_to_subtheme {
+        id
+        name
+        relationships {
+          field_belongs_to_theme {
+            id
+            name
+          }
+        }
+      }
+      field_article_related_content : backref_field_article_related_content {
+        __typename
+        #... on node__faq {
+        #  ...QAFragment
+        #}
+        #... on node__clip {
+        #  ...PosterImageClipFragment
+        #}
+        ... on node__article {
+          ...ArticleFragment
+        }
+        #... on node__quickfact {
+        #  ...QuickfactWithRelatedContentFragment
+        #}
+      }
+      field_tags: field_tag {
+        name
+        relationships {
+          backref_field_tags_node_article {
+            ...ArticleFragment
+          }
+          backref_field_tag_node_faq {
+            ...QAFragment
+          }
+          backref_field_t_node_clip {
+            ...PosterImageClipFragment
+          }
+        }
+      }
+    }
   }
 `
 
@@ -263,7 +338,7 @@ export const ClipFragment = graphql`
       field_re {
         __typename
         ... on node__faq {
-          ...FAQFragment
+          ...QAFragment
         }
         ... on node__clip {
           ...PosterImageClipFragment
@@ -294,7 +369,7 @@ export const QuickfactWithRelatedContentFragment = graphql`
       field_related_content {
         __typename
         ... on node__faq {
-          ...FAQFragment
+          ...QAFragment
         }
         ... on node__clip {
           ...PosterImageClipFragment

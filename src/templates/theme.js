@@ -266,7 +266,7 @@ export const pageQuery = graphql`
               ...InterviewFragment
             }
             faqs: backref_field_belongs_to_subtheme_node_faq {
-              ...FAQFragment
+              ...QAFragment
             }
           }
         }

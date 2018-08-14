@@ -33,6 +33,8 @@ const ArrowTitle = styled.div`
 class SingleQA extends React.Component {
   render() {
     const { data } = this.props;
+    console.log(data)
+
     const { 
       allNodeFaq, 
       nodeFaq: {
@@ -114,35 +116,7 @@ export const faqQuery = graphql`
     }
 
     nodeFaq(id: { eq: $id }) {
-  	  id
-  		title
-      fields {
-        slug
-      }
-  	  field_title {
-  	    processed
-  	  }
-  	  field_question_summary {
-  	    processed
-  	  }
-  	  field_expert_1 {
-  	    processed
-  	  }
-  	  field_expert_1_answer {
-  	    processed
-  	  }
-  	  field_expert_2 {
-  	    processed
-  	  }
-  	  field_expert_3_name {
-  	    processed
-  	  }
-  	  field_expert_4_name {
-  	    processed
-  	  }
-  	  field_expert_4_answer {
-  	    processed
-  	  }
+  	  ...FullQAFragment
     }
   }
 `
