@@ -251,6 +251,7 @@ export const QAFragment = graphql`
 
 export const FullQAFragment = graphql`
   fragment FullQAFragment on node__faq {
+    __typename
     id
     title
     fields {

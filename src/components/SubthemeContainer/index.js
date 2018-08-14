@@ -20,6 +20,7 @@ import {
 import { default as CustomOverlay } from './Overlay'
 import Article from '../Article'
 import Interview from '../Interview'
+import QA, { gradient as gradientQA } from '../QA'
 
 import getCards from '../../utils/getCards'
 
@@ -34,7 +35,7 @@ const SubthemeTitle = styled.div`
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-size: 42px;
-  font-weight:300;
+  font-weight: 300;
   padding: 15px;
   font-family: 'Lato';
   text-align: center;
@@ -131,7 +132,7 @@ const XButtonContainer = styled(XButton)`
 const CloseButton = props => (
   <CloseButtonContainer>
     <XButtonContainer 
-      width={30}
+      width={100}
       open={true} 
       {...props}
     />
@@ -255,7 +256,7 @@ class Subtheme extends React.Component {
 
   open = (link, data) => {
     const typename = data.__typename.replace('node__','')
-    const entities = `all ${typename}s`
+    const entities = typename == 'faq' ? `All Q&As` : `all ${typename}s`
     const entitiesLink = `/${typename}s`
 
     this.setState({
@@ -279,14 +280,15 @@ class Subtheme extends React.Component {
 
     let component = null
 
-    console.log({typename, card})
-
     switch(typename){
       case 'article':
         component = <Article data={{nodeArticle: card}} overlay={true}/>
         break
       case 'interview':
         component = <Interview data={{nodeInterview: card}} overlay={true}/>
+        break
+      case 'faq':
+        component = <QA data={{nodeFaq: card}} overlay={true}/>
         break
       default:
         return null
@@ -299,7 +301,14 @@ class Subtheme extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    const { filter, popup, card, entities, entitiesLink } = this.state;
+    const { 
+      filter, 
+      popup, 
+      card, 
+      entities, 
+      entitiesLink,
+      typename
+    } = this.state;
 
     const rawCards = getCards(subtheme.relationships, filter, this.open)
 
@@ -314,7 +323,17 @@ class Subtheme extends React.Component {
     const description = card && card.field_short_version ? card.field_short_version.processed : null;
     const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
-    const gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
+    let gradient, color
+
+    switch(typename){
+      case 'faq':
+        gradient = gradientQA
+        color = backgroundColor
+        break;
+      default:
+        gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
+        color = white
+    }
 
     return (
       <Container>
@@ -327,9 +346,9 @@ class Subtheme extends React.Component {
                 </InnerOverlayContainer>
               </OverlayContainer>
               <AllEntities>
-                <FiledUnderLink color={white} to={entitiesLink}>{entities}</FiledUnderLink>
+                <FiledUnderLink color={color} to={entitiesLink}>{entities}</FiledUnderLink>
               </AllEntities>
-              <CloseButton id="close-button" onClick={this.close} />
+              <CloseButton id="close-button" color={color} onClick={this.close} />
             </CustomOverlay>
           </OverlayBody>
         </Overlay>

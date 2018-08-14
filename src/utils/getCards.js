@@ -53,6 +53,7 @@ const getCards = (relationships, queryFilter, onOpen) => {
     <QACard
       key={'qa-' + qa.title}
       qa={qa}
+      onOpen={ link => onOpen(link, qa) } 
     />
   )
 

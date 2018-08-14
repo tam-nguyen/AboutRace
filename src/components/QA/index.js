@@ -21,7 +21,7 @@ import {
 } from '../../colors'
 
 const TICKER = 'Q&A'
-const gradient = `linear-gradient(to bottom, #EEFFE8 0%, rgba(255,255,255,0.92) 100%)`
+export const gradient = `linear-gradient(to bottom, #EEFFE8 0%, rgba(255,255,255,0.92) 100%)`
 const gradient2 = `linear-gradient(to bottom, #EEFFE8 0%, #F6FFF4 100%)`
 const gradient3 = `linear-gradient(to bottom, #A7C6D9 0%, #546D67 100%)`
 
@@ -56,7 +56,7 @@ const TopContainer = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: ${gradient};
+    background-image: ${ props => props.overlay ? 'none' : gradient };
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -127,7 +127,7 @@ const Footer = styled(Row)`
   width: auto;
   min-height: 20vh;
 
-  background: ${gradient3};
+  background-image: ${props => props.overlay ? null : gradient3 };
 
   @media (min-width: 1025px) { /* desktop */
     display: flex;
@@ -209,6 +209,7 @@ const SubTitle = styled.div`
 const getFiledUnder = array => {
   let results = []
 
+  if(array)
   array.map( ({name}) =>
     results.push({
       name,
@@ -387,8 +388,10 @@ const Description = styled.div`
   line-height: 24px;
 `
 
+const MAX_WIDTH = 664
+
 const Experts = styled(Column)`
-  max-width: 664px;
+  max-width: ${MAX_WIDTH}px;
   margin: auto;
 
   align-items: center;
@@ -421,6 +424,11 @@ const ExpertAnswer = styled.div`
   line-height: 24px;
 `
 
+const MobileSideBarContainer = styled(Column)`
+  color: ${darkWhite};
+  width: 100vw;
+`
+
 class QA extends React.Component {
   render() {
     const {data, overlay} = this.props
@@ -450,8 +458,8 @@ class QA extends React.Component {
     if(field_expert_1_answer) answers.push({answer: field_expert_1_answer, expert: field_expert_3_name})
     if(field_expert_4_answer) answers.push({answer: field_expert_4_answer, expert: field_expert_4_name})
 
-    const MobileSideBar = () => (
-      <Column style={{color: darkWhite, width: '100vw'}}>
+    const MobileSideBar = props => (
+      <MobileSideBarContainer>
 
         <MobileRow style={{alignItems: 'flex-start'}}>
           <FiledUnderContainer>
@@ -481,7 +489,7 @@ class QA extends React.Component {
           { relatedContent }
         </CardsContainer>
         
-      </Column>
+      </MobileSideBarContainer>
     )
 
     return (
@@ -504,7 +512,7 @@ class QA extends React.Component {
             </Row>)
           }
           </Experts>
-          <Footer>
+          <Footer overlay={overlay}>
             <MobileSideBar />
           </Footer>
         </BottomContaniner>
