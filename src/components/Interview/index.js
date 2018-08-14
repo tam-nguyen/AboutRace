@@ -111,7 +111,7 @@ const Quote = styled.div`
 `
 
 const QuoteContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 100px;
   left: 60px;
   right: 60px;
@@ -156,11 +156,11 @@ const TextContainer = styled.div`
   z-index: 3;
 
   width: 80%;
-  margin-top: 50vh;
+  padding-top: 40vh;
 
   @media (min-width: 1025px) { /* desktop */
     width: 1000px;
-    margin-top: 70vh;
+    padding-top: 60vh;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -544,7 +544,7 @@ const AllEntitiesContainer = styled(Row)`
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    position: absolute;
+    position: fixed;
     top: 0;
   }
 
