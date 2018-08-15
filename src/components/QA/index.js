@@ -480,6 +480,7 @@ class QA extends React.Component {
     let left = null
     let right = null
 
+    if(edges)
     edges.map( (edge, key) => {
       const {node: {id, fields: {slug}}} = edge;
       if(currentId === id) {
