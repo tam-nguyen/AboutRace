@@ -257,7 +257,7 @@ class Subtheme extends React.Component {
   open = (link, data) => {
     const typename = data.__typename.replace('node__','')
     const entities = typename == 'faq' ? `All Q&As` : `all ${typename}s`
-    const entitiesLink = `/${typename}s`
+    const entitiesLink = typename == 'faq' ? '/qa' : `/${typename}s`
 
     this.setState({
       popup: true,

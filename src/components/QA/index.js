@@ -6,7 +6,8 @@ import get from 'lodash/get'
 import {
   Link,
   SVGArrow,
-  FiledUnderLink
+  FiledUnderLink,
+  SVGChevron,
 } from '../'
 
 import getCards from '../../utils/getCards'
@@ -330,6 +331,10 @@ const TopCard = styled(Column)`
 
   margin-top: 50px;
   margin-bottom: 60px;
+
+  margin-left: 30px;
+  margin-right: 30px;
+
   padding: 60px;
 
   border-radius: 3px;
@@ -429,13 +434,80 @@ const MobileSideBarContainer = styled(Column)`
   width: 100vw;
 `
 
+const ChevronContainer = styled(Link)`
+  cursor: pointer;
+  
+  width: 18px;
+  height: 30px;
+
+  transform: rotate(${props => props.open ? 180 : 0}deg);
+
+  transition: all 0.3s ease-out;
+
+  @media (max-width: 812px) { /* mobile */
+    display: none;
+  }
+`
+
+const Chevron = ({left, to}) => <ChevronContainer href={to} open={left}>
+  <SVGChevron color={red} />
+</ChevronContainer>
+
+///
+
+const InnerTopContainer = styled(Row)`
+  align-items: center;
+
+  @media (min-width: 1025px) { /* desktop */
+    
+  }
+
+  @media (max-width: 812px) { /* mobile */
+
+  }
+`
+
+const nodeName = 'nodeFaq'
+
 class QA extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const currentId = get(props, `data.${nodeName}.id`)
+    const edges = get(props, 'data.allNodeFaq.edges')
+    const totalCount = get(props, 'data.allNodeFaq.totalCount')
+
+    let left = null
+    let right = null
+
+    edges.map( (edge, key) => {
+      const {node: {id, fields: {slug}}} = edge;
+      if(currentId === id) {
+        if( key - 1 >= 0 ) {
+          const previous = edges[key - 1]
+          const {node: {fields: {slug}}} = previous
+          left = `/qa/${kebabCase(slug)}`
+        }
+
+        if( key + 1 < totalCount) {
+          const next = edges[key + 1]
+          const {node: {fields: {slug}}} = next
+          right = `/qa/${kebabCase(slug)}`
+        }
+        
+      }
+    })
+  
+    this.state = {
+      left,
+      right
+    };
+  }
+
   render() {
+    const {left, right} = this.state
     const {data, overlay} = this.props
-    const nodeName = 'nodeFaq'
-
-    console.log(data)
-
+    
     const title = get(this, `props.data.${nodeName}.title`)
     const description = get(this, `props.data.${nodeName}.field_question_summary.processed`)
 
@@ -496,10 +568,14 @@ class QA extends React.Component {
       <Container>
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
-          <TopCard>
-            <Title>{title}</Title>
-            <Description dangerouslySetInnerHTML={{ __html: description }}/>
-          </TopCard>
+          <InnerTopContainer>
+            { left && <Chevron to={left} left={true}/>}
+            <TopCard>
+              <Title>{title}</Title>
+              <Description dangerouslySetInnerHTML={{ __html: description }}/>
+            </TopCard>
+            { right && <Chevron to={right}/>}
+          </InnerTopContainer>
         </TopContainer>
         <BottomContaniner overlay={overlay}>
           <Experts>
