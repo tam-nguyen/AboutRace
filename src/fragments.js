@@ -357,6 +357,57 @@ export const ClipFragment = graphql`
   }
 `
 
+export const FullClipFragment = graphql`
+  fragment FullClipFragment on node__clip {
+    __typename
+    id
+    field_episode
+    title
+    field_external_video_url {
+      uri
+      title
+    }
+    field_title_of_clip {
+      processed
+    }
+     relationships {
+      field_re {
+        __typename
+        ... on node__faq {
+          ...QAFragment
+        }
+        ... on node__clip {
+          ...PosterImageClipFragment
+        }
+        ... on node__article {
+          ...ArticleFragment
+        }
+      }
+      field_poster_image {
+        localFile {
+          publicURL
+          childImageSharp {
+            id
+            original {
+              width
+              height
+              src
+            }
+            sizes {
+              src
+            }
+            resolutions {
+              height
+              width
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const QuickfactWithRelatedContentFragment = graphql`
   fragment QuickfactWithRelatedContentFragment on node__quickfact {
     title

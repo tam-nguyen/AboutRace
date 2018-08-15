@@ -7,7 +7,11 @@ import get from 'lodash/get'
 import Filters from './Filters'
 import {
   Link,
-  FiledUnderLink
+  FiledUnderLink,
+  Article,
+  Interview,
+  QA,
+  Clip
 } from '../'
 
 import {default as XButton} from '../Header/Menu'
@@ -18,9 +22,7 @@ import {
 } from '../overlay'
 
 import { default as CustomOverlay } from './Overlay'
-import Article from '../Article'
-import Interview from '../Interview'
-import QA, { gradient as gradientQA } from '../QA'
+import { gradient as gradientQA } from '../QA'
 
 import getCards from '../../utils/getCards'
 
@@ -289,6 +291,9 @@ class Subtheme extends React.Component {
         break
       case 'faq':
         component = <QA data={{nodeFaq: card}} overlay={true}/>
+        break
+      case 'clip':
+        component = <Clip data={{nodeClip: card}} overlay={true}/>
         break
       default:
         return null
