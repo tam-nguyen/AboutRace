@@ -12,6 +12,7 @@ const GreyBackground = styled.div`
   height: 100%;
   width:100%;
 `
+
 const IntroText = styled.div`
   font-weight: 300;
   font-size: 48px;
@@ -23,10 +24,12 @@ const IntroText = styled.div`
   color: snow;
   background-color: #25292b;
 `
+
 const InterviewCard = styled.div`
   position: relative;
   overflow:hidden;
 `
+
 const InterviewTitle = styled.div`
   margin-bottom: 11.25px;
   font-size:20px;
@@ -36,6 +39,7 @@ const InterviewTitle = styled.div`
   color: inherit;
   font-weight: 700;
 `
+
 const InterviewExcerpt = styled.div`
   line-height: 1.5;
   font-weight: 500;
@@ -45,6 +49,7 @@ const InterviewExcerpt = styled.div`
     margin-bottom: 7.5px;
   }
 `
+
 const InterviewImage = styled.div`
   background-color:red;
   border-radius: 50%;
@@ -53,33 +58,19 @@ const InterviewImage = styled.div`
   margin-bottom: 15px;
   background-position: center;
   background-size:cover;
-  background-image: ${props =>
-    props.background ? `url(${props.background})` : `none`};
+  background-image: ${props => props.background ? `url(${props.background})` : `none`};
 `
-const InterviewMain = styled.div`
 
+const InterviewMain = styled.div`
 `
+
 const AllInterviews = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0 45px;
 `
-const AuthorBioText = styled.div`
-  width: 100%;
-  height: auto;
-  position: absolute;
-  bottom: 0;
-  left:0;
-  z-index: 9999999999;
-  background-color: rgba(255, 255, 255, 0.96);
-  padding: 30px;
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight:500;
-  border-top: solid thin lightgrey;
-  font-family: 'Lato';
-`
+
 const TopText = styled.div`
   width: 100%;
   text-align: center;
@@ -88,14 +79,6 @@ const TopText = styled.div`
   background-color: #25292b;
   color: white;
 `
-
-const AuthorBio = ({ data }) => (
-  <div
-  dangerouslySetInnerHTML={{
-    __html: data.field_interviewee_bio && data.field_interviewee_bio.processed,
-  }}
-  />
-)
 
 const InterviewSummary = ({ data }) => {
   return (

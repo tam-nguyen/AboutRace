@@ -5,7 +5,6 @@ import get from 'lodash/get'
 
 import {
   Link,
-  SVGArrow,
   FiledUnderLink,
   SVGChevron,
 } from '../'
@@ -13,10 +12,8 @@ import {
 import getCards from '../../utils/getCards'
 
 import {
-  black,
   white,
   darkWhite,
-  whiteShadow,
   backgroundColor,
   red,
 } from '../../colors'
@@ -150,12 +147,6 @@ const MobileRow = styled(Row)`
     padding-left: 0;
     margin-top: 0;
     justify-content: center;
-  }
-`
-
-const FirstMobileRow = styled(MobileRow)`
-  @media (max-width: 812px) { /* mobile */
-    margin-top: -150px;
   }
 `
 
@@ -481,8 +472,8 @@ class QA extends React.Component {
     let right = null
 
     if(edges)
-    edges.map( (edge, key) => {
-      const {node: {id, fields: {slug}}} = edge;
+    edges.forEach( (edge, key) => {
+      const {node: {id}} = edge;
       if(currentId === id) {
         if( key - 1 >= 0 ) {
           const previous = edges[key - 1]
@@ -507,7 +498,7 @@ class QA extends React.Component {
 
   render() {
     const {left, right} = this.state
-    const {data, overlay} = this.props
+    const {overlay} = this.props
     
     const title = get(this, `props.data.${nodeName}.title`)
     const description = get(this, `props.data.${nodeName}.field_question_summary.processed`)

@@ -69,15 +69,6 @@ const InnerContainer = styled.div`
   flex-direction: column;
 `
 
-const Author = styled.div`
-  font-family: Lato;
-  font-size: 12pt;
-  line-height: 18px;
-  letter-spacing: 0.022em;
-
-  text-transform: uppercase;
-`
-
 const Ticker = styled.div`
   position: absolute;
 
@@ -187,7 +178,7 @@ export class ClipCard extends React.Component {
     const background = clip.relationships.field_poster_image.localFile.publicURL
     const fromEpisode = 'from episode 1'
 
-    const {title, uri} = clip.field_external_video_url
+    // const {title, uri} = clip.field_external_video_url
 
     return (
       <Container onClick={ () => onOpen(link)} >

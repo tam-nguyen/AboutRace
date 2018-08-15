@@ -1,6 +1,6 @@
 import React from "react"
 import kebabCase from 'lodash/kebabCase'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
 
@@ -13,8 +13,6 @@ import {
 
 import {
   backgroundColor,
-  titleColor,
-  grandColor,
 
   red,
   white,
@@ -32,16 +30,6 @@ const Container = styled.div`
   z-index: 0;
 `
 
-const Main = styled.div`
-  background-size: cover !important;
-  text-align: center;
-  border-radius: 3px;
-  color: white;
-  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-  position: relative;
-  z-index: 3;
-`
-// min-height: 340px;
 const Header = styled.div`
   position: relative;
 
@@ -186,7 +174,6 @@ class SubThemePage extends React.Component {
     } = this.props;
 
     const {
-      field_theme_image, 
       theme,
       color
     } = pageContext;

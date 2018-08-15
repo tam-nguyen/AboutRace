@@ -4,8 +4,6 @@ import kebabCase from 'lodash/kebabCase'
 import get from 'lodash/get'
 
 import {
-  Link,
-  SVGArrow,
   FiledUnderLink
 } from '../'
 
@@ -561,49 +559,10 @@ const AllEntities = () => <AllEntitiesContainer>
 
 ///
 
-const CallOutContainer = styled(Row)`
-  display: none;
-
-  color: ${white};
-
-  padding: 40px;
-
-  justify-content: center !important;
-  text-align: center !important;
-
-  @media (min-width: 1025px) { /* desktop */
-    display: none;
-  }
-
-  @media (max-width: 812px) { /* mobile */
-    display: flex;
-  }
-`
-
-const CallOut = styled(Row)`
-  font-family: 'Tisa Pro';
-  font-size: 24px;
-  line-height: 30px;
-`
-
-const Copyright = styled(Row)`
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-
-  justify-content: center;
-`
-
 class Interview extends React.Component {
   render() {
-    const {data, overlay} = this.props
+    const {overlay} = this.props
     const nodeName = 'nodeInterview'
-
-    console.log(data)
-    
-    const background = get(this, `props.data.${nodeName}.relationships.field_main_image.localFile.childImageSharp.original.src`)
-    const calloutText = get(this, `props.data.${nodeName}.field_large_callout_text.processed`)
-    const copyright = get(this, `props.data.${nodeName}.field_copyright.processed`)
 
     const title = get(this, `props.data.${nodeName}.title`)
     const author = get(this, `props.data.${nodeName}.field_interviewee_name.processed`)

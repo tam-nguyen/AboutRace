@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, push, graphql } from 'gatsby'
-import kebabCase from 'lodash/kebabCase'
+import { Link, push,} from 'gatsby'
 import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
 import episodes from '../utils/episodes-data'
 import Layout from "../components/layout"

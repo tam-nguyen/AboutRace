@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link, graphql } from 'gatsby'
-import kebabCase from 'lodash/kebabCase'
-import {AllClips, Layout, Filter} from '../components'
+import { graphql } from 'gatsby'
+
+import {
+	AllClips, 
+	Layout, 
+	Filter
+} from '../components'
 
 const queryString = require('query-string');
 
-const ClipsIntro = styled.div
-`
+const ClipsIntro = styled.div`
 	font-size:24px;
 	margin-bottom:60px;
 	line-height:1.5;
@@ -26,7 +29,7 @@ class Clips extends Component {
 	onSelected = selected => {
 		let queryParams = queryString.parse(window.location.search)
 		queryParams.episode = selected;
-		const search = `?` + queryString.stringify({ ...queryParams});
+		// const search = `?` + queryString.stringify({ ...queryParams});
 
 		// uncomment if you want to have url changed
 		// history.pushState({}, window.document.title, search)

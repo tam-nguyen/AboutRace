@@ -1,6 +1,5 @@
 import React from "react"
 import styled from 'styled-components';
-import kebabCase from 'lodash/kebabCase'
   
 import Card from '../Card';
 
@@ -14,7 +13,7 @@ const Title = styled.h4`
 
 export class QuickFactCard extends React.Component {
   render() {
-    const { quickfact, i, relatedContent, style = {} } = this.props
+    const { quickfact } = this.props
     const description = quickfact.field_quickfact.processed;
 
     return (

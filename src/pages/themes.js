@@ -1,12 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import kebabCase from 'lodash/kebabCase'
-import styled from 'styled-components'
+
 import {
   Layout,
-  Link,
-  Title,
   ThemeCard
 } from "../components"
 

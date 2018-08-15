@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import kebabCase from 'lodash/kebabCase'
 import FlipMove from 'react-flip-move'
-import get from 'lodash/get'
+// import get from 'lodash/get'
 
 import Filters from './Filters'
 import {
-  Link,
   FiledUnderLink,
   Article,
   Interview,
@@ -33,18 +31,6 @@ import {
 
 const range = require('range');
 
-const SubthemeTitle = styled.div`
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-  font-size: 42px;
-  font-weight: 300;
-  padding: 15px;
-  font-family: 'Lato';
-  text-align: center;
-  color: rgba(59, 59, 59, 0.8);
-  margin-bottom: 15px;
-  margin-top: 15px;
-`
 const NUM_CARDS_TO_SHOW = 3;
 
 const shuffle = (arr) => {
@@ -73,25 +59,6 @@ const reorder = (arr, order) => {
   })
   return newArr;
 }
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`
-
-const PopupCard = styled.div`
-  position: relative;
-  width: 33vw;
-  height: 33vw;
-  min-width: 300px;
-  min-height: 300px;
-  background-color: gray;
-  border-radius: 100px;
-  border: 1px solid grey;
-  overflow: hidden;
-`
 
 const OverlayContainer = styled.div`
   overflow-y: scroll;
@@ -147,15 +114,6 @@ const AllEntities = styled.div`
   position: absolute;
   top: 30px;
   right: 50px;
-`
-
-const TopImage = styled.div`
-  height:50%;
-  width:100%;
-  background-color:red;
-  background-size:cover;
-  background-position: center;
-  background-image: ${props => props.background ?  `url(${props.background})` : `none`};
 `
 
 const FlipContainer = styled(FlipMove)`
@@ -248,7 +206,7 @@ class Subtheme extends React.Component {
 
   close = event => {
     const array = ['close-button', 'subtheme-overlay']
-    if( array.indexOf(event.target.id) == -1 ) return
+    if( array.indexOf(event.target.id) === -1 ) return
 
     this.setState({
       popup: !this.state.popup,
@@ -258,8 +216,8 @@ class Subtheme extends React.Component {
 
   open = (link, data) => {
     const typename = data.__typename.replace('node__','')
-    const entities = typename == 'faq' ? `All Q&As` : `all ${typename}s`
-    const entitiesLink = typename == 'faq' ? '/qa' : `/${typename}s`
+    const entities = typename === 'faq' ? `All Q&As` : `all ${typename}s`
+    const entitiesLink = typename === 'faq' ? '/qa' : `/${typename}s`
 
     this.setState({
       popup: true,
@@ -323,10 +281,10 @@ class Subtheme extends React.Component {
 
     allCards = allCards.filter( allCards => !!allCards)
 
-    const title = card && card.title ? card.title : '';
-    const link = card && card.link ? card.link : '';
-    const description = card && card.field_short_version ? card.field_short_version.processed : null;
-    const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
+    // const title = card && card.title ? card.title : '';
+    // const link = card && card.link ? card.link : '';
+    // const description = card && card.field_short_version ? card.field_short_version.processed : null;
+    // const background = card && card.relationships.field_main_image && card.relationships.field_main_image.localFile.publicURL;
 
     let gradient, color
 

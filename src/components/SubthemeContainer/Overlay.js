@@ -1,7 +1,4 @@
-import React from 'react'
 import styled from 'styled-components'
-
-
 
 const Overlay = styled.div`
   position: absolute;
@@ -41,7 +38,5 @@ const Overlay = styled.div`
     filter: opacity(89%);
   }
 `
-
-
 
 export default Overlay;
