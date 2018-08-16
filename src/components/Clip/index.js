@@ -57,7 +57,7 @@ const TopContainer = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    
+    background-image: ${ props => props.overlay ? 'none' : gradient };
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -79,6 +79,7 @@ const BottomContaniner = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
+    background-image: ${ props => props.overlay ? 'none' : gradient };
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -401,7 +402,7 @@ class Clip extends React.Component {
     return (
       <Container>
         <TopContainer overlay={overlay}>
-          <AllEntities />
+          { !overlay && <AllEntities /> }
           <Content>
             <SideBar>
               <SubTitle>filed under:</SubTitle>
