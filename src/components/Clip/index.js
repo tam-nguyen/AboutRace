@@ -290,7 +290,7 @@ const IMAGE_WIDTH = 663
 
 const MainImage = styled.div`
   cursor: pointer;
-  
+
   display: flex;
   flex-direction: row;
 
@@ -390,7 +390,7 @@ class Clip extends React.Component {
     console.log('Clip', data)
 
     const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
-
+    const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
     const title = get(this, `props.data.${nodeName}.title`)
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
