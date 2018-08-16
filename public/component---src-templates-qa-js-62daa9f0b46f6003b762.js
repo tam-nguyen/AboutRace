@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{211:function(a,n,e){"use strict";e.r(n),e.d(n,"faqQuery",function(){return u});var t=e(0),o=e.n(t),r=e(224),i=e(231),c=e(225),d=r.b.div.withConfig({displayName:"qa__Container"})(["background-color:",";@media (max-width:812px){}"],c.o);n.default=function(a){var n=a.data,e=a.location;return o.a.createElement(i.g,{location:e},o.a.createElement(d,null,o.a.createElement(i.j,{data:n})))};var u="494526662"}}]);
+//# sourceMappingURL=component---src-templates-qa-js-62daa9f0b46f6003b762.js.map
