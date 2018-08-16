@@ -113,17 +113,17 @@ const Title = styled.div`
   letter-spacing: 0.02em;
   line-height: 54px;
 
-  color: ${black};
+  color: ${white};
 
-  font-size: 20pt;
+  font-size: 66px;
   font-weight: 600;
 `;
 
 const Description = styled.div`
   font-family: Tisa Pro;
-  font-size: 22pt;
+  font-size: 22px;
+  margin-right: 90px;
   line-height: 30px;
-
   margin-bottom: 45px;
 
   & > p {
