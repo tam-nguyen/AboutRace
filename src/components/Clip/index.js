@@ -16,8 +16,6 @@ import {
   black,
   white,
   darkWhite,
-  // whiteShadow,
-  // backgroundColor,
   red,
 } from '../../colors'
 
@@ -387,8 +385,6 @@ const nodeName = 'nodeClip'
 class Clip extends React.Component {
   render() {
     const {data, overlay} = this.props
-
-    console.log('Clip', data)
 
     const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
     const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
