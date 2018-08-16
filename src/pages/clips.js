@@ -11,9 +11,9 @@ import {
 const queryString = require('query-string');
 
 const ClipsIntro = styled.div`
-	font-size:24px;
-	margin-bottom:60px;
-	line-height:1.5;
+	font-size: 24px;
+	margin-bottom: 60px;
+	line-height: 1.5;
 `
 
 class Clips extends Component {

@@ -370,8 +370,53 @@ export const FullClipFragment = graphql`
     field_title_of_clip {
       processed
     }
-     relationships {
-      field_re {
+    relationships {
+      field_poster_image {
+        localFile {
+          publicURL
+          childImageSharp {
+            id
+            original {
+              width
+              height
+              src
+            }
+            sizes {
+              src
+            }
+            resolutions {
+              height
+              width
+              src
+            }
+          }
+        }
+      }
+      field_belongs_to_subtheme {
+        id
+        name
+        relationships {
+          field_belongs_to_theme {
+            id
+            name
+          }
+        }
+      }
+      field_tags: field_t {
+        name
+        relationships {
+          backref_field_tags_node_article {
+            ...ArticleFragment
+          }
+          backref_field_tag_node_faq {
+            ...QAFragment
+          }
+          backref_field_t_node_clip {
+            ...PosterImageClipFragment
+          }
+        }
+      }
+      field_article_related_content: field_re {
         __typename
         ... on node__faq {
           ...QAFragment
