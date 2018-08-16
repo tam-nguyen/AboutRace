@@ -80,6 +80,8 @@ const Info = styled.div`
 
   backdrop-filter: blur(12px);
 
+  cursor: pointer;
+
   &::after {
     content: '';
     position: absolute;
@@ -107,14 +109,25 @@ const Info = styled.div`
   }
 `
 
+const Explore = styled.div`
+  font-family: Lato;
+  text-align: left;
+  letter-spacing: 0.22em;
+  margin-top:45px;
+  margin-bottom: 9px;
+  text-transform: uppercase;
+  color: ${white};
+  font-size: 12px;
+  font-weight: normal;
+`
+
 const Title = styled.div`
   font-family: Lato;
   text-align: left;
   letter-spacing: 0.02em;
-  line-height: 54px;
-
+  line-height: 66px;
+  margin-bottom: 18px;
   color: ${white};
-
   font-size: 66px;
   font-weight: 600;
 `;
@@ -124,7 +137,7 @@ const Description = styled.div`
   font-size: 22px;
   margin-right: 90px;
   line-height: 30px;
-  margin-bottom: 45px;
+  margin-bottom: 60px;
 
   & > p {
     margin: 0;
@@ -161,12 +174,12 @@ const SubThemes = styled.div`
   display: grid;
   grid-template-columns: 45vw 45vw;
 
-  padding-left: 138px;
+  padding-left: 90px;
 
   padding-bottom: 30px;
 
   @media (min-width: 1025px) { /* desktop */
-    grid-template-columns: 30vw 30vw 30vw;
+    grid-template-columns: 30% 30% 30%;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -236,6 +249,7 @@ class ThemeCard extends React.Component {
         <MainImage background={background} />
         <Info gradient={gradient}>
           <FirstRow>
+            <Explore>Explore:</Explore>
             <Title >{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
             <Chevron open={open} />
