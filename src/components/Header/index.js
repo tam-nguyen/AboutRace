@@ -52,17 +52,17 @@ const Item = styled(Link)`
   text-transform: uppercase;
 
   font-family: Lato;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 10pt;
   line-height: 30px;
-  letter-spacing: 0;
+  letter-spacing: 0.22em;
 
   margin-right: 0;
 
   @media (min-width: 1025px) { /* desktop */
-    margin-right: 41px;
-    font-size: 12pt;
-    letter-spacing: 5px;
+    margin-right: 45px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
   }
 
   @media (max-width: 812px) { /* mobile */
