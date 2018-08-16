@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/Race2`,
+  pathPrefix: `/AboutRace`,
   siteMetadata: {
     title: 'Race: The Power of an Illusion',
   },
