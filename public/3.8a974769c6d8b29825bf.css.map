@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/components/layout.css"],"names":[],"mappings":"AAAA,KAAK,sBAAsB,SAAS,iE","file":"3.8a974769c6d8b29825bf.css","sourcesContent":["body{background-color:#000;margin:0;padding:0 env(safe-area-inset-right) 0 env(safe-area-inset-left)}"],"sourceRoot":""}

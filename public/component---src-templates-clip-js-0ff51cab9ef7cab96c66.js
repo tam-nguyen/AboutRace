@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{212:function(a,n,e){"use strict";e.r(n),e.d(n,"clipQuery",function(){return d});var t=e(0),i=e.n(t),o=e(224),c=e(231),r=e(225),l=o.b.div.withConfig({displayName:"clip__Container"})(["background-color:",";@media (max-width:812px){}"],r.o);n.default=function(a){var n=a.data,e=a.location;return i.a.createElement(c.g,{location:e},i.a.createElement(l,null,i.a.createElement(c.c,{data:n})))};var d="4047989759"}}]);
-//# sourceMappingURL=component---src-templates-clip-js-0ff51cab9ef7cab96c66.js.map

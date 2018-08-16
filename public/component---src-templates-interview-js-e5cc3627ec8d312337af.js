@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{210:function(e,n,a){"use strict";a.r(n),a.d(n,"interviewsQuery",function(){return u});var t=a(0),i=a.n(t),r=a(224),o=a(231),c=a(225),d=r.b.div.withConfig({displayName:"interview__Container"})(["background-color:",";@media (max-width:812px){}"],c.o);n.default=function(e){var n=e.data,a=e.location;return i.a.createElement(o.g,{location:a},i.a.createElement(d,null,i.a.createElement(o.f,{data:n})))};var u="2604865408"}}]);
-//# sourceMappingURL=component---src-templates-interview-js-e5cc3627ec8d312337af.js.map
