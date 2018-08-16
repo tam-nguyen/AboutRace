@@ -5,7 +5,6 @@ import SVGChevron from '../SVGChevron'
 import SubThemeCard from './SubThemeCard'
 
 import {
-  red,
   black,
   white,
   getGradient
@@ -218,8 +217,6 @@ class ThemeCard extends React.Component {
     } = this.props
 
     const {
-      height,
-      width,
       src
     } = data.relationships.field_theme_image.localFile.childImageSharp.original
 

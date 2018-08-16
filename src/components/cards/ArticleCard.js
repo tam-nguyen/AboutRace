@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
+import get from 'lodash/get'
 
 import Description from './Description'
 import Card from '../Card'
@@ -136,20 +137,18 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class ArticleCard extends React.Component {
   render() {
-    const { article, i, style = {}, onOpen } = this.props
+    const { article, onOpen } = this.props
     const link = `/articles/${kebabCase(article.title)}`
 
-    const background = article.relationships.field_main_image.localFile.publicURL;
-    const description = article.field_short_version ? `"${article.field_short_version.processed}"` : null;
-    const author = article.field_author && article.field_author.processed;
+    const background = get(article, 'relationships.field_main_image.localFile.publicURL')
+    const description = get(article, 'field_short_version.processed')
+    const author = get(article, 'field_author.processed')
     const title = article.title.replace('--','–');
 
     return (
       <Container
         background={background}
         title={title}
-        type="Article"
-        slug="article"
         changed={article.changed}
         onClick={ () => onOpen(link)}
       >

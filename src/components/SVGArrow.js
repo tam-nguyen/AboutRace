@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 const SVGArrow = ({color, style}) =>
   <div style={style}>

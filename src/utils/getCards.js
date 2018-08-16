@@ -40,6 +40,7 @@ const getCards = (relationships, queryFilter, onOpen) => {
       key={'clip-' + clip.title}
       linkable={true}
       clip={clip}
+      onOpen={ link => onOpen(link, clip) } 
     />
   )
 
@@ -53,6 +54,7 @@ const getCards = (relationships, queryFilter, onOpen) => {
     <QACard
       key={'qa-' + qa.title}
       qa={qa}
+      onOpen={ link => onOpen(link, qa) } 
     />
   )
 

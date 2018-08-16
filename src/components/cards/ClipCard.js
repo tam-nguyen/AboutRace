@@ -4,7 +4,11 @@ import kebabCase from 'lodash/kebabCase'
 
 import Description from './Description'
 import Card from '../Card'
-import SVGArrow from '../SVGArrow'
+
+import {
+  SVGArrow,
+  PlayButton
+} from '../'
 
 import {
   white,
@@ -69,15 +73,6 @@ const InnerContainer = styled.div`
   flex-direction: column;
 `
 
-const Author = styled.div`
-  font-family: Lato;
-  font-size: 12pt;
-  line-height: 18px;
-  letter-spacing: 0.022em;
-
-  text-transform: uppercase;
-`
-
 const Ticker = styled.div`
   position: absolute;
 
@@ -111,34 +106,6 @@ const Row = styled.div`
 
   align-items: flex-end;
   justify-content: flex-end;
-`
-
-const PlayButton = styled.div`
-  position: relative;
-
-  width: 46px;
-  height: 46px;
-  border-radius: 23px;
-  background-color: rgba(239, 239, 239, 0.76);
-
-  &::after {
-    content: '▶';
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    font-family: Lato;
-    font-size: 14px;
-    line-height: 14px;
-  }
 `
 
 const ArrowContainer = styled.div`
@@ -187,7 +154,7 @@ export class ClipCard extends React.Component {
     const background = clip.relationships.field_poster_image.localFile.publicURL
     const fromEpisode = 'from episode 1'
 
-    const {title, uri} = clip.field_external_video_url
+    // const {title, uri} = clip.field_external_video_url
 
     return (
       <Container onClick={ () => onOpen(link)} >

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import styled, {keyframes, css} from 'styled-components';
+import styled from 'styled-components';
 
 import {
   white,
@@ -33,7 +32,7 @@ const Container = styled.div`
 const Line = styled.div`
   width: ${props => props.width ? props.width : 25 }px;
   height: 2px;
-  background-color: ${white};
+  background-color: ${props => props.color ? props.color : white};
 
   transition: all 0.3s ease-out;
 `
@@ -66,14 +65,15 @@ class Menu extends React.Component {
   render() {
     const {
       open,
-      width
+      width, 
+      color
     } = this.props
 
     return (
       <Container {...this.props} width={width}>
-        <TopLine open={open} width={width}/>
+        <TopLine open={open} width={width} color={color}/>
         <MiddleLine open={open} width={width}/>
-        <BottomLine open={open} width={width}/>
+        <BottomLine open={open} width={width} color={color}/>
       </Container>
     )
   }

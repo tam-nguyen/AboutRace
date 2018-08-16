@@ -81,7 +81,7 @@ const ArticleSummary = ({ data }) => {
           <ArticleTitle>
            {data.title}
           </ArticleTitle>
-          <p style={{marginBottom:7.5, color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.04em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
+          <p style={{color:'#2b2b2b', fontFamily:'Lato', fontSize:14, letterSpacing:'0.04em', lineHeight:1.25, marginLeft:30, marginBottom:22.5}}>Article by {data.field_author && data.field_author.processed}</p>
 
           
           <div className="articleExcerpt">

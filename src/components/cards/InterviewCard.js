@@ -69,15 +69,6 @@ const InnerContainer = styled.div`
   flex-direction: column;
 `
 
-const Author = styled.div`
-  font-family: Lato;
-  font-size: 12pt;
-  line-height: 18px;
-  letter-spacing: 0.022em;
-
-  text-transform: uppercase;
-`
-
 const Ticker = styled.div`
   position: absolute;
 
@@ -135,7 +126,7 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class InterviewCard extends React.Component {
   render() {
-    const { interview = {}, i, relatedContent, onOpen } = this.props
+    const { interview = {}, onOpen } = this.props
     
     const link = `/interviews/${kebabCase(interview.title)}` 
     const background = interview.relationships.field_interviewee.localFile.publicURL;

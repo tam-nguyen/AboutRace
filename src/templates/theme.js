@@ -4,8 +4,6 @@ import kebabCase from 'lodash/kebabCase'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
-const queryString = require('query-string');
-
 const ThemeTitle = styled.div`
   margin-top: 15px;
   margin-bottom:15px;
@@ -177,7 +175,7 @@ class ThemePage extends React.Component {
           <ThemeIntro>
             <AllThemesLink to='/themes'>
               {/* <Huge>‹</Huge> */}
-              <img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
+              <img alt="img1" style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, verticalAlign:'middle'}} src={require('../assets/images/back.svg')} />
               <h4 style={{marginBottom:0, display:'inline-block', verticalAlign:'middle'}}>All Themes</h4>
             </AllThemesLink>
             <ThemeTitle>{theme.name}</ThemeTitle>
@@ -203,7 +201,7 @@ class ThemePage extends React.Component {
                         />
                       </Col>
                       <Col>
-                        <ChevronButton><img style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, transform: 'rotate(180deg)', verticalAlign:'middle'}} src={require('../assets/images/back.svg')} /></ChevronButton>
+                        <ChevronButton><img alt="img2" style={{height: 24, opacity:0.8, display:'inline-block', marginBottom:0, marginRight:15, transform: 'rotate(180deg)', verticalAlign:'middle'}} src={require('../assets/images/back.svg')} /></ChevronButton>
                       </Col>
                     </Row>
                   </Card>
@@ -266,7 +264,7 @@ export const pageQuery = graphql`
               ...InterviewFragment
             }
             faqs: backref_field_belongs_to_subtheme_node_faq {
-              ...FAQFragment
+              ...QAFragment
             }
           }
         }

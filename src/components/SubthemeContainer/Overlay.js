@@ -1,7 +1,4 @@
-import React from 'react'
 import styled from 'styled-components'
-
-
 
 const Overlay = styled.div`
   position: absolute;
@@ -19,6 +16,8 @@ const Overlay = styled.div`
   height: 100vh;
   overflow: hidden;
 
+  will-change: transform;
+
   &::before {
     content: '';
     position: absolute;
@@ -34,11 +33,10 @@ const Overlay = styled.div`
     height: 100vh;
 
     background-image: ${props => props.gradient ? props.gradient : null};
+    will-change: transform;
     filter: blur(7px);
     filter: opacity(89%);
   }
 `
-
-
 
 export default Overlay;

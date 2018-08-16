@@ -8,7 +8,6 @@ import {
 
 import {
   red,
-  backgroundColor,
   white
 } from '../../colors'
 
@@ -28,15 +27,6 @@ const Row = styled.div`
   flex-direction: row;
 
   align-items: center;
-`
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  background-color: ${backgroundColor};
-
-  padding: 15px;
 `
 
 const Title = styled.div`

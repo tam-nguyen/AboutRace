@@ -1,6 +1,7 @@
 import React from "react"
 import kebabCase from 'lodash/kebabCase'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import get from 'lodash/get'
 import { graphql } from 'gatsby'
 
 import {
@@ -12,8 +13,6 @@ import {
 
 import {
   backgroundColor,
-  titleColor,
-  grandColor,
 
   red,
   white,
@@ -31,16 +30,6 @@ const Container = styled.div`
   z-index: 0;
 `
 
-const Main = styled.div`
-  background-size: cover !important;
-  text-align: center;
-  border-radius: 3px;
-  color: white;
-  background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-  position: relative;
-  z-index: 3;
-`
-// min-height: 340px;
 const Header = styled.div`
   position: relative;
 
@@ -185,7 +174,6 @@ class SubThemePage extends React.Component {
     } = this.props;
 
     const {
-      field_theme_image, 
       theme,
       color
     } = pageContext;
@@ -199,7 +187,7 @@ class SubThemePage extends React.Component {
       return encodeURIComponent(kebabCase(parts[parts.length - 1]))
     }
 
-    const background = field_theme_image && field_theme_image.localFile.publicURL;
+    const background = get(this, 'props.pageContext.field_theme_image.localFile.publicURL');
     const title = subtheme.name.indexOf(':') >=0 ? subtheme.name.split(':')[1] : subtheme.name;
     const description = taxonomyTermSubthemes.description ? taxonomyTermSubthemes.description.processed : `<br/>`;
 
@@ -253,13 +241,13 @@ export const pageQuery = graphql`
           ...FullArticleFragment
         }
         clips: backref_field_belongs_to_subtheme_node_clip {
-          ...PosterImageClipFragment
+          ...FullClipFragment
         }
         interviews: backref_field_which_subtheme_does_this_b_node_interview {
-          ...InterviewFragment
+          ...FullInterviewFragment
         }
         faqs: backref_field_belongs_to_subtheme_node_faq {
-          ...FAQFragment
+          ...FullQAFragment
         }
       }
     }
