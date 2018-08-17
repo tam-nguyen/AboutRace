@@ -42,7 +42,8 @@ const TopImage = styled.div`
   height: 221px;
   
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
-
+  background-size: cover;
+  
   filter: brightness(50%);
   opacity: 0.53;
 `
@@ -50,7 +51,7 @@ const TopImage = styled.div`
 const TopBlock = styled.div`
   position: relative;
 
-  width: 100%;
+  width: calc(100% - 30px);
   height: 221px;
 
   display: flex;
@@ -81,9 +82,9 @@ const InnerContainer = styled.div`
 
 const Author = styled.div`
   font-family: Lato;
-  font-size: 12pt;
+  font-size: 12px;
   line-height: 18px;
-  letter-spacing: 0.022em;
+  letter-spacing: 0.22em;
 
   text-transform: uppercase;
 `
@@ -95,15 +96,15 @@ const Ticker = styled.div`
   bottom: 0;
 
   font-family: Lato;
-  font-weight: 600;
-  font-size: 12pt;
+  font-weight: normal;
+  font-size: 12px;
   line-height: 30px;
-  letter-spacing: 0.022em;
+  letter-spacing: 0.22em;
 
   border-top-right-radius: 3px;
   background-color: ${articleTickerColor};
 
-  padding: 13px;
+  padding: 9px 15px;
   text-transform: uppercase;
 `
 

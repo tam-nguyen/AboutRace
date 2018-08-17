@@ -40,7 +40,9 @@ const TopImage = styled.div`
   width: 100%;
   height: 221px;
   
+ 
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+  background-size: cover;
 `
 
 const TopBlock = styled.div`
@@ -76,15 +78,15 @@ const Ticker = styled.div`
   bottom: 0;
 
   font-family: Lato;
-  font-weight: 600;
-  font-size: 12pt;
+  font-weight: normal;
+  font-size: 12px;
   line-height: 30px;
-  letter-spacing: 0.022em;
+  letter-spacing: 0.22em;
 
   border-top-right-radius: 3px;
   background-color: ${interviewTickerColor};
 
-  padding: 13px;
+  padding: 9px 15px;
   text-transform: uppercase;
 `
 
