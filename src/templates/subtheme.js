@@ -126,27 +126,27 @@ const Row = styled.div`
 const Title = styled.div`
   color: ${white};
   font-family: Lato;
-  font-size: 42pt;
-  font-weight: bold;
+  font-size: 66px;
+  font-weight: 500;
   line-height: 60px;
 
   padding-top: 7px;
-  padding-bottom: 7px;
+  padding-bottom: 36px;
 `
 
 const TopLink = styled(Link)`
   font-family: Lato;
-  font-size: 18pt;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   line-height: 60px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: ${white};
 `
 
 const Description = styled.div`
   font-family: 'Tisa Pro';
-  font-size: 20pt;
+  font-size: 20px;
   line-height: 24px;
   color: ${white};
 
@@ -155,7 +155,7 @@ const Description = styled.div`
 
 const Subthemes = styled.div`
   position: absolute;
-  top: 500px;
+  top: calc(100vh - 200px);
 
   z-index: 1;
 `
