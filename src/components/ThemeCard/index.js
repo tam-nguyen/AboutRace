@@ -13,9 +13,13 @@ import {
 const Container = styled.div`
   position: relative;
 
-  width: 100%;
+  width: calc(100% - 90px);
   display: flex;
   flex-direction: column;
+
+  margin-left:45px;
+  margin-bottom: 45px;
+  border-radius: 6px;
 
   align-items: center;
   justify-content: center;
@@ -125,10 +129,10 @@ const Title = styled.div`
   font-family: Lato;
   text-align: left;
   letter-spacing: 0.02em;
-  line-height: 66px;
-  margin-bottom: 18px;
+  line-height: 60px;
+  margin-bottom: 12px;
   color: ${white};
-  font-size: 66px;
+  font-size: 60px;
   font-weight: 600;
 `;
 

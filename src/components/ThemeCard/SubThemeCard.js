@@ -14,9 +14,10 @@ import {
 const Container = styled(Link)`
   color: white;
   background-color: rgba(51, 51, 51, .48);
-  padding: 30px;
+  padding: 15px;
   margin-left: 15px;
   margin-right: 15px;
+  margin-bottom: 15px;
   border-radius: 3px;
 
   display: flex;
@@ -34,8 +35,8 @@ const Title = styled.div`
 
   font-family: Lato;
   font-size: 36px;
-  line-height: 39px;
-  font-weight: 600;
+  line-height: 42px;
+  font-weight: normal;
 
   letter-spacing: 0.02em;
 
