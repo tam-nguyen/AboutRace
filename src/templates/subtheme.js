@@ -66,7 +66,7 @@ const Header = styled.div`
     background-attachment: fixed;
 
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    filter: blur(12px);
+    filter: blur(6px);
   }
 
   
