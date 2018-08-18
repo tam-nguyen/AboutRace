@@ -17,7 +17,7 @@ const Container = styled(Link)`
   padding: 15px;
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   border-radius: 3px;
 
   display: flex;
@@ -40,7 +40,7 @@ const Title = styled.div`
 
   letter-spacing: 0.02em;
 
-  color: ${white};
+  color: ${red};
   width: auto;
 
   
