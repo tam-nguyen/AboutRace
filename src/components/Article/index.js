@@ -114,7 +114,7 @@ const MainImage = styled.div`
     left: 0;
     right: 0;
     
-    height: 80vh;
+    height: 100vh;
 
     box-shadow: none;
   }
@@ -138,7 +138,7 @@ const TextContainer = styled.div`
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
     max-width: 1200px;
-    padding-top: 60vh;
+    padding-top: 87vh;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -212,7 +212,7 @@ const Author = styled.div`
   text-transform: uppercase;
 
   padding-top: 18px;
-  padding-bottom: 48px;
+  padding-bottom: 24px;
 `
 
 const IntroText = styled.div`
@@ -229,7 +229,7 @@ const Text = styled.div`
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 70px 80px;
+  padding: 60px 80px;
 
   z-index: 10;
 
@@ -255,7 +255,7 @@ const SideBar = styled(Column)`
   display: flex;
   flex-direction: column;
 
-  width: 390px;
+  width: 400px;
   background-color: ${whiteShadowTrans};
 
   border-top-right-radius: 3px;
@@ -293,6 +293,7 @@ const Bio = styled.div`
   padding: 15px;
 
   font-family: Lato;
+  font-style: italic;
   font-size: 14px;
   line-height: 18px;
 
@@ -339,21 +340,19 @@ const Tags = styled.div`
 `
 
 const Tag = styled.div`
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 3px 15px;
 
   font-family: Lato;
   font-size: 14px;
   line-height: 36px;
   letter-spacing: 0.22em;
-  font-weight: 600;
 
   text-transform: uppercase;
 
   color: ${red};
 
   margin-right: 15px;
-  margin-bottom: 15px;
+  margin-top: 15px;
 
   border-radius: 3px;
   background-color: ${white};
