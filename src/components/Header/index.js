@@ -25,7 +25,7 @@ const Container = styled.div`
 
   background-color: ${blackWithOpacity(0.83)};
 
-  height: 64px;
+  height: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;

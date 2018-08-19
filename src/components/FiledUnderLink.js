@@ -16,19 +16,19 @@ const FiledUnderLinkContainer = styled(Link)`
 
   padding-left: 0;
   padding-right: 10px;
+  padding-top:9px;
 
   font-family: Lato;
   font-size: 18px;
-  line-height: 36px;
+  line-height: 24px;
   letter-spacing: 0.02em;
-  font-weight: 600;
   text-transform: capitalize;
 
   color: ${props => props.color};
 
   @media (min-width: 1025px) { /* desktop */
     padding-left: 15px;
-    padding-right: 0;
+    padding-right: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */

@@ -13,9 +13,15 @@ import {
 const Container = styled.div`
   position: relative;
 
-  width: 100%;
+  width: calc(100% - 90px);
   display: flex;
   flex-direction: column;
+
+  margin-left:45px;
+  margin-bottom: 45px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: #a7a7a7 0px 0px 45px;
 
   align-items: center;
   justify-content: center;
@@ -51,7 +57,7 @@ const MainImage = styled.div`
   position: relative;
 
   width: 832px;
-  height: 583px;
+  height: 523px;
 
   background-size: cover !important;
   background-attachment: fixed;
@@ -113,8 +119,8 @@ const Explore = styled.div`
   font-family: Lato;
   text-align: left;
   letter-spacing: 0.22em;
-  margin-top:45px;
-  margin-bottom: 9px;
+  margin-top:12px;
+  margin-bottom: 12px;
   text-transform: uppercase;
   color: ${white};
   font-size: 12px;
@@ -125,10 +131,10 @@ const Title = styled.div`
   font-family: Lato;
   text-align: left;
   letter-spacing: 0.02em;
-  line-height: 66px;
-  margin-bottom: 18px;
+  line-height: 60px;
+  margin-bottom: 24px;
   color: ${white};
-  font-size: 66px;
+  font-size: 60px;
   font-weight: 600;
 `;
 
@@ -174,17 +180,17 @@ const SubThemes = styled.div`
   display: grid;
   grid-template-columns: 45vw 45vw;
 
-  padding-left: 90px;
+  padding-left: 15px;
 
   padding-bottom: 30px;
 
   @media (min-width: 1025px) { /* desktop */
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 33% 33% 33%;
   }
 
   @media (max-width: 812px) { /* mobile */
     padding-left: 38px;
-    grid-template-columns: 90vw;
+    grid-template-columns: calc(100% - 30px);
   }
 `
 
@@ -199,8 +205,8 @@ const Row = styled.div`
 
 const FirstRow = styled(Row)`
   margin-top: 16px;
-  margin-left: 138px;
-  margin-right: 138px;
+  margin-left: 30px;
+  margin-right: 30px;
 
   @media (min-width: 1025px) { /* desktop */
     
