@@ -16,6 +16,7 @@ import {
   darkWhite,
   backgroundColor,
   red,
+  softblack,
 } from '../../colors'
 
 const TICKER = 'Q&A'
@@ -183,7 +184,7 @@ const SubTitle = styled.div`
   line-height: 28px;
   letter-spacing: 0.22em;
 
-  color: ${backgroundColor};
+  color: ${softblack};
 
   text-transform: uppercase;
 
@@ -332,7 +333,7 @@ const TopCard = styled(Column)`
   box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
 
   background-image: ${gradient2};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   @media (min-width: 1025px) { /* desktop */
     width: 614px;
@@ -392,7 +393,7 @@ const Experts = styled(Column)`
 
   align-items: center;
 
-  color: ${backgroundColor};
+  color: ${softblack};
 
   @media (min-width: 1025px) { /* desktop */
     max-width: 664px;
