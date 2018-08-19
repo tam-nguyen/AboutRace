@@ -132,7 +132,7 @@ export class InterviewCard extends React.Component {
     
     const link = `/interviews/${kebabCase(interview.title)}` 
     const background = interview.relationships.field_interviewee.localFile.publicURL;
-    const description = interview.field_key_quote.processed;
+    const description = interview.field_interview_summary.processed;
 
     const bio = interview.field_interviewee_bio ? interview.field_interviewee_bio.processed : null;
 
