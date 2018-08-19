@@ -35,12 +35,12 @@ const Header = styled.div`
 
   z-index: 1;
 
-  padding-top: 95px;
   padding-left: 138px;
 
-  min-height: 737px;
+  height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   
   transition: all .5s ease;
 
