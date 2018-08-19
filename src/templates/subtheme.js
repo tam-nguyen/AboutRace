@@ -12,17 +12,16 @@ import {
 } from '../components'
 
 import {
-  backgroundColor,
-
   red,
   white,
-  getGradient
+  getGradient,
+  softblack
 } from '../colors'
 
 const queryString = require('query-string');
 
 const Container = styled.div`
-  background: ${backgroundColor};
+  background: ${softblack};
   min-height: 100vh;
 
   position: relative;
@@ -163,7 +162,7 @@ const Subthemes = styled.div`
 class SubThemePage extends React.Component {
 
   componentDidMount() {
-    document.body.style.backgroundColor = backgroundColor;
+    document.body.style.backgroundColor = softblack;
   }
 
   render() {

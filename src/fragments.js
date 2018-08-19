@@ -187,6 +187,9 @@ export const FullInterviewFragment = graphql`
     field_key_quote {
       processed
     }
+    field_interview_summary {
+      processed
+    }
     field_full_length_version {
       processed
     }

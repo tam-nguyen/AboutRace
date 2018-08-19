@@ -16,6 +16,7 @@ import {
   whiteShadow,
   backgroundColor,
   red,
+  softblack,
 } from '../../colors'
 
 const TICKER = 'INTERVIEW'
@@ -192,7 +193,7 @@ const TextInnerContainer = styled.div`
   border-bottom-left-radius: 3px;
 
   background-color: ${white};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   margin-bottom: 50px;
 

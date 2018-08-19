@@ -16,6 +16,7 @@ import {
   whiteShadowTrans,
   backgroundColor,
   red,
+  softblack,
 } from '../../colors'
 
 const TICKER = 'ARTICLE'
@@ -159,7 +160,7 @@ const TextInnerContainer = styled.div`
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
 
-  color: ${backgroundColor};
+  color: ${softblack};
 
   margin-bottom: 50px;
 

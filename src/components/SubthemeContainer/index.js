@@ -26,7 +26,8 @@ import getCards from '../../utils/getCards'
 
 import {
   white,
-  backgroundColor
+  backgroundColor,
+  softblack
 } from '../../colors'
 
 const range = require('range');
@@ -130,8 +131,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: ${backgroundColor};
-  box-shadow: 0px -12px 15px rgba(121, 121, 121, 0.45);
+  background-color: ${softblack};
   backdrop-filter: blur(5px);
 
   border-bottom: solid thin grey;
@@ -291,7 +291,7 @@ class Subtheme extends React.Component {
     switch(typename){
       case 'faq':
         gradient = gradientQA
-        color = backgroundColor
+        color = softblack
         break;
       default:
         gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`

@@ -7,8 +7,8 @@ import SVGArrow from '../SVGArrow'
 
 import {
   qaColor,
-  backgroundColor,
-  red
+  red,
+  softblack
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -19,7 +19,7 @@ const Container = styled(Card)`
   justify-content: center;
 
   background-color: ${qaColor};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   padding-left: 15px;
   padding-right: 15px;
