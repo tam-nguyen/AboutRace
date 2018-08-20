@@ -39,10 +39,12 @@
     "build": "gatsby build",
     "develop": "gatsby develop -H 0.0.0.0",
     "format": "prettier --write src/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gatsby build --prefix-paths && node_modules/.bin/gh-pages -d public"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.53",
+    "gh-pages": "^1.2.0",
     "prettier": "^1.11.1"
   }
 }
