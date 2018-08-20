@@ -7,8 +7,8 @@ import SVGArrow from '../SVGArrow'
 
 import {
   qaColor,
-  backgroundColor,
-  red
+  red,
+  softblack
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -19,7 +19,7 @@ const Container = styled(Card)`
   justify-content: center;
 
   background-color: ${qaColor};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   padding-left: 15px;
   padding-right: 15px;
@@ -27,8 +27,8 @@ const Container = styled(Card)`
   &::before {
     content: '?';
     position: absolute;
-    top: 65px;
-    right: 38px;
+    top: -35px;
+    right: 100px;
 
     font-family: 'Tisa Pro';
     font-size: 400px;
@@ -39,14 +39,14 @@ const Container = styled(Card)`
 
 const Title = styled.div`
   font-family: Lato;
-  font-size: 12pt;
+  font-size: 12px;
   line-height: 30px;
-  letter-spacing: 0.022em;
+  letter-spacing: 0.22em;
 `
 
 const Question = styled.div`
   font-family: 'Tisa Pro';
-  font-size: 36pt;
+  font-size: 36px;
   line-height: 42px;
 `
 

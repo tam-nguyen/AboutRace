@@ -12,17 +12,16 @@ import {
 } from '../components'
 
 import {
-  backgroundColor,
-
   red,
   white,
-  getGradient
+  getGradient,
+  softblack
 } from '../colors'
 
 const queryString = require('query-string');
 
 const Container = styled.div`
-  background: ${backgroundColor};
+  background: ${softblack};
   min-height: 100vh;
 
   position: relative;
@@ -35,12 +34,12 @@ const Header = styled.div`
 
   z-index: 1;
 
-  padding-top: 95px;
   padding-left: 138px;
 
-  min-height: 737px;
+  height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   
   transition: all .5s ease;
 
@@ -66,7 +65,7 @@ const Header = styled.div`
     background-attachment: fixed;
 
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    filter: blur(12px);
+    filter: blur(6px);
   }
 
   
@@ -126,27 +125,27 @@ const Row = styled.div`
 const Title = styled.div`
   color: ${white};
   font-family: Lato;
-  font-size: 42pt;
-  font-weight: bold;
+  font-size: 66px;
+  font-weight: 500;
   line-height: 60px;
 
   padding-top: 7px;
-  padding-bottom: 7px;
+  padding-bottom: 36px;
 `
 
 const TopLink = styled(Link)`
   font-family: Lato;
-  font-size: 18pt;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   line-height: 60px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: ${white};
 `
 
 const Description = styled.div`
   font-family: 'Tisa Pro';
-  font-size: 20pt;
+  font-size: 20px;
   line-height: 24px;
   color: ${white};
 
@@ -155,7 +154,7 @@ const Description = styled.div`
 
 const Subthemes = styled.div`
   position: absolute;
-  top: 500px;
+  top: calc(100vh - 200px);
 
   z-index: 1;
 `
@@ -163,7 +162,7 @@ const Subthemes = styled.div`
 class SubThemePage extends React.Component {
 
   componentDidMount() {
-    document.body.style.backgroundColor = backgroundColor;
+    document.body.style.backgroundColor = softblack;
   }
 
   render() {

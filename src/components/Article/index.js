@@ -13,9 +13,10 @@ import {
   black,
   white,
   darkWhite,
-  whiteShadow,
+  whiteShadowTrans,
   backgroundColor,
   red,
+  softblack,
 } from '../../colors'
 
 const TICKER = 'ARTICLE'
@@ -114,7 +115,7 @@ const MainImage = styled.div`
     left: 0;
     right: 0;
     
-    height: 80vh;
+    height: 100vh;
 
     box-shadow: none;
   }
@@ -136,8 +137,9 @@ const TextContainer = styled.div`
   padding-top: 40vh;
 
   @media (min-width: 1025px) { /* desktop */
-    width: 1000px;
-    padding-top: 60vh;
+    min-width: 1000px;
+    max-width: 1200px;
+    padding-top: 87vh;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -158,8 +160,7 @@ const TextInnerContainer = styled.div`
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
 
-  background-color: ${white};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   margin-bottom: 50px;
 
@@ -167,14 +168,14 @@ const TextInnerContainer = styled.div`
     content: '${TICKER}';
     position: absolute;
 
-    height: 50px;
+    height: 39px;
 
     font-family: Lato;
-    font-size: 12;
+    font-size: 12px;
     line-height: 50px;
     letter-spacing: 0.22em;
 
-    top: -50px;
+    top: -39px;
     left: 0;
 
     background-color: ${white};
@@ -212,18 +213,24 @@ const Author = styled.div`
   text-transform: uppercase;
 
   padding-top: 18px;
-  padding-bottom: 28px;
+  padding-bottom: 24px;
 `
 
-const Text = styled.div`
+const IntroText = styled.div`
   font-family: 'Tisa Pro';
   font-size: 20px;
   line-height: 28px;
 `
 
+const Text = styled.div`
+  font-family: 'Tisa Pro';
+  font-size: 17px;
+  line-height: 24px;
+`
+
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 70px;
+  padding: 60px 80px;
 
   z-index: 10;
 
@@ -249,8 +256,8 @@ const SideBar = styled(Column)`
   display: flex;
   flex-direction: column;
 
-  width: 390px;
-  background-color: ${whiteShadow};
+  width: 400px;
+  background-color: ${whiteShadowTrans};
 
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -287,6 +294,7 @@ const Bio = styled.div`
   padding: 15px;
 
   font-family: Lato;
+  font-style: italic;
   font-size: 14px;
   line-height: 18px;
 
@@ -333,21 +341,19 @@ const Tags = styled.div`
 `
 
 const Tag = styled.div`
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 3px 15px;
 
   font-family: Lato;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 36px;
   letter-spacing: 0.22em;
-  font-weight: 600;
 
   text-transform: uppercase;
 
   color: ${red};
 
   margin-right: 15px;
-  margin-bottom: 15px;
+  margin-top: 15px;
 
   border-radius: 3px;
   background-color: ${white};
@@ -547,6 +553,7 @@ class Article extends React.Component {
     const author = get(this, `props.data.${nodeName}.field_author.processed`)
     const authorImage = get(this, `props.data.${nodeName}.relationships.field_author_image.localFile.childImageSharp.original.src`)
     const authorBio = get(this, `props.data.${nodeName}.field_author_bio.processed`)
+    const introText = get(this, `props.data.${nodeName}.field_large_callout_text.processed`)
     const text = get(this, `props.data.${nodeName}.field_full_version.processed`)
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
@@ -639,6 +646,7 @@ class Article extends React.Component {
               <ContentBar>
                 <Title>{title}</Title>
                 <Author>by {author}</Author>
+                <IntroText dangerouslySetInnerHTML={{ __html: introText}}/>
                 <Text dangerouslySetInnerHTML={{ __html: text}}/>
                 <TextFooter>
                   <LocalBackTo />

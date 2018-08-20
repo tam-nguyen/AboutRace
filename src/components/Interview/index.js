@@ -16,6 +16,7 @@ import {
   whiteShadow,
   backgroundColor,
   red,
+  softblack,
 } from '../../colors'
 
 const TICKER = 'INTERVIEW'
@@ -97,7 +98,9 @@ const Quote = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     width: 835px;
-    font-size: 48px;
+    font-size: 36px;
+    font-style: italic;
+    line-height: 48px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -108,6 +111,16 @@ const Quote = styled.div`
   }
 `
 
+const QuoteAttribution = styled.div`
+  font-family: 'Lato';
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: ${white};
+  text-align: center;
+  padding-top:15px;
+`
+
 const QuoteContainer = styled.div`
   position: fixed;
   top: 100px;
@@ -115,7 +128,7 @@ const QuoteContainer = styled.div`
   right: 60px;
 
   width: auto;
-  height: 40vh;
+  height: 100vh;
 
   z-index: 2;
 
@@ -134,7 +147,7 @@ const QuoteContainer = styled.div`
     left: 0;
     right: 0;
     
-    height: 80vh;
+    height: 100vh;
 
     background-image: ${props => props.overlay ? null : gradient};
     box-shadow: none;
@@ -158,7 +171,7 @@ const TextContainer = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     width: 1000px;
-    padding-top: 60vh;
+    padding-top: 87vh;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -180,7 +193,7 @@ const TextInnerContainer = styled.div`
   border-bottom-left-radius: 3px;
 
   background-color: ${white};
-  color: ${backgroundColor};
+  color: ${softblack};
 
   margin-bottom: 50px;
 
@@ -188,14 +201,14 @@ const TextInnerContainer = styled.div`
     content: '${TICKER}';
     position: absolute;
 
-    height: 50px;
+    height: 39px;
 
     font-family: Lato;
-    font-size: 12;
+    font-size: 12px;
     line-height: 50px;
     letter-spacing: 0.22em;
 
-    top: -50px;
+    top: -39px;
     left: 0;
 
     background-color: ${white};
@@ -238,13 +251,13 @@ const Author = styled.div`
 
 const Text = styled.div`
   font-family: 'Tisa Pro';
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 17px;
+  line-height: 24px;
 `
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 70px;
+  padding: 60px 80px;
 
   z-index: 10;
 
@@ -270,7 +283,7 @@ const SideBar = styled(Column)`
   display: flex;
   flex-direction: column;
 
-  width: 390px;
+  width: 400px;
   background-color: ${whiteShadow};
 
   border-top-right-radius: 3px;
@@ -308,6 +321,7 @@ const Bio = styled.div`
   padding: 15px;
 
   font-family: Lato;
+  font-style: italic;
   font-size: 14px;
   line-height: 18px;
 
@@ -661,7 +675,10 @@ class Interview extends React.Component {
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
           <QuoteContainer overlay={overlay}>
+            <div>
             <Quote dangerouslySetInnerHTML={{ __html: keyQuote }} />
+            <QuoteAttribution>{author}</QuoteAttribution>
+            </div>
           </QuoteContainer>
           <TextContainer>
             <TextInnerContainer>

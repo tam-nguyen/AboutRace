@@ -1,11 +1,13 @@
 export const black = '#000000';
+export const softblack = '#222222';
 export const blackWithOpacity = opacity => `rgba(0,0,0,${opacity})`;
 export const white = '#FFFFFF';
 export const whiteShadow = '#FCFCFC';
+export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
-export const backgroundColor = '#222222';
+export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';
 export const grandColor = '#6A6588';
 export const orange = '#E3A44D';

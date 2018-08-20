@@ -160,6 +160,9 @@ export const InterviewFragment = graphql`
     field_key_quote {
       processed
     }
+    field_interview_summary {
+      processed
+    }
     relationships {
       field_interviewee {
         localFile {
@@ -182,6 +185,9 @@ export const FullInterviewFragment = graphql`
       processed
     }
     field_key_quote {
+      processed
+    }
+    field_interview_summary {
       processed
     }
     field_full_length_version {
