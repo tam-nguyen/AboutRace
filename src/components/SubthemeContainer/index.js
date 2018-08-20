@@ -26,7 +26,6 @@ import getCards from '../../utils/getCards'
 
 import {
   white,
-  backgroundColor,
   softblack
 } from '../../colors'
 

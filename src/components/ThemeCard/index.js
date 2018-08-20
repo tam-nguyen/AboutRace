@@ -5,7 +5,6 @@ import SVGChevron from '../SVGChevron'
 import SubThemeCard from './SubThemeCard'
 
 import {
-  black,
   white,
   getGradient
 } from '../../colors'
