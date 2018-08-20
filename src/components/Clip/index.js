@@ -4,8 +4,6 @@ import kebabCase from 'lodash/kebabCase'
 import get from 'lodash/get'
 
 import {
-  Link,
-  SVGArrow,
   FiledUnderLink,
   PlayButton
 } from '../'
@@ -16,8 +14,6 @@ import {
   black,
   white,
   darkWhite,
-  // whiteShadow,
-  // backgroundColor,
   red,
 } from '../../colors'
 
@@ -386,12 +382,10 @@ const nodeName = 'nodeClip'
 
 class Clip extends React.Component {
   render() {
-    const {data, overlay} = this.props
-
-    console.log('Clip', data)
+    const {overlay} = this.props
 
     const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
-    const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
+    // const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
     const title = get(this, `props.data.${nodeName}.title`)
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
