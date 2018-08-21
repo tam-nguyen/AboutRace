@@ -162,6 +162,7 @@ class Subtheme extends React.Component {
   }
 
   toggleFilter(value) {
+    console.log('toggleFilter', value)
     if (this.state.filter === value) {
       this.setState({filter: null})
     } else {
@@ -272,14 +273,15 @@ class Subtheme extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    const { 
-      filter, 
+    let {filter} = this.state
+
+    const {
       popup, 
       card, 
       entities, 
       entitiesLink,
       typename
-    } = this.state;
+    } = this.state
 
     const rawCards = getCards(subtheme.relationships, filter, this.open)
 

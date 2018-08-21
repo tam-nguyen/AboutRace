@@ -8,21 +8,28 @@ import {
   QuickFactCard
 } from '../components/cards'
 
-const defaultToEmpty = arr => (arr ? arr : [])
-
 const generate = (Component, key, object, onOpen) => <Component 
   key={key + '-' + object.title} 
   onOpen={ link => onOpen(link, object) } 
   data={object} 
 />
 
-const filter = (object, queryFilter, filter) => !queryFilter 
+const filter = (object, queryFilter, filter) => {
+  if(filter === 'qa') filter = 'faq'
+  const flag = !queryFilter 
   || queryFilter === `recent` 
   || queryFilter === filter
 
-const generateArray = (array, queryFilter, key, Component, onOpen) => array
+  return flag
+}
+
+const generateArray = (array, queryFilter, key, Component, onOpen) => {
+  const result = array
   .filter( o => filter(o, queryFilter, key) )
   .map( o => generate(Component, key, o, onOpen) )
+
+  return result
+}
 
 const getCards = (cards, queryFilter, onOpen) => {
   if(!onOpen) onOpen = link => window.location = link
@@ -30,27 +37,27 @@ const getCards = (cards, queryFilter, onOpen) => {
   let {
     articles,
     clips,
-    faq,
+    faqs,
     interviews,
     quickfacts,
   } = cards
 
   if(!articles) articles = []
   if(!clips) clips = []
-  if(!faq) faq = []
+  if(!faqs) faqs = []
   if(!interviews) interviews = []
   if(!quickfacts) quickfacts = []
 
   articles = generateArray(articles, queryFilter, 'article', ArticleCard, onOpen)
   clips = generateArray(clips, queryFilter, 'clip', ClipCard, onOpen)
-  faq = generateArray(faq, queryFilter, 'qa', QACard, onOpen)
+  faqs = generateArray(faqs, queryFilter, 'qa', QACard, onOpen)
   interviews = generateArray(interviews, queryFilter, 'interview', InterviewCard, onOpen)
   quickfacts = generateArray(quickfacts, queryFilter, 'quickfact', QuickFactCard, onOpen)
 
   return [
     ...articles,
     ...clips,
-    ...faq,
+    ...faqs,
     ...interviews,
     ...quickfacts,
   ]

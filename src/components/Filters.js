@@ -39,7 +39,12 @@ const Button = styled.div`
   text-transform: uppercase;
 `
 
-const itemExists = (itemTag, parent) => parent.relationships[itemTag]
+const itemExists = (itemTag, parent) => {
+  if(itemTag === 'Q&A') itemTag = 'faqs'
+  const flag = !!parent.relationships[itemTag]
+
+  return flag
+}
 
 const Filters = ({ queryParams, filter, subtheme, toggleFilter, color}) => {
   const array = Array
