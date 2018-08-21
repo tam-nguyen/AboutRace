@@ -82,11 +82,11 @@ const MobileItem = styled(Item)`
 
 const pages = [
   { name: 'themes', link: '/themes' },
-  { name: 'articles', link: '/articles' },
-  { name: 'interviews', link: '/interviews' },
-  { name: 'q&a', link: '/qa' },
   { name: 'clips', link: '/clips' },
   { name: 'teaching', link: '/teaching' },
+  { name: 'interviews', link: '/interviews' },
+  { name: 'articles', link: '/articles' },
+  { name: 'q&a', link: '/qa' },
   { name: 'about', link: '/about' }
 ]
 
