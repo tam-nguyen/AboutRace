@@ -66,8 +66,9 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class QACard extends React.Component {
   render() {
-    const {  qa = {}, onOpen } = this.props;
-    const link = `/qa/${kebabCase(qa.title)}`;
+    const {  data = {}, onOpen } = this.props
+    const qa = data
+    const link = `/qa/${kebabCase(qa.title)}`
 
     return (
       <Container

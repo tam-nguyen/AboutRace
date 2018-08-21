@@ -10,85 +10,47 @@ import {
 
 const defaultToEmpty = arr => (arr ? arr : [])
 
-const getCards = (relationships, queryFilter, onOpen) => {
-  if(!onOpen)
-    onOpen = link => {}
+const generate = (Component, key, object, onOpen) => <Component 
+  key={key + '-' + object.title} 
+  onOpen={ link => onOpen(link, object) } 
+  data={object} 
+/>
 
-  const articles = defaultToEmpty(relationships.articles)
-    .filter(article => 
-      !queryFilter 
-      || queryFilter === `recent` 
-      || queryFilter === `article`
-    )
-    .map(
-      article => 
-        <ArticleCard 
-          key={'article-' + article.title} 
-          onOpen={ link => onOpen(link, article) } 
-          article={article} 
-        />
-    )
+const filter = (object, queryFilter, filter) => !queryFilter 
+  || queryFilter === `recent` 
+  || queryFilter === filter
 
-  const clips = defaultToEmpty(relationships.clips)
-  .filter(clip => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `clip`
-  )
-  .map( clip => 
-    <ClipCard
-      key={'clip-' + clip.title}
-      linkable={true}
-      clip={clip}
-      onOpen={ link => onOpen(link, clip) } 
-    />
-  )
+const generateArray = (array, queryFilter, key, Component, onOpen) => array
+  .filter( o => filter(o, queryFilter, key) )
+  .map( o => generate(Component, key, o, onOpen) )
 
-  const qa = defaultToEmpty(relationships.faqs)
-  .filter( qa => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `qa`
-  )
-  .map( qa => 
-    <QACard
-      key={'qa-' + qa.title}
-      qa={qa}
-      onOpen={ link => onOpen(link, qa) } 
-    />
-  )
+const getCards = (cards, queryFilter, onOpen) => {
+  if(!onOpen) onOpen = link => window.location = link
 
-  const interviews = defaultToEmpty(relationships.interviews)
-  .filter( interview => 
-    !queryFilter
-    || queryFilter === `recent`
-    || queryFilter === `interview`
-  )
-  .map( interview => 
-    <InterviewCard
-      key={'interview-' + interview.title}
-      onOpen={ link => onOpen(link, interview) }
-      interview={interview} 
-    />
-  )
+  let {
+    articles,
+    clips,
+    faq,
+    interviews,
+    quickfacts,
+  } = cards
 
-  const quickfacts = defaultToEmpty(relationships.quickfacts)
-  .filter(quickfact => 
-    !queryFilter 
-    || queryFilter === `recent` 
-    || queryFilter === `quickfact`
-  )
-  .map( quickfact => 
-    <QuickFactCard
-      key={'quickfact-' + quickfact.title} 
-      quickfact={quickfact}
-    />
-  )
+  if(!articles) articles = []
+  if(!clips) clips = []
+  if(!faq) faq = []
+  if(!interviews) interviews = []
+  if(!quickfacts) quickfacts = []
+
+  articles = generateArray(articles, queryFilter, 'article', ArticleCard, onOpen)
+  clips = generateArray(clips, queryFilter, 'clip', ClipCard, onOpen)
+  faq = generateArray(faq, queryFilter, 'qa', QACard, onOpen)
+  interviews = generateArray(interviews, queryFilter, 'interview', InterviewCard, onOpen)
+  quickfacts = generateArray(quickfacts, queryFilter, 'quickfact', QuickFactCard, onOpen)
 
   return [
     ...articles,
     ...clips,
-    ...qa,
+    ...faq,
     ...interviews,
     ...quickfacts,
   ]

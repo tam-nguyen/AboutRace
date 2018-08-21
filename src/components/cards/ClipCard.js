@@ -150,7 +150,8 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class ClipCard extends React.Component {
   render() {
-    const { clip = { relationships: {} }, onOpen } = this.props
+    const { data = { relationships: {} }, onOpen } = this.props
+    const clip = data;
     const link = `/clips/${kebabCase(clip.title)}`
     const description = clip.title
     const background = clip.relationships.field_poster_image.localFile.publicURL
