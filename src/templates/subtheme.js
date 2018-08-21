@@ -206,7 +206,7 @@ class SubThemePage extends React.Component {
           >
             <Row>
               <Chevron />
-              <TopLink href='/'>{theme.name}</TopLink>
+              <TopLink href='/themes'>{theme.name}</TopLink>
             </Row>
             <Title>{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
