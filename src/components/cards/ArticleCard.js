@@ -138,7 +138,8 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class ArticleCard extends React.Component {
   render() {
-    const { article, onOpen } = this.props
+    const { data, onOpen } = this.props
+    const article = data;
     const link = `/articles/${kebabCase(article.title)}`
 
     const background = get(article, 'relationships.field_main_image.localFile.publicURL')

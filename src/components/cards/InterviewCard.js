@@ -128,7 +128,8 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 export class InterviewCard extends React.Component {
   render() {
-    const { interview = {}, onOpen } = this.props
+    const { data = {}, onOpen } = this.props
+    const interview = data;
     
     const link = `/interviews/${kebabCase(interview.title)}` 
     const background = interview.relationships.field_interviewee.localFile.publicURL;

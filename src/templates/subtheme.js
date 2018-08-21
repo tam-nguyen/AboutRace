@@ -30,7 +30,11 @@ const Container = styled.div`
 `
 
 const Header = styled.div`
-  position: relative;
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
 
   z-index: 1;
 
@@ -202,7 +206,7 @@ class SubThemePage extends React.Component {
           >
             <Row>
               <Chevron />
-              <TopLink href='/'>{theme.name}</TopLink>
+              <TopLink href='/themes'>{theme.name}</TopLink>
             </Row>
             <Title>{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />

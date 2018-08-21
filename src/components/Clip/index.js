@@ -401,7 +401,7 @@ class Clip extends React.Component {
             <SideBar>
               <SubTitle>filed under:</SubTitle>
               {
-                filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+                filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link} color={red}>{name}</FiledUnderLink>)
               }
               {
                 tags.length > 0

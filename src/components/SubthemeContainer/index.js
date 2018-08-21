@@ -21,6 +21,7 @@ import {
 
 import { default as CustomOverlay } from './Overlay'
 import { gradient as gradientQA } from '../QA'
+import { gradient as gradientInterview } from '../Interview'
 
 import getCards from '../../utils/getCards'
 
@@ -28,6 +29,8 @@ import {
   white,
   softblack
 } from '../../colors'
+
+import hexToRGB from '../../utils/hexToRGB'
 
 const range = require('range');
 
@@ -130,7 +133,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: ${softblack};
+  background-color: ${hexToRGB(softblack, 0.75)};
   backdrop-filter: blur(5px);
 
   border-bottom: solid thin grey;
@@ -159,6 +162,7 @@ class Subtheme extends React.Component {
   }
 
   toggleFilter(value) {
+    console.log('toggleFilter', value)
     if (this.state.filter === value) {
       this.setState({filter: null})
     } else {
@@ -218,6 +222,12 @@ class Subtheme extends React.Component {
     const entities = typename === 'faq' ? `All Q&As` : `all ${typename}s`
     const entitiesLink = typename === 'faq' ? '/qa' : `/${typename}s`
 
+    // a plain way to detect if window size is to small to show overlay
+    if(window.innerWidth < 1000) {
+      window.location = entitiesLink
+      return
+    }
+
     this.setState({
       popup: true,
       card: {...data, link},
@@ -263,14 +273,15 @@ class Subtheme extends React.Component {
     const {data} = this.props;
     const subtheme = data;
 
-    const { 
-      filter, 
+    let {filter} = this.state
+
+    const {
       popup, 
       card, 
       entities, 
       entitiesLink,
       typename
-    } = this.state;
+    } = this.state
 
     const rawCards = getCards(subtheme.relationships, filter, this.open)
 
@@ -291,7 +302,11 @@ class Subtheme extends React.Component {
       case 'faq':
         gradient = gradientQA
         color = softblack
-        break;
+        break
+      case 'interview':
+        gradient = gradientInterview
+        color = softblack
+        break
       default:
         gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
         color = white

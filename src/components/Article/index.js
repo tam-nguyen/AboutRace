@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
 import get from 'lodash/get'
 
@@ -110,13 +110,20 @@ const MainImage = styled.div`
   transition: all .5s ease;
 
   @media (min-width: 1025px) { /* desktop */
-    top: 0;
-    left: 0;
-    right: 0;
-    
-    height: 100vh;
+    ${props => props.overlay ? css`
+      top: 10vh;
+      left: 20vw;
+      right: 20vw;
+      height: 50vh;
+    ` : css`
+      top: 0;
+      left: 0;
+      right: 0;
+      
+      height: 100vh;
 
-    box-shadow: none;
+      box-shadow: none;
+    `}
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -138,7 +145,7 @@ const TextContainer = styled.div`
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
     max-width: 1200px;
-    padding-top: 87vh;
+    padding-top: ${props => props.overlay ? '40vh' : '87vh'};
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -639,8 +646,8 @@ class Article extends React.Component {
       <Container>
         <TopContainer overlay={overlay}>
           <AllEntities />
-          <MainImage background={background}/>
-          <TextContainer>
+          <MainImage background={background} overlay={overlay}/>
+          <TextContainer overlay={overlay}>
             <TextInnerContainer>
               <ContentBar>
                 <Title>{title}</Title>
