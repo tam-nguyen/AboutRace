@@ -20,7 +20,7 @@ const TopContainer = styled.div`
   position: relative;
 
   width: 100vw;
-  min-height: 700px;
+  min-height: 100vh;
 
   &::before {
     position: absolute;
@@ -57,7 +57,7 @@ const InnerContainer = styled.div`
   position: absolute;
 
   width: 100vw;
-  min-height: 700px;
+  min-height: 100vh;
 
   top: 0;
   left: 0;
