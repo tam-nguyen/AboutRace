@@ -21,6 +21,7 @@ import {
 
 import { default as CustomOverlay } from './Overlay'
 import { gradient as gradientQA } from '../QA'
+import { gradient as gradientInterview } from '../Interview'
 
 import getCards from '../../utils/getCards'
 
@@ -299,7 +300,11 @@ class Subtheme extends React.Component {
       case 'faq':
         gradient = gradientQA
         color = softblack
-        break;
+        break
+      case 'interview':
+        gradient = gradientInterview
+        color = softblack
+        break
       default:
         gradient = `linear-gradient(to bottom, #D9B0B0 0%, rgba(109,88,88,0.92) 100%)`
         color = white
