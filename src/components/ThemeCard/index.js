@@ -85,8 +85,6 @@ const Info = styled.div`
 
   z-index: 1;
 
-  /*backdrop-filter: blur(12px);*/
-
   cursor: pointer;
 
   &::after {
@@ -251,7 +249,6 @@ class ThemeCard extends React.Component {
       <Container
         open={open}
         gradient={gradient}
-        onClick={() => this.setState({open: !open})}
       >
         <MainImage 
           style={{
@@ -271,7 +268,9 @@ class ThemeCard extends React.Component {
             }}
             background={background}
           />
-          <FirstRow>
+          <FirstRow
+            onClick={() => this.setState({open: !open})}
+          >
             <Explore>Explore:</Explore>
             <Title >{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
