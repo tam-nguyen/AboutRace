@@ -29,6 +29,8 @@ import {
   softblack
 } from '../../colors'
 
+import hexToRGB from '../../utils/hexToRGB'
+
 const range = require('range');
 
 const NUM_CARDS_TO_SHOW = 3;
@@ -130,7 +132,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: ${softblack};
+  background-color: ${hexToRGB(softblack, 0.75)};
   backdrop-filter: blur(5px);
 
   border-bottom: solid thin grey;
