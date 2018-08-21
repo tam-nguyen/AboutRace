@@ -77,6 +77,9 @@ const MainImage = styled.div`
 
 const Info = styled.div`
   position: relative;
+
+  width: 100%;
+  min-height: 400px;
   
   margin-top: -200px;
   margin-bottom: -100px;
@@ -155,7 +158,7 @@ const ChevronContainer = styled.div`
   cursor: pointer;
   position: absolute;
   
-  right: 0;
+  right: 30px;
 
   width: 18px;
   height: 30px;
@@ -203,17 +206,23 @@ const Row = styled.div`
 `
 
 const FirstRow = styled(Row)`
-  margin-top: 16px;
-  margin-left: 30px;
-  margin-right: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  padding-top: 16px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 30px;
 
   @media (min-width: 1025px) { /* desktop */
     
   }
 
   @media (max-width: 812px) { /* mobile */
-    margin-left: 38px;
-    margin-right: 38px;
+    padding-left: 38px;
+    padding-right: 38px;
   }
 `
 
@@ -276,7 +285,7 @@ class ThemeCard extends React.Component {
             <Description dangerouslySetInnerHTML={{ __html: description }} />
             <Chevron open={open} />
           </FirstRow>
-          <Row>
+          <Row style={{marginTop: 50}}>
             {
               open && <SubThemes gradient={gradient}>
                 {
