@@ -220,6 +220,12 @@ class Subtheme extends React.Component {
     const entities = typename === 'faq' ? `All Q&As` : `all ${typename}s`
     const entitiesLink = typename === 'faq' ? '/qa' : `/${typename}s`
 
+    // a plain way to detect if window size is to small to show overlay
+    if(window.innerWidth < 1000) {
+      window.location = entitiesLink
+      return
+    }
+
     this.setState({
       popup: true,
       card: {...data, link},

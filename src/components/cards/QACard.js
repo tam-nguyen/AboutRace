@@ -72,9 +72,7 @@ export class QACard extends React.Component {
 
     return (
       <Container
-        slug="qa"
         changed={qa.changed}
-        type="qa" 
         onClick={ () => onOpen(link)}
       >
         <Title>Q&A</Title>
