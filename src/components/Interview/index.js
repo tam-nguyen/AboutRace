@@ -19,7 +19,7 @@ import {
 } from '../../colors'
 
 const TICKER = 'INTERVIEW'
-export const gradient = `linear-gradient(to bottom, #A7D9CE 0%, rgba(84,109,103,0.92) 100%)`
+export const gradient = `linear-gradient(to bottom,rgba(192, 217, 176, 0.52) 0%,rgba(15, 201, 210, 0.72) 100%)`
 const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
