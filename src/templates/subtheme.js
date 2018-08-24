@@ -69,7 +69,7 @@ const Header = styled.div`
     background-attachment: fixed;
 
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    filter: blur(6px);
+    filter: blur(12px);
   }
 
   
@@ -128,9 +128,9 @@ const Row = styled.div`
 
 const Title = styled.div`
   color: ${white};
-  font-family: Lato;
+  font-family: 'Quicksand';
   font-size: 66px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 60px;
 
   padding-top: 12px;
@@ -148,8 +148,8 @@ const TopLink = styled(Link)`
 `
 
 const Description = styled.div`
-  font-family: 'Neuton';
-  font-size: 24px;
+  font-family: 'Quicksand';
+  font-size: 20px;
   font-weight: 400;
   line-height: 28px;
   color: ${white};
