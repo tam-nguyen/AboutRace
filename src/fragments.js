@@ -27,6 +27,9 @@ export const ArticleFragment = graphql`
     field_author {
       processed
     }
+    field_article_summary {
+      processed
+    }
     relationships {
       field_main_image {
         localFile {

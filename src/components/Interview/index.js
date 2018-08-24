@@ -231,8 +231,8 @@ const Column = styled.div`
 `
 
 const Title = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 36px;
+  font-family: 'Quicksand';
+  font-size: 42px;
   line-height: 48px;
 `
 
@@ -249,8 +249,8 @@ const Author = styled.div`
 `
 
 const Text = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 17px;
+  font-family: 'Quicksand';
+  font-size: 15px;
   line-height: 24px;
 `
 

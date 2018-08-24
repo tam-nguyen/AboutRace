@@ -1,6 +1,6 @@
 export const black = '#000000';
 export const softblack = '#222222';
-export const blackWithOpacity = opacity => `rgba(0,0,0,${opacity})`;
+export const blackWithOpacity = opacity => `rgba(34,34,34,${opacity})`;
 export const white = '#FFFFFF';
 export const whiteShadow = '#FCFCFC';
 export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';

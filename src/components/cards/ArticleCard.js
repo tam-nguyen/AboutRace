@@ -64,7 +64,7 @@ const TopBlock = styled.div`
 `
 
 const ArticleTitle = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Neuton';
   font-size: 36px;
   line-height: 36px;
 `
@@ -81,7 +81,8 @@ const InnerContainer = styled.div`
 `
 
 const Author = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.22em;
@@ -95,8 +96,8 @@ const Ticker = styled.div`
   left: 0;
   bottom: 0;
 
-  font-family: Lato;
-  font-weight: normal;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 30px;
   letter-spacing: 0.22em;
@@ -143,7 +144,7 @@ export class ArticleCard extends React.Component {
     const link = `/articles/${kebabCase(article.title)}`
 
     const background = get(article, 'relationships.field_main_image.localFile.publicURL')
-    const description = get(article, 'field_short_version.processed')
+    const description = get(article, 'field_article_summary.processed')
     const author = get(article, 'field_author.processed')
     const title = article.title.replace('--','–');
 
