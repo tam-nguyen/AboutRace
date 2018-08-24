@@ -17,7 +17,8 @@ const Container = styled.div`
   font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.22em;
-  font-family: 'Lato';
+  font-family: 'Quicksand';
+  font-weight: 500;
   color: ${props => props.color ? props.color : black};
   opacity: 0.8;
 

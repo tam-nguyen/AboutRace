@@ -48,6 +48,9 @@ export const FullArticleFragment = graphql`
     field_short_version {
       processed
     }
+    field_article_summary {
+      processed
+    }
     field_old_article_discl {
       processed
     }

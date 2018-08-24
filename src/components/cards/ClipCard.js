@@ -81,8 +81,8 @@ const Ticker = styled.div`
   left: 0;
   bottom: 0;
 
-  font-family: Lato;
-  font-weight: normal;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 30px;
   letter-spacing: 0.22em;

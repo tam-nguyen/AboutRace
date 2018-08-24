@@ -27,27 +27,30 @@ const Container = styled(Card)`
   &::before {
     content: '?';
     position: absolute;
-    top: -35px;
+    top: -115px;
     right: 100px;
 
-    font-family: 'Tisa Pro';
+    font-family: 'Quicksand'
+    font-weight: 700;
     font-size: 400px;
 
-    opacity: 0.06;
+    opacity: 0.16;
   }
 `
 
 const Title = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 30px;
   letter-spacing: 0.22em;
 `
 
 const Question = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Neuton';
+  font-weight: 500;
   font-size: 36px;
-  line-height: 42px;
+  line-height: 36px;
 `
 
 const ArrowContainer = styled.div`
