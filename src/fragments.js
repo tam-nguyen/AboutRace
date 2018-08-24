@@ -27,6 +27,9 @@ export const ArticleFragment = graphql`
     field_author {
       processed
     }
+    field_article_summary {
+      processed
+    }
     relationships {
       field_main_image {
         localFile {
@@ -43,6 +46,9 @@ export const FullArticleFragment = graphql`
     id
     field_include_in_the_teaching_se
     field_short_version {
+      processed
+    }
+    field_article_summary {
       processed
     }
     field_old_article_discl {

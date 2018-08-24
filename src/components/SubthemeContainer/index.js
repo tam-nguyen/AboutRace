@@ -133,7 +133,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: ${hexToRGB(softblack, 0.75)};
+  background-color: #222222;
   backdrop-filter: blur(5px);
 
   border-bottom: solid thin grey;

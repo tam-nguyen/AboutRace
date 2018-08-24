@@ -69,7 +69,7 @@ const Header = styled.div`
     background-attachment: fixed;
 
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    filter: blur(6px);
+    filter: blur(12px);
   }
 
   
@@ -128,29 +128,30 @@ const Row = styled.div`
 
 const Title = styled.div`
   color: ${white};
-  font-family: Lato;
+  font-family: 'Quicksand';
   font-size: 66px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 60px;
 
-  padding-top: 7px;
-  padding-bottom: 36px;
+  padding-top: 12px;
+  padding-bottom: 18px;
 `
 
 const TopLink = styled(Link)`
-  font-family: Lato;
+  font-family: 'Quicksand';
   font-size: 17px;
   font-weight: 500;
   line-height: 60px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: ${white};
+  color: ${red};
 `
 
 const Description = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Quicksand';
   font-size: 20px;
-  line-height: 24px;
+  font-weight: 400;
+  line-height: 28px;
   color: ${white};
 
   max-width: 600px;

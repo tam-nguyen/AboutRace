@@ -11,7 +11,8 @@ import {
   red,
   white,
   articleColors,
-  articleTickerColor
+  articleTickerColor,
+  softblack
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -23,7 +24,7 @@ const Container = styled(Card)`
 
   background: linear-gradient(to bottom, ${articleColors[0]} 0%, ${articleColors[1]} 100%);
 
-  color: ${white};
+  color: ${softblack};
 
   padding-left: 15px;
   padding-right: 15px;
@@ -64,7 +65,8 @@ const TopBlock = styled.div`
 `
 
 const ArticleTitle = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Neuton';
+  color: white;
   font-size: 36px;
   line-height: 36px;
 `
@@ -81,7 +83,8 @@ const InnerContainer = styled.div`
 `
 
 const Author = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.22em;
@@ -95,8 +98,8 @@ const Ticker = styled.div`
   left: 0;
   bottom: 0;
 
-  font-family: Lato;
-  font-weight: normal;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 30px;
   letter-spacing: 0.22em;
@@ -104,7 +107,7 @@ const Ticker = styled.div`
   border-top-right-radius: 3px;
   background-color: ${articleTickerColor};
 
-  padding: 9px 15px;
+  padding: 5px 15px;
   text-transform: uppercase;
 `
 
@@ -143,7 +146,7 @@ export class ArticleCard extends React.Component {
     const link = `/articles/${kebabCase(article.title)}`
 
     const background = get(article, 'relationships.field_main_image.localFile.publicURL')
-    const description = get(article, 'field_short_version.processed')
+    const description = get(article, 'field_article_summary.processed')
     const author = get(article, 'field_author.processed')
     const title = article.title.replace('--','–');
 

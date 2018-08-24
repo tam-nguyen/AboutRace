@@ -174,14 +174,15 @@ const TextInnerContainer = styled.div`
     content: '${TICKER}';
     position: absolute;
 
-    height: 39px;
+    height: 45px;
 
-    font-family: Lato;
+    font-family: Quicksand;
+    font-weight: 500;
     font-size: 12px;
     line-height: 50px;
     letter-spacing: 0.22em;
 
-    top: -39px;
+    top: -45px;
     left: 0;
 
     background-color: ${white};
@@ -205,13 +206,15 @@ const Column = styled.div`
 `
 
 const Title = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 36px;
+  font-family: 'Neuton';
+  font-weight:400;
+  font-size: 48px;
   line-height: 48px;
 `
 
 const Author = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight:500;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.22em;
@@ -219,19 +222,23 @@ const Author = styled.div`
   text-transform: uppercase;
 
   padding-top: 18px;
-  padding-bottom: 24px;
+  padding-bottom: 6px;
 `
 
 const IntroText = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 20px;
+  font-family: 'Neuton';
+  font-weight:800;
+  font-size: 26px;
   line-height: 28px;
+  & p {
+    -webkit-margin-after: 0;
+  }
 `
 
 const Text = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 17px;
-  line-height: 24px;
+  font-family: 'Neuton';
+  font-size: 20px;
+  line-height: 26px;
 `
 
 const ContentBar = styled(Column)`
@@ -298,17 +305,18 @@ const AuthorImage = styled.div`
 
 const Bio = styled.div`
   padding: 15px;
-
-  font-family: Lato;
-  font-style: italic;
-  font-size: 14px;
-  line-height: 18px;
+  padding-top:0;
+  font-family: Neuton;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
 
   margin-bottom: 60px;
 `
 
 const SubTitle = styled.div`
-  font-family: Lato;
+  font-family: Quicksand;
+  font-weight: 500;
   font-size: 12px;
   line-height: 28px;
   letter-spacing: 0.22em;
@@ -349,7 +357,8 @@ const Tags = styled.div`
 const Tag = styled.div`
   padding: 3px 15px;
 
-  font-family: Lato;
+  font-family: Quicksand;
+  font-weight: 500;
   font-size: 14px;
   line-height: 36px;
   letter-spacing: 0.22em;
