@@ -15,12 +15,12 @@ export const orange = '#E3A44D';
 const backdropColor = '#0B0C0D';
 export const getGradient = color => `linear-gradient(to bottom, ${color} 0%, ${backdropColor} 100%)`
 
-export const qaColor = '#EEFFE8';
-export const articleColors = ['#FFB1B1', '#503E3E'];
-export const articleTickerColor = '#7E6169';
+export const qaColor = ['#f3f19b', '#fffff1'];
+export const articleColors = ['#f26f70', '#fffbfb'];
+export const articleTickerColor = '#f26f70';
 
-export const interviewColors = ['#0075B2', '#9FDD6A'];
-export const interviewTickerColor = '#57C190';
+export const interviewColors = ['#a2fee7', '#fbfffe'];
+export const interviewTickerColor = '#a2fee7';
 
 export const clipColors = ['#7C85A5', '#222222'];
 export const clipRadialColors = ['#37625D', '#2F4134'];

@@ -90,7 +90,7 @@ const Ticker = styled.div`
   border-top-right-radius: 3px;
   background-color: ${clipTickerColor};
 
-  padding: 9px 15px;
+  padding: 5px 15px;
   text-transform: uppercase;
 `
 

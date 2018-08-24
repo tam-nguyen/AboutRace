@@ -10,7 +10,8 @@ import {
   red,
   white,
   interviewColors,
-  interviewTickerColor
+  interviewTickerColor,
+  softblack
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -22,7 +23,7 @@ const Container = styled(Card)`
 
   background: linear-gradient(to bottom, ${interviewColors[0]} 0%, ${interviewColors[1]} 100%);
 
-  color: ${white};
+  color: ${softblack};
 
   padding-left: 15px;
   padding-right: 15px;
@@ -86,7 +87,7 @@ const Ticker = styled.div`
   border-top-right-radius: 3px;
   background-color: ${interviewTickerColor};
 
-  padding: 9px 15px;
+  padding: 5px 15px;
   text-transform: uppercase;
 `
 
@@ -101,7 +102,8 @@ const BottomBlock = styled.div`
 
 const Bio = styled.div`
   font-family: 'Quicksand';
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 12px;
   line-height: 18px;
 `
 

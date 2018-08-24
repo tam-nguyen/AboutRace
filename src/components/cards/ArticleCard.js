@@ -11,7 +11,8 @@ import {
   red,
   white,
   articleColors,
-  articleTickerColor
+  articleTickerColor,
+  softblack
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -23,7 +24,7 @@ const Container = styled(Card)`
 
   background: linear-gradient(to bottom, ${articleColors[0]} 0%, ${articleColors[1]} 100%);
 
-  color: ${white};
+  color: ${softblack};
 
   padding-left: 15px;
   padding-right: 15px;
@@ -65,6 +66,7 @@ const TopBlock = styled.div`
 
 const ArticleTitle = styled.div`
   font-family: 'Neuton';
+  color: white;
   font-size: 36px;
   line-height: 36px;
 `
@@ -105,7 +107,7 @@ const Ticker = styled.div`
   border-top-right-radius: 3px;
   background-color: ${articleTickerColor};
 
-  padding: 9px 15px;
+  padding: 5px 15px;
   text-transform: uppercase;
 `
 

@@ -18,7 +18,7 @@ const Container = styled(Card)`
   flex-direction: column;
   justify-content: center;
 
-  background-color: ${qaColor};
+  background: linear-gradient(to bottom, ${qaColor[0]} 0%, ${qaColor[1]} 100%);
   color: ${softblack};
 
   padding-left: 15px;

@@ -89,8 +89,9 @@ const Quote = styled.div`
   width: 100%;
   margin: auto;
 
-  font-family: 'Tisa Pro';
-  font-size: 40px;
+  font-family: 'Neuton';
+  font-weight: 400;
+  font-size: 42px;
   line-height: 60px;
 
   text-align: center;
@@ -98,7 +99,6 @@ const Quote = styled.div`
   @media (min-width: 1025px) { /* desktop */
     width: 835px;
     font-size: 36px;
-    font-style: italic;
     line-height: 48px;
   }
 
@@ -111,7 +111,8 @@ const Quote = styled.div`
 `
 
 const QuoteAttribution = styled.div`
-  font-family: 'Lato';
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.22em;

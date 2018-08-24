@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Description = styled.div`
   font-family: 'Quicksand';
-  font-weight: 400;
+  font-weight: 500;
   font-size: 17px;
   line-height: 21px;
 `;
