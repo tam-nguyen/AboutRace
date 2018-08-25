@@ -43,6 +43,17 @@ const Container = styled.div`
   transition: all 0.3s ease-out;
 `
 
+const HomeLink = styled(Link)`
+  text-aligment: center;
+  text-decoration: none;
+  display: none;
+  color: ${white};
+  font-family: 'Quicksand';
+  font-size: 36px;
+  line-height: 36px;
+  float: left;
+`
+
 const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
@@ -61,8 +72,8 @@ const Item = styled(Link)`
 
   @media (min-width: 1025px) { /* desktop */
     margin-right: 45px;
-    font-size: 14px;
-    letter-spacing: 0.22em;
+    font-size: 18px;
+    letter-spacing: 0.12em;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -104,6 +115,7 @@ class Header extends React.Component {
 
     return (
       <Container open={open} id="header">
+      <HomeLink>Home</HomeLink>
         <Menu
           open={open}
           onClick={ e => this.setState({open: !open})}

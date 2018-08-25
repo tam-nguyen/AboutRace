@@ -26,7 +26,6 @@ const Container = styled.div`
   justify-content: center;
 
   padding-top: 51px;
-  padding-bottom: 98px;
 
   background-color: ${white};
   
@@ -118,7 +117,8 @@ const Info = styled.div`
 `
 
 const Explore = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   text-align: left;
   letter-spacing: 0.22em;
   margin-top:12px;
@@ -130,9 +130,8 @@ const Explore = styled.div`
 `
 
 const Title = styled.div`
-  font-family: Lato;
+  font-family: 'Neuton';
   text-align: left;
-  letter-spacing: 0.02em;
   line-height: 60px;
   margin-bottom: 24px;
   color: ${white};
@@ -141,7 +140,7 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
-  font-family: Tisa Pro;
+  font-family: 'Quicksand';
   font-size: 22px;
   margin-right: 90px;
   line-height: 30px;
@@ -183,8 +182,6 @@ const SubThemes = styled.div`
   grid-template-columns: 45vw 45vw;
 
   padding-left: 15px;
-
-  padding-bottom: 30px;
 
   @media (min-width: 1025px) { /* desktop */
     grid-template-columns: 33% 33% 33%;

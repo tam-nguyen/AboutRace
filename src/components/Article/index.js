@@ -24,7 +24,6 @@ const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 10
 
 const Container = styled.div`
   width: 100%;
-  
   display: flex;
   flex-direction: column;
 
@@ -106,7 +105,6 @@ const MainImage = styled.div`
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
-
   transition: all .5s ease;
 
   @media (min-width: 1025px) { /* desktop */
@@ -173,6 +171,7 @@ const TextInnerContainer = styled.div`
   &::before {
     content: '${TICKER}';
     position: absolute;
+    display:none;
 
     height: 45px;
 
@@ -205,11 +204,18 @@ const Column = styled.div`
   flex-direction: column;
 `
 
+const Filing = styled.div`
+  margin-left: -60px;
+  margin-top: -30px;
+  margin-bottom: 30px;
+`
+
 const Title = styled.div`
   font-family: 'Neuton';
   font-weight:400;
   font-size: 48px;
   line-height: 48px;
+  margin-top:48px;
 `
 
 const Author = styled.div`
@@ -227,10 +233,11 @@ const Author = styled.div`
 
 const IntroText = styled.div`
   font-family: 'Neuton';
-  font-weight:800;
-  font-size: 26px;
-  line-height: 28px;
+  font-weight:700;
+  font-size: 24px;
+  line-height: 30px;
   & p {
+    margin-bottom: 0;
     -webkit-margin-after: 0;
   }
 `
@@ -238,16 +245,19 @@ const IntroText = styled.div`
 const Text = styled.div`
   font-family: 'Neuton';
   font-size: 20px;
-  line-height: 26px;
+  line-height: 28px;
 `
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 60px 80px;
+  padding: 60px 90px;
 
   z-index: 10;
 
   background-color: ${white};
+  background-color: rgba(255, 255, 255, 0.96);
+
+
   border-bottom-left-radius: 3px;
 
   box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
@@ -271,6 +281,8 @@ const SideBar = styled(Column)`
 
   width: 400px;
   background-color: ${whiteShadowTrans};
+
+
 
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -310,8 +322,6 @@ const Bio = styled.div`
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
-
-  margin-bottom: 60px;
 `
 
 const SubTitle = styled.div`
@@ -590,10 +600,7 @@ class Article extends React.Component {
       <SideBar>
         <AuthorImage background={authorImage}/>
         <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
-        <SubTitle>filed under:</SubTitle>
-        {
-          filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
-        }
+        
         <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
         <Tags>
           {
@@ -659,6 +666,12 @@ class Article extends React.Component {
           <TextContainer overlay={overlay}>
             <TextInnerContainer>
               <ContentBar>
+                <Filing>
+                <SubTitle>filed under:</SubTitle>
+                  {
+                    filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+                  }
+                  </Filing>
                 <Title>{title}</Title>
                 <Author>by {author}</Author>
                 <IntroText dangerouslySetInnerHTML={{ __html: introText}}/>

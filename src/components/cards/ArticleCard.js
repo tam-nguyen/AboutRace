@@ -23,7 +23,7 @@ const Container = styled(Card)`
   justify-content: center;
 
   background: linear-gradient(to bottom, ${articleColors[0]} 0%, ${articleColors[1]} 100%);
-
+  background: linear-gradient(to bottom,#f90e70 0%,#ffaa61 100%);
   color: ${softblack};
 
   padding-left: 15px;
@@ -67,8 +67,8 @@ const TopBlock = styled.div`
 const ArticleTitle = styled.div`
   font-family: 'Neuton';
   color: white;
-  font-size: 36px;
-  line-height: 36px;
+  font-size: 42px;
+  line-height: 42px;
 `
 
 const InnerContainer = styled.div`
