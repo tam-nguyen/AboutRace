@@ -11,7 +11,7 @@ import {
 import {
   blackWithOpacity,
   white,
-} from '../../colors.js'
+} from '../../colors'
 
 const Container = styled.div`
   position: fixed;
