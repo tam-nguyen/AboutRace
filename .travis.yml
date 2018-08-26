@@ -10,6 +10,7 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: "racepi"
   skip_cleanup: true
+  local_dir: public
   acl: public_read
 before_script:
   - "npm i -g gatsby"
