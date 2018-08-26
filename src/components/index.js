@@ -14,6 +14,7 @@ export {
   OverlayBody 
 } from './overlay'
 
+export SVGLogo from './SVGLogo'
 export SVGChevron from './SVGChevron'
 export SVGArrow from './SVGArrow'
 export SVGLink from './SVGLink'
