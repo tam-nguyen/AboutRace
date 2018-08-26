@@ -43,17 +43,6 @@ const Container = styled.div`
   transition: all 0.3s ease-out;
 `
 
-const HomeLink = styled(Link)`
-  text-aligment: center;
-  text-decoration: none;
-  display: none;
-  color: ${white};
-  font-family: 'Quicksand';
-  font-size: 36px;
-  line-height: 36px;
-  float: left;
-`
-
 const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
@@ -115,7 +104,6 @@ class Header extends React.Component {
 
     return (
       <Container open={open} id="header">
-      <HomeLink>Home</HomeLink>
         <Menu
           open={open}
           onClick={ e => this.setState({open: !open})}

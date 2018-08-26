@@ -255,7 +255,7 @@ const ContentBar = styled(Column)`
   z-index: 10;
 
   background-color: ${white};
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(255, 255, 255, 0.97);
 
 
   border-bottom-left-radius: 3px;
