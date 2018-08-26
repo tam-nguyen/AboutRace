@@ -40,7 +40,7 @@
     "develop": "gatsby develop -H 0.0.0.0",
     "format": "prettier --write src/**/*.js",
     "test": "exit 0",
-    "deploy": "gatsby build --prefix-paths && node_modules/.bin/gh-pages -d public"
+    "deploy": "gatsby build --prefix-path"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.53",
