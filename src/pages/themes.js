@@ -19,6 +19,11 @@ const HomeBackground = styled.div`
   width:100%;
 `
 
+const ThemesIntro = styled.div`
+  height: 500px;
+  width: 100%;
+`
+
 class Index extends React.Component {
   render() {
     const edges = get(this, 'props.data.allTaxonomyTermThemes.edges')
@@ -27,6 +32,7 @@ class Index extends React.Component {
       <Layout location={this.props.location}>
         <div>
           <HomeBackground />
+          <ThemesIntro />
           {
             edges.map( ({ node }, key) =>
               <ThemeCard key={key} data={node} color={gradientColors[key]}/>

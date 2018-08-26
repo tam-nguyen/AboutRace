@@ -23,7 +23,7 @@ const Container = styled.div`
   
   justify-content: space-around;
 
-  background-color: ${blackWithOpacity(0.83)};
+  background-color: ${blackWithOpacity(0.92)};
 
   height: 60px;
 
@@ -51,8 +51,8 @@ const Item = styled(Link)`
 
   text-transform: uppercase;
 
-  font-family: Lato;
-  font-weight: normal;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 10pt;
   line-height: 30px;
   letter-spacing: 0.22em;
@@ -61,8 +61,8 @@ const Item = styled(Link)`
 
   @media (min-width: 1025px) { /* desktop */
     margin-right: 45px;
-    font-size: 12px;
-    letter-spacing: 0.22em;
+    font-size: 18px;
+    letter-spacing: 0.12em;
   }
 
   @media (max-width: 812px) { /* mobile */

@@ -17,3 +17,11 @@ body {
 body.modal-open {
   overflow: hidden;
 }
+
+strong {
+  font-weight: 700;
+  position: relative;
+  top:14px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Neuton:200,300,400,400i,700,800|Quicksand:300,400,500,700');
