@@ -222,6 +222,8 @@ class Teaching extends React.Component {
 
     const relatedContent = getCards({articles, interviews})
 
+    const desciption = get(this, `props.data.taxonomyTermForTeachers.field_intro_text.processed`)
+
     const handouts = [
       {
         name: '10 Things to Know About Race',
@@ -300,6 +302,6 @@ class Teaching extends React.Component {
   }
 }
 
-const desciption = `In the United States, buying a home is the key to achieving the American Dream. Forty-two percent of the net worth of all households consists of equity in their homes - that means for most Americans, their homes are their single largest asset. Homeownership provides families with the means to invest in education, business opportunities, retirement and resources for the next generation.`
+
 
 export default Teaching
