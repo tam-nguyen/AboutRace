@@ -82,7 +82,7 @@ const BottomContainer = styled(Column)`
 `
 
 const Title = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Quicksand';
   font-size: 48px;
   line-height: 60px;
 
@@ -92,9 +92,9 @@ const Title = styled.div`
 `
 
 const Description = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 20px;
-  line-height: 24px;
+  font-family: 'Neuton';
+  font-size: 24px;
+  line-height: 30px;
 
   color: ${softblack};
 `
@@ -130,7 +130,8 @@ const SideBar = styled.div`
 `
 
 const SubTitle = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 28px;
   letter-spacing: 0.22em;
@@ -149,7 +150,7 @@ const SubTitle = styled.div`
 `
 
 const SecondTitle = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
   font-size: 42px;
   font-weight: 600;
   line-height: 36px;
@@ -222,8 +223,6 @@ class Teaching extends React.Component {
 
     const relatedContent = getCards({articles, interviews})
 
-    const desciption = get(this, `props.data.taxonomyTermForTeachers.field_intro_text.processed`)
-
     const handouts = [
       {
         name: '10 Things to Know About Race',
@@ -251,7 +250,7 @@ class Teaching extends React.Component {
         <TopContainer>
           <ContentColumn>
             <Title>Teaching</Title>
-            <Description>{desciption}</Description>
+            <Description dangerouslySetInnerHTML={{ __html: get(this, `props.data.taxonomyTermForTeachers.field_intro_text.processed`) }}/>
           </ContentColumn>
           <SideBar>
             <Title>&nbsp;</Title>

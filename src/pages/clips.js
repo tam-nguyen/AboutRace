@@ -21,12 +21,12 @@ const Container = styled.div`
   }
 `
 
-const description = `In the United States, buying a home is the key to achieving the American Dream. Forty-two percent of the net worth of all households consists of equity in their homes - that means for most Americans, their homes are their single largest asset. Homeownership provides families with the means to invest in education, business opportunities, retirement and resources for the next generation.`
 
 export default ({ data, location }) => {
   const title = "Clips"
   // const description = get(data, 'taxonomyTermInterviewsPage.description.processed')
   const clips = get(data, `allNodeClip.edges`).map(edge => edge.node)
+  const description = get(data, 'taxonomyTermClipsPage.description.processed')
 
   const cards = { clips }
 
@@ -47,6 +47,11 @@ export default ({ data, location }) => {
 
 export const query = graphql`
   query ClipsQuery {
+    taxonomyTermClipsPage {
+      description {
+        processed
+      }
+    }
     allNodeClip {
 		  edges {
 		    node {

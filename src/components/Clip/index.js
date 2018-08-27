@@ -387,6 +387,7 @@ class Clip extends React.Component {
     const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
     // const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
     const title = get(this, `props.data.${nodeName}.title`)
+    const introText = get(this, `props.data.${nodeName}.description.processed`)
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
     const tags = getTags(get(this, `props.data.${nodeName}.relationships.field_tags`))

@@ -58,7 +58,6 @@ const Filters = ({selected, select}) => <FiltersContainer>
   }
 </FiltersContainer>
 
-const description = `In the United States, buying a home is the key to achieving the American Dream. Forty-two percent of the net worth of all households consists of equity in their homes - that means for most Americans, their homes are their single largest asset. Homeownership provides families with the means to invest in education, business opportunities, retirement and resources for the next generation.`
 
 class QA extends React.Component {
   constructor(props) {
@@ -72,6 +71,7 @@ class QA extends React.Component {
   render() {
     const title = "Q&A"
     const faqs = get(this, `props.data.allNodeFaq.edges`).map(edge => edge.node)
+    const description = get(this, `props.data.taxonomyTermQAPage.description.processed`)
 
     const props = {
       title,
@@ -100,6 +100,11 @@ export default QA
 
 export const query = graphql`
   query QAQuery {
+    taxonomyTermQAPage {
+      description {
+        processed
+      }
+    }
     allNodeFaq {
       edges {
         node {
