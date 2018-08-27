@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Menu from './Menu'
 
 import {
-  SVGLogo
+  SVGLogo,
 } from '../'
 
 import {
@@ -143,14 +143,14 @@ class Header extends React.Component {
           open={open}
           onClick={ e => this.setState({open: !open})}
         />
-        <Logo><SVGLogo/></Logo>
+        <Logo><Link href='/'><SVGLogo/></Link></Logo>
         <ItemsContainer>
           {
             pages.map( ({name, link}, index) => <Item href={link} key={index}>{name}</Item>)
           }
         </ItemsContainer>
 
-        { open && <SVGLogo/> }
+        { open && <Link href='/'><SVGLogo/></Link> }
         {
           open && pages.map( ({name, link}, index) => <MobileItem to={link} key={index}>{name}</MobileItem>)
         }
