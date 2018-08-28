@@ -12,13 +12,13 @@ import getCards from '../../utils/getCards'
 
 import {
   black,
+  softblack,
   white,
-  darkWhite,
   red,
 } from '../../colors'
 
 const TICKER = 'CLIP'
-const gradient = `linear-gradient(to bottom, #324558 0%, rgba(0,0,0,0.92) 100%)`
+const gradient = `linear-gradient(to bottom, #f9de7b 0%, #ffe7e7eb 100%)`
 const gradient2 = `linear-gradient(to bottom, #A7C6D9 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
@@ -70,12 +70,12 @@ const BottomContaniner = styled.div`
 
   z-index: 2;
 
-  background-color: ${black};
+  background-color: ${softblack};
   background-image: ${gradient2};
 
   @media (min-width: 1025px) { /* desktop */
     background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: ${ props => props.overlay ? 'none' : gradient };
+    background-image: ${ props => props.overlay ? 'none' : gradient2 };
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -109,8 +109,10 @@ const getTags = array => {
 const getRelatedContent = array => {
   const cards = {
     articles: [],
+    interviews: [],
     clips: [],
     faqs: [],
+    qa: [],
   }
 
   array && array.forEach(item => {
@@ -163,7 +165,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER.toLowerCase()}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={white}>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={softblack}>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 ///
@@ -171,12 +173,14 @@ const AllEntities = () => <AllEntitiesContainer>
 const Content = styled(Row)`
 
   padding-top: 100px;
-
+  width: 100%;
 `
 
 const SideBar = styled(Column)`
   display: none;
   min-width: 400px;
+
+  flex: 1;
 
   padding-left: 60px;
   padding-right: 60px;
@@ -192,6 +196,7 @@ const SideBar = styled(Column)`
 
 const ContentBar = styled(Column)`
   align-items: center;
+  padding-right: 60px;
 `
 
 const SubTitle = styled.div`
@@ -202,7 +207,7 @@ const SubTitle = styled.div`
 
   text-transform: uppercase;
 
-  color: ${white};
+  color: ${black};
 
   padding-left: 0;
 
@@ -250,7 +255,7 @@ const Tag = styled.div`
   color: ${red};
 
   margin-right: 15px;
-  margin-bottom: 15px;
+  margin-top: 15px;
 
   border-radius: 3px;
   background-color: ${white};
@@ -291,9 +296,6 @@ const MainImage = styled.div`
   display: flex;
   flex-direction: row;
 
-  justify-content: center;
-  align-items: center;
-
   color: ${white};
 
   width: ${IMAGE_WIDTH}px;
@@ -324,7 +326,7 @@ const Title = styled.div`
 
   margin-top: 15px;
 
-  color: ${darkWhite};
+  color: ${softblack};
 `
 
 const Footer = styled(Row)`

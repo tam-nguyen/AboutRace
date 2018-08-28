@@ -22,7 +22,7 @@ export const articleTickerColor = '#f26f70';
 export const interviewColors = ['#0037b3', '#dec9ff'];
 export const interviewTickerColor = '#dec9ff';
 
-export const clipColors = ['#7C85A5', '#222222'];
+export const clipColors = ['#647d15', '#180f63'];
 export const clipRadialColors = ['#37625D', '#2F4134'];
 export const clipTickerColor = '#363D43';
 
