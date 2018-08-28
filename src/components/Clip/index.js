@@ -18,7 +18,7 @@ import {
 } from '../../colors'
 
 const TICKER = 'CLIP'
-const gradient = `linear-gradient(to bottom, #f9de7b 0%, #ffe7e7eb 100%)`
+const gradient = `linear-gradient(to bottom, #f9de7b 0%, #ffe7e7 100%)`
 const gradient2 = `linear-gradient(to bottom, #A7C6D9 0%, rgba(29,69,59,0.92) 100%)`
 
 const Container = styled.div`
@@ -168,7 +168,7 @@ const AllEntities = () => <AllEntitiesContainer>
   <FiledUnderLink color={softblack}>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
-///
+
 
 const Content = styled(Row)`
 

@@ -41,7 +41,7 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 261px;
+  height: 310px;
   
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   background-size: cover;
@@ -54,12 +54,13 @@ const TopBlock = styled.div`
   position: relative;
 
   width: calc(100% - 30px);
-  height: 261px;
+  height: 310px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  align-items: center;
+  align-items: left;
+  justify-content: center;
 
   padding-right: 15px;
   padding-left: 15px;
@@ -88,9 +89,10 @@ const Author = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 9px;
   letter-spacing: 0.22em;
 
+  color: white;
   text-transform: uppercase;
 `
 
@@ -133,6 +135,7 @@ const ArrowContainer = styled.div`
   bottom: 15px;
   right: 17px;
 
+  display: none;
   width: 25px;
   height: 20px;
 `
@@ -164,12 +167,13 @@ export class ArticleCard extends React.Component {
         article.field_short_version && <InnerContainer>
           <TopBlock>
             <ArticleTitle>{title}</ArticleTitle>
+            <Author>by {author}</Author>
             <Ticker>article</Ticker>
           </TopBlock>
           <BottomBlock>
             <Description>{description}</Description>
             <Row>
-              <Author>by {author}</Author>
+             
               <Arrow />
             </Row>
           </BottomBlock>
