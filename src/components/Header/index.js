@@ -55,7 +55,7 @@ const ItemsContainer = styled.div`
   justify-content: space-between;
 
   @media (min-width: 1025px) { /* desktop */
-    flex: 3;
+    flex: 1;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -107,6 +107,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
+  padding-top: 9px;
   padding-left: 36px;
   padding-right: 36px;
 

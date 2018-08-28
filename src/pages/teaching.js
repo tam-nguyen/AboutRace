@@ -39,6 +39,7 @@ export const query = graphql`
         }
       }
     }
+    
     allNodeLessonPlan {
       edges {
         node {
