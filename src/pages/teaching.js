@@ -32,6 +32,13 @@ export const query = graphql`
         processed
       }
     }
+    allNodeHandout {
+      edges {
+        node {
+          title
+        }
+      }
+    }
     allNodeLessonPlan {
       edges {
         node {
