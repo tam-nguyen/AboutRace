@@ -21,6 +21,7 @@ const Container = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   background: linear-gradient(to bottom, ${articleColors[0]} 0%, ${articleColors[1]} 100%);
   background: linear-gradient(to bottom,#f90e70 0%,#ffaa61 100%);
@@ -40,7 +41,7 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 221px;
+  height: 261px;
   
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   background-size: cover;
@@ -53,11 +54,11 @@ const TopBlock = styled.div`
   position: relative;
 
   width: calc(100% - 30px);
-  height: 221px;
+  height: 261px;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
+
   align-items: center;
 
   padding-right: 15px;
@@ -69,6 +70,7 @@ const ArticleTitle = styled.div`
   color: white;
   font-size: 42px;
   line-height: 42px;
+  padding-bottom: 15px;
 `
 
 const InnerContainer = styled.div`

@@ -43,7 +43,7 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 221px;
+  height: 291px;
   
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   background-size: cover;
@@ -53,15 +53,12 @@ const TopBlock = styled.div`
   position: relative;
 
   width: auto;
-  height: 221px;
+  height: 291px;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
+ 
   padding-right: 15px;
-  padding-left: 15px;
 `
 
 const InnerContainer = styled.div`

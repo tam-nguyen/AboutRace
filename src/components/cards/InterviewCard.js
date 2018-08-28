@@ -38,7 +38,7 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 221px;
+  height: 201px;
   
  
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
@@ -49,7 +49,7 @@ const TopBlock = styled.div`
   position: relative;
 
   width: auto;
-  height: 221px;
+  height: 201px;
 
   display: flex;
   flex-direction: row;
