@@ -8,7 +8,6 @@ import SVGArrow from '../SVGArrow'
 
 import {
   red,
-  white,
   interviewColors,
   interviewTickerColor,
   softblack
