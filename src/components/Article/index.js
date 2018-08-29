@@ -213,7 +213,7 @@ const Filing = styled.div`
 const Title = styled.div`
   font-family: 'Neuton';
   font-weight:400;
-  font-size: 42px;
+  font-size: 48px;
   line-height: 48px;
   margin-top:48px;
 `
@@ -317,11 +317,13 @@ const AuthorImage = styled.div`
 
 const Bio = styled.div`
   padding: 15px;
-  padding-top:0;
   font-family: Neuton;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
+  & p {
+    margin: 0;
+  }
 `
 
 const SubTitle = styled.div`

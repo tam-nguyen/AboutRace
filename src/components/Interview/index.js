@@ -94,6 +94,10 @@ const Quote = styled.div`
   font-size: 42px;
   line-height: 60px;
 
+  & p {
+    margin: 0;
+  }
+
   text-align: center;
 
   @media (min-width: 1025px) { /* desktop */
@@ -170,7 +174,8 @@ const TextContainer = styled.div`
   padding-top: 40vh;
 
   @media (min-width: 1025px) { /* desktop */
-    width: 1000px;
+    min-width: 1000px;
+    max-width: 1200px;
     padding-top: 87vh;
   }
 
@@ -265,7 +270,7 @@ const Text = styled.div`
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 60px 80px;
+  padding: 60px 90px;
 
   z-index: 10;
 
@@ -327,13 +332,13 @@ const AuthorImage = styled.div`
 
 const Bio = styled.div`
   padding: 15px;
-
-  font-family: Lato;
-  font-style: italic;
-  font-size: 14px;
-  line-height: 18px;
-
-  margin-bottom: 60px;
+  font-family: Neuton;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  & p {
+    margin: 0;
+  }
 `
 
 const SubTitle = styled.div`
