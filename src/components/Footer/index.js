@@ -41,7 +41,6 @@ const MobileRow = styled.div`
 const Container = styled(Column)`
   justify-content: center;
   align-items: center;
-
   padding: 64px;
 
 

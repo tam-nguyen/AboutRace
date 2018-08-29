@@ -27,6 +27,19 @@ export default ({ data, location }) => <Layout location={location}>
 
 export const query = graphql`
   query TeachingQuery {
+    taxonomyTermForTeachers {
+      field_intro_text {
+        processed
+      }
+    }
+    allNodeHandout {
+      edges {
+        node {
+          title
+        }
+      }
+    }
+    
     allNodeLessonPlan {
       edges {
         node {

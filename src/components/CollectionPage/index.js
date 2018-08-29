@@ -81,7 +81,7 @@ const BottomContainer = styled(Column)`
 `
 
 const Title = styled.div`
-  font-family: 'Tisa Pro';
+  font-family: 'Quicksand';
   font-size: 48px;
   line-height: 60px;
 
@@ -91,9 +91,9 @@ const Title = styled.div`
 `
 
 const Description = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 20px;
-  line-height: 24px;
+  font-family: 'Neuton';
+  font-size: 24px;
+  line-height: 30px;
 
   color: ${softblack};
 `
@@ -129,7 +129,8 @@ const SideBar = styled.div`
 `
 
 const SubTitle = styled.div`
-  font-family: Lato;
+  font-family: Quicksand;
+  font-weight: 500;
   font-size: 12px;
   line-height: 28px;
   letter-spacing: 0.22em;

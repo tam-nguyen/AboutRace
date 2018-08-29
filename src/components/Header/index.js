@@ -46,16 +46,10 @@ const Container = styled.div`
 `
 
 const ItemsContainer = styled.div`
-  flex: 1;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  justify-content: space-between;
+  
 
   @media (min-width: 1025px) { /* desktop */
-    flex: 3;
+  
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -86,7 +80,7 @@ const Item = styled(Link)`
   @media (min-width: 1025px) { /* desktop */
     /*margin-right: 45px;*/
     margin-right: 2vw;
-    font-size: 18px;
+    font-size: 14px;
     letter-spacing: 0.12em;
   }
 
@@ -107,6 +101,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
+  padding-top: 9px;
   padding-left: 36px;
   padding-right: 36px;
 
