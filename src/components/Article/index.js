@@ -213,7 +213,7 @@ const Filing = styled.div`
 const Title = styled.div`
   font-family: 'Neuton';
   font-weight:400;
-  font-size: 48px;
+  font-size: 42px;
   line-height: 48px;
   margin-top:48px;
 `
