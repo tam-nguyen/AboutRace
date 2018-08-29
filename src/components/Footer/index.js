@@ -70,8 +70,17 @@ const ImageHolder = styled(Column)`
   }
 `
 
-const Image = style.img`
+const Image = styled.img`
   width: 100%;
+  max-width: 400px;
+
+  @media (min-width: 1025px) { /* desktop */
+    width: 90%;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  } 
 `
 
 class Footer extends React.Component {
