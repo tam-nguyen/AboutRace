@@ -101,8 +101,12 @@ class Footer extends React.Component {
             <Image src={berkley} />
           </ImageHolder>
         </MobileRow>
-        <Row>website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
-Copyright 2018 UC Berkeley.</Row>
+        <Row>
+          website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
+        </Row>
+        <Row>
+          Copyright 2018 UC Berkeley.
+        </Row>
       </Container>
     )
   }
