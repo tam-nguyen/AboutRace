@@ -1,6 +1,6 @@
-const _ = require("lodash");
-const kebabCase = require("lodash/kebabCase");
-const path = require("path");
+const _ = require("lodash")
+const kebabCase = require("lodash/kebabCase")
+const path = require("path")
 
 const gradientColors = require('./src/gradients');
 
@@ -102,10 +102,51 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           allNodeLessonPlan {
             edges {
               node {
-                ...LessonPlanFragment
+                id
+                title
+                field_activity{
+                  processed
+                }
+                field_overview {
+                  processed
+                }
+                field_subjects {
+                  processed
+                }
+                field_objectives {
+                  processed
+                }
+                field_copyright_a {
+                  processed
+                }
+                field_description {
+                  processed
+                }
+                field_lesson_plan {
+                  processed
+                }
+                field_grade_levels {
+                  processed
+                }
+                field_lesson_summary {
+                  processed
+                }
+                field_time_allotment {
+                  processed
+                }
+                field_lesson_plan_author {
+                  processed
+                }
+                field_less_plan_author_bio {
+                  processed
+                }
+                field_subjects {
+                  processed
+                }
               }
             }
           }
+
         }
       `
     ).then(result => {
