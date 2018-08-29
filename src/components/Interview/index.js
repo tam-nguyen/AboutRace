@@ -94,6 +94,10 @@ const Quote = styled.div`
   font-size: 42px;
   line-height: 60px;
 
+  & p {
+    margin: 0;
+  }
+
   text-align: center;
 
   @media (min-width: 1025px) { /* desktop */

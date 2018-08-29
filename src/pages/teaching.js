@@ -39,7 +39,17 @@ export const query = graphql`
         }
       }
     }
-    
+    allNodeExternalLink {
+      edges {
+        node {
+          title
+          field_link {
+            uri
+            title
+          }
+        }
+      }
+    }
     allNodeLessonPlan {
       edges {
         node {
