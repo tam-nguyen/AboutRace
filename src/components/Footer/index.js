@@ -69,8 +69,17 @@ const ImageHolder = styled(Column)`
   }
 `
 
-const Image = style.img`
+const Image = styled.img`
   width: 100%;
+  max-width: 400px;
+
+  @media (min-width: 1025px) { /* desktop */
+    width: 90%;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  } 
 `
 
 class Footer extends React.Component {
@@ -91,8 +100,12 @@ class Footer extends React.Component {
             <Image src={berkley} />
           </ImageHolder>
         </MobileRow>
-        <Row>website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
-Copyright 2018 UC Berkeley.</Row>
+        <Row>
+          website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
+        </Row>
+        <Row>
+          Copyright 2018 UC Berkeley.
+        </Row>
       </Container>
     )
   }
