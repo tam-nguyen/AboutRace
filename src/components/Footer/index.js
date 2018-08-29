@@ -59,6 +59,18 @@ const ImageHolder = styled(Column)`
   flex: 1;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 1025px) { /* desktop */
+    
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  }
+`
+
+const Image = style.img`
+  width: 100%;
 `
 
 class Footer extends React.Component {
@@ -68,15 +80,15 @@ class Footer extends React.Component {
         <Row>a production of:</Row>
         <MobileRow>
           <ImageHolder>
-            <img src={haas}/>
+            <Image src={haas} />
           </ImageHolder>
 
           <ImageHolder>
-            <img src={cn}/>
+            <Image src={cn} />
           </ImageHolder>
 
           <ImageHolder>
-            <img src={berkley}/>
+            <Image src={berkley} />
           </ImageHolder>
         </MobileRow>
         <Row>website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
