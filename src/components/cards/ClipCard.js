@@ -164,7 +164,7 @@ export class ClipCard extends React.Component {
         <TopImage background={background}/>
         <InnerContainer>
           <TopBlock>
-            { field_episode && <TopTicker>{fromEpisode}</TopTicker> }}
+            { field_episode && <TopTicker>{fromEpisode}</TopTicker> }
             <PlayButton />
             <Ticker>film clip</Ticker>
           </TopBlock>
