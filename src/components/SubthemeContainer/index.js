@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import FlipMove from 'react-flip-move'
+import kebabCase from 'lodash/kebabCase'
 // import get from 'lodash/get'
 
 import Filters from '../Filters'
@@ -224,12 +225,14 @@ class Subtheme extends React.Component {
     const entitiesLink = typename === 'faq' ? '/qa' : `/${typename}s`
 
     // a plain way to detect if window size is to small to show overlay
-    if(window.innerWidth < 1000) {
+    /*if(window.innerWidth < 1000) {
       window.location = entitiesLink
       return
-    }
+    }*/
 
-    this.setState({
+    window.location = `${entitiesLink}/${kebabCase(data.title)}`
+
+    /*this.setState({
       popup: true,
       card: {...data, link},
       typename,
@@ -239,7 +242,7 @@ class Subtheme extends React.Component {
 
     setTimeout( () => {
       window.document.getElementById('subtheme-overlay').scrollTop = 0
-    }, 1)
+    }, 1)*/
   }
 
   renderOverlay = () => {
