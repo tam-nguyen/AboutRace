@@ -270,7 +270,7 @@ const Text = styled.div`
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 60px 90px;
+  padding: 60px 5vw;
 
   z-index: 10;
 

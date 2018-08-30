@@ -202,7 +202,8 @@ const ContentBar = styled(Column)`
 `
 
 const SubTitle = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 28px;
   letter-spacing: 0.22em;
@@ -246,7 +247,8 @@ const Tag = styled.div`
   padding-left: 10px;
   padding-right: 10px;
 
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 15px;
   line-height: 36px;
   letter-spacing: 0.22em;
