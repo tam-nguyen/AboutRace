@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import berkley from './berkley.png'
 import cn from './cn.png'
 import haas from './haas.png'
+import cultures from './cultures.png'
 
 import {
   black
@@ -98,6 +99,10 @@ class Footer extends React.Component {
 
           <ImageHolder>
             <Image src={berkley} />
+          </ImageHolder>
+
+          <ImageHolder>
+            <Image src={cultures} />
           </ImageHolder>
         </MobileRow>
         <Row>
