@@ -10,10 +10,9 @@ import {
   Article,
   Interview,
   QA,
-  Clip
+  Clip,
+  CloseButton
 } from '../'
-
-import {default as XButton} from '../Header/Menu'
 
 import { 
   Overlay, 
@@ -32,37 +31,12 @@ import {
 } from '../../colors'
 
 import hexToRGB from '../../utils/hexToRGB'
+import reorder from '../../utils/reorder'
+import shuffle from '../../utils/shuffle'
 
-const range = require('range');
+const range = require('range')
 
 const NUM_CARDS_TO_SHOW = 3;
-
-const shuffle = (arr) => {
-  var currentIndex = arr.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = arr[currentIndex];
-    arr[currentIndex] = arr[randomIndex];
-    arr[randomIndex] = temporaryValue;
-  }
-
-  return arr;
-}
- 
-const reorder = (arr, order) => {
-  const newArr = new Array(arr.length);
-  order && order.forEach((item, i) => {
-    newArr[i] = arr[item];
-  })
-  return newArr;
-}
 
 const OverlayContainer = styled.div`
   overflow-y: scroll;
@@ -87,30 +61,6 @@ const OverlayContainer = styled.div`
 const InnerOverlayContainer = styled.div`
   width: 1200px;
 `
-
-const CloseButtonContainer = styled.div`
-  position: fixed;
-  top: 400px;
-  right: 50px;
-
-  z-index: 4;
-`
-
-const XButtonContainer = styled(XButton)`
-  cursor: pointer;
-  display: block;
-  position: relative;
-`
-
-const CloseButton = props => (
-  <CloseButtonContainer>
-    <XButtonContainer 
-      width={100}
-      open={true} 
-      {...props}
-    />
-  </CloseButtonContainer>
-)
 
 ///
 
