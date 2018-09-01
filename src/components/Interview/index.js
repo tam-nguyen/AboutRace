@@ -632,6 +632,7 @@ class Interview extends React.Component {
             <Row
               style={{
                 position: 'fixed',
+                zIndex: 5,
                 top: 0,
                 right: 30
               }}
