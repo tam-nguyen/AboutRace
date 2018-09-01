@@ -1,156 +1,116 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, push,} from 'gatsby'
-import { Overlay, OverlayHeader, OverlayBody }  from '../components/overlay'
+import get from 'lodash/get'
+
 import episodes from '../utils/episodes-data'
-import Layout from "../components/layout"
 
-const queryString = require('query-string');
+import {
+  Layout,
+  CollectionPage
+} from '../components'
 
-const HeaderDimmer = styled.div`
-  width: 100%;
-  position: absolute;
-  left:0;
-  right:0;
-  top:0;
-  z-index: -1;
-  height:50vh;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,d3dde5+100&0.5+1,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%, rgba(2,2,2,0.5) 1%, rgba(211,221,229,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(2,2,2,0.5) 1%,rgba(211,221,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#00d3dde5',GradientType=0 ); /* IE6-9 */
+import { graphql } from 'gatsby'
+
+import {
+  white,
+  black
+} from '../colors'
+
+const Container = styled.div`
+  background-color: ${white};
+
+  @media (max-width: 812px) { /* mobile */
+
+  }
 `
 
-const Wrapper = styled.div`
-  margin: 250px auto 0px;
-  max-width: 100%;
-`
+class Clips extends React.Component {
 
-class ExpandableText extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            expanded: false
-        }
-        this.toggleExpand = this.toggleExpand.bind(this)
-    }
+  render() {
+    // const clips = get(this, `props.data.allNodeClip.edges`).map(edge => edge.node)
 
-    toggleExpand() {
-        this.setState({expanded: !this.state.expanded})
-    }
+    console.log(this.props)
 
-    render() {
-        const { expanded } = this.state
-        return (
-            <div>
-                <div style={{maxHeight: expanded ? '' : '105px', overflow: 'hidden', marginBottom: 15 }}>
-                    {this.props.children}
-                </div>
-                <button className="tag" style={{float: 'right'}} onClick={this.toggleExpand}>{expanded ? "View less" : "View more"}</button>
-            </div>
-        )
-    }
+    return (
+      <Layout location={this.props.location}>
+        <Container>
+          
+        </Container>
+      </Layout>
+    )
+  }
 }
 
-const EpisodeItem = ({ episode, queryParams }) => (
-    <div className="row" style={{marginBottom: 25}}>
-        <div className="column">
-            <div style={{background: 'gray', width: 500, height: (500 * 9 / 16)}}/>
-        </div>
-        <div className="column">
-            Episode {episode.episodeNumber}
-            <h2>{episode.title}</h2>
-            <div style={{margin: '0 -15px'}}>
-                <Link to={`?${queryString.stringify({ ...queryParams, transcript: episode.episodeNumber })}`} className="tag">Transcript</Link>
-                <Link to={`?${queryString.stringify({ ...queryParams, credits: episode.episodeNumber })}`} className="tag">Credits</Link>
-                <Link to={`/clips?${queryString.stringify({ ...queryParams, episode: episode.field_episode })}`} className="tag">Clips</Link>
-                {/*<button className="tag">Clips</button>*/}
-            </div>
-            <div>
-                <ExpandableText>
-                    <div dangerouslySetInnerHTML={{
-                        __html: episode.description,
-                    }}/>
-                </ExpandableText>
-            </div>
-        </div>
-    </div>
-)
+export default Clips
 
-const getEpisodeByNumber = episodeNumber => episodes.find(episode => episode.episodeNumber === episodeNumber)
-const safeGet = (object, fieldName) => object ? object[fieldName] : null
-
-const closeHandler = () => push(`?`)
-
-const CloseButton = styled.div`
-    float: right;
-    color: red;
-    cursor: pointer;
-    font-weight: bold;
-`
-
-export default ({ data, transition, location }) => {
-  const queryParams = queryString.parse(location.search)
-
-  const transcript = queryParams.transcript ? getEpisodeByNumber(queryParams.transcript) : null
-  const credits = queryParams.credits ? getEpisodeByNumber(queryParams.credits) : null
-
-  return (
-    <Layout location={location}>
-        <Wrapper>
-            <HeaderDimmer />
-            <Overlay id="film-overlay" visible={!!transcript || !!credits} style={transition && transition.style}>
-            {(transcript || credits) &&
-                <OverlayBody>
-                    <OverlayHeader>
-                        <CloseButton onClick={closeHandler}>Close</CloseButton>
-                        <div style={{
-                        textAlign:'center'
-                        }}>
-                            <h1>{transcript ? transcript.title : credits.title}</h1>
-                        </div>
-                    </OverlayHeader>
-                    <div
-                    dangerouslySetInnerHTML={{
-                        __html: transcript ? safeGet(transcript, 'transcript') : safeGet(credits, 'credits'),
-                    }}
-                    />
-                </OverlayBody>
+export const query = graphql`
+  query AboutQuery {
+      taxonomy: allTaxonomyTermAboutTheFilmPage {
+        edges {
+          node {
+            id
+            field_updated_ep_statement_title {
+              processed
             }
-            </Overlay>
-            <div className="row">
-                <div className="column _25"/>
-                <div className="column">
-                    <h1>Race: The Power of an Illusion</h1>
-                    <p><strong>Statement from executive producer</strong></p>
-                    <div className="row" style={{margin: '0 -15px'}}>
-                        <div className="column">
-                            <p>Race is one topic where we all think we're experts. Yet ask 10 people to define race or name "the races," and you're likely to get 10 different answers. Few issues are characterized by more contradictory assumptions and myths, each voiced with absolute certainty.</p>
+            field_updated_ep_statement {
+              processed
+            }
+            field_series_production_credits {
+              processed
+            }
+          }
+        }
+      }
+      
+      quotes: allNodeCriticQuote {
+        edges {
+          node {
+            title
+            field_critic_quote {
+              processed
+            }
+          }
+        }
+      }
+      
+      synopsis: allNodeSynopsis {
+        edges {
+          node {
+            title
+            field_episode_synopsis {
+              processed
+            }
+          }
+        }
+      }
+      
+      credits: allNodeEpisodeCredits {
+        edges {
+          node {
+            title
+            field_episode_credits {
+              processed
+            }
+            field_episode_copy {
+              processed
+            }
+          }
+        }
+      }
+      
+      transcript: allNodeTranscript {
+        edges {
+          node {
+            title
+            body {
+              processed
+            }
+            field_cop {
+              processed
+            }
+          }
+        }
+      }
+    }
+`
 
-                            <p>In producing this series, we felt it was important to go back to first principles and ask, What is this thing called "race?" - a question so basic it is rarely raised. What we discovered is that most of our common assumptions about race - for instance, that the world's people can be divided biologically along racial lines - are wrong. Yet the consequences of racism are very real.</p>
-
-                            <p>How do we make sense of these two seeming contradictions? Our hope is that this series can help us all navigate through our myths and misconceptions, and scrutinize some of the assumptions we take for granted. In that sense, the real subject of the film is not so much race but the viewer, or more precisely, the notions about race we all hold.</p>
-
-                            <p>We hope this series can help clear away the biological underbrush and leave starkly visible the underlying social, economic, and political conditions that disproportionately channel advantages and opportunities to white people. Perhaps then we can shift the conversation from discussing diversity and respecting cultural difference to building a more just and equitable society.</p>
-
-                            <p><strong>April 2003</strong></p>
-                        </div>
-                        <div>
-                            <div className="tag">Buy on DVD</div>
-                            <br/>
-                            <div className="tag">Stream on demand</div>
-                            <br/>
-                            <div className="tag">Contact</div>
-                        </div>
-                    </div>
-                    <div style={{marginTop: 50}}>
-                        {episodes.map(episode => <EpisodeItem key={`episode-${episode.episodeNumber}`} episode={episode} queryParams={queryParams} />)}
-                    </div>
-                </div>
-                <div className="column _25"/>
-            </div>
-        </Wrapper>
-    </Layout>
-  )
-}

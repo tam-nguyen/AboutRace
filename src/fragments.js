@@ -550,6 +550,20 @@ export const LessonPlanFragment = graphql`
     relationships {
       field_subject_tags {
         name
+        relationships {
+          articles: backref_field_tags_node_article {
+            ...ArticleFragment
+          }
+          qa: backref_field_tag_node_faq {
+            ...QAFragment
+          }
+          clips: backref_field_t_node_clip {
+            ...PosterImageClipFragment
+          }
+          interviews: backref_field_tags_node_interview {
+            ...InterviewFragment
+          }
+        }
       }
     }
   }
