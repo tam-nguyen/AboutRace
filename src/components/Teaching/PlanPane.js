@@ -10,9 +10,7 @@ import {
 
 import {
   white,
-  red,
   softblack,
-  teachingBlue
 } from '../../colors'
 
 const PADDING = 138;
@@ -36,11 +34,7 @@ const TopContainer = styled(Row)`
 
   align-items: center;
 
-  border-bottom: solid 1px black;
-
-  transition: all 0.3s ease-out;
-
-
+  border-bottom: solid black ${props => props.open ? 0 : '1px'};
 
   @media (min-width: 1025px) { /* desktop */
  
@@ -94,7 +88,6 @@ const ContentPane = styled.div`
   overflow: hidden;
 
   max-height: ${props => props.open ? 'auto' : 0};
-  background-color: ${props => props.open ? teachingBlue : white};
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;
@@ -108,9 +101,9 @@ const ContentPane = styled.div`
 
 const SmallTitle = styled.div`
   font-family: 'Quicksand';
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
 
   letter-spacing: 0.02em;
 
@@ -126,17 +119,21 @@ const Text = styled.div`
     margin-left: -1em;
   }
   font-size: 20px;
-  line-height: 28px;
+  line-height: 24px;
   font-family: 'Neuton';
   margin-bottom: 20px;
+
+  & p {
+    margin: 0;
+  }
 `
 
 const SubTitle = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 12px;
-  line-height: 28px;
-  letter-spacing: 0.22em;
+  font-size: 14px;
+  line-height: 30px;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 
@@ -152,7 +149,7 @@ const SubTitle = styled.div`
 `
 
 const Tags = styled(Column)`
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -174,8 +171,6 @@ const Tag = styled.div`
 
   text-transform: uppercase;
 
-  color: ${red};
-
   margin-right: 15px;
   margin-top: 15px;
 
@@ -188,6 +183,7 @@ const Grade = styled.div`
   font-weight: 500;
   font-size: 30px;
   line-height: 30px;
+  margin-bottom: 60px;
 
   color: ${softblack};
 
@@ -196,7 +192,6 @@ const Grade = styled.div`
 
 const ContentColumn = styled(Column)`
 
-  padding-top: 18px;
   
   @media (min-width: 1025px) { /* desktop */
     max-width: 50%;
@@ -213,7 +208,6 @@ const SideColumn = styled.div`
   flex-direction: row;
   flex: 1;
 
-  padding-top: 18px;
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: column;
@@ -241,17 +235,6 @@ const ViewButton = styled(Row)`
 
   justify-content: center;
 
-  margin-top: 50px;
-  margin-bottom: 20px;
-
-  background-color: ${white};
-  box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
-
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
   @media (min-width: 1025px) { /* desktop */
     
   }
@@ -263,7 +246,6 @@ const ViewButton = styled(Row)`
 
 const ViewLessonPlan = props => <ViewButton {...props}>
   <FiledUnderLink 
-    color={red}
     to={props.to}
     style={{paddingTop: 0}}
   >
@@ -318,10 +300,10 @@ class PlanPane extends React.Component {
         </TopContainer>
         <ContentPane open={open}>
           <ContentColumn>
-            <SmallTitle>Overview</SmallTitle>
+            <SubTitle>Overview</SubTitle>
             <Text dangerouslySetInnerHTML={{ __html: overview }}/>
 
-            <SmallTitle>Objectives</SmallTitle>
+            <SubTitle>Objectives</SubTitle>
             <Text dangerouslySetInnerHTML={{ __html: objectives }}/>
           </ContentColumn>
           <Column>
@@ -342,10 +324,12 @@ class PlanPane extends React.Component {
                 <Grade dangerouslySetInnerHTML={{ __html: grade }} />
               </SideInnerColumn>
 
+              <SideInnerColumn>
+                <ViewLessonPlan to={lessonLink}/>
+              </SideInnerColumn>
             </SideColumn>
 
             <BottomRow>
-              <ViewLessonPlan to={lessonLink}/>
             </BottomRow>
           </Column>
         </ContentPane>

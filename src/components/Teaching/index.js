@@ -22,7 +22,6 @@ import PlanPane from './PlanPane'
 
 const PADDING = 138;
 const PADDING_TABLET = 80;
-const gradient = `linear-gradient(to bottom, #69D7DB 0%, #DBD8FF 100%)`
 
 const Container = styled.div`
   width: 100%;
@@ -68,8 +67,17 @@ const TopContainer = styled.div`
   }
 `
 
+const HandoutsContainer = styled.div`
+  margin-bottom: 60px;
+`
+
+const ExternalLinksContainer = styled.div`
+  margin-bottom: 60px;
+`
+
 const BottomContainer = styled(Column)`
   padding-left: ${PADDING_TABLET}px;
+  margin-bottom: 15px;
 
   @media (min-width: 1025px) { /* desktop */
     padding-left: ${PADDING}px;
@@ -174,6 +182,7 @@ const SecondTitle = styled.div`
 const LessonsContainer = styled(Column)`
   padding-left: ${PADDING_TABLET}px;
   padding-right: ${PADDING_TABLET}px;
+  margin-bottom: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     padding-left: ${PADDING}px;
@@ -218,9 +227,8 @@ const LocalLink = styled(Link)`
 
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 30px;
-  line-height: 42px;
-  letter-spacing: 0.02em;
+  font-size: 20px;
+  line-height: 45px;
 `
 
 ///
@@ -262,26 +270,28 @@ class Teaching extends React.Component {
           </LessonsContainer>
 
           <BottomContainer>
-            <SecondTitle>Handouts</SecondTitle>
-            <Column>
-              {
-                handouts.map( ({title, link},key) => <LocalLink to={link} key={'handout'+key}>
-                  <SVGPDF style={{width: 25, marginRight: 20}}/>
-                  {title}
-                </LocalLink>)
-              }
-            </Column>
-
-            <SecondTitle>External Links</SecondTitle>
-            <Column>
-              {
-                links.map( ({title, uri},key) => <LocalLink to={uri} key={'link'+key}>
-                  <SVGLink style={{width: 25, marginRight: 20}}/>
-                  {title}
-                </LocalLink>)
-              }
-            </Column>
-
+            <HandoutsContainer>
+              <SecondTitle>Handouts</SecondTitle>
+              <Column>
+                {
+                  handouts.map( ({title, link},key) => <LocalLink to={link} key={'handout'+key}>
+                    <SVGPDF style={{width: 25, marginTop:6, marginRight: 20}}/>
+                    {title}
+                  </LocalLink>)
+                }
+              </Column>
+            </HandoutsContainer>
+            <ExternalLinksContainer>
+              <SecondTitle>External Links</SecondTitle>
+              <Column>
+                {
+                  links.map( ({title, uri},key) => <LocalLink to={uri} key={'link'+key}>
+                    <SVGLink style={{width: 25, marginTop:6, marginRight: 20}}/>
+                    {title}
+                  </LocalLink>)
+                }
+              </Column>
+            </ExternalLinksContainer>
             <SecondTitle>Additional resources</SecondTitle>
           </BottomContainer>
           <CardsContainer>
