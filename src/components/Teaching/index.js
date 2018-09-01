@@ -14,6 +14,7 @@ import getCards from '../../utils/getCards'
 import {
   white,
   red,
+  green,
   softblack,
 } from '../../colors'
 
@@ -26,6 +27,8 @@ const gradient = `linear-gradient(to bottom, #69D7DB 0%, #DBD8FF 100%)`
 const Container = styled.div`
   width: 100%;
   
+  background: ${green};
+
   display: flex;
   flex-direction: column;
 
@@ -47,9 +50,6 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  background: ${gradient};
-
-  min-height: 300px;
 
   padding: 20px;
   padding-top: 160px;
@@ -61,7 +61,6 @@ const TopContainer = styled.div`
     padding-left: ${PADDING}px;
     padding-right: 0;
 
-    min-height: 500px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -83,20 +82,26 @@ const BottomContainer = styled(Column)`
 
 const Title = styled.div`
   font-family: 'Quicksand';
-  font-size: 48px;
+  font-weight: 500;
+  font-size: 36px;
   line-height: 60px;
 
-  margin-bottom: 17px;
 
-  color: ${white};
+  color: ${softblack};
 `
 
 const Description = styled.div`
   font-family: 'Neuton';
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 20px;
+  line-height: 24px;
+
+  padding-bottom: 36px;
 
   color: ${softblack};
+
+  & p {
+    margin: 0;
+  }
 `
 
 const ContentColumn = styled(Column)`
@@ -151,17 +156,11 @@ const SubTitle = styled.div`
 
 const SecondTitle = styled.div`
   font-family: 'Quicksand';
-  font-size: 42px;
-  font-weight: 600;
+  font-size: 27px;
+  font-weight: 500;
   line-height: 36px;
 
   letter-spacing: 0.02em;
-
-  color: ${red};
-
-  
-  margin-top: 100px;
-  margin-bottom: 23px;
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -173,7 +172,17 @@ const SecondTitle = styled.div`
 `
 
 const LessonsContainer = styled(Column)`
+  padding-left: ${PADDING_TABLET}px;
+  padding-right: ${PADDING_TABLET}px;
 
+  @media (min-width: 1025px) { /* desktop */
+    padding-left: ${PADDING}px;
+    padding-right: ${PADDING}px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  }
 `
 
 const CardsContainer = styled.div`
@@ -235,12 +244,12 @@ class Teaching extends React.Component {
             <Title>Teaching</Title>
             <Description dangerouslySetInnerHTML={{ __html: get(this, `props.data.taxonomyTermForTeachers.field_intro_text.processed`) }}/>
           </ContentColumn>
-          <SideBar>
+          {/* <SideBar>
             <Title>&nbsp;</Title>
             <SubTitle>you might also like:</SubTitle>
             <FiledUnderLink color={white} arrowcolor={red}>About the Film</FiledUnderLink>
             <FiledUnderLink color={white} arrowcolor={red}>Explore Key Themes</FiledUnderLink>
-          </SideBar>
+          </SideBar> */}
         </TopContainer>
         <Column>
           <BottomContainer>

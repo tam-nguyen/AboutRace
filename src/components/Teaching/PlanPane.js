@@ -36,16 +36,14 @@ const TopContainer = styled(Row)`
 
   align-items: center;
 
-  background-color: ${props => props.open ? teachingBlue : white};
+  border-bottom: solid 1px black;
 
   transition: all 0.3s ease-out;
 
-  padding-left: ${PADDING_TABLET}px;
-  padding-right: ${PADDING_TABLET}px;
+
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: ${PADDING}px;
-    padding-right: ${PADDING}px;
+ 
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -54,14 +52,13 @@ const TopContainer = styled(Row)`
 `
 
 const Title = styled.div`
-  font-family: 'Neuton';
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 36px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
 
-
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 
   margin-right: 10px;
 `
@@ -99,14 +96,9 @@ const ContentPane = styled.div`
   max-height: ${props => props.open ? 'auto' : 0};
   background-color: ${props => props.open ? teachingBlue : white};
 
-  padding-left: ${PADDING_TABLET}px;
-  padding-right: ${PADDING_TABLET}px;
-
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;
 
-    padding-left: ${PADDING}px;
-    padding-right: ${PADDING}px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -203,6 +195,8 @@ const Grade = styled.div`
 `
 
 const ContentColumn = styled(Column)`
+
+  padding-top: 18px;
   
   @media (min-width: 1025px) { /* desktop */
     max-width: 50%;
@@ -218,6 +212,8 @@ const SideColumn = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+
+  padding-top: 18px;
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: column;

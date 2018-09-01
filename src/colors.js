@@ -7,6 +7,8 @@ export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
+export const green = '#B8D59B';
+
 export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';
 export const grandColor = '#6A6588';
