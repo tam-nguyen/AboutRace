@@ -68,6 +68,8 @@ const Text = styled.div`
   font-size: 20px;
 
   color: ${black};
+
+  
 `
 
 const InnerContainer = styled(Column)`
@@ -90,18 +92,15 @@ const InnerContainer = styled(Column)`
 class Credits extends React.Component {
 
   render() {
-    const credits = get(this, `props.data.credits.edges`).map(edge => edge.node)
+    const nodes = get(this, `props.data.allTaxonomyTermAboutTheFilmPage.edges`).map(edge => edge.node)
+    const credits = nodes[0].field_series_production_credits.processed
 
     return (
       <Layout location={this.props.location}>
         <Container>
           <InnerContainer>
-            {
-              credits.map( ({title, field_episode_copy, field_episode_credits},key) => <Column>
-                <SubTitle>{title}</SubTitle>
-                <Text dangerouslySetInnerHTML={{ __html: field_episode_credits.processed }}/>
-              </Column>)
-            }
+            <Title>Production Credits</Title>
+            <Text dangerouslySetInnerHTML={{ __html: credits }}/>
           </InnerContainer>
         </Container>
       </Layout>
@@ -113,20 +112,17 @@ export default Credits
 
 export const query = graphql`
   query CreditsQuery {
-    
-    credits: allNodeEpisodeCredits {
+
+    allTaxonomyTermAboutTheFilmPage {
       edges {
         node {
-          title
-          field_episode_credits {
-            processed
-          }
-          field_episode_copy {
+          field_series_production_credits {
             processed
           }
         }
       }
     }
+    
   }
 `
 
