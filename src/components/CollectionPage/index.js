@@ -11,16 +11,19 @@ import getCards from '../../utils/getCards'
 
 import {
   white,
-  red,
+  fogwhite,
+  smokegrey,
   softblack,
 } from '../../colors'
 
-const PADDING = 138;
+const PADDING = 60;
 const PADDING_TABLET = 80;
 const gradient = `linear-gradient(to bottom, #69D7DB 0%, #DBD8FF 100%)`
 
 const Container = styled.div`
   width: 100%;
+
+  background: ${smokegrey};
   
   display: flex;
   flex-direction: column;
@@ -37,18 +40,16 @@ const Container = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  
 `
 
 const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  background: ${gradient};
-
-  min-height: 300px;
 
   padding: 20px;
-  padding-top: 160px;
+  padding-top: 60px;
   padding-left: ${PADDING_TABLET}px;
   padding-right: ${PADDING_TABLET}px;
 
@@ -66,11 +67,9 @@ const TopContainer = styled.div`
 `
 
 const BottomContainer = styled(Column)`
-  padding-left: ${PADDING_TABLET}px;
   margin-top: -100px;
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: ${PADDING}px;
     margin-top: -200px;
   }
 
@@ -82,20 +81,28 @@ const BottomContainer = styled(Column)`
 
 const Title = styled.div`
   font-family: 'Quicksand';
-  font-size: 48px;
-  line-height: 60px;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
 
   margin-bottom: 17px;
 
-  color: ${white};
+  color: ${fogwhite};
 `
 
 const Description = styled.div`
   font-family: 'Neuton';
-  font-size: 24px;
-  line-height: 30px;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  
+  max-width: 500px;
 
-  color: ${softblack};
+  color: ${fogwhite};
+
+  & p {
+    margin: 0;
+  }
 `
 
 const ContentColumn = styled(Column)`
@@ -153,7 +160,7 @@ const CardsContainer = styled(FlipMove)`
   flex-direction: row; 
   flex-wrap: wrap;
 
-  justify-content: flex-start;
+  justify-content: center;
   padding-left: 0;
   padding-right: 50px;
   padding-bottom: 70px;
@@ -190,12 +197,12 @@ class CollectionPage extends React.Component {
             <Title>{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }}/>
           </ContentColumn>
-          <SideBar>
+          {/* <SideBar>
             <Title>&nbsp;</Title>
             <SubTitle>you might also like:</SubTitle>
             <FiledUnderLink color={white} arrowcolor={red}>About the Film</FiledUnderLink>
             <FiledUnderLink color={white} arrowcolor={red}>Explore Key Themes</FiledUnderLink>
-          </SideBar>
+          </SideBar> */}
         </TopContainer>
         <BottomContainer>
           {

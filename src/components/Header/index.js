@@ -15,7 +15,7 @@ import {
 
 const Container = styled.div`
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
 
@@ -27,7 +27,7 @@ const Container = styled.div`
   
   background-color: ${blackWithOpacity(0.92)};
 
-  height: 60px;
+  height: 96px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;

@@ -8,6 +8,8 @@ export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
 export const green = '#B8D59B';
+export const smokegrey = '#5A5E61';
+export const fogwhite = '#F5F5F5';
 
 export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';
