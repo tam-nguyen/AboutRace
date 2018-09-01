@@ -64,8 +64,7 @@ const TopContainer = styled.div`
   background: ${gradient};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: ${ props => props.overlay ? 'none' : gradient };
+   
   }
 
   @media (max-width: 812px) { /* mobile */

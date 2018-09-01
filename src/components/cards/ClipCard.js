@@ -129,7 +129,7 @@ const TopTicker = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 28px;
-  letter-spacing: 0.018em;
+  letter-spacing: 0.06em;
   color: ${fogwhite};
 
   background-color: rgba(90, 94, 97, .83);

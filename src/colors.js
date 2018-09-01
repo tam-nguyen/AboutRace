@@ -10,6 +10,8 @@ export const darkWhite = '#DEDEDE';
 export const green = '#B8D59B';
 export const smokegrey = '#5A5E61';
 export const fogwhite = '#F5F5F5';
+export const smokeblue = '#C5DEEC';
+export const smokelime = '#deff9d';
 
 export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';
@@ -21,7 +23,7 @@ export const getGradient = color => `linear-gradient(to bottom, ${color} 0%, ${b
 
 export const qaColor = ['#f3f19b', '#fffff1'];
 export const articleColors = ['#f26f70', '#fffbfb'];
-export const articleTickerColor = '#f26f70';
+export const articleTickerColor = '#ff839f';
 
 export const interviewColors = ['#0037b3', '#dec9ff'];
 export const interviewTickerColor = '#dec9ff';

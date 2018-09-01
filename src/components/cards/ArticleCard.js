@@ -12,7 +12,9 @@ import {
   white,
   articleColors,
   articleTickerColor,
-  softblack
+  softblack,
+  fogwhite,
+  smokegrey
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -23,8 +25,7 @@ const Container = styled(Card)`
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(to bottom, ${articleColors[0]} 0%, ${articleColors[1]} 100%);
-  background: linear-gradient(to bottom,#f90e70 0%,#ffaa61 100%);
+  background-color: ${fogwhite};
   color: ${softblack};
 
   padding-left: 15px;
@@ -41,37 +42,34 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 310px;
+  height: 100%;
   
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   background-size: cover;
-  
-  filter: brightness(50%);
-  opacity: 0.53;
 `
 
 const TopBlock = styled.div`
   position: relative;
 
-  width: calc(100% - 30px);
-  height: 310px;
+  width: auto;
+  height: auto;
 
   display: flex;
   flex-direction: column;
-
-  align-items: left;
-  justify-content: center;
+  flex: 100;
+  align-self: stretch;
 
   padding-right: 15px;
   padding-left: 15px;
 `
 
 const ArticleTitle = styled.div`
-  font-family: 'Neuton';
-  color: white;
-  font-size: 42px;
-  line-height: 42px;
-  padding-bottom: 15px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 18px;
+  text-transform: uppercase;
 `
 
 const InnerContainer = styled.div`
@@ -89,11 +87,10 @@ const Author = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
   font-size: 12px;
-  line-height: 9px;
-  letter-spacing: 0.22em;
-
-  color: white;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 21px;
+  padding-bottom: 9px;
+  color: ${smokegrey}
 `
 
 const Ticker = styled.div`
@@ -107,6 +104,7 @@ const Ticker = styled.div`
   font-size: 12px;
   line-height: 30px;
   letter-spacing: 0.22em;
+  color: ${fogwhite};
 
   border-top-right-radius: 3px;
   background-color: ${articleTickerColor};
@@ -116,10 +114,11 @@ const Ticker = styled.div`
 `
 
 const BottomBlock = styled.div`
-  flex: 1;
+  flex: auto;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  align-self: flex-end;
+  padding: 12px 30px 24px 30px;
 `
 
 const Row = styled.div`
@@ -162,15 +161,16 @@ export class ArticleCard extends React.Component {
         changed={article.changed}
         onClick={ () => onOpen(link)}
       >
-        <TopImage  background={background}/>
       {
         article.field_short_version && <InnerContainer>
           <TopBlock>
-            <ArticleTitle>{title}</ArticleTitle>
-            <Author>by {author}</Author>
+          <TopImage  background={background}/>
+            
             <Ticker>article</Ticker>
           </TopBlock>
           <BottomBlock>
+            <ArticleTitle>{title}</ArticleTitle>
+            <Author>by {author}</Author>
             <Description>{description}</Description>
             <Row>
              
