@@ -301,7 +301,9 @@ class PlanPane extends React.Component {
     const objectives = get(this, 'props.data.field_objectives.processed')
 
     const grade = get(this, 'props.data.field_grade_levels.processed')
-    const subjects = get(this, 'props.data.field_subjects.processed')
+
+    let subjects = get(this, 'props.data.relationships.field_subject_tags')
+    subjects = subjects ? subjects.map( ({name}) => name) : subjects
 
     const lessonLink = `/lessons/${kebabCase(title)}`
     
@@ -328,7 +330,7 @@ class PlanPane extends React.Component {
                 <SubTitle>subjects</SubTitle>
                 <Tags>
                   {
-                    subjects && subjects.split(',').map( (name, key) => <Row key={key}>
+                    subjects && subjects.map( (name, key) => <Row key={key}>
                       <Tag>{name}</Tag>
                     </Row>)
                   }
