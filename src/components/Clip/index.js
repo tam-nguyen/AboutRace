@@ -7,6 +7,10 @@ import Vimeo from 'react-vimeo'
 
 import {
   FiledUnderLink,
+  Overlay,
+  OverlayBody,
+  CloseButton,
+  TagTitle,
   PlayButton
 } from '../'
 
@@ -18,6 +22,11 @@ import {
   white,
   red,
 } from '../../colors'
+
+import reorder from '../../utils/reorder'
+import shuffle from '../../utils/shuffle'
+
+const range = require('range')
 
 const TICKER = 'CLIP'
 const gradient = `linear-gradient(to bottom, #f9de7b 0%, #ffe7e7 100%)`
@@ -102,8 +111,12 @@ const getFiledUnder = array => {
 const getTags = array => {
   let results = []
 
-  if(array)
-  results = array.map( ({name}) => name )
+  results = array.map( ({name, relationships}) => {
+    return {
+      name,
+      cards: relationships
+    }
+  })
 
   return results
 }
@@ -167,7 +180,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER.toLowerCase()}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={softblack}>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={softblack} to='/clips'>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 
@@ -243,6 +256,8 @@ const Tags = styled.div`
 `
 
 const Tag = styled.div`
+  cursor: pointer;
+
   padding-left: 10px;
   padding-right: 10px;
 
@@ -291,6 +306,7 @@ const CardsContainer = styled.div`
 `
 
 const IMAGE_WIDTH = 663
+const IMAGE_HEIGHT = 391
 
 const MainImage = styled.div`
   cursor: pointer;
@@ -301,7 +317,7 @@ const MainImage = styled.div`
   color: ${white};
 
   width: ${IMAGE_WIDTH}px;
-  height: 391px;
+  height: ${IMAGE_HEIGHT}px;
 
   border-radius: 3px;
   background-color: ${white};
@@ -382,10 +398,61 @@ const MobileSubTitle = styled(SubTitle)`
   }
 `
 
+const CenteredContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
 const nodeName = 'nodeClip'
 
 class Clip extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      playing: false,
+      tagName: null,
+      tagCards: []
+    };
+  }
+
+  renderOverlay = (name, cards) => {
+    const tagsContent = getCards(cards)
+    const order = shuffle(range.range(tagsContent.length))
+    const shuffledCards = reorder(tagsContent, order)
+
+    return (
+      <Overlay visible={name}>
+        <OverlayBody>
+          <Row>
+            <Row style={{flex: 1, justifyContent: 'center'}}>
+              <TagTitle>{name}</TagTitle>
+            </Row>
+            <CloseButton
+              style={{marginRight: 30}}
+              color={black}
+              simple={true} 
+              onClick={ () => this.setState({
+                tagName: null,
+                tagCards: []
+              })}
+            />
+          </Row>
+          <CardsContainer>
+            { shuffledCards }
+          </CardsContainer>
+        </OverlayBody>
+      </Overlay>
+    )
+  }
+
+  ///
+
   render() {
+    const {tagName, tagCards} = this.state
     const {overlay} = this.props
 
     const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
@@ -396,11 +463,32 @@ class Clip extends React.Component {
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
     const tags = getTags(get(this, `props.data.${nodeName}.relationships.field_tags`))
+    console.log(tags)
 
     const relatedContent = getRelatedContent(get(this, `props.data.${nodeName}.relationships.field_article_related_content`))
 
+    const renderTags = () => (
+      <Tags>
+        {
+          tags.map( ({name, cards}, key) => <Tag
+            key={key}
+            onClick={ () => this.setState({
+                tagName: name,
+                tagCards: cards
+              })
+            }
+          >
+            {name}
+          </Tag>)
+        }
+      </Tags>
+    )
+
     return (
       <Container>
+        {
+          this.renderOverlay(tagName, tagCards)
+        }
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
           <Content>
@@ -414,20 +502,22 @@ class Clip extends React.Component {
                 &&
                 <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
               }
-              <Tags>
-                {
-                  tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-                }
-              </Tags>
+              { renderTags() }
             </SideBar>
             <ContentBar>
-              <Vimeo
-                style={{width: 400, height: 300}}
-                videoId={videoId}
-              />
-              {/*<MainImage background={background}>
-                <PlayButton size={72}/>
-              </MainImage> */}
+              <MainImage background={background}>
+                <Vimeo
+                  style={{width: IMAGE_WIDTH, height: IMAGE_HEIGHT}}
+                  videoId={videoId}
+                  playButton={
+                    <CenteredContainer>
+                      <PlayButton
+                        size={72}
+                      />
+                    </CenteredContainer>
+                  }
+                />
+              </MainImage>
               <Title>{title}</Title>
             </ContentBar>
           </Content>
@@ -448,11 +538,7 @@ class Clip extends React.Component {
                   &&
                   <SubTitle>explore:</SubTitle>
                 }
-                <Tags>
-                  {
-                    tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-                  }
-                </Tags>
+                { renderTags() }
               </MobileColumn>
             </MobileRow>
           </Footer>

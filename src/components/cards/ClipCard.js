@@ -147,6 +147,14 @@ const Arrow = () => <ArrowContainer><SVGArrow color={red}/></ArrowContainer>
 
 ///
 
+const CenteredContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
 export class ClipCard extends React.Component {
   render() {
     const { onOpen } = this.props
@@ -165,7 +173,9 @@ export class ClipCard extends React.Component {
         <InnerContainer>
           <TopBlock>
             { field_episode && <TopTicker>{fromEpisode}</TopTicker> }
-            <PlayButton />
+            <CenteredContainer>
+              <PlayButton />
+            </CenteredContainer>
             <Ticker>film clip</Ticker>
           </TopBlock>
           <BottomBlock>

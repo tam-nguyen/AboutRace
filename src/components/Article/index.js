@@ -602,7 +602,7 @@ class Article extends React.Component {
   renderOverlay = (name, cards) => {
     const tagsContent = getCards(cards)
     const order = shuffle(range.range(tagsContent.length))
-    const shuffledCards = shuffle(tagsContent, order)
+    const shuffledCards = reorder(tagsContent, order)
 
     return (
       <Overlay visible={name}>
@@ -628,6 +628,8 @@ class Article extends React.Component {
       </Overlay>
     )
   }
+
+  ///
 
   render() {
     const {tagName, tagCards} = this.state
