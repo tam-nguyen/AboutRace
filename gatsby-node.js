@@ -2,6 +2,8 @@ const _ = require("lodash")
 const kebabCase = require("lodash/kebabCase")
 const path = require("path")
 
+const episodes = require('./src/utils/episodes-data')
+
 const gradientColors = require('./src/gradients');
 
 exports.onCreateBabelConfig = ({ actions }) => {
@@ -29,6 +31,17 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const interviewTemplate = path.resolve(`src/templates/interview.js`)
     const qaTemplate = path.resolve(`src/templates/qa.js`)
     const lessonTemplate = path.resolve(`src/templates/lesson.js`)
+    const episodeTemplate = path.resolve(`src/templates/episode.js`)
+
+    // offline data
+
+    episodes.map( context => 
+      createPage({
+        path: `/episodes/${kebabCase(context.title)}`, // required
+        component: episodeTemplate,
+        context,
+      })
+    )
     
     // Query for markdown nodes to use in creating pages.
     graphql(

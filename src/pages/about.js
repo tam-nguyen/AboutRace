@@ -7,7 +7,6 @@ import episodes from '../utils/episodes-data'
 
 import {
   Layout,
-  CollectionPage,
   FiledUnderLink
 } from '../components'
 
@@ -94,7 +93,6 @@ const Text = styled.div`
 
 const CardContainer = styled(Column)`
   width: 730px;
-  min-height: 450px;
   margin-bottom: 30px;
 
   background-color: ${props => props.color ? props.color : '#FFDDAA'};
@@ -139,24 +137,33 @@ const EpisodeDescription = styled.div`
   font-size: 20px;
 
   color: ${black};
+
+  margin-bottom: 20px;
 `
 
 const Card = props => {
   const {
-    title,
+    // title,
     episodeNumber,
-    field_episode,
+    // field_episode,
     description,
     color,
   } = props.data
 
+  const {
+    title,
+    field_episode_synopsis,
+    field_synopsis_copyright
+  } = props.synopsis
+
   const to = `/episodes/${kebabCase(title)}`
+  // const brief = description.split('</p>')[0].replace('<p>','')
 
   return (
     <CardContainer color={color}>
       <EpisodeNumber>Episode {episodeNumber}</EpisodeNumber>
       <EpisodeTitle>{title.trim()}</EpisodeTitle>
-      <EpisodeDescription dangerouslySetInnerHTML={{ __html: description }}/>
+      <EpisodeDescription dangerouslySetInnerHTML={{ __html: field_episode_synopsis.processed}}/>
       <FiledUnderLink
         style={{paddingLeft: 0}}
         color={black} 
@@ -170,14 +177,14 @@ const Card = props => {
 
 const Footer = styled(Column)`
   align-items: center;
-  
+
   padding-top: 114px;
   padding-bottom: 200px;
 `
 
 ///
 
-class Clips extends React.Component {
+class About extends React.Component {
 
   render() {
     const credits = get(this, `props.data.credits.edges`).map(edge => edge.node)
@@ -186,13 +193,13 @@ class Clips extends React.Component {
     const taxonomy = get(this, `props.data.taxonomy.edges`).map(edge => edge.node)
     const transcript = get(this, `props.data.transcript.edges`).map(edge => edge.node)
 
-    console.log({
-        credits,
-        quotes,
-        synopsis,
-        taxonomy,
-        transcript
-    })
+    // console.log({
+    //   credits,
+    //   quotes,
+    //   synopsis,
+    //   taxonomy,
+    //   transcript
+    // })
 
     return (
       <Layout location={this.props.location}>
@@ -231,7 +238,7 @@ class Clips extends React.Component {
 
           <Column style={{alignItems: 'center'}}>
             {
-              episodes.map( episode => <Card data={episode}/>)
+              episodes.map( (episode, key) => <Card key={key} data={episode} synopsis={synopsis[key]}/>)
             }
           </Column>
 
@@ -250,7 +257,7 @@ class Clips extends React.Component {
   }
 }
 
-export default Clips
+export default About
 
 export const query = graphql`
   query AboutQuery {
@@ -287,6 +294,9 @@ export const query = graphql`
         node {
           title
           field_episode_synopsis {
+            processed
+          }
+          field_synopsis_copyright {
             processed
           }
         }
