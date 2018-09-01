@@ -32,3 +32,6 @@ export LessonPlan from './LessonPlan'
 export Teaching from './Teaching'
 export CollectionPage from './CollectionPage'
 export Main from './Main'
+
+export CloseButton from './CloseButton'
+export TagTitle from './TagTitle'

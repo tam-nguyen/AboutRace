@@ -4,7 +4,11 @@ import kebabCase from 'lodash/kebabCase'
 import get from 'lodash/get'
 
 import {
-  FiledUnderLink
+  FiledUnderLink,
+  Overlay,
+  OverlayBody,
+  CloseButton,
+  TagTitle
 } from '../'
 
 import getCards from '../../utils/getCards'
@@ -17,6 +21,11 @@ import {
   red,
   softblack,
 } from '../../colors'
+
+import reorder from '../../utils/reorder'
+import shuffle from '../../utils/shuffle'
+
+const range = require('range')
 
 const TICKER = 'INTERVIEW'
 export const gradient = `linear-gradient(to bottom,rgba(192, 217, 176, 0.52) 0%,rgba(15, 201, 210, 0.72) 100%)`
@@ -381,6 +390,7 @@ const Tags = styled.div`
 `
 
 const Tag = styled.div`
+  cursor: pointer;
   padding-left: 10px;
   padding-right: 10px;
 
@@ -528,7 +538,12 @@ const getFiledUnder = array => {
 const getTags = array => {
   let results = []
 
-  results = array && array.map( ({name}) => name )
+  results = array.map( ({name, relationships}) => {
+    return {
+      name,
+      cards: relationships
+    }
+  })
 
   return results
 }
@@ -587,7 +602,49 @@ const AllEntities = () => <AllEntitiesContainer>
 ///
 
 class Interview extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      tagName: null,
+      tagCards: []
+    };
+  }
+
+  renderOverlay = (name, cards) => {
+    const tagsContent = getCards(cards)
+    const order = shuffle(range.range(tagsContent.length))
+    const shuffledCards = reorder(tagsContent, order)
+
+    return (
+      <Overlay visible={name}>
+        <OverlayBody>
+          <Row>
+            <Row style={{flex: 1, justifyContent: 'center'}}>
+              <TagTitle>{name}</TagTitle>
+            </Row>
+            <CloseButton
+              style={{marginRight: 30}}
+              color={black}
+              simple={true} 
+              onClick={ () => this.setState({
+                tagName: null,
+                tagCards: []
+              })}
+            />
+          </Row>
+          <CardsContainer>
+            { shuffledCards }
+          </CardsContainer>
+        </OverlayBody>
+      </Overlay>
+    )
+  }
+
+  ///
+
   render() {
+    const {tagName, tagCards} = this.state
     const {overlay} = this.props
     const nodeName = 'nodeInterview'
 
@@ -619,11 +676,7 @@ class Interview extends React.Component {
         <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
         
         <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
-        <Tags>
-          {
-            tags && tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-          }
-        </Tags>
+        { renderTags() }
         
         {
           relatedContent.length > 0 && <SubTitle style={{marginTop: 90}}>see also:</SubTitle>
@@ -657,11 +710,7 @@ class Interview extends React.Component {
 
           <MobileColumn>
             <SubTitle>explore:</SubTitle>
-            <Tags>
-              {
-                tags && tags.map( (name, key) => <Tag key={key}>{name}</Tag>)
-              }
-            </Tags>
+            { renderTags() }
           </MobileColumn>
         </MobileRow>
 
@@ -680,8 +729,30 @@ class Interview extends React.Component {
 
     ///
 
+    const renderTags = () => (
+      <Tags>
+        {
+          tags.map( ({name, cards}, key) => <Tag
+            key={key}
+            onClick={ () => this.setState({
+                tagName: name,
+                tagCards: cards
+              })
+            }
+          >
+            {name}
+          </Tag>)
+        }
+      </Tags>
+    )
+
+    ///
+
     return (
       <Container>
+        {
+          this.renderOverlay(tagName, tagCards)
+        }
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
           <QuoteContainer overlay={overlay}>
