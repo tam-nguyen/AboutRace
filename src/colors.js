@@ -13,6 +13,8 @@ export const fogwhite = '#F5F5F5';
 export const smokeblue = '#C5DEEC';
 export const smokelime = '#F4F9D4';
 export const rose = '#ffe5e9';
+export const purple = 'rgba(33, 29, 36, .92)';
+export const gold = '#FFF9DB';
 
 export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';

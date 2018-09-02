@@ -11,6 +11,7 @@ import {
 import {
   blackWithOpacity,
   white,
+  purple,
 } from '../../colors'
 
 const Container = styled.div`
@@ -25,7 +26,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   
-  background-color: ${blackWithOpacity(0.92)};
+  background-color: ${purple};
 
   height: 96px;
 
