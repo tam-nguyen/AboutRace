@@ -332,6 +332,7 @@ const CardsContainer = styled.div`
 const getTags = array => {
   let results = []
 
+  if(array)
   results = array.map( ({name, relationships}) => {
     return {
       name,
