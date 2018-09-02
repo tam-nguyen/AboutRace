@@ -94,7 +94,7 @@ const Description = styled.div`
   font-size: 20px;
   line-height: 24px;
   
-  max-width: 500px;
+  max-width: 469px;
 
   color: ${fogwhite};
 

@@ -102,7 +102,7 @@ const Description = styled.div`
   font-family: 'Neuton';
   font-size: 20px;
   line-height: 24px;
-
+  max-width: 469px;
   padding-bottom: 36px;
 
   color: ${softblack};

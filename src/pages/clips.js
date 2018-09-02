@@ -11,7 +11,8 @@ import { graphql } from 'gatsby'
 
 import {
   white,
-  black
+  black,
+  fogwhite
 } from '../colors'
 
 const Container = styled.div`
@@ -34,6 +35,8 @@ const FiltersContainer = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
   color: ${props => props.color ? props.color : black};
+  color: ${fogwhite};
+  margin: 0 auto;
   opacity: 0.8;
 `
 

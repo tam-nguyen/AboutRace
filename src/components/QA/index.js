@@ -33,12 +33,12 @@ const range = require('range')
 
 const TICKER = 'Q&A'
 export const gradient = `linear-gradient(to bottom, #EEFFE8 0%, rgba(255,255,255,0.92) 100%)`
-const gradient2 = `linear-gradient(to bottom, #EEFFE8 0%, #F6FFF4 100%)`
-const gradient3 = `linear-gradient(to bottom, #A7C6D9 0%, #546D67 100%)`
 
 const Container = styled.div`
   width: 100%;
   
+  background-color: ${smokelime};
+
   display: flex;
   flex-direction: column;
 
@@ -53,7 +53,7 @@ const Container = styled.div`
 
 const TopContainer = styled.div`
   position: relative;
-
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
 
@@ -63,7 +63,6 @@ const TopContainer = styled.div`
   width: 100%;
   height: auto;
 
-  background-color: ${smokelime};
 
   @media (min-width: 1025px) { /* desktop */
 
@@ -80,7 +79,6 @@ const BottomContaniner = styled.div`
   width: 100%;
 
   z-index: 2;
-
 
 
   @media (min-width: 1025px) { /* desktop */
@@ -265,9 +263,9 @@ const AllEntitiesContainer = styled(Row)`
   width: 100vw;
   justify-content: flex-end;
 
-  padding-top: 90px;
-  padding-right: 60px;
-  padding-bottom: 30px;
+  position: fixed;
+  top: 90px;
+  right: 60px;
 
   z-index: 4;
 
@@ -283,7 +281,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={backgroundColor}>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={smokegrey}>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 ///
@@ -387,19 +385,27 @@ const Description = styled.div`
     margin: 0;
   }
 `
+const Answers = styled.div`
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 24px;
+`
 
-const MAX_WIDTH = 664
+const MAX_WIDTH = 527
 
 const Experts = styled(Column)`
   max-width: ${MAX_WIDTH}px;
   margin: auto;
-
+  margin-bottom: 90px;
   align-items: center;
 
   color: ${softblack};
 
   @media (min-width: 1025px) { /* desktop */
-    max-width: 664px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -410,18 +416,24 @@ const Experts = styled(Column)`
 `
 
 const ExpertTitle = styled.div`
-  font-family: Lato;
-  font-size: 18px;
-  font-weight: 600;
-
-  line-height: 24px;
-  letter-spacing: 0.02em;
+  font-family: 'Quicksand';
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 27px;
+  padding-bottom: 12px;
 `
 
 const ExpertAnswer = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 17px;
+  font-family: 'Neuton';
+  font-weight: 300;
+  font-size: 20px;
   line-height: 24px;
+  padding-bottom: 18px;
+  & p {
+    margin-top:0;
+    margin-bottom: 1em;
+  }
 `
 
 const MobileSideBarContainer = styled(Column)`
@@ -641,6 +653,7 @@ class QA extends React.Component {
           </InnerTopContainer>
         </TopContainer>
         <BottomContaniner overlay={overlay}>
+          <Answers>Answers:</Answers>
           <Experts>
           {
             answers.map( ({answer, expert}, key) => <Row key={key}>

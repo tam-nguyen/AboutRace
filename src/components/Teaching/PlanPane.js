@@ -30,8 +30,7 @@ const PADDING = 138;
 const PADDING_TABLET = 80;
 
 const Column = styled.div`
-  display: flex;
-  flex-direction: column;
+
 `
 
 const Row = styled.div`
@@ -177,11 +176,13 @@ const Tag = styled.div`
   cursor: pointer;
   padding: 3px 15px;
 
+  display: inline-block;
+
   font-family: 'Quicksand';
   font-weight: 500;
   font-size: 14px;
   line-height: 36px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 
@@ -205,7 +206,7 @@ const Grade = styled.div`
 `
 
 const ContentColumn = styled(Column)`
-
+  padding-bottom: 90px;
   
   @media (min-width: 1025px) { /* desktop */
     max-width: 50%;
