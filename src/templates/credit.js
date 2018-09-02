@@ -1,5 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
+import get from 'lodash/get'
 import {
   Layout,
   Credits
@@ -19,16 +20,46 @@ const Container = styled.div`
   }
 `
 
-export default ({ data, location }) => <Layout location={location}>
-  <Container>
-    <Credits data={data} />
-  </Container>
-</Layout>
+export default props => {
+  const number = props.pageContext.number
+
+  const one = get(props, 'data.episodeOne')
+  const two = get(props, 'data.episodeTwo')
+  const three = get(props, 'data.episodeThree')
+
+  let episode
+
+  switch(number){
+    case 'one':
+      episode = one
+      break
+    case 'two':
+      episode = two
+      break
+    case 'three':
+      episode = three
+      break
+    default:
+      episode = one
+  }
+
+  return (<Layout location={props.location}>
+    <Container>
+      <Credits data={episode} />
+    </Container>
+  </Layout>)
+}
 
 export const creditQuery = graphql`
-  query creditQuery {
-    site {
-      id
+   query creditQuery {
+    episodeOne: taxonomyTermEpisodeOnePage {
+      ...EpisodeOneFragment
+    }
+    episodeTwo: taxonomyTermEpisodeTwoPage {
+      ...EpisodeTwoFragment
+    }
+    episodeThree: taxonomyTermEpisodeThreePage {
+      ...EpisodeThreeFragment
     }
   }
 `

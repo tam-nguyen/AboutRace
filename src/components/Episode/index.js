@@ -119,6 +119,19 @@ const CardsContainer = styled.div`
   }
 `
 
+const SideColumn = styled(Column)`
+  flex: 1;
+  padding-left: 50px;
+
+  @media (min-width: 1025px) { /* desktop */
+    padding-left: 100px;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    padding-left: 0;
+  }
+`
+
 class Episode extends React.Component {
   render() {
     const number = get(this, 'props.number')
@@ -151,10 +164,11 @@ class Episode extends React.Component {
             <Text dangerouslySetInnerHTML={{ __html: synopsis }}/>
           </Column>
 
-          <Column style={{flex:1, paddingLeft: 100}}>
+          <SideColumn>
             <SubTitle>EXPLORE:</SubTitle>
             {
-              subthemes.map( subtheme => <FiledUnderLink
+              subthemes.map( (subtheme, key) => <FiledUnderLink
+                  key={key}
                   style={{paddingLeft:0}}
                   color={black}
                   to={'/subthemes/' + kebabCase(subtheme)}
@@ -163,7 +177,7 @@ class Episode extends React.Component {
               </FiledUnderLink>)
             }
 
-            <SubTitle>CLIPS:</SubTitle>
+            <SubTitle style={{marginTop: 50}}>CLIPS:</SubTitle>
 
             <CardsContainer>
               { relatedClips }
@@ -183,7 +197,7 @@ class Episode extends React.Component {
             >
               episode transcript
             </FiledUnderLink>
-          </Column>
+          </SideColumn>
         </MobileRow>
       </Container>
     )

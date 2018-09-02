@@ -30,27 +30,37 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const lessonTemplate = path.resolve(`src/templates/lesson.js`)
   const episodeTemplate = path.resolve(`src/templates/episode.js`)
   const creditTemplate = path.resolve(`src/templates/credit.js`)
+  const transcriptTemplate = path.resolve(`src/templates/transcript.js`)
 
   // custom pages for episodes
   const episodes = ['one', 'two', 'three']
 
-  episodes.map( title => {
-    const index = episodes.indexOf(title) + 1
+  episodes.map( number => {
+    const index = episodes.indexOf(number) + 1
     
     createPage({
-      path: `/episodes/${kebabCase(title)}`, // required
+      path: `/episodes/${kebabCase(number)}`, // required
       component: episodeTemplate,
       context: {
-        title,
+        number,
         index
       }
     })
 
     createPage({
-      path: `/credits/${kebabCase(title)}`, // required
+      path: `/credits/${kebabCase(number)}`, // required
       component: creditTemplate,
       context: {
-        title,
+        number,
+        index
+      }
+    })
+
+    createPage({
+      path: `/transcripts/${kebabCase(number)}`, // required
+      component: transcriptTemplate,
+      context: {
+        number,
         index
       }
     })

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import get from 'lodash/get'
 import {
   Layout,
-  Episode
+  Transcript
 } from '../components'
 
 import { graphql } from 'gatsby'
@@ -27,22 +27,17 @@ export default props => {
   const two = get(props, 'data.episodeTwo')
   const three = get(props, 'data.episodeThree')
 
-  const allClips = get(props, 'data.clips.edges').map( ({node}) => node)
-
-  let episode, clips
+  let episode
 
   switch(number){
     case 'one':
       episode = one
-      clips = allClips.filter( ({field_episode}) => field_episode === 1)
       break
     case 'two':
       episode = two
-      clips = allClips.filter( ({field_episode}) => field_episode === 2)
       break
     case 'three':
       episode = three
-      clips = allClips.filter( ({field_episode}) => field_episode === 3)
       break
     default:
       episode = one
@@ -50,13 +45,13 @@ export default props => {
 
   return (<Layout location={props.location}>
     <Container>
-      <Episode data={episode} number={number} clips={clips}/>
+      <Transcript data={episode} />
     </Container>
   </Layout>)
 }
 
-export const episodeQuery = graphql`
-  query episodeQuery {
+export const transcriptQuery = graphql`
+   query transcriptQuery {
     episodeOne: taxonomyTermEpisodeOnePage {
       ...EpisodeOneFragment
     }
@@ -65,14 +60,6 @@ export const episodeQuery = graphql`
     }
     episodeThree: taxonomyTermEpisodeThreePage {
       ...EpisodeThreeFragment
-    }
-
-    clips: allNodeClip {
-      edges{
-        node {
-          ...ClipFragment
-        }
-      }
     }
   }
 `

@@ -30,6 +30,7 @@ export Clip from './Clip'
 export LessonPlan from './LessonPlan'
 export Episode from './Episode'
 export Credits from './Credits'
+export Transcript from './Transcript'
 
 export Teaching from './Teaching'
 export CollectionPage from './CollectionPage'
