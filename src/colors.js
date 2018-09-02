@@ -12,6 +12,7 @@ export const smokegrey = '#5A5E61';
 export const fogwhite = '#F5F5F5';
 export const smokeblue = '#C5DEEC';
 export const smokelime = '#F4F9D4';
+export const rose = '#ffe5e9';
 
 export const backgroundColor = '#f7f7f7';
 export const titleColor = '#E3A44D';

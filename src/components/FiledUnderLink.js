@@ -22,9 +22,8 @@ const FiledUnderLinkContainer = styled(Link)`
 
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 24px;
+  font-size: 18px;
   
-  letter-spacing: 0.02em;
   text-transform: capitalize;
 
   color: ${props => props.color};
