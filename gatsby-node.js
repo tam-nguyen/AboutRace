@@ -32,17 +32,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const qaTemplate = path.resolve(`src/templates/qa.js`)
     const lessonTemplate = path.resolve(`src/templates/lesson.js`)
     const episodeTemplate = path.resolve(`src/templates/episode.js`)
+    const creditTemplate = path.resolve(`src/templates/credit.js`)
 
     // offline data
 
-    episodes.map( context => 
-      createPage({
-        path: `/episodes/${kebabCase(context.title)}`, // required
-        component: episodeTemplate,
-        context,
-      })
-    )
-    
     // Query for markdown nodes to use in creating pages.
     graphql(
       `
@@ -160,6 +153,20 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
           }
 
+          synopsis: allNodeSynopsis {
+            edges {
+              node {
+                title
+                field_episode_synopsis {
+                  processed
+                }
+                field_synopsis_copyright {
+                  processed
+                }
+              }
+            }
+          }
+
         }
       `
     ).then(result => {
@@ -249,6 +256,23 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           context: {
             id: edge.node.id,
           },
+        })
+      })
+
+      _.each(result.data.synopsis.edges, edge => {
+        
+        const context = edge.node
+
+        createPage({
+          path: `/episodes/${kebabCase(context.title)}`, // required
+          component: episodeTemplate,
+          context,
+        })
+
+        createPage({
+          path: `/credits/${kebabCase(context.title)}`, // required
+          component: creditTemplate,
+          context,
         })
       })
       

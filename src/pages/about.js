@@ -157,13 +157,14 @@ const Card = props => {
   } = props.synopsis
 
   const to = `/episodes/${kebabCase(title)}`
-  // const brief = description.split('</p>')[0].replace('<p>','')
+  const brief = description.split('</p>')[0].replace('<p>','')
+  // const brief = field_episode_synopsis.processed
 
   return (
     <CardContainer color={color}>
       <EpisodeNumber>Episode {episodeNumber}</EpisodeNumber>
       <EpisodeTitle>{title.trim()}</EpisodeTitle>
-      <EpisodeDescription dangerouslySetInnerHTML={{ __html: field_episode_synopsis.processed}}/>
+      <EpisodeDescription dangerouslySetInnerHTML={{ __html: brief}}/>
       <FiledUnderLink
         style={{paddingLeft: 0}}
         color={black} 
