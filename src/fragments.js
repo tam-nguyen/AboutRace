@@ -588,11 +588,7 @@ export const EpisodeOneFragment = graphql`
     }
     relationships {
       subthemes: field_explore_subthemes_related {
-        relationships {
-          clips: backref_field_belongs_to_subtheme_node_clip {
-            ...ClipFragment
-          }
-        }
+        name
       }
     }
   }
@@ -615,11 +611,7 @@ export const EpisodeTwoFragment = graphql`
     }
     relationships {
       subthemes: field_explore_subthemes_re2 {
-        relationships {
-          clips: backref_field_belongs_to_subtheme_node_clip {
-            ...ClipFragment
-          }
-        }
+        name
       }
     }
   }
@@ -642,11 +634,7 @@ export const EpisodeThreeFragment = graphql`
     }
     relationships {
       subthemes: field_explore_subthemes_re3 {
-        relationships {
-          clips: backref_field_belongs_to_subtheme_node_clip {
-            ...ClipFragment
-          }
-        }
+        name
       }
     }
   }

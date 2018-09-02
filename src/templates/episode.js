@@ -28,17 +28,22 @@ export default props => {
   const two = get(props, 'data.episodeTwo')
   const three = get(props, 'data.episodeThree')
 
-  let episode
+  const allClips = get(props, 'data.clips').edges.map( ({node}) => node)
+
+  let episode, clips
 
   switch(number){
     case 'one':
       episode = one
+      clips = allClips.filter( ({field_episode}) => field_episode === 1)
       break
     case 'two':
       episode = two
+      clips = allClips.filter( ({field_episode}) => field_episode === 2)
       break
     case 'three':
       episode = three
+      clips = allClips.filter( ({field_episode}) => field_episode === 3)
       break
     default:
       episode = one
@@ -48,13 +53,13 @@ export default props => {
 
   return (<Layout location={location}>
     <Container>
-      <Episode data={episode} number={number} />
+      <Episode data={episode} number={number} clips={clips}/>
     </Container>
   </Layout>)
 }
 
 export const episodeQuery = graphql`
-  query episodeQuery {
+  query episodeQuery($index: Int) {
     episodeOne: taxonomyTermEpisodeOnePage {
       ...EpisodeOneFragment
     }
@@ -63,6 +68,14 @@ export const episodeQuery = graphql`
     }
     episodeThree: taxonomyTermEpisodeThreePage {
       ...EpisodeThreeFragment
+    }
+
+    clips: allNodeClip(filter: {field_episode: {eq: $index}}) {
+      edges{
+        node {
+          ...ClipFragment
+        }
+      }
     }
   }
 `

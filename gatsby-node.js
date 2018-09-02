@@ -35,16 +35,24 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const episodes = ['one', 'two', 'three']
 
   episodes.map( title => {
+    const index = episodes.indexOf(title) + 1
+    
     createPage({
       path: `/episodes/${kebabCase(title)}`, // required
       component: episodeTemplate,
-      context: {title},
+      context: {
+        title,
+        index
+      }
     })
 
     createPage({
       path: `/credits/${kebabCase(title)}`, // required
       component: creditTemplate,
-      context: {title},
+      context: {
+        title,
+        index
+      }
     })
   })
 

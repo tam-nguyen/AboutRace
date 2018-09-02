@@ -107,10 +107,6 @@ const CardsContainer = styled.div`
   
 
   @media (min-width: 1025px) { /* desktop */
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 200px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -130,23 +126,13 @@ class Episode extends React.Component {
 
     const title = get(this, 'props.data.title.processed')
     const synopsis = get(this, 'props.data.synopsis.processed')
+    const clips = get(this, 'props.clips')
 
-    let allClips = {}
-
-    get(this, 'props.data.relationships.subthemes')
-    .map( ({relationships: {clips}}) => {
-      if(clips){
-        clips
-        .filter( ({field_episode}) => field_episode === index + 1)
-        .map( clip => allClips[clip.id] = clip)
-      }
-    })
-
-    const flatClips = Object.keys(allClips).map( key => allClips[key])
+    const subthemes = get(this, 'props.data.relationships.subthemes').map( ({name}) => name)
     
     const relatedClips = getCards({
       articles: [],
-      clips: flatClips,
+      clips: clips,
       faqs: [],
       interviews: [],
     })
@@ -167,6 +153,16 @@ class Episode extends React.Component {
 
           <Column style={{flex:1, paddingLeft: 100}}>
             <SubTitle>EXPLORE:</SubTitle>
+            {
+              subthemes.map( subtheme => <FiledUnderLink
+                  style={{paddingLeft:0}}
+                  color={black}
+                  to={'/subthemes/' + kebabCase(subtheme)}
+                >
+                {subtheme}
+              </FiledUnderLink>)
+            }
+
             <SubTitle>CLIPS:</SubTitle>
 
             <CardsContainer>
