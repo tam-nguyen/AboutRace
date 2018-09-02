@@ -45,7 +45,7 @@ export default props => {
 
   return (<Layout location={props.location}>
     <Container>
-      <Credits data={episode} />
+      <Credits data={episode} number={number}/>
     </Container>
   </Layout>)
 }

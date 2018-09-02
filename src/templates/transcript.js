@@ -45,7 +45,7 @@ export default props => {
 
   return (<Layout location={props.location}>
     <Container>
-      <Transcript data={episode} />
+      <Transcript data={episode} number={number}/>
     </Container>
   </Layout>)
 }

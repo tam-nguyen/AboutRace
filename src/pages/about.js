@@ -156,7 +156,7 @@ const Card = props => {
     field_synopsis_copyright
   } = props.synopsis
 
-  const to = `/episodes/${kebabCase(title)}`
+  const to = `/episodes/${kebabCase(props.number)}`
   const brief = description.split('</p>')[0].replace('<p>','')
   // const brief = field_episode_synopsis.processed
 
@@ -194,13 +194,7 @@ class About extends React.Component {
     const taxonomy = get(this, `props.data.taxonomy.edges`).map(edge => edge.node)
     const transcript = get(this, `props.data.transcript.edges`).map(edge => edge.node)
 
-    // console.log({
-    //   credits,
-    //   quotes,
-    //   synopsis,
-    //   taxonomy,
-    //   transcript
-    // })
+    const numbers = ['one', 'two', 'three']
 
     return (
       <Layout location={this.props.location}>
@@ -239,7 +233,7 @@ class About extends React.Component {
 
           <Column style={{alignItems: 'center'}}>
             {
-              episodes.map( (episode, key) => <Card key={key} data={episode} synopsis={synopsis[key]}/>)
+              episodes.map( (episode, key) => <Card key={key} data={episode} number={numbers[key]} synopsis={synopsis[key]}/>)
             }
           </Column>
 
