@@ -22,6 +22,8 @@ import {
   backgroundColor,
   red,
   softblack,
+  smokelime,
+  smokegrey,
 } from '../../colors'
 
 import reorder from '../../utils/reorder'
@@ -61,14 +63,13 @@ const TopContainer = styled.div`
   width: 100%;
   height: auto;
 
-  background: ${gradient};
+  background-color: ${smokelime};
 
   @media (min-width: 1025px) { /* desktop */
-   
+
   }
 
   @media (max-width: 812px) { /* mobile */
-    background-color: ${white};
     z-index: 1;
   }
 `
@@ -80,11 +81,10 @@ const BottomContaniner = styled.div`
 
   z-index: 2;
 
-  background-color: ${white};
+
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: none;
+
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -135,7 +135,7 @@ const Footer = styled(Row)`
   width: auto;
   min-height: 20vh;
 
-  background-image: ${props => props.overlay ? null : gradient3 };
+  background-color:${smokegrey};
 
   @media (min-width: 1025px) { /* desktop */
     display: flex;
@@ -311,15 +311,15 @@ const Tag = styled.div`
   padding-left: 10px;
   padding-right: 10px;
 
-  font-family: Lato;
-  font-size: 15px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 14px;
   line-height: 36px;
-  letter-spacing: 0.22em;
-  font-weight: 600;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 
-  color: ${red};
+  color: ${softblack};
 
   margin-right: 15px;
   margin-bottom: 15px;
@@ -331,27 +331,22 @@ const Tag = styled.div`
 const TopCard = styled(Column)`
   position: relative;
 
-  width: 614px;
-  min-height: 300px;
+  width: 490px;
 
-  justify-content: center;
-
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin-top: 18px;
+  margin-bottom: 30px;
 
   margin-left: 30px;
   margin-right: 30px;
 
-  padding: 60px;
+  padding: 15px 30px 54px 30px;
 
-  border-radius: 3px;
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+  border-radius: 15px;
 
-  background-image: ${gradient2};
-  color: ${softblack};
+  background-color: ${smokegrey};
+  color: ${smokelime};
 
   @media (min-width: 1025px) { /* desktop */
-    width: 614px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -359,45 +354,38 @@ const TopCard = styled(Column)`
     margin-bottom: 0;
 
     padding: 0;
-    padding-top: 100px;
-    padding-left: 20px;
+    padding-top: 18px;
+    padding-left: 15px;
 
     width: 100vw;
     max-width: 100vw;
   }
-
-  &::before {
-    content: '?';
-    position: absolute;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-
-    font-family: 'Tisa Pro';
-    font-size: 400px;
-    opacity: 0.06;
-  }
 `
-
+const Question = styled.div`
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 24px;
+`
 const Title = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 36px;
-  line-height: 42px;
-
-  margin-bottom: 10px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 27px;
+  padding-bottom: 12px;
 `
 
 const Description = styled.div`
-  font-family: 'Tisa Pro';
-  font-size: 20px;
-  line-height: 24px;
+  font-family: 'Quicksand';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  & p {
+    margin: 0;
+  }
 `
 
 const MAX_WIDTH = 664
@@ -645,6 +633,7 @@ class QA extends React.Component {
           <InnerTopContainer>
             { left && <Chevron to={left} left={true}/>}
             <TopCard>
+              <Question>Question:</Question>
               <Title>{title}</Title>
               <Description dangerouslySetInnerHTML={{ __html: description }}/>
             </TopCard>

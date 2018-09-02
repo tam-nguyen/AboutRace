@@ -58,7 +58,6 @@ const TopContainer = styled.div`
     padding-left: ${PADDING}px;
     padding-right: 0;
 
-    min-height: 500px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -67,10 +66,9 @@ const TopContainer = styled.div`
 `
 
 const BottomContainer = styled(Column)`
-  margin-top: -100px;
 
   @media (min-width: 1025px) { /* desktop */
-    margin-top: -200px;
+
   }
 
   @media (max-width: 812px) { /* mobile */

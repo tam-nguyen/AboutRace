@@ -51,7 +51,7 @@ const TopContainer = styled.div`
 
 
   padding: 20px;
-  padding-top: 160px;
+  padding-top: 60px;
   padding-left: ${PADDING_TABLET}px;
   padding-right: ${PADDING_TABLET}px;
 
