@@ -187,9 +187,44 @@ const Footer = styled(Column)`
 
 class About extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    const quotes = get(this, `props.data.quotes.edges`).map(edge => {
+      const{
+        title,
+        field_critic_quote: {
+          processed
+        }
+      } = edge.node
+
+      return {
+        title,
+        quote: processed
+      }
+    })
+
+    this.quoteIndex = 0
+  
+    this.state = {
+      quotes
+    };
+
+    const self = this
+
+    setInterval(() => {
+      if(quotes.length == self.quoteIndex) self.quoteIndex = 0
+      self.forceUpdate()
+      self.quoteIndex++
+    }, 3000)
+  }
+
   render() {
+    const {
+      quotes
+    } = this.state
+
     const credits = get(this, `props.data.credits.edges`).map(edge => edge.node)
-    const quotes = get(this, `props.data.quotes.edges`).map(edge => edge.node)
     const synopsis = get(this, `props.data.synopsis.edges`).map(edge => edge.node)
     const taxonomy = get(this, `props.data.taxonomy.edges`).map(edge => edge.node)
     const transcript = get(this, `props.data.transcript.edges`).map(edge => edge.node)
@@ -200,12 +235,8 @@ class About extends React.Component {
       <Layout location={this.props.location}>
         <Container>
           <TopContainer>
-            <Quote>
-              “One of the most honest and compelling documentaries I’ve ever seen on race and its impact on this nation.”
-            </Quote>
-            <Author>
-              Acel Moore, Philadelphia Inquirer columnist
-            </Author>
+            <Quote dangerouslySetInnerHTML={{ __html: quotes[this.quoteIndex].quote }}/>
+            <Author> {quotes[this.quoteIndex].title} </Author>
           </TopContainer>
 
           <Column style={{alignItems: 'center'}}>
@@ -256,6 +287,19 @@ export default About
 
 export const query = graphql`
   query AboutQuery {
+
+    quotes: allNodeCriticQuote {
+      edges {
+        node {
+          id
+          title
+          field_critic_quote {
+            processed
+          }
+        }
+      }
+    }
+
     taxonomy: allTaxonomyTermAboutTheFilmPage {
       edges {
         node {
@@ -267,17 +311,6 @@ export const query = graphql`
             processed
           }
           field_series_production_credits {
-            processed
-          }
-        }
-      }
-    }
-    
-    quotes: allNodeCriticQuote {
-      edges {
-        node {
-          title
-          field_critic_quote {
             processed
           }
         }
