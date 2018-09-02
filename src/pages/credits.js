@@ -68,8 +68,6 @@ const Text = styled.div`
   font-size: 20px;
 
   color: ${black};
-
-  
 `
 
 const InnerContainer = styled(Column)`

@@ -2,8 +2,6 @@ const _ = require("lodash")
 const kebabCase = require("lodash/kebabCase")
 const path = require("path")
 
-const episodes = require('./src/utils/episodes-data')
-
 const gradientColors = require('./src/gradients');
 
 exports.onCreateBabelConfig = ({ actions }) => {
@@ -23,19 +21,35 @@ exports.onCreateBabelConfig = ({ actions }) => {
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage, createRedirect } = boundActionCreators;
 
+  const themeTemplate = path.resolve(`src/templates/theme.js`)
+  const subThemeTemplate = path.resolve(`src/templates/subtheme.js`)
+  const articleTemplate = path.resolve(`src/templates/article.js`)
+  const clipTemplate = path.resolve(`src/templates/clip.js`)
+  const interviewTemplate = path.resolve(`src/templates/interview.js`)
+  const qaTemplate = path.resolve(`src/templates/qa.js`)
+  const lessonTemplate = path.resolve(`src/templates/lesson.js`)
+  const episodeTemplate = path.resolve(`src/templates/episode.js`)
+  const creditTemplate = path.resolve(`src/templates/credit.js`)
+
+  // custom pages for episodes
+  const episodes = ['one', 'two', 'three']
+
+  episodes.map( title => {
+    createPage({
+      path: `/episodes/${kebabCase(title)}`, // required
+      component: episodeTemplate,
+      context: {title},
+    })
+
+    createPage({
+      path: `/credits/${kebabCase(title)}`, // required
+      component: creditTemplate,
+      context: {title},
+    })
+  })
+
   return new Promise((resolve, reject) => {
-    const themeTemplate = path.resolve(`src/templates/theme.js`)
-    const subThemeTemplate = path.resolve(`src/templates/subtheme.js`)
-    const articleTemplate = path.resolve(`src/templates/article.js`)
-    const clipTemplate = path.resolve(`src/templates/clip.js`)
-    const interviewTemplate = path.resolve(`src/templates/interview.js`)
-    const qaTemplate = path.resolve(`src/templates/qa.js`)
-    const lessonTemplate = path.resolve(`src/templates/lesson.js`)
-    const episodeTemplate = path.resolve(`src/templates/episode.js`)
-    const creditTemplate = path.resolve(`src/templates/credit.js`)
-
-    // offline data
-
+    
     // Query for markdown nodes to use in creating pages.
     graphql(
       `
@@ -153,20 +167,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
           }
 
-          synopsis: allNodeSynopsis {
-            edges {
-              node {
-                title
-                field_episode_synopsis {
-                  processed
-                }
-                field_synopsis_copyright {
-                  processed
-                }
-              }
-            }
-          }
-
         }
       `
     ).then(result => {
@@ -256,23 +256,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           context: {
             id: edge.node.id,
           },
-        })
-      })
-
-      _.each(result.data.synopsis.edges, edge => {
-        
-        const context = edge.node
-
-        createPage({
-          path: `/episodes/${kebabCase(context.title)}`, // required
-          component: episodeTemplate,
-          context,
-        })
-
-        createPage({
-          path: `/credits/${kebabCase(context.title)}`, // required
-          component: creditTemplate,
-          context,
         })
       })
       

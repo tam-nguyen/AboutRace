@@ -28,6 +28,8 @@ export Interview from './Interview'
 export QA from './QA'
 export Clip from './Clip'
 export LessonPlan from './LessonPlan'
+export Episode from './Episode'
+export Credits from './Credits'
 
 export Teaching from './Teaching'
 export CollectionPage from './CollectionPage'

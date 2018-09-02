@@ -2,6 +2,7 @@ import { graphql } from 'gatsby'
 
 export const PosterImageClipFragment = graphql`
   fragment PosterImageClipFragment on node__clip {
+    id
     title
     field_external_video_url {
       uri
@@ -349,6 +350,7 @@ export const FullQAFragment = graphql`
 
 export const ClipFragment = graphql`
   fragment ClipFragment on node__clip {
+    id
     field_episode
     title
     field_external_video_url {
@@ -562,6 +564,87 @@ export const LessonPlanFragment = graphql`
           }
           interviews: backref_field_tags_node_interview {
             ...InterviewFragment
+          }
+        }
+      }
+    }
+  }
+`
+
+export const EpisodeOneFragment = graphql`
+  fragment EpisodeOneFragment on taxonomy_term__episode_one_page {
+    id
+    title: field_episode_one_title {
+      processed
+    }
+    synopsis: field_episode_one_synopsis {
+      processed
+    }
+    credits: field_episode_one_credits {
+      processed
+    }
+    transcript: field_episode_one_transcript {
+      processed
+    }
+    relationships {
+      subthemes: field_explore_subthemes_related {
+        relationships {
+          clips: backref_field_belongs_to_subtheme_node_clip {
+            ...ClipFragment
+          }
+        }
+      }
+    }
+  }
+`
+
+export const EpisodeTwoFragment = graphql`
+  fragment EpisodeTwoFragment on taxonomy_term__episode_two_page {
+    id
+    title: field_episode_two_ {
+      processed
+    }
+    synopsis: field_episode_two_synopsis {
+      processed
+    }
+    credits: field_episode_two_credits {
+      processed
+    }
+    transcript: field_episode_two_transcript {
+      processed
+    }
+    relationships {
+      subthemes: field_explore_subthemes_re2 {
+        relationships {
+          clips: backref_field_belongs_to_subtheme_node_clip {
+            ...ClipFragment
+          }
+        }
+      }
+    }
+  }
+`
+
+export const EpisodeThreeFragment = graphql`
+  fragment EpisodeThreeFragment on taxonomy_term__episode_three_page {
+    id
+    title: field_episode_three_title {
+      processed
+    }
+    synopsis: field_episode_three_synopsis {
+      processed
+    }
+    credits: field_episode_three_credits {
+      processed
+    }
+    transcript: field_episode_three_ {
+      processed
+    }
+    relationships {
+      subthemes: field_explore_subthemes_re3 {
+        relationships {
+          clips: backref_field_belongs_to_subtheme_node_clip {
+            ...ClipFragment
           }
         }
       }

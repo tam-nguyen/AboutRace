@@ -30,3 +30,5 @@ export const clipRadialColors = ['#37625D', '#2F4134']
 export const clipTickerColor = '#363D43'
 
 export const teachingBlue = '#E3F8FF'
+
+export const episodeColors = ['#FFECAA', '#FFDDAA', '#FFC4AA']

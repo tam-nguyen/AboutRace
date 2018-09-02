@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import {
   Layout,
-  // Article
+  Credits
 } from '../components'
 
 import { graphql } from 'gatsby'
@@ -21,8 +21,7 @@ const Container = styled.div`
 
 export default ({ data, location }) => <Layout location={location}>
   <Container>
-    Credit
-    {/*<Article data={data} />*/}
+    <Credits data={data} />
   </Container>
 </Layout>
 

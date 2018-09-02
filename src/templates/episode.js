@@ -1,8 +1,9 @@
 import React from "react"
 import styled from 'styled-components'
+import get from 'lodash/get'
 import {
   Layout,
-  // Article
+  Episode
 } from '../components'
 
 import { graphql } from 'gatsby'
@@ -21,42 +22,47 @@ const Container = styled.div`
 
 export default props => {
   const { data, location } = props
-  console.log(props)
+  const number = props.pageContext.title
+
+  const one = get(props, 'data.episodeOne')
+  const two = get(props, 'data.episodeTwo')
+  const three = get(props, 'data.episodeThree')
+
+  let episode
+
+  switch(number){
+    case 'one':
+      episode = one
+      break
+    case 'two':
+      episode = two
+      break
+    case 'three':
+      episode = three
+      break
+    default:
+      episode = one
+  }
+
+  // console.log(episode)
 
   return (<Layout location={location}>
     <Container>
-      Episode
-      {/*<Article data={data} />*/}
+      <Episode data={episode} number={number} />
     </Container>
   </Layout>)
 }
 
 export const episodeQuery = graphql`
   query episodeQuery {
-    episode: taxonomyTermEpisodeOnePage {
-      id
-      title: field_episode_one_title {
-        processed
-      }
-      synopsis: field_episode_one_synopsis {
-        processed
-      }
-      credits: field_episode_one_credits {
-        processed
-      }
-      transcript: field_episode_one_transcript {
-        processed
-      }
-      relationships {
-        field_explore_subthemes_related {
-          relationships {
-            clips: backref_field_belongs_to_subtheme_node_clip {
-              id
-              title
-            }
-          }
-        }
-      }
+    episodeOne: taxonomyTermEpisodeOnePage {
+      ...EpisodeOneFragment
+    }
+    episodeTwo: taxonomyTermEpisodeTwoPage {
+      ...EpisodeTwoFragment
+    }
+    episodeThree: taxonomyTermEpisodeThreePage {
+      ...EpisodeThreeFragment
     }
   }
 `
