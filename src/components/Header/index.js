@@ -11,6 +11,7 @@ import {
 import {
   blackWithOpacity,
   white,
+  gold,
   purple,
 } from '../../colors'
 
@@ -66,7 +67,7 @@ const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
 
-  color: ${white};
+  color: ${gold};
 
   text-transform: uppercase;
 
@@ -102,7 +103,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
-  padding-top: 9px;
+  margin-top: -9px;
   padding-left: 36px;
   padding-right: 36px;
 
