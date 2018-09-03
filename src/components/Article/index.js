@@ -92,7 +92,7 @@ const BottomContaniner = styled.div`
 const MainImage = styled.div`
   width: auto;
   height: 374px;
-  margin-top: -60px;
+  margin-top: -30px;
   margin-left: -5vw;
   margin-right: -5vw;
   margin-bottom: 15px;
@@ -114,7 +114,7 @@ const MainImage = styled.div`
 const TextContainer = styled.div`
   z-index: 3;
 
-  padding: 60px 30px;
+  padding: 120px 30px;
 
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
@@ -221,6 +221,8 @@ const Text = styled.div`
 const ContentBar = styled(Column)`
   flex: 1;
   padding: 30px 5vw;
+
+  margin-top: -30px;
 
   z-index: 10;
 

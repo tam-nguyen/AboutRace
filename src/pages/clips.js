@@ -26,9 +26,6 @@ const Container = styled.div`
 const FiltersContainer = styled.div`
   display: flex;
   flex-direction: row;
-
-  padding-left: 60px;
-
   font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.22em;

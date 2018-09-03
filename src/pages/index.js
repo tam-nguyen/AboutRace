@@ -17,6 +17,7 @@ class Index extends Component {
     return (
       <Layout location={this.props.location}>
         <Main data={this.props.data}/>
+
         <div>
           {
             edges.map( ({ node }, key) =>
@@ -33,7 +34,7 @@ export default Index
 
 export const query = graphql`
   query HomeQuery {
-    synopsis: allNodeSynopsis {
+    allNodeSynopsis {
       edges {
         node {
           title

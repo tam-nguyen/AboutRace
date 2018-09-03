@@ -182,7 +182,7 @@ const QuoteContainer = styled.div`
 const TextContainer = styled.div`
   z-index: 3;
 
-  padding: 60px;
+  padding: 56px 30px;
 
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
@@ -277,6 +277,8 @@ const Text = styled.div`
 const ContentBar = styled(Column)`
   flex: 1;
   padding: 60px 5vw;
+
+  margin-top: -30px;
 
   z-index: 10;
 
@@ -566,16 +568,15 @@ const getRelatedContent = array => {
 
 const AllEntitiesContainer = styled(Row)`
   width: 100vw;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
-  padding-top: 90px;
-  padding-right: 60px;
+  padding-top: 18px;
+  padding-left: 90px;
 
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    position: fixed;
-    top: 0;
+
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -586,7 +587,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER.toLowerCase()}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={white} to='/interviews'>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={softblack} to='/interviews'>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 ///
