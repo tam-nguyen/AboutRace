@@ -15,13 +15,13 @@ import { graphql } from 'gatsby'
 import {
   white,
   black,
-  gray,
+  smokegrey,
   softblack,
-  softWhite
+  fogwhite
 } from '../colors'
 
 const Container = styled.div`
-  background-color: ${softWhite};
+  background-color: ${fogwhite};
 
   padding-top: 90px;
   padding-bottom: 90px;

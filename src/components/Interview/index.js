@@ -18,8 +18,9 @@ import {
   white,
   darkWhite,
   whiteShadow,
-  red,
+  rose,
   softblack,
+  smokeblue,
 } from '../../colors'
 
 import reorder from '../../utils/reorder'
@@ -33,6 +34,8 @@ const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 10
 
 const Container = styled.div`
   width: 100%;
+
+  background-color: ${smokeblue};
   
   display: flex;
   flex-direction: column;
@@ -58,15 +61,12 @@ const TopContainer = styled.div`
   width: 100%;
   height: auto;
 
-  background: ${gradient};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: none;
+
   }
 
   @media (max-width: 812px) { /* mobile */
-    background-color: ${white};
     z-index: 1;
   }
 `
@@ -136,6 +136,7 @@ const QuoteAttribution = styled.div`
 
 const QuoteContainer = styled.div`
   position: fixed;
+
   top: 100px;
   left: 60px;
   right: 60px;
@@ -174,23 +175,22 @@ const QuoteContainer = styled.div`
     height: 40vh;
     min-height: 300px;
   }
+
+  display: none;
 `
 
 const TextContainer = styled.div`
   z-index: 3;
 
-  width: 80%;
-  padding-top: 40vh;
+  padding: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
     max-width: 1200px;
-    padding-top: 87vh;
   }
 
   @media (max-width: 812px) { /* mobile */
     width: 100vw;
-    margin-top: 20vh;
   }
 `
 
@@ -206,7 +206,6 @@ const TextInnerContainer = styled.div`
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
 
-  background-color: ${white};
   color: ${softblack};
 
   margin-bottom: 50px;
@@ -247,9 +246,7 @@ const Column = styled.div`
 `
 
 const Filing = styled.div`
-  margin-left: -60px;
-  margin-top: -30px;
-  margin-bottom: 30px;
+  padding-bottom: 15px;
 `
 
 const Title = styled.div`
@@ -274,19 +271,16 @@ const Author = styled.div`
 const Text = styled.div`
   font-family: 'Neuton';
   font-size: 20px;
-  line-height: 28px;
+  line-height: 24px;
 `
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 60px 90px;
+  padding: 60px 5vw;
 
   z-index: 10;
 
   background-color: ${white};
-  border-bottom-left-radius: 3px;
-
-  box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -302,16 +296,12 @@ const SideBar = styled(Column)`
 
   display: none !important;
 
+  padding-left:30px;
+
   display: flex;
   flex-direction: column;
 
-  width: 400px;
-  background-color: ${whiteShadow};
-
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-
-  box-shadow: 0px 3px 3px rgba(0,0,0,0.16);
+  width: 336px;
 
   @media (min-width: 1025px) { /* desktop */
     display: flex !important;
@@ -323,10 +313,8 @@ const SideBar = styled(Column)`
 `
 
 const AuthorImage = styled.div`
-  height: 481px;
-  min-width: 373px;
-
-  border-top-right-radius: 3px;
+  height: 228px;
+  min-width: 100%;
 
   background-size: cover !important;
   background-attachment: fixed;
@@ -340,7 +328,7 @@ const AuthorImage = styled.div`
 `
 
 const Bio = styled.div`
-  padding: 15px;
+  padding-top: 15px;
   font-family: Neuton;
   font-weight: 400;
   font-size: 18px;
@@ -351,21 +339,18 @@ const Bio = styled.div`
 `
 
 const SubTitle = styled.div`
-  font-family: Lato;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 12px;
   line-height: 28px;
   letter-spacing: 0.22em;
 
   text-transform: uppercase;
 
-  padding-left: 0;
-
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
-    padding-left: 0;
   }
 `
 
@@ -381,7 +366,6 @@ const Tags = styled.div`
   overflow: auto;
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -394,21 +378,26 @@ const Tag = styled.div`
   padding-left: 10px;
   padding-right: 10px;
 
-  font-family: Lato;
-  font-size: 15px;
+  font-family: 'Quicksand';
+  font-size: 14px;
   line-height: 36px;
-  letter-spacing: 0.22em;
-  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-weight: 500;
 
   text-transform: uppercase;
 
-  color: ${red};
 
   margin-right: 15px;
   margin-bottom: 15px;
 
   border-radius: 3px;
   background-color: ${white};
+  transition: all .5s;
+
+  & :hover {
+    background-color: ${rose};
+    transition: all .5s;
+  }
 `
 
 const BackTo = styled.div`
@@ -691,6 +680,11 @@ class Interview extends React.Component {
         <Bio dangerouslySetInnerHTML={{ __html: authorBio }}/>
         
         <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
+        <Filing>
+          {
+            filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+          }
+        </Filing>
         { renderTags() }
         
         {
@@ -779,12 +773,6 @@ class Interview extends React.Component {
           <TextContainer>
             <TextInnerContainer>
               <ContentBar>
-                <Filing>
-                  <SubTitle>filed under:</SubTitle>
-                    {
-                      filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
-                    }
-                  </Filing>
                 <Title>{title.trim()}</Title>
                 {/* <Author>by {author}</Author> */}
                 <Text dangerouslySetInnerHTML={{ __html: text}}/>

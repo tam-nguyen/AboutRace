@@ -9,8 +9,9 @@ import SVGArrow from '../SVGArrow'
 import {
   red,
   interviewColors,
-  interviewTickerColor,
-  softblack
+  gold,
+  softblack,
+  fogwhite
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -20,7 +21,7 @@ const Container = styled(Card)`
   flex-direction: column;
   justify-content: center;
 
-  background: linear-gradient(to bottom, ${interviewColors[0]} 0%, ${interviewColors[1]} 100%);
+  background-color: ${fogwhite};
 
   color: ${softblack};
 
@@ -38,8 +39,7 @@ const TopImage = styled.div`
   z-index: -1;
 
   width: 100%;
-  height: 310px;
-  
+  height: 100%;
  
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
   background-size: cover;
@@ -49,12 +49,11 @@ const TopBlock = styled.div`
   position: relative;
 
   width: auto;
-  height: 310px;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex: 100;
+  align-self: stretch;
 
   padding-right: 15px;
   padding-left: 15px;
@@ -72,11 +71,13 @@ const InnerContainer = styled.div`
 `
 
 const IntervieweeName = styled.div`
-  font-family: 'Neuton';
-  color: white;
-  font-size: 42px;
-  line-height: 42px;
-  padding-bottom: 15px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 21px;
+  padding-bottom: 9px;
+  text-transform: uppercase;
 `
 
 const Ticker = styled.div`
@@ -92,19 +93,19 @@ const Ticker = styled.div`
   letter-spacing: 0.22em;
 
   border-top-right-radius: 3px;
-  background-color: ${interviewTickerColor};
+  background-color: ${gold};
 
   padding: 5px 15px;
   text-transform: uppercase;
 `
 
 const BottomBlock = styled.div`
-  flex: 1;
+  flex: auto;
   display: flex;
   flex-direction: column;
   padding: 15px;
-
-
+  align-self: flex-end;
+  padding: 12px 30px 24px 30px;
 `
 
 const Bio = styled.div`
@@ -151,13 +152,14 @@ export class InterviewCard extends React.Component {
 
     return (
       <Container onClick={ () => onOpen(link)} >
-        <TopImage  background={background}/>
+        
         <InnerContainer>
           <TopBlock>
+            <TopImage  background={background}/>
             <Ticker>interview</Ticker>
           </TopBlock>
           <BottomBlock>
-            
+            <IntervieweeName>{interviewee}</IntervieweeName>
             <Description>{description}</Description>
             <Row>
               <Bio dangerouslySetInnerHTML={{ __html: bio }}/>

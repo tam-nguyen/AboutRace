@@ -27,7 +27,8 @@ import getCards from '../../utils/getCards'
 
 import {
   white,
-  softblack
+  softblack,
+  smokeblue
 } from '../../colors'
 
 import hexToRGB from '../../utils/hexToRGB'
@@ -85,7 +86,7 @@ const FlipContainer = styled(FlipMove)`
 `
 
 const Container = styled.div`
-  background-color: #222222;
+  background-color: ${smokeblue};
   backdrop-filter: blur(5px);
 
   border-bottom: solid thin grey;

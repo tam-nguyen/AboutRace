@@ -22,7 +22,6 @@ const Row = styled.div`
 `
 
 const MobileRow = styled.div`
-  width: 100vw;
 
   display: flex;
   flex-direction: row;

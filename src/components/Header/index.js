@@ -11,11 +11,13 @@ import {
 import {
   blackWithOpacity,
   white,
+  gold,
+  purple,
 } from '../../colors'
 
 const Container = styled.div`
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
 
@@ -25,9 +27,9 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   
-  background-color: ${blackWithOpacity(0.92)};
+  background-color: ${purple};
 
-  height: 60px;
+  height: 96px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;
@@ -65,7 +67,7 @@ const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
 
-  color: ${white};
+  color: ${gold};
 
   text-transform: uppercase;
 
@@ -101,7 +103,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
-  padding-top: 9px;
+  margin-top: -9px;
   padding-left: 36px;
   padding-right: 36px;
 

@@ -15,35 +15,28 @@ import {
   red,
   white,
   getGradient,
-  softblack
+  softblack,
+  smokeblue
 } from '../colors'
 
 const queryString = require('query-string');
 
 const Container = styled.div`
-  background: ${softblack};
   min-height: 100vh;
 
   position: relative;
+
+  background-color: ${smokeblue};
 
   z-index: 0;
 `
 
 const Header = styled.div`
-  position: fixed;
+  text-align: center;
 
-  top: 0;
-  left: 0;
-  right: 0;
+  padding-top: 60px;
 
-  z-index: 1;
-
-  padding-left: 60px;
-
-  height: calc(100vh - 200px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: auto;
   
   transition: all .5s ease;
 
@@ -65,30 +58,6 @@ const Header = styled.div`
     width: 100%;
     height: 100%;
 
-    background-size: cover !important;
-    background-attachment: fixed;
-
-    background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-    filter: blur(12px);
-  }
-
-  
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: ${ props => props.gradient ? props.gradient : null };
-    filter: opacity(54%);
-    backdrop-filter: blur(12px);
   }
 `
 
@@ -127,53 +96,47 @@ const Row = styled.div`
 `
 
 const Title = styled.div`
-  color: ${white};
+  color: ${softblack};
   font-family: 'Quicksand';
-  font-size: 66px;
-  font-weight: 400;
-  line-height: 60px;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 42px;
 
   padding-bottom: 18px;
 `
 
 const TopLink = styled(Link)`
   font-family: 'Quicksand';
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 30px;
-  letter-spacing: 0.13em;
+  line-height: 42px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  border-bottom: solid 2px;
+  margin: 0 auto;
   
-  margin-bottom: 30px;
-  color: ${white};
+  color: ${softblack};
 `
 
 const Description = styled.div`
-  font-family: 'Quicksand';
+  font-family: 'Neuton';
   font-size: 20px;
   font-weight: 400;
-  line-height: 28px;
-  color: ${white};
+  line-height: 24px;
+  color: ${softblack};
+  margin: 0 auto;
 
-  max-width: 600px;
+  max-width: 469px;
   & p {
     margin: 0;
   }
 `
 
 const Subthemes = styled.div`
-  position: absolute;
-  top: calc(100vh - 200px);
-
-  z-index: 1;
 `
 
 class SubThemePage extends React.Component {
 
-  componentDidMount() {
-    document.body.style.backgroundColor = softblack;
-  }
+ 
 
   render() {
     const {
@@ -206,10 +169,7 @@ class SubThemePage extends React.Component {
       <Layout location={location}>
         <Container>
 
-          <Header 
-            gradient={gradient}
-            background={background}
-          >
+          <Header>
             <Row>
               <Chevron />
               <TopLink href='/themes'>{theme.name}</TopLink>

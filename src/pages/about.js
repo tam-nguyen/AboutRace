@@ -15,13 +15,13 @@ import { graphql } from 'gatsby'
 import {
   white,
   black,
-  gray,
+  smokegrey,
   softblack,
-  softWhite
+  fogwhite
 } from '../colors'
 
 const Container = styled.div`
-  background-color: ${softWhite};
+  background-color: ${fogwhite};
 
   @media (max-width: 812px) { /* mobile */
 
@@ -39,7 +39,7 @@ const Column = styled.div`
 `
 
 const TopContainer = styled(Column)`
-  background-color: ${gray};
+  background-color: ${smokegrey};
   justify-content: center;
   align-items: center;
   padding-top: 150px;

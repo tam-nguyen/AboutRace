@@ -8,20 +8,12 @@ import {
 
 import {
   red,
-  white
+  white,
+  softblack
 } from '../../colors'
 
 const Container = styled(Link)`
-  color: white;
-  background-color: rgba(51, 51, 51, .48);
-  padding: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 30px;
-  border-radius: 3px;
-
-  display: flex;
-  flex-direction: column;
+ 
 `
 
 const Row = styled.div`
@@ -32,27 +24,12 @@ const Row = styled.div`
 `
 
 const Title = styled.div`
-
-  font-family: Lato;
-  font-size: 36px;
-  line-height: 42px;
-  font-weight: normal;
-
-  letter-spacing: 0.02em;
-
-  color: ${red};
-  width: auto;
-
-  
-`
-
-const Description = styled.div`
-  font-family: 'Tisa Pro';
+  padding-left:15px;
+  font-family: 'Quicksand';
+  font-weight: 500;
   font-size: 20px;
-  line-height: 24px;
-  
-  color: ${white};
-`
+  line-height: 30px; 
+` 
 
 const ArrowContainer = styled.div`
   width: 25px;
@@ -76,10 +53,9 @@ class SubThemeCard extends React.Component {
     return (
       <Container href={link}>
         <Row>
-          <Title color={red}>{title}</Title>
+        <Arrow color={softblack}/><Title color={red}>{title}</Title>
         </Row>
-        <Description dangerouslySetInnerHTML={{ __html: description }} />
-        <Arrow color={red}/>
+        
       </Container>
     )
   }
