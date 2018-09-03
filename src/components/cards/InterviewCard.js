@@ -9,7 +9,7 @@ import SVGArrow from '../SVGArrow'
 import {
   red,
   interviewColors,
-  interviewTickerColor,
+  gold,
   softblack,
   fogwhite
 } from '../../colors'
@@ -93,7 +93,7 @@ const Ticker = styled.div`
   letter-spacing: 0.22em;
 
   border-top-right-radius: 3px;
-  background-color: ${interviewTickerColor};
+  background-color: ${gold};
 
   padding: 5px 15px;
   text-transform: uppercase;

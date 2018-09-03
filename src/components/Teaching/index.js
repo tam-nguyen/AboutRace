@@ -20,8 +20,8 @@ import {
 
 import PlanPane from './PlanPane'
 
-const PADDING = 138;
-const PADDING_TABLET = 80;
+const PADDING = 60;
+const PADDING_TABLET = 60;
 
 const Container = styled.div`
   width: 100%;

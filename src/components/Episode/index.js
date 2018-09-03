@@ -58,7 +58,7 @@ const MobileRow = styled.div`
   display: flex;
   flex-direction: row;
 
-  padding-top: 150px;
+  padding-top: 60px;
   padding-bottom: 150px;
   padding-left: 25px;
 
@@ -96,6 +96,10 @@ const Title = styled.div`
 `
 
 const Text = styled.div`
+  font-family: 'Neuton';
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
 `
 
 const CardsContainer = styled.div`
@@ -121,6 +125,7 @@ const CardsContainer = styled.div`
 
 const SideColumn = styled(Column)`
   flex: 1;
+  padding-top: 101px;
   padding-left: 50px;
 
   @media (min-width: 1025px) { /* desktop */

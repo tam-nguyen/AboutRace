@@ -14,7 +14,8 @@ import {
   articleTickerColor,
   softblack,
   fogwhite,
-  smokegrey
+  smokegrey,
+  purple
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -107,7 +108,7 @@ const Ticker = styled.div`
   color: ${fogwhite};
 
   border-top-right-radius: 3px;
-  background-color: ${articleTickerColor};
+  background-color: ${purple};
 
   padding: 5px 15px;
   text-transform: uppercase;

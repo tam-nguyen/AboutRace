@@ -246,7 +246,6 @@ const Column = styled.div`
 `
 
 const Filing = styled.div`
-  padding-left: 15px;
   padding-bottom: 15px;
 `
 
@@ -348,14 +347,10 @@ const SubTitle = styled.div`
 
   text-transform: uppercase;
 
-  padding-left: 0;
-
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
-    padding-left: 0;
   }
 `
 
@@ -371,7 +366,6 @@ const Tags = styled.div`
   overflow: auto;
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
