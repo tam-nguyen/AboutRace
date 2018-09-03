@@ -10,19 +10,9 @@ import {
 
 import gradientColors from '../gradients'
 
-const HomeBackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -999999;
-  height: 100%;
-  width:100%;
-`
 
-const ThemesIntro = styled.div`
-  height: 500px;
-  width: 100%;
-`
+
+
 
 class Index extends React.Component {
   render() {
@@ -31,8 +21,6 @@ class Index extends React.Component {
     return (
       <Layout location={this.props.location}>
         <div>
-          <HomeBackground />
-          <ThemesIntro />
           {
             edges.map( ({ node }, key) =>
               <ThemeCard key={key} data={node} color={gradientColors[key]}/>

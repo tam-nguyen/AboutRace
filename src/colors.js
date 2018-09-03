@@ -28,11 +28,10 @@ export const qaColor = ['#f3f19b', '#fffff1'];
 export const articleColors = ['#f26f70', '#fffbfb'];
 export const articleTickerColor = '#ff839f';
 
-export const interviewColors = ['#0037b3', '#dec9ff'];
-export const interviewTickerColor = '#dec9ff';
-
-export const clipColors = ['#647d15', '#180f63'];
-export const clipRadialColors = ['#37625D', '#2F4134'];
-export const clipTickerColor = '#363D43';
+export const clipColors = ['#647d15', '#180f63']
+export const clipRadialColors = ['#37625D', '#2F4134']
+export const clipTickerColor = '#363D43'
 
 export const teachingBlue = '#E3F8FF'
+
+export const episodeColors = ['#FFECAA', '#FFDDAA', '#FFC4AA']

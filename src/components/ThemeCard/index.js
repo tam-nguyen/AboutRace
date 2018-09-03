@@ -12,39 +12,9 @@ import {
 const Container = styled.div`
   position: relative;
 
-  width: calc(100% - 90px);
-  display: flex;
-  flex-direction: column;
-
-  margin-left:45px;
-  margin-bottom: 45px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: #a7a7a7 0px 0px 45px;
-
-  align-items: center;
-  justify-content: center;
-
   padding-top: 51px;
 
-  background-color: ${white};
   
-  &::before {
-    content: '';
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: ${props => props.gradient ? props.gradient : null };
-    filter: blur(12px);
-    filter: opacity(53%);
-  }
 
   @media (max-width: 812px) { /* mobile */
     padding-top: 0;
@@ -54,15 +24,14 @@ const Container = styled.div`
 const MainImage = styled.div`
   position: relative;
 
-  width: 832px;
-  height: 523px;
+  width: 505px;
+  height: 298px;
 
   background-size: cover !important;
   background-attachment: fixed;
   transition: all .5s ease;
 
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : `none`};
-  filter: opacity(92%);
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -75,37 +44,7 @@ const MainImage = styled.div`
 `
 
 const Info = styled.div`
-  position: relative;
-
-  width: 100%;
-  min-height: 400px;
-  
-  margin-top: -200px;
-  margin-bottom: -100px;
-
-  overflow: hidden;
-
-  z-index: 1;
-
-  cursor: pointer;
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background: ${props => props.gradient ? props.gradient : null };
-    /*filter: blur(12px);*/
-    filter: opacity(53%);
-  }
+ 
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -119,38 +58,28 @@ const Info = styled.div`
 const Explore = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
-  text-align: left;
-  letter-spacing: 0.22em;
-  margin-top:12px;
-  margin-bottom: 12px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: ${white};
-  font-size: 12px;
-  font-weight: normal;
+  font-size: 14px;
 `
 
 const Title = styled.div`
-  font-family: 'Neuton';
-  text-align: left;
-  line-height: 60px;
-  margin-bottom: 24px;
-  color: ${white};
-  font-size: 60px;
-  font-weight: 600;
+  font-family: 'Quicksand';
+  line-height: 36px;
+  font-size: 36px;
+  font-weight: 500;
+  padding-bottom: 18px;
 `;
 
 const Description = styled.div`
-  font-family: 'Quicksand';
-  font-size: 22px;
-  margin-right: 90px;
-  line-height: 30px;
-  margin-bottom: 60px;
-
+  font-family: 'Neuton';
+  font-size: 20px;
+  line-height: 24px;
+  padding-bottom: 15px;
   & > p {
     margin: 0;
   }
 
-  color: ${white};
 `;
 
 const ChevronContainer = styled.div`
@@ -178,48 +107,35 @@ const Chevron = ({open}) => <ChevronContainer open={open}>
 ///
 
 const SubThemes = styled.div`
-  display: grid;
-  grid-template-columns: 45vw 45vw;
-
-  padding-left: 15px;
-
   @media (min-width: 1025px) { /* desktop */
-    grid-template-columns: 33% 33% 33%;
   }
 
   @media (max-width: 812px) { /* mobile */
-    padding-left: 38px;
-    grid-template-columns: calc(100% - 30px);
+
   }
 `
 
-const Row = styled.div`
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-`
-
-const FirstRow = styled(Row)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  padding-top: 16px;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-bottom: 30px;
-
+const LeftCol = styled.div`
+  padding-left: 60px;
+  width: calc(50% - 60px);
+  display: inline-block;
   @media (min-width: 1025px) { /* desktop */
     
   }
 
   @media (max-width: 812px) { /* mobile */
-    padding-left: 38px;
-    padding-right: 38px;
+
+  }
+`
+const RightCol = styled.div`
+width: 50%;
+  display: inline-block;
+  @media (min-width: 1025px) { /* desktop */
+    
+  }
+
+  @media (max-width: 812px) { /* mobile */
+
   }
 `
 
@@ -252,45 +168,26 @@ class ThemeCard extends React.Component {
     const gradient = getGradient(color)
 
     return (
-      <Container
-        open={open}
-        gradient={gradient}
-      >
-        <MainImage 
-          style={{
-            height: 323,
-            marginBottom: 200
-          }}
-          background={background}
-        />
-        <Info gradient={gradient}>
-          <MainImage 
-            style={{
-              marginTop: -323,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              filter: 'blur(12px)',
-              zIndex: -1,
-            }}
-            background={background}
-          />
-          <FirstRow
-            onClick={() => this.setState({open: !open})}
+      <Container>
+        
+        <Info>
+          <LeftCol
           >
-            <Explore>Explore:</Explore>
             <Title >{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
-            <Chevron open={open} />
-          </FirstRow>
-          <Row style={{marginTop: 50}}>
+            <MainImage background={background} />
+         
+          </LeftCol>
+          <RightCol >
+          <Explore>Explore:</Explore>
             {
-              open && <SubThemes gradient={gradient}>
+             <SubThemes gradient={gradient}>
                 {
                   subthemes.map( (data, key) => <SubThemeCard key={key} data={data}/>)
                 }
               </SubThemes>
             }
-          </Row>
+          </RightCol>
         </Info>
       </Container>
     )
