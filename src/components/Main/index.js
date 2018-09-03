@@ -57,18 +57,19 @@ const Episodes = styled.div`
   width: 100%;
   height: 700px;
 `
+const EpisodeOne = styled.div`
 
+`
+
+const EpisodeSynopsis = styled.div`
+`
 
 
 
 export default ({ data, location }) => {
   const background = get(data, `taxonomyTermThemes.relationships.field_theme_image.localFile.childImageSharp.original.src`)
 
-  // const cards = { interviews }
-
-  // const props = {
-  //   cards
-  // }
+ const episodeOneSynopsis = get(data, `allNodeSynopsis.edges.node[1].field_episode_synopsis.processed`)
 
   return (
     <Container>
@@ -76,7 +77,9 @@ export default ({ data, location }) => {
       <Slugline>An online companion to the award-winning documentary series</Slugline>
       </TopContainer>
       <Episodes>
-        
+        <EpisodeOne>
+          <EpisodeSynopsis dangerouslySetInnerHTML={{ __html: episodeOneSynopsis }}/>
+        </EpisodeOne>
       </Episodes>
     </Container>
   )

@@ -46,7 +46,7 @@ const Column = styled.div`
 const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
 
   padding: 20px;
   padding-top: 60px;
@@ -56,7 +56,6 @@ const TopContainer = styled.div`
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;
     padding-left: ${PADDING}px;
-    padding-right: 0;
 
   }
 
@@ -82,9 +81,9 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 36px;
   line-height: 42px;
-
+  max-width: 469px;
   margin-bottom: 17px;
-
+  letter-spacing: 0.06em;
   color: ${fogwhite};
 `
 
@@ -95,6 +94,7 @@ const Description = styled.div`
   line-height: 24px;
   
   max-width: 469px;
+  padding-bottom: 30px;
 
   color: ${fogwhite};
 
@@ -104,6 +104,9 @@ const Description = styled.div`
 `
 
 const ContentColumn = styled(Column)`
+
+  max-width: 469px;
+  text-align: center;
   
   @media (min-width: 1025px) { /* desktop */
     flex: 1;

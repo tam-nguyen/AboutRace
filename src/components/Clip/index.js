@@ -21,6 +21,9 @@ import {
   softblack,
   white,
   red,
+  smokegrey,
+  episodeColors,
+  fogwhite,
 } from '../../colors'
 
 import reorder from '../../utils/reorder'
@@ -50,26 +53,18 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
   width: 100%;
   height: auto;
-  min-height: 683px;
 
-  background: ${gradient};
+  background-color: ${episodeColors[0]};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: ${ props => props.overlay ? 'none' : gradient };
+
   }
 
   @media (max-width: 812px) { /* mobile */
-    background-color: ${white};
-    z-index: 1;
+
+
   }
 `
 
@@ -79,14 +74,10 @@ const BottomContaniner = styled.div`
   width: 100%;
   padding-top: 20px;
 
-  z-index: 2;
-
-  background-color: ${softblack};
-  background-image: ${gradient2};
+  background-color: ${smokegrey};
 
   @media (min-width: 1025px) { /* desktop */
-    background-color: ${ props => props.overlay ? 'rgba(0,0,0,0)' : white };
-    background-image: ${ props => props.overlay ? 'none' : gradient2 };
+
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -161,21 +152,21 @@ const Column = styled.div`
 `
 
 const AllEntitiesContainer = styled(Row)`
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: 100vw;
+  justify-content: flex-start;
 
-  padding-top: 90px;
-  padding-right: 60px;
+  padding-top: 18px;
+  padding-left: 60px;
 
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    
+
   }
 
   @media (max-width: 812px) { /* mobile */
     justify-content: center;
+    padding-right: 0;
   }
 `
 
@@ -187,22 +178,22 @@ const AllEntities = () => <AllEntitiesContainer>
 
 
 const Content = styled(Row)`
-
-  padding-top: 100px;
   width: 100%;
+  padding: 18px 0 72px 0;
 `
 
 const SideBar = styled(Column)`
   display: none;
-  min-width: 400px;
 
   flex: 1;
 
   padding-left: 60px;
-  padding-right: 60px;
+  padding-right: 30px;
 
   @media (min-width: 1025px) { /* desktop */
     display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -220,7 +211,7 @@ const SubTitle = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 28px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
 
@@ -229,7 +220,6 @@ const SubTitle = styled.div`
   padding-left: 0;
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -249,7 +239,6 @@ const Tags = styled.div`
   overflow: auto;
 
   @media (min-width: 1025px) { /* desktop */
-    padding-left: 15px;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -265,14 +254,11 @@ const Tag = styled.div`
 
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 36px;
-  letter-spacing: 0.22em;
-  font-weight: 600;
+  letter-spacing: 0.12em;
 
   text-transform: uppercase;
-
-  color: ${red};
 
   margin-right: 15px;
   margin-top: 15px;
@@ -308,8 +294,8 @@ const CardsContainer = styled.div`
   }
 `
 
-const IMAGE_WIDTH = 663
-const IMAGE_HEIGHT = 391
+const IMAGE_WIDTH = 582
+const IMAGE_HEIGHT = 304
 
 const MainImage = styled.div`
   cursor: pointer;
@@ -317,13 +303,11 @@ const MainImage = styled.div`
   display: flex;
   flex-direction: row;
 
-  color: ${white};
-
   width: ${IMAGE_WIDTH}px;
   height: ${IMAGE_HEIGHT}px;
 
-  border-radius: 3px;
-  background-color: ${white};
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 
   background-size: cover !important;
   background-attachment: fixed;
@@ -339,13 +323,17 @@ const MainImage = styled.div`
 `
 
 const Title = styled.div`
-  width: ${IMAGE_WIDTH}px;
+  width: calc(${IMAGE_WIDTH}px - 60px);
 
-  font-family: 'Tisa Pro';
-  font-size: 20px;
-  line-height: 24px;
+  font-family: 'Quicksand';
 
-  margin-top: 15px;
+  font-size: 14px;
+  line-height: 18px;
+
+  background-color: ${fogwhite};
+  padding: 15px 30px 24px 30px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 
   color: ${softblack};
 `
@@ -393,8 +381,9 @@ const MobileColumn = styled(Column)`
 `
 
 const MobileSubTitle = styled(SubTitle)`
-  padding-left: 100px;
+  padding-left: 60px;
   padding-bottom: 30px;
+  color: ${fogwhite};
 
   @media (max-width: 812px) { /* mobile */
     padding-left: 20px;
@@ -510,15 +499,13 @@ class Clip extends React.Component {
           { !overlay && <AllEntities /> }
           <Content>
             <SideBar>
-              <SubTitle>filed under:</SubTitle>
+            <SubTitle>explore:</SubTitle>
               {
-                filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link} color={red}>{name}</FiledUnderLink>)
+                filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link} color={softblack}>{name}</FiledUnderLink>)
               }
-              {
-                tags.length > 0
-                &&
-                <SubTitle style={{marginTop: 90}}>explore:</SubTitle>
-              }
+             
+                
+            
               { renderTags() }
             </SideBar>
             <ContentBar>
