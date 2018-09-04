@@ -35,7 +35,7 @@ class Themes extends React.Component {
     if(index){
       const ref = this.links[index]
       const domNode = ReactDOM.findDOMNode(ref)
-      // domNode.scrollIntoView()
+      
       setTimeout(()=>{
         window.scrollTo(0, domNode.offsetTop);
       }, 1)
@@ -57,7 +57,7 @@ class Themes extends React.Component {
                   this.links[key] = re
                 }}
                 key={key}
-                to={'/themes/#'+key}
+                to={'/themes/#'+kebabCase(node.name)}
               >
                 <ThemeCard data={node} color={gradientColors[key]}/>
               </Link>
