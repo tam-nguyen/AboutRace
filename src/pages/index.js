@@ -184,6 +184,10 @@ const Summary = styled.div`
   letter-spacing: 0.03em;
 
   color: #5A5E61;
+
+  @media (max-width: 812px) { /* mobile */
+    display: none;
+  }
 `
 
 const Image = styled.img`
