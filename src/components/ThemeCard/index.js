@@ -169,17 +169,14 @@ class ThemeCard extends React.Component {
 
     return (
       <Container>
-        
         <Info>
-          <LeftCol
-          >
+          <LeftCol>
             <Title >{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
             <MainImage background={background} />
-         
           </LeftCol>
-          <RightCol >
-          <Explore>Explore:</Explore>
+          <RightCol>
+            <Explore>Explore:</Explore>
             {
              <SubThemes gradient={gradient}>
                 {

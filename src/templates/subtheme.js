@@ -1,5 +1,5 @@
 import React from "react"
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from '../utils/kebabCase'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
@@ -165,6 +165,8 @@ class SubThemePage extends React.Component {
 
     const gradient = getGradient(color)
 
+    const themeLink = `/themes/#${kebabCase(theme.name)}`
+
     return (
       <Layout location={location}>
         <Container>
@@ -172,7 +174,7 @@ class SubThemePage extends React.Component {
           <Header>
             <Row>
               <Chevron />
-              <TopLink href='/themes'>{theme.name}</TopLink>
+              <TopLink href={themeLink}>{theme.name}</TopLink>
             </Row>
             <Title>{title}</Title>
             <Description dangerouslySetInnerHTML={{ __html: description }} />
