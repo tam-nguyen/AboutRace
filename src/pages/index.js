@@ -242,7 +242,8 @@ class Index extends Component {
     const image = get(trailerClip, 'relationships.field_poster_image.localFile.publicURL')
 
     const trailerData = get(this, 'props.data.allTaxonomyTermHomePage.edges').map( ({node}) => node )[0]
-    const summary = get(trailerData, 'field_site_summary_tagline.processed')
+    // const summary = get(trailerData, 'field_site_summary_tagline.processed')
+    const summary = get(trailerClip, 'title')
     const under = get(trailerData, 'field_text_under_john_a_powell_v.processed')
 
     return (
@@ -366,6 +367,7 @@ export const query = graphql`
         }
       }
     }
+
     trailerClip: nodeClip(id: { eq:"72e4ec93-6d32-460e-a7e3-1b958360d330" } ) {
       ...ClipFragment
     }
