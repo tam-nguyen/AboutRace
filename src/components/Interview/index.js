@@ -602,6 +602,10 @@ class Interview extends React.Component {
     };
   }
 
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+
   renderOverlay = (name, cards) => {
     const tagsContent = getCards(cards)
     const order = shuffle(range.range(tagsContent.length))

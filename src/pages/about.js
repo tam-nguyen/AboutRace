@@ -219,6 +219,10 @@ class About extends React.Component {
     }, 3000)
   }
 
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+
   render() {
     const {
       quotes

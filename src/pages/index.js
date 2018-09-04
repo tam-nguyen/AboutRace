@@ -227,6 +227,10 @@ const Video = ({videoId, image, under, summary}) => <VideoContainer>
 ///
 
 class Index extends Component {
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+  
   render() {
     const edges = get(this, 'props.data.allTaxonomyTermThemes.edges').map( ({node}) => node )
     const episodeOne = get(this, 'props.data.episodeOne')

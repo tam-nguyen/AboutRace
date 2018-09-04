@@ -105,6 +105,10 @@ const Title = styled.div`
 `
 
 class Transcript extends React.Component {
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+  
   render() {
     const title = get(this, 'props.data.title.processed')
     const transcript = get(this, 'props.data.transcript.processed')

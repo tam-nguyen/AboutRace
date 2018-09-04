@@ -100,6 +100,10 @@ const SubTitle = styled.div`
 `
 
 class LessonPlan extends React.Component {
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+  
   render() {
     const {overlay} = this.props
     console.log(this.props)

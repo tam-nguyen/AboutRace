@@ -138,6 +138,10 @@ const SideColumn = styled(Column)`
 `
 
 class Episode extends React.Component {
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+  
   render() {
     const number = get(this, 'props.number')
     const index = ['one', 'two', 'three'].indexOf(number)

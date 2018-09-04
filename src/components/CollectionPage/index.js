@@ -184,6 +184,10 @@ const CardsContainer = styled(FlipMove)`
 
 class CollectionPage extends React.Component {
 
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+
   render() {
     const title = get(this, 'props.title')
     const description = get(this, 'props.description')

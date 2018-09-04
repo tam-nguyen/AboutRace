@@ -95,6 +95,10 @@ const Column = styled.div`
 `
 
 class Credits extends React.Component {
+  componentDidMount() {
+    setTimeout(()=>window.scrollTo(0,0),1)
+  }
+  
   render() {
     const title = get(this, 'props.data.title.processed')
     const credits = get(this, 'props.data.credits.processed')
