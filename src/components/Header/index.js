@@ -11,6 +11,7 @@ import {
 import {
   blackWithOpacity,
   white,
+  red,
   gold,
   purple,
 } from '../../colors'
@@ -67,7 +68,7 @@ const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
 
-  color: ${gold};
+  color: ${props => props.selected ? red : gold};
 
   text-transform: uppercase;
 
@@ -93,6 +94,8 @@ const Item = styled(Link)`
 
 const MobileItem = styled(Item)`
   display: none;
+
+  color: ${props => props.selected ? red : gold};
 
   @media (max-width: 812px) { /* mobile */
     display: block;
@@ -133,6 +136,7 @@ class Header extends React.Component {
 
   render() {
     const {open} = this.state;
+    const currentSection = window.location.pathname.split('/')[1]
 
     return (
       <Container open={open} id="header">
@@ -143,13 +147,21 @@ class Header extends React.Component {
         <Logo><Link href='/'><SVGLogo/></Link></Logo>
         <ItemsContainer>
           {
-            pages.map( ({name, link}, index) => <Item href={link} key={index}>{name}</Item>)
+            pages.map( ({name, link}, index) => <Item
+              selected={name.indexOf(currentSection) >= 0}
+              href={link}
+              key={index}
+            >{name}</Item>)
           }
         </ItemsContainer>
 
         { open && <Link href='/'><SVGLogo/></Link> }
         {
-          open && pages.map( ({name, link}, index) => <MobileItem to={link} key={index}>{name}</MobileItem>)
+          open && pages.map( ({name, link}, index) => <MobileItem
+            selected={name.indexOf(currentSection) >= 0}
+            to={link}
+            key={index}
+          >{name}</MobileItem>)
         }
       </Container>
     );
