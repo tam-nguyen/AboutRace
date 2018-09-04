@@ -537,6 +537,7 @@ class QA extends React.Component {
               style={{
                 position: 'fixed',
                 top: 0,
+                zIndex: 5,
                 right: 30
               }}
             >
@@ -639,7 +640,7 @@ class QA extends React.Component {
     return (
       <Container>
         {
-          this.renderOverlay(tagName, tagCards)
+          tagName && this.renderOverlay(tagName, tagCards)
         }
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
