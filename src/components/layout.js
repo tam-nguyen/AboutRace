@@ -25,6 +25,16 @@ export default ({ children, location, header = true }) => (
             title
           }
         }
+
+        footer: allTaxonomyTermFooter {
+          edges {
+            node {
+              field_legal_text {
+                processed
+              }
+            }
+          }
+        }
       }
     `}
     render={data => (
@@ -39,7 +49,7 @@ export default ({ children, location, header = true }) => (
         <Typekit kitId="pte4pny" />
         { header && <Header data={data} pathname={location.pathname} /> }
         <Container> {children} </Container>
-        <Footer />
+        <Footer data={data.footer}/>
       </>
     )}
   />

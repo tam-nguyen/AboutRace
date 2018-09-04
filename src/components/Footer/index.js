@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from '../Link'
 import styled from 'styled-components'
+import get from 'lodash/get'
 
 import berkley from './berkley.png'
 import cn from './cn.png'
@@ -84,6 +85,9 @@ const Image = styled.img`
 
 class Footer extends React.Component {
   render() {
+    const data = get(this, 'props.data.edges').map( ({node}) => node )[0]
+    const footer = get(data, 'field_legal_text.processed')
+
     return (
       <Container>
         <Row>a production of:</Row>
@@ -104,15 +108,15 @@ class Footer extends React.Component {
             <Image src={cultures} />
           </ImageHolder>
         </MobileRow>
-        <Row>
-          website legaleze all content in this site reflects the views of its respective authors and in no way should be construed to represent the views of UC Berkeley or California Newsreel except where explicitly cited etc.
-        </Row>
-        <Row>
-          Copyright 2018 UC Berkeley.
-        </Row>
+        <Row
+          style={{marginBottom: 100}}
+          dangerouslySetInnerHTML={{ __html: footer }}
+        />
       </Container>
     )
   }
 }
+
+///
 
 export default Footer
