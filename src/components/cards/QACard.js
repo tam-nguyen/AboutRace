@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from '../../utils/kebabCase'
 
 import Card from '../Card'
 import SVGArrow from '../SVGArrow'

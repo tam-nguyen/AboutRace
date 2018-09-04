@@ -1,6 +1,8 @@
 const _ = require("lodash")
-const kebabCase = require("lodash/kebabCase")
+const _kebabCase = require("lodash/kebabCase")
 const path = require("path")
+
+const kebabCase = string => _kebabCase(string).substr(0, 100)
 
 const gradientColors = require('./src/gradients');
 
@@ -121,6 +123,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 id
+                title
                 fields {
                   slug
                 }
@@ -249,7 +252,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
       _.each(result.data.allNodeFaq.edges, edge => {
         createPage({
-          path: `/qa/${edge.node.fields.slug}`, // required
+          path: `/qa/${kebabCase(edge.node.title)}`, // required
           component: qaTemplate,
           context: {
             id: edge.node.id,

@@ -282,7 +282,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={smokegrey}>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={smokegrey} to='/qa'>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 ///
