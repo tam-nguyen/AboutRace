@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import get from 'lodash/get'
 
 import gradientColors from '../gradients'
-
+import episodes from '../utils/episodes-data'
 
 import {
   Layout,
@@ -121,6 +121,20 @@ export const query = graphql`
                 src
               }
             }
+          }
+        }
+      }
+    }
+
+    synopsis: allNodeSynopsis {
+      edges {
+        node {
+          title
+          field_episode_synopsis {
+            processed
+          }
+          field_synopsis_copyright {
+            processed
           }
         }
       }
