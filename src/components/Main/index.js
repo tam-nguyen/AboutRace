@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import get from 'lodash/get'
 
 import {
-  white, softblack, smokegrey, fogwhite
+  white,
+  softblack,
+  smokegrey,
+  fogwhite
 } from '../../colors'
 
 const gradient = `linear-gradient(to bottom, rgba(255,255,255,0.66) 0%, rgba(245,238,182,0.92) 100%)`
@@ -53,34 +56,17 @@ const Slugline = styled.div`
   flex-direction: column;
   justify-content: center;
 `
-const Episodes = styled.div`
-  width: 100%;
-  height: 700px;
-`
-const EpisodeOne = styled.div`
-
-`
-
-const EpisodeSynopsis = styled.div`
-`
-
-
 
 export default ({ data, location }) => {
   const background = get(data, `taxonomyTermThemes.relationships.field_theme_image.localFile.childImageSharp.original.src`)
 
- const episodeOneSynopsis = get(data, `allNodeSynopsis.edges.node[1].field_episode_synopsis.processed`)
+  const episodeOneSynopsis = get(data, `allNodeSynopsis.edges.node[1].field_episode_synopsis.processed`)
 
   return (
     <Container>
       <TopContainer background={background}>
-      <Slugline>An online companion to the award-winning documentary series</Slugline>
+        <Slugline>An online companion to the award-winning documentary series</Slugline>
       </TopContainer>
-      <Episodes>
-        <EpisodeOne>
-          <EpisodeSynopsis dangerouslySetInnerHTML={{ __html: episodeOneSynopsis }}/>
-        </EpisodeOne>
-      </Episodes>
     </Container>
   )
 }

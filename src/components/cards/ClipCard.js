@@ -10,7 +10,8 @@ import {
   SVGArrow,
 } from '../'
 
-import playButton from './PlayButton.png';
+//TODO: refactor assets
+import playButton from '../../assets/images/PlayButton.png';
 
 import {
   red,
@@ -146,6 +147,7 @@ const Image = styled.img`
   position: absolute;
   bottom: 15px;
   left: 12px;
+
   @media (min-width: 1025px) { /* desktop */
 
   }
