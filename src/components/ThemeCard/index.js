@@ -6,7 +6,8 @@ import SubThemeCard from './SubThemeCard'
 
 import {
   white,
-  getGradient
+  getGradient,
+  smokeblue
 } from '../../colors'
 
 const Container = styled.div`
@@ -14,7 +15,7 @@ const Container = styled.div`
 
   padding-top: 51px;
 
-  
+  background-color: ${smokeblue};
 
   @media (max-width: 812px) { /* mobile */
     padding-top: 0;
@@ -24,7 +25,6 @@ const Container = styled.div`
 const MainImage = styled.div`
   position: relative;
 
-  width: 505px;
   height: 298px;
 
   background-size: cover !important;
@@ -44,7 +44,9 @@ const MainImage = styled.div`
 `
 
 const Info = styled.div`
- 
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-bottom: 60px;
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -115,10 +117,12 @@ const SubThemes = styled.div`
   }
 `
 
+const DetailContainer = styled.div`
+  display: flex;
+`
+
 const LeftCol = styled.div`
-  padding-left: 60px;
-  width: calc(50% - 60px);
-  display: inline-block;
+  flex: 1;
   @media (min-width: 1025px) { /* desktop */
     
   }
@@ -128,8 +132,8 @@ const LeftCol = styled.div`
   }
 `
 const RightCol = styled.div`
-width: 50%;
-  display: inline-block;
+  flex: 1;
+  padding-left: 60px;
   @media (min-width: 1025px) { /* desktop */
     
   }
@@ -169,22 +173,25 @@ class ThemeCard extends React.Component {
 
     return (
       <Container>
+        <Explore style={{paddingLeft: 60, paddingBottom: 30}}>Themes from the films</Explore>
         <Info>
-          <LeftCol>
-            <Title >{title}</Title>
-            <Description dangerouslySetInnerHTML={{ __html: description }} />
-            <MainImage background={background} />
-          </LeftCol>
-          <RightCol>
-            <Explore>Explore:</Explore>
-            {
-             <SubThemes gradient={gradient}>
-                {
-                  subthemes.map( (data, key) => <SubThemeCard key={key} data={data}/>)
-                }
-              </SubThemes>
-            }
-          </RightCol>
+          <Title>{title}</Title>
+          <DetailContainer>
+            <LeftCol>
+              <Description dangerouslySetInnerHTML={{ __html: description }} />
+              <MainImage background={background} />
+            </LeftCol>
+            <RightCol>
+              <Explore style={{paddingTop:6, paddingBottom:15}}>Explore:</Explore>
+              {
+              <SubThemes gradient={gradient}>
+                  {
+                    subthemes.map( (data, key) => <SubThemeCard key={key} data={data}/>)
+                  }
+                </SubThemes>
+              }
+            </RightCol>
+          </DetailContainer>
         </Info>
       </Container>
     )

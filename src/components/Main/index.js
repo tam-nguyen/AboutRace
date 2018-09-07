@@ -22,8 +22,7 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
-  width: 100vw;
-  height: 311px;
+  height: 401px;
 
   &::before {
     position: absolute;
@@ -43,13 +42,12 @@ const TopContainer = styled.div`
 const Slugline = styled.div`
   width: 100%;
   height: 96px;
-  background-color: ${smokegrey};
+  background-color: rgba(31,41,54,0.66);
   position: absolute;
   bottom: 0;
   font-family: 'Quicksand';
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
+  font-weight: 400;
+  font-size: 30px;
   color: ${fogwhite};
   text-align: center;
   display: flex;

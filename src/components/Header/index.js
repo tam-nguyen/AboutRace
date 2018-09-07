@@ -14,11 +14,12 @@ import {
   red,
   gold,
   purple,
+  smokeblue,
 } from '../../colors'
 
 const Container = styled.div`
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
 
@@ -68,7 +69,7 @@ const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
 
-  color: ${props => props.selected ? red : gold};
+  color: ${props => props.selected ? gold : smokeblue};
 
   text-transform: uppercase;
 
@@ -95,7 +96,7 @@ const Item = styled(Link)`
 const MobileItem = styled(Item)`
   display: none;
 
-  color: ${props => props.selected ? red : gold};
+  color: ${props => props.selected ? gold : smokeblue};
 
   @media (max-width: 812px) { /* mobile */
     display: block;

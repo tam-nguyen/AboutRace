@@ -32,6 +32,7 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #2b2231;
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;
@@ -53,7 +54,11 @@ const CardContainer = styled(Link)`
   margin-top: 10px;
   padding: 30px;
 
+  flex: 1 1 auto;
+
   background-color: ${props => props.color ? props.color : white };
+
+  transition: all 0.5s;
 
   @media (min-width: 1025px) { /* desktop */
     margin: 1vw;
@@ -65,6 +70,12 @@ const CardContainer = styled(Link)`
     margin: 0;
     padding: 20px;
   }
+
+  &:hover {
+    transform: translatey(-21px);
+    transition: all 0.5s;
+  }
+
 `
 
 const EpisodeNumber = styled.div`
@@ -172,6 +183,10 @@ const Under = styled.div`
   letter-spacing: 0.03em;
 
   color: #5A5E61;
+
+  & p {
+    margin: 15px;
+  }
 `
 
 const Summary = styled.div`
@@ -182,6 +197,9 @@ const Summary = styled.div`
   font-size: 14px;
   text-align: center;
   letter-spacing: 0.03em;
+
+  max-width: 510px;
+  padding-bottom: 60px;
 
   color: #5A5E61;
 

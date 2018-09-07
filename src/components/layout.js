@@ -14,6 +14,8 @@ import './layout.css'
 const Container = styled.div`
   background-color: ${backgroundColor};
   margin: 0 auto;
+  padding-top:96px;
+  // overflow: hidden;
 `
 
 export default ({ children, location, header = true }) => (
