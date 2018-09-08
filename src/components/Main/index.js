@@ -22,7 +22,7 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
-  height: 401px;
+  height: 396px;
 
   &::before {
     position: absolute;
