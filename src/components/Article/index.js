@@ -20,7 +20,7 @@ import {
   whiteShadowTrans,
   rose,
   softblack,
-  smokeblue,
+  articles,
 } from '../../colors'
 
 import reorder from '../../utils/reorder'
@@ -36,7 +36,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: ${smokeblue};
+  background-color: ${articles};
 
   @media (min-width: 1025px) { /* desktop */
 

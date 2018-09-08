@@ -27,13 +27,14 @@ const Title = styled.div`
   padding-left:15px;
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 30px; 
 ` 
 
 const ArrowContainer = styled.div`
-  width: 25px;
-  height: 20px;
+  width: 27px;
+  flex-shrink: 0;
+  height: 22px;
 `
 
 const Arrow = ({color}) => <ArrowContainer>
@@ -55,7 +56,6 @@ class SubThemeCard extends React.Component {
         <Row>
         <Arrow color={softblack}/><Title color={red}>{title}</Title>
         </Row>
-        
       </Container>
     )
   }

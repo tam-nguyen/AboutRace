@@ -29,13 +29,11 @@ const Column = styled.div`
 `
 
 const MainText = styled.div`
-  font-family: 'Neuton';
+  font-family: 'ff-tisa-web-pro';
   font-weight: 300;
-  font-size: 20px;
+  font-size: 17px;
   line-height: 24px;
-
-  max-width: 469px;
-
+  
   color: ${softblack};
  `
 

@@ -31,7 +31,7 @@ const Container = styled.div`
   
   background-color: ${purple};
 
-  height: 96px;
+  height: 72px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;
@@ -107,7 +107,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
-  margin-top: -9px;
+  margin-top: 6px;
   padding-left: 36px;
   padding-right: 36px;
 

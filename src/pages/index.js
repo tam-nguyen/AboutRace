@@ -21,7 +21,9 @@ import {
 import {
   black,
   white,
-  episodeColors
+  episodeColors,
+  fogwhite,
+  smokeblue
 } from '../colors'
 
 const Container = styled.div`
@@ -60,6 +62,8 @@ const CardContainer = styled(Link)`
 
   transition: all 0.5s;
 
+  border-radius: 6px;
+
   @media (min-width: 1025px) { /* desktop */
     margin: 1vw;
     width: 400px;
@@ -97,16 +101,17 @@ const EpisodeTitle = styled.div`
   font-weight: 500;
   line-height: 42px;
   font-size: 36px;
+  padding-bottom: 15px;
 
   color: ${black};
 `
 
 const EpisodeDescription = styled.div`
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-style: normal;
   font-weight: normal;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 17px;
 
   color: ${black};
 `
@@ -176,13 +181,12 @@ const VimeoContainer = styled.div`
 const Under = styled.div`
   font-family: Quicksand;
   font-style: normal;
-  font-weight: bold;
   line-height: 28px;
   font-size: 24px;
   text-align: center;
   letter-spacing: 0.03em;
 
-  color: #5A5E61;
+  color: ${fogwhite};
 
   & p {
     margin: 15px;
@@ -192,20 +196,29 @@ const Under = styled.div`
 const Summary = styled.div`
   font-family: Quicksand;
   font-style: normal;
-  font-weight: bold;
   line-height: 21px;
   font-size: 14px;
   text-align: center;
   letter-spacing: 0.03em;
 
   max-width: 510px;
-  padding-bottom: 60px;
+  padding-bottom: 102px;
 
-  color: #5A5E61;
+  color: ${fogwhite};
 
   @media (max-width: 812px) { /* mobile */
     display: none;
   }
+`
+const Explore = styled.div`
+  font-family: 'Quicksand';
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 14px;
+  background-color: ${smokeblue};
+  padding-top: 45px;
+  padding-bottom: 30px;
 `
 
 const Image = styled.img`
@@ -292,6 +305,8 @@ class Index extends Component {
         />
 
         <Container>
+        <Explore style={{paddingLeft: 60}}>Themes from the films:</Explore>
+
           {
             edges.map( (edge, key) =>
               <ThemeCard key={key} data={edge} color={gradientColors[key]}/>

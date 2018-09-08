@@ -32,7 +32,7 @@ const Container = styled(Card)`
     top: -115px;
     right: 100px;
 
-    font-family: 'Neuton';
+    font-family: 'ff-tisa-web-pro';
     font-weight: 400;
     font-size: 400px;
 

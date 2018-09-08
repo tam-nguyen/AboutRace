@@ -15,7 +15,8 @@ import {
   softblack,
   fogwhite,
   smokegrey,
-  purple
+  purple,
+  articles
 } from '../../colors'
 
 const Container = styled(Card)`
@@ -28,6 +29,7 @@ const Container = styled(Card)`
 
   background-color: ${fogwhite};
   color: ${softblack};
+  box-shadow: 0px 0px 30px #0000002b;
 
   padding-left: 15px;
   padding-right: 15px;
@@ -66,11 +68,10 @@ const TopBlock = styled.div`
 
 const ArticleTitle = styled.div`
   font-family: 'Quicksand';
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.00em;
   line-height: 18px;
-  text-transform: uppercase;
 `
 
 const InnerContainer = styled.div`
@@ -86,7 +87,7 @@ const InnerContainer = styled.div`
 
 const Author = styled.div`
   font-family: 'Quicksand';
-  font-weight: 500;
+  font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.06em;
   line-height: 21px;
@@ -104,13 +105,13 @@ const Ticker = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 30px;
-  letter-spacing: 0.22em;
-  color: ${fogwhite};
+  letter-spacing: 0.12em;
+  color: ${smokegrey};
 
   border-top-right-radius: 3px;
-  background-color: ${purple};
+  background-color: ${articles};
 
-  padding: 5px 15px;
+  padding: 3px 15px;
   text-transform: uppercase;
 `
 

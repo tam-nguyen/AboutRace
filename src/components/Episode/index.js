@@ -58,7 +58,7 @@ const MobileRow = styled.div`
   display: flex;
   flex-direction: row;
 
-  padding-top: 60px;
+  padding-top: 30px;
   padding-bottom: 150px;
   padding-left: 25px;
 
@@ -96,9 +96,9 @@ const Title = styled.div`
 `
 
 const Text = styled.div`
-  font-family: 'Neuton';
+  font-family: 'ff-tisa-web-pro';
   font-weight: 300;
-  font-size: 20px;
+  font-size: 17px;
   line-height: 24px;
 `
 

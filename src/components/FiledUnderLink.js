@@ -18,7 +18,7 @@ const FiledUnderLinkContainer = styled(Link)`
 
   padding-left: 0;
   padding-right: 10px;
-  padding-top:9px;
+  padding-top:18px;
 
   font-family: 'Quicksand';
   font-weight: 500;
@@ -46,7 +46,7 @@ const FiledUnderLinkContainerDiv = styled.div`
 
   padding-left: 0;
   padding-right: 10px;
-  padding-top:9px;
+  padding-top:15px;
 
   font-family: 'Quicksand';
   font-weight: 500;
@@ -84,7 +84,7 @@ const FiledUnderLink = props => {
   else
   return (
     <FiledUnderLinkContainer {...props} href={to} to={to} color={color}>
-      <SVGArrow style={{width: 25, marginRight: 10}} color={arrowcolor}/>
+      <SVGArrow style={{width: 27, flexShrink:0, marginRight: 15}} color={arrowcolor}/>
       {children}
     </FiledUnderLinkContainer>
   )

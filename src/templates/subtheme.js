@@ -118,8 +118,8 @@ const TopLink = styled(Link)`
 `
 
 const Description = styled.div`
-  font-family: 'Neuton';
-  font-size: 20px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 17px;
   font-weight: 400;
   line-height: 24px;
   color: ${softblack};

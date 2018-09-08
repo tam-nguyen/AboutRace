@@ -14,6 +14,8 @@ import {
   fogwhite,
   smokegrey,
   softblack,
+  gold,
+  smokeblue,
 } from '../../colors'
 
 const PADDING = 60;
@@ -49,7 +51,6 @@ const TopContainer = styled.div`
   justify-content: center;
 
   padding: 20px;
-  padding-top: 60px;
   padding-left: ${PADDING_TABLET}px;
   padding-right: ${PADDING_TABLET}px;
 
@@ -77,6 +78,7 @@ const BottomContainer = styled(Column)`
 `
 
 const Title = styled.div`
+display:none;
   font-family: 'Neue Plak W01 Bold';
   font-weight: 500;
   font-size: 36px;
@@ -90,13 +92,12 @@ const Title = styled.div`
 
 const Description = styled.div`
   font-family: "ff-tisa-web-pro";
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 17px;
+  line-height: 21px;
   
   max-width: 469px;
-  padding-bottom: 30px;
   text-align: left;
-  color: ${fogwhite};
+  color: ${smokeblue};
 
   & p {
     margin: 0;
@@ -104,12 +105,15 @@ const Description = styled.div`
 `
 
 const ContentColumn = styled(Column)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  max-width: 469px;
+  width: 306px;
+  padding: 30px;
   text-align: center;
   
   @media (min-width: 1025px) { /* desktop */
-    flex: 1;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -198,10 +202,7 @@ class CollectionPage extends React.Component {
     return (
       <Container>
         <TopContainer>
-          <ContentColumn>
-            <Title>{title}</Title>
-            <Description dangerouslySetInnerHTML={{ __html: description }}/>
-          </ContentColumn>
+          
           {/* <SideBar>
             <Title>&nbsp;</Title>
             <SubTitle>you might also like:</SubTitle>
@@ -214,6 +215,10 @@ class CollectionPage extends React.Component {
             this.props.children
           }
           <CardsContainer>
+          <ContentColumn>
+            <Title>{title}</Title>
+            <Description dangerouslySetInnerHTML={{ __html: description }}/>
+          </ContentColumn>
             { relatedContent }
           </CardsContainer>
         </BottomContainer>

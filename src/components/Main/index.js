@@ -6,7 +6,8 @@ import {
   white,
   softblack,
   smokegrey,
-  fogwhite
+  fogwhite,
+  gold
 } from '../../colors'
 
 const gradient = `linear-gradient(to bottom, rgba(255,255,255,0.66) 0%, rgba(245,238,182,0.92) 100%)`
@@ -22,7 +23,7 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
-  height: 396px;
+  height: 504px;
  
 
   &::before {
@@ -42,7 +43,7 @@ const TopContainer = styled.div`
 `
 const Slugline = styled.div`
   width: 100%;
-  height: 96px;
+  height: 132px;
   background-color: rgba(31,41,54,0.66);
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#202a37+0,202a37+100&0+0,1+100 */
   background: -moz-linear-gradient(top, rgba(32,42,55,0) 0%, rgba(32,42,55,1) 100%); /* FF3.6-15 */
@@ -54,11 +55,12 @@ const Slugline = styled.div`
   font-family: 'Quicksand';
   font-weight: 400;
   font-size: 30px;
-  color: ${fogwhite};
+  color: ${gold};
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 15px;
 `
 
 export default ({ data, location }) => {

@@ -51,7 +51,7 @@ const TopContainer = styled.div`
 
 
   padding: 20px;
-  padding-top: 60px;
+  padding-top: 30px;
   padding-left: ${PADDING_TABLET}px;
   padding-right: ${PADDING_TABLET}px;
 
@@ -99,8 +99,8 @@ const Title = styled.div`
 `
 
 const Description = styled.div`
-  font-family: 'Neuton';
-  font-size: 20px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 17px;
   line-height: 24px;
   max-width: 469px;
   padding-bottom: 36px;
@@ -204,9 +204,10 @@ const CardsContainer = styled.div`
   padding-right: 50px;
   padding-bottom: 70px;
 
+  justify-content: center;
+
   @media (min-width: 1025px) { /* desktop */
     /*justify-content: center;*/
-    padding-left: 100px;
     padding-right: 0;
     padding-bottom: 200px;
   }

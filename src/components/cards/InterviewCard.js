@@ -9,7 +9,7 @@ import SVGArrow from '../SVGArrow'
 import {
   red,
   interviewColors,
-  gold,
+  interviews,
   softblack,
   fogwhite
 } from '../../colors'
@@ -22,8 +22,8 @@ const Container = styled(Card)`
   justify-content: center;
 
   background-color: ${fogwhite};
-
   color: ${softblack};
+  box-shadow: 0px 0px 30px #0000002b;
 
   padding-left: 15px;
   padding-right: 15px;
@@ -71,13 +71,11 @@ const InnerContainer = styled.div`
 `
 
 const IntervieweeName = styled.div`
-  font-family: 'Neue Plak Text W01 Bold';
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-family: 'Quicksand';
+  font-weight: 600;
+  font-size: 14px;
   line-height: 21px;
   padding-bottom: 9px;
-  text-transform: uppercase;
 `
 
 const Ticker = styled.div`
@@ -90,12 +88,12 @@ const Ticker = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 30px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
 
   border-top-right-radius: 3px;
-  background-color: ${gold};
+  background-color: ${interviews};
 
-  padding: 5px 15px;
+  padding: 3px 15px;
   text-transform: uppercase;
 `
 
