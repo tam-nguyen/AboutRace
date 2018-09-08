@@ -38,4 +38,4 @@ export const clipTickerColor = '#363D43'
 
 export const teachingBlue = '#E3F8FF'
 
-export const episodeColors = ['#e8f2f2', '#b5d6d4', '#FFC4AA']
+export const episodeColors = ['#e8f2f2', '#fcf1ff', '#fee1db']
