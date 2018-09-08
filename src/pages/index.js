@@ -32,7 +32,7 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2b2231;
+  background-color: #202A37;
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;

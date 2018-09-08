@@ -17,6 +17,7 @@ export const purple = 'rgba(33, 29, 36, .92)';
 export const gold = '#FFF9DB';
 
 export const backgroundColor = '#f7f7f7';
+export const darkBackgroundColor = '#202A37';
 export const titleColor = '#E3A44D';
 export const grandColor = '#6A6588';
 export const orange = '#E3A44D';

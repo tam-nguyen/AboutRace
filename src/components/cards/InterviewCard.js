@@ -71,7 +71,7 @@ const InnerContainer = styled.div`
 `
 
 const IntervieweeName = styled.div`
-  font-family: 'Quicksand';
+  font-family: 'Neue Plak Text W01 Bold';
   font-weight: 500;
   font-size: 12px;
   letter-spacing: 0.06em;

@@ -77,7 +77,7 @@ const BottomContainer = styled(Column)`
 `
 
 const Title = styled.div`
-  font-family: 'Quicksand';
+  font-family: 'Neue Plak W01 Bold';
   font-weight: 500;
   font-size: 36px;
   line-height: 42px;
@@ -85,17 +85,17 @@ const Title = styled.div`
   margin-bottom: 17px;
   letter-spacing: 0.06em;
   color: ${fogwhite};
+  text-transform: uppercase;
 `
 
 const Description = styled.div`
-  font-family: 'Neuton';
-  font-weight: 300;
+  font-family: "ff-tisa-web-pro";
   font-size: 20px;
   line-height: 24px;
   
   max-width: 469px;
   padding-bottom: 30px;
-
+  text-align: left;
   color: ${fogwhite};
 
   & p {

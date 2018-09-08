@@ -93,8 +93,8 @@ const MainImage = styled.div`
   width: auto;
   height: 374px;
   margin-top: -30px;
-  margin-left: -5vw;
-  margin-right: -5vw;
+  margin-left: -7vw;
+  margin-right: -7vw;
   margin-bottom: 15px;
 
   background-size: cover !important;
@@ -183,8 +183,8 @@ padding-bottom: 15px;
 `
 
 const Title = styled.div`
-  font-family: 'Neuton';
-  font-size: 48px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 42px;
   line-height: 48px;
 `
 
@@ -198,14 +198,14 @@ const Author = styled.div`
   text-transform: uppercase;
 
   padding-top: 18px;
-  padding-bottom: 28px;
+  padding-bottom: 15px;
 `
 
 const IntroText = styled.div`
-  font-family: 'Neuton';
-  font-weight:700;
+  font-family: 'ff-tisa-web-pro';
+  font-weight: 500;
   font-size: 24px;
-  line-height: 27px;
+  line-height: 30px;
   & p {
     margin-bottom: 0;
     -webkit-margin-after: 0;
@@ -213,14 +213,14 @@ const IntroText = styled.div`
 `
 
 const Text = styled.div`
-  font-family: 'Neuton';
-  font-size: 20px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 17px;
   line-height: 24px;
 `
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 30px 5vw;
+  padding: 30px 7vw;
 
   margin-top: -30px;
 
@@ -276,10 +276,10 @@ const AuthorImage = styled.div`
 
 const Bio = styled.div`
   padding-top: 15px;
-  font-family: Neuton;
+  font-family: "ff-tisa-web-pro";
   font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 17px;
+  line-height: 24px;
   & p {
     margin: 0;
   }
@@ -380,6 +380,7 @@ const CardsContainer = styled.div`
     justify-content: center;
     padding-left: 0;
     padding-right: 0;
+    margin-left: -15px;
     padding-bottom: 200px;
   }
 

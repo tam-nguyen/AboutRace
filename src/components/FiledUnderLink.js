@@ -22,7 +22,7 @@ const FiledUnderLinkContainer = styled(Link)`
 
   font-family: 'Quicksand';
   font-weight: 500;
-  font-size: 18px;
+  font-size: 24px;
   
   text-transform: capitalize;
 

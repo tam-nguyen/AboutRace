@@ -7,12 +7,12 @@ import Typekit from 'react-typekit'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import { backgroundColor } from '../colors'
+import { darkBackgroundColor } from '../colors'
 
 import './layout.css'
 
 const Container = styled.div`
-  background-color: ${backgroundColor};
+  background-color: ${darkBackgroundColor};
   margin: 0 auto;
   padding-top:96px;
   // overflow: hidden;

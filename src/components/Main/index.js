@@ -23,6 +23,7 @@ const TopContainer = styled.div`
   position: relative;
 
   height: 396px;
+ 
 
   &::before {
     position: absolute;
@@ -43,6 +44,11 @@ const Slugline = styled.div`
   width: 100%;
   height: 96px;
   background-color: rgba(31,41,54,0.66);
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#202a37+0,202a37+100&0+0,1+100 */
+  background: -moz-linear-gradient(top, rgba(32,42,55,0) 0%, rgba(32,42,55,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(32,42,55,0) 0%,rgba(32,42,55,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(32,42,55,0) 0%,rgba(32,42,55,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00202a37', endColorstr='#202a37',GradientType=0 ); /* IE6-9 */
   position: absolute;
   bottom: 0;
   font-family: 'Quicksand';
