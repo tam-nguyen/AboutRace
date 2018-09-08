@@ -137,7 +137,7 @@ class Header extends React.Component {
 
   render() {
     const {open} = this.state;
-    const currentSection = window.location.pathname.split('/')[1]
+    const currentSection = typeof window !== 'undefined' && window.location.pathname.split('/')[1]
 
     return (
       <Container open={open} id="header">
