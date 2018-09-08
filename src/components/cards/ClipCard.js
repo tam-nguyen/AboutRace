@@ -28,8 +28,8 @@ const Container = styled(Card)`
   justify-content: center;
 
   background-color: ${fogwhite};
-
   color: ${smokegrey};
+  box-shadow: 0px 0px 30px #0000002b;
 
   padding-left: 15px;
   padding-right: 15px;

@@ -130,9 +130,9 @@ const Text = styled.div`
   & > ul > li {
     margin-left: -1em;
   }
-  font-size: 20px;
+  font-size: 17px;
   line-height: 24px;
-  font-family: 'Neuton';
+  font-family: 'ff-tisa-web-pro';
   margin-bottom: 20px;
 
   & p {

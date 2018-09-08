@@ -28,9 +28,8 @@ const FiltersContainer = styled.div`
   flex-direction: row;
   font-size: 12px;
   line-height: 24px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   font-family: 'Quicksand';
-  font-weight: 500;
   color: ${props => props.color ? props.color : black};
   color: ${fogwhite};
   margin: 0 auto;

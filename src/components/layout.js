@@ -14,7 +14,7 @@ import './layout.css'
 const Container = styled.div`
   background-color: ${darkBackgroundColor};
   margin: 0 auto;
-  padding-top:96px;
+  padding-top: 72px;
   // overflow: hidden;
 `
 

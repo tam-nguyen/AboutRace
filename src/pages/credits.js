@@ -52,20 +52,20 @@ const Title = styled.div`
 `
 
 const SubTitle = styled.div`
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-style: normal;
   font-weight: bold;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 17px;
 
   color: ${black};
 `
 
 const Text = styled.div`
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-style: normal;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 17px;
 
   color: ${black};
 `

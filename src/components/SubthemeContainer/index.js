@@ -80,7 +80,6 @@ const FlipContainer = styled(FlipMove)`
   overflow: auto;
 
   padding-bottom: 286px;
-  width: 100vw;
 
   justify-content: center;
 `

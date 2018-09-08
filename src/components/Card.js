@@ -29,7 +29,7 @@ const CardGridItem = styled.div`
   float: left;
   display: inline-block;
   
-  margin: 10px;
+  margin: 15px;
 
   color: black;
 

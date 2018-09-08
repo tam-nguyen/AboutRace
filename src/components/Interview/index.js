@@ -20,7 +20,7 @@ import {
   whiteShadow,
   rose,
   softblack,
-  smokeblue,
+  interviews,
 } from '../../colors'
 
 import reorder from '../../utils/reorder'
@@ -35,7 +35,7 @@ const gradient2 = `linear-gradient(to bottom, #2A495C 0%, rgba(29,69,59,0.92) 10
 const Container = styled.div`
   width: 100%;
 
-  background-color: ${smokeblue};
+  background-color: ${interviews};
   
   display: flex;
   flex-direction: column;
@@ -54,9 +54,6 @@ const TopContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
 
   width: 100%;
   height: auto;
@@ -98,7 +95,7 @@ const Quote = styled.div`
   width: 100%;
   margin: auto;
 
-  font-family: 'Neuton';
+  font-family: 'ff-tisa-web-pro';
   font-weight: 400;
   font-size: 42px;
   line-height: 60px;
@@ -217,7 +214,7 @@ const TextInnerContainer = styled.div`
 
     height: 39px;
 
-    font-family: Lato;
+    font-family: 'Quicksand';
     font-size: 12px;
     line-height: 50px;
     letter-spacing: 0.22em;
@@ -250,8 +247,8 @@ const Filing = styled.div`
 `
 
 const Title = styled.div`
-  font-family: 'Neuton';
-  font-size: 48px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 42px;
   line-height: 48px;
 `
 
@@ -269,18 +266,20 @@ const Author = styled.div`
 `
 
 const Text = styled.div`
-  font-family: 'Neuton';
-  font-size: 20px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 17px;
   line-height: 24px;
 `
 
 const ContentBar = styled(Column)`
   flex: 1;
-  padding: 60px 5vw;
+  padding: 60px 7vw;
 
   margin-top: -30px;
 
   z-index: 10;
+
+  border-radius: 3px;
 
   background-color: ${white};
 
@@ -331,10 +330,10 @@ const AuthorImage = styled.div`
 
 const Bio = styled.div`
   padding-top: 15px;
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 17px;
+  line-height: 24px;
   & p {
     margin: 0;
   }
@@ -567,11 +566,10 @@ const getRelatedContent = array => {
 }
 
 const AllEntitiesContainer = styled(Row)`
-  width: 100vw;
   justify-content: flex-start;
 
   padding-top: 18px;
-  padding-left: 90px;
+  padding-left: 60px;
 
   z-index: 4;
 

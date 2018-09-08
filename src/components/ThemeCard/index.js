@@ -5,15 +5,16 @@ import SVGChevron from '../SVGChevron'
 import SubThemeCard from './SubThemeCard'
 
 import {
-  white,
   getGradient,
-  smokeblue
+  smokeblue,
+  fogwhite,
+  wetpaint
 } from '../../colors'
 
 const Container = styled.div`
   position: relative;
 
-  padding-top: 51px;
+  padding-top: 15px;
 
   background-color: ${smokeblue};
 
@@ -25,7 +26,7 @@ const Container = styled.div`
 const MainImage = styled.div`
   position: relative;
 
-  height: 298px;
+  height: 100%;
 
   background-size: cover !important;
   background-attachment: fixed;
@@ -46,7 +47,7 @@ const MainImage = styled.div`
 const Info = styled.div`
   padding-left: 60px;
   padding-right: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -67,15 +68,14 @@ const Explore = styled.div`
 
 const Title = styled.div`
   font-family: 'Quicksand';
-  line-height: 36px;
-  font-size: 36px;
-  font-weight: 500;
+  line-height: 48px;
+  font-size: 48px;
   padding-bottom: 18px;
 `;
 
 const Description = styled.div`
-  font-family: 'Neuton';
-  font-size: 20px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 17px;
   line-height: 24px;
   padding-bottom: 15px;
   & > p {
@@ -84,29 +84,6 @@ const Description = styled.div`
 
 `;
 
-const ChevronContainer = styled.div`
-  cursor: pointer;
-  position: absolute;
-  
-  right: 30px;
-
-  width: 18px;
-  height: 30px;
-
-  transform: rotate(${props => props.open ? 90 : 0}deg);
-
-  transition: all 0.3s ease-out;
-
-  @media (max-width: 812px) { /* mobile */
-    right: -25px;
-  }
-`
-
-const Chevron = ({open}) => <ChevronContainer open={open}>
-  <SVGChevron color={white} />
-</ChevronContainer>
-
-///
 
 const SubThemes = styled.div`
   @media (min-width: 1025px) { /* desktop */
@@ -119,10 +96,14 @@ const SubThemes = styled.div`
 
 const DetailContainer = styled.div`
   display: flex;
+  background-color: ${wetpaint};
+  border-radius: 3px;
+  padding: 15px;
 `
 
 const LeftCol = styled.div`
   flex: 1;
+  padding-bottom: 30px;
   @media (min-width: 1025px) { /* desktop */
     
   }
@@ -133,7 +114,7 @@ const LeftCol = styled.div`
 `
 const RightCol = styled.div`
   flex: 1;
-  padding-left: 60px;
+  padding-left: 30px;
   @media (min-width: 1025px) { /* desktop */
     
   }
@@ -173,23 +154,22 @@ class ThemeCard extends React.Component {
 
     return (
       <Container>
-        <Explore style={{paddingLeft: 60, paddingBottom: 30}}>Themes from the films</Explore>
         <Info>
-          <Title>{title}</Title>
           <DetailContainer>
-            <LeftCol>
-              <Description dangerouslySetInnerHTML={{ __html: description }} />
-              <MainImage background={background} />
+            <LeftCol> 
+              <Title>{title}</Title>
+                <Description dangerouslySetInnerHTML={{ __html: description }} />
+                <Explore style={{paddingTop:6, paddingBottom:15}}>Explore:</Explore>
+                {
+                  <SubThemes gradient={gradient}>
+                      {
+                        subthemes.map( (data, key) => <SubThemeCard key={key} data={data}/>)
+                      }
+                  </SubThemes>
+                }
             </LeftCol>
             <RightCol>
-              <Explore style={{paddingTop:6, paddingBottom:15}}>Explore:</Explore>
-              {
-              <SubThemes gradient={gradient}>
-                  {
-                    subthemes.map( (data, key) => <SubThemeCard key={key} data={data}/>)
-                  }
-                </SubThemes>
-              }
+              <MainImage background={background} />             
             </RightCol>
           </DetailContainer>
         </Info>
@@ -197,7 +177,5 @@ class ThemeCard extends React.Component {
     )
   }
 }
-
-// 〉
 
 export default ThemeCard

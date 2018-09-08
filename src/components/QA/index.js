@@ -380,8 +380,8 @@ const Title = styled.div`
 const Description = styled.div`
   font-family: 'Quicksand';
   font-weight: 400;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 17px;
+  line-height: 21px;
   & p {
     margin: 0;
   }
@@ -417,7 +417,7 @@ const Experts = styled(Column)`
 `
 
 const ExpertTitle = styled.div`
-  font-family: 'Quicksand';
+  font-family: 'ff-tisa-web-pro';
   font-size: 24px;
   font-weight: 500;
   text-align: center;
@@ -426,9 +426,9 @@ const ExpertTitle = styled.div`
 `
 
 const ExpertAnswer = styled.div`
-  font-family: 'Neuton';
+  font-family: 'ff-tisa-web-pro';
   font-weight: 300;
-  font-size: 20px;
+  font-size: 17px;
   line-height: 24px;
   padding-bottom: 18px;
   & p {

@@ -7,14 +7,17 @@ export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
-export const green = '#B8D59B';
-export const smokegrey = '#5A5E61';
+export const green = '#b5d6d4';
+export const smokegrey = '#475158';
 export const fogwhite = '#F5F5F5';
-export const smokeblue = '#C5DEEC';
-export const smokelime = '#F4F9D4';
-export const rose = '#ffe5e9';
+export const smokeblue = '#c4d6e0';
+export const smokelime = '#f3d9d4';
+export const rose = '#f1dfff';
 export const purple = 'rgba(33, 29, 36, .92)';
 export const gold = '#FFF9DB';
+export const wetpaint = '#e8f2f2';
+export const interviews = '#ecd8c7';
+export const articles = '#b5cec7';
 
 export const backgroundColor = '#f7f7f7';
 export const darkBackgroundColor = '#202A37';
@@ -35,4 +38,4 @@ export const clipTickerColor = '#363D43'
 
 export const teachingBlue = '#E3F8FF'
 
-export const episodeColors = ['#FFECAA', '#FFDDAA', '#FFC4AA']
+export const episodeColors = ['#e8f2f2', '#b5d6d4', '#FFC4AA']

@@ -152,7 +152,6 @@ const Column = styled.div`
 `
 
 const AllEntitiesContainer = styled(Row)`
-  width: 100vw;
   justify-content: flex-start;
 
   padding-top: 18px;

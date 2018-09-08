@@ -47,11 +47,11 @@ const TopContainer = styled(Column)`
 `
 
 const Quote = styled.div`
-  font-family: Neuton;
+  font-family: ff-tisa-web-pro;
   font-style: italic;
   font-weight: normal;
   line-height: 48px;
-  font-size: 48px;
+  font-size: 36px;
   text-align: center;
 
   color: #F5F5F5;
@@ -60,7 +60,11 @@ const Quote = styled.div`
 `
 
 const Author = styled(Quote)`
-  font-size: 24px;
+  font-size: 20px;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.012em;
 `
 
 const SubTitle = styled.div`
@@ -82,11 +86,11 @@ const InnerContainer = styled.div`
 const Text = styled.div`
   margin-bottom: 90px;
 
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-style: normal;
   font-weight: normal;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 17px;
 
   color: ${softblack};
 `
@@ -130,11 +134,11 @@ const EpisodeTitle = styled.div`
 `
 
 const EpisodeDescription = styled.div`
-  font-family: Neuton;
+  font-family: 'ff-tisa-web-pro';
   font-style: normal;
   font-weight: normal;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 17px;
 
   color: ${black};
 
@@ -247,7 +251,7 @@ class About extends React.Component {
             <InnerContainer>
               <Column>
                 <SubTitle>
-                  STATEMENT FROM THE EXECUTIVE PRODUCER
+                  STATEMENT FROM THE EXECUTIVE PRODUCER:
                 </SubTitle>
                 <Text>
                   <p>
