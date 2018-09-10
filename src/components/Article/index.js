@@ -53,16 +53,16 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  justify-content: center;
-  align-items: center;
-
   width: 100%;
   height: auto;
 
+
   @media (min-width: 1025px) { /* desktop */
+
   }
 
   @media (max-width: 812px) { /* mobile */
+    z-index: 1;
   }
 `
 
@@ -114,7 +114,7 @@ const MainImage = styled.div`
 const TextContainer = styled.div`
   z-index: 3;
 
-  padding: 120px 30px;
+  padding: 42px 30px;
 
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
@@ -519,16 +519,15 @@ const getRelatedContent = array => {
 }
 
 const AllEntitiesContainer = styled(Row)`
-  width: 100vw;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
-  padding-top: 90px;
-  padding-right: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
 
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    display: none;
+
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -539,7 +538,7 @@ const AllEntitiesContainer = styled(Row)`
 
 const AllEntitiesText = `All ${TICKER.toLowerCase()}s`
 const AllEntities = () => <AllEntitiesContainer>
-  <FiledUnderLink color={white}>{AllEntitiesText}</FiledUnderLink>
+  <FiledUnderLink color={softblack} to='/articles'>{AllEntitiesText}</FiledUnderLink>
 </AllEntitiesContainer>
 
 ///
