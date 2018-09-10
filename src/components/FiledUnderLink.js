@@ -18,7 +18,7 @@ const FiledUnderLinkContainer = styled(Link)`
 
   padding-left: 0;
   padding-right: 10px;
-  padding-top:18px;
+  padding-bottom:18px;
 
   font-family: 'Quicksand';
   font-weight: 500;

@@ -179,7 +179,7 @@ const QuoteContainer = styled.div`
 const TextContainer = styled.div`
   z-index: 3;
 
-  padding: 56px 30px;
+  padding: 42px 30px;
 
   @media (min-width: 1025px) { /* desktop */
     min-width: 1000px;
@@ -568,7 +568,7 @@ const getRelatedContent = array => {
 const AllEntitiesContainer = styled(Row)`
   justify-content: flex-start;
 
-  padding-top: 18px;
+  padding-top: 30px;
   padding-left: 60px;
 
   z-index: 4;

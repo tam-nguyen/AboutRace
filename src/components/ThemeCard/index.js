@@ -49,6 +49,9 @@ const Info = styled.div`
   padding-right: 60px;
   padding-bottom: 30px;
 
+  max-width: 1320px;
+  margin: 0 auto;
+
   @media (min-width: 1025px) { /* desktop */
     
   }

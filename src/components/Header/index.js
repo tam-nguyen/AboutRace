@@ -9,9 +9,6 @@ import {
 } from '../'
 
 import {
-  blackWithOpacity,
-  white,
-  red,
   gold,
   purple,
   smokeblue,
