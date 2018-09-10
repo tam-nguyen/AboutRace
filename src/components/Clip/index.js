@@ -313,7 +313,7 @@ const MainImage = styled.div`
   background-size: cover !important;
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
-  background-color: ${black};
+  background-color: ${softblack};
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -496,7 +496,6 @@ class Clip extends React.Component {
 
     const filedUnder = getFiledUnder(get(this, `props.data.${nodeName}.relationships.field_belongs_to_subtheme`))
     const tags = getTags(get(this, `props.data.${nodeName}.relationships.field_tags`))
-    console.log(tags)
 
     const relatedContent = getRelatedContent(get(this, `props.data.${nodeName}.relationships.field_article_related_content`))
 
