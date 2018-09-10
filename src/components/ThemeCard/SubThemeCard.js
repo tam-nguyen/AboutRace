@@ -28,7 +28,7 @@ const Title = styled.div`
   font-family: 'Quicksand';
   font-weight: 500;
   font-size: 24px;
-  line-height: 30px; 
+  line-height: 42px; 
 ` 
 
 const ArrowContainer = styled.div`
