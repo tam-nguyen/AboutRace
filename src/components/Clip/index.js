@@ -5,6 +5,8 @@ import get from 'lodash/get'
 
 import Vimeo from 'react-vimeo'
 
+import playButton from '../../assets/images/PlayButton.png';
+
 import {
   FiledUnderLink,
   Overlay,
@@ -311,6 +313,7 @@ const MainImage = styled.div`
   background-size: cover !important;
   background-attachment: fixed;
   background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+  background-color: ${black};
 
   @media (min-width: 1025px) { /* desktop */
     
@@ -390,6 +393,8 @@ const MobileSubTitle = styled(SubTitle)`
 `
 
 const CenteredContainer = styled.div`
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -397,16 +402,35 @@ const CenteredContainer = styled.div`
   height: 100%;
 `
 
+const Image = styled.img`
+  width: 53px;
+  height: 53px;
+  position: absolute;
+  bottom: 15px;
+  left: 12px;
+
+  @media (min-width: 1025px) { /* desktop */
+
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  } 
+`
+
 const nodeName = 'nodeClip'
 
 class Clip extends React.Component {
   constructor(props) {
     super(props);
+
+    const background = get(props, `data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
   
     this.state = {
       playing: false,
       tagName: null,
-      tagCards: []
+      tagCards: [],
+      background
     };
   }
 
@@ -464,7 +488,7 @@ class Clip extends React.Component {
     const {tagName, tagCards} = this.state
     const {overlay} = this.props
 
-    const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
+    // const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
     const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
     const videoId = videoURL ? videoURL.split('/').pop() : ''
     const title = get(this, `props.data.${nodeName}.title`)
@@ -506,21 +530,16 @@ class Clip extends React.Component {
               {
                 filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link} color={softblack}>{name}</FiledUnderLink>)
               }
-             
-                
-            
               { renderTags() }
             </SideBar>
             <ContentBar>
-              <MainImage background={background}>
+              <MainImage background={this.state.background}>
                 <Vimeo
                   style={{width: IMAGE_WIDTH, height: IMAGE_HEIGHT}}
                   videoId={videoId}
                   playButton={
                     <CenteredContainer>
-                      <PlayButton
-                        size={72}
-                      />
+                      <Image src={playButton} onClick={() => this.setState({background:null})}/>
                     </CenteredContainer>
                   }
                 />
