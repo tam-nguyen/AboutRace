@@ -204,6 +204,18 @@ export const FullInterviewFragment = graphql`
       processed
     }
     relationships {
+      related_content: field_related_content_interview {
+        __typename
+        ... on node__faq {
+          ...QAFragment
+        }
+        ... on node__clip {
+          ...PosterImageClipFragment
+        }
+        ... on node__article {
+          ...ArticleFragment
+        }
+      }
       field_which_subtheme_does_this_b {
         id
         name

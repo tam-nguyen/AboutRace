@@ -666,7 +666,8 @@ class Interview extends React.Component {
     const tags = getTags(get(this, `props.data.${nodeName}.relationships.field_tags`))
     const backTo = filedUnder[0]
 
-    const relatedContent = getRelatedContent(get(this, `props.data.${nodeName}.relationships.field_article_related_content`))
+    const relationships = get(this, `props.data.${nodeName}.relationships.related_content`)
+    const relatedContent = getRelatedContent(relationships)
     
     const LocalBackTo = () => backTo ? (
       <BackTo>
