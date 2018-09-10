@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@ehp/gatsby-source-drupal": "^2.2.6",
+    "@ehp/gatsby-source-drupal": "^2.2.7",
     "babel-plugin-styled-components": "^1.5.1",
     "gatsby": "^2.0.0-beta.98",
     "gatsby-image": "^1.0.45",
