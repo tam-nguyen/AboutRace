@@ -23,7 +23,7 @@ const Container = styled(Card)`
 
   background-color: ${fogwhite};
   color: ${softblack};
-  box-shadow: 0px 0px 30px #0000002b;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.17);
 
   padding-left: 15px;
   padding-right: 15px;
