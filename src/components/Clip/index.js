@@ -180,6 +180,8 @@ const AllEntities = () => <AllEntitiesContainer>
 
 const Content = styled(Row)`
   width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
   padding: 18px 0 72px 0;
 `
 
