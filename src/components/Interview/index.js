@@ -556,6 +556,9 @@ const getRelatedContent = array => {
       case 'node__article':
         cards.articles.push(item)
         break
+        case 'node__interview':
+        cards.interviews.push(item)
+        break
       case 'node__clip':
         cards.clips.push(item)
         break
