@@ -20,6 +20,7 @@ import {
 
 import {
   black,
+  softblack,
   white,
   episodeColors,
   fogwhite,
@@ -38,7 +39,7 @@ const CardsContainer = styled.div`
 
   @media (min-width: 1025px) { /* desktop */
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
   }
 
@@ -53,7 +54,6 @@ const CardContainer = styled(Link)`
   flex-direction: column;
 
   width: 80vh;
-  margin-top: 10px;
   padding: 30px;
 
   flex: 1 1 auto;
@@ -62,10 +62,8 @@ const CardContainer = styled(Link)`
 
   transition: all 0.5s;
 
-  border-radius: 6px;
-
   @media (min-width: 1025px) { /* desktop */
-    margin: 1vw;
+    
     width: 400px;
   }
 
@@ -90,7 +88,7 @@ const EpisodeNumber = styled.div`
   font-size: 14px;
   letter-spacing: 0.12em;
 
-  color: ${black};
+  color: ${softblack};
 
   text-transform: capitalize;
 `
@@ -103,7 +101,7 @@ const EpisodeTitle = styled.div`
   font-size: 36px;
   padding-bottom: 15px;
 
-  color: ${black};
+  color: ${softblack};
 `
 
 const EpisodeDescription = styled.div`
@@ -113,7 +111,7 @@ const EpisodeDescription = styled.div`
   line-height: 24px;
   font-size: 17px;
 
-  color: ${black};
+  color: ${softblack};
 `
 
 const InnerContainer = styled.div`

@@ -3,18 +3,21 @@ import styled from 'styled-components'
 import get from 'lodash/get'
 
 import {
-  white,
-  softblack,
-  smokegrey,
-  fogwhite,
-  gold
+  SVGLogoMain,
+} from '../'
+
+import LogoMain from './LogoMain.png'
+
+import {
+  gold,
+  midnight,
+  white
 } from '../../colors'
 
-const gradient = `linear-gradient(to bottom, rgba(255,255,255,0.66) 0%, rgba(245,238,182,0.92) 100%)`
-
 const Container = styled.div`
-  background-color: ${white};
-
+  background-color: ${midnight};
+  position: relative;
+  margin-top: -96px;
   @media (max-width: 812px) { /* mobile */
 
   }
@@ -23,7 +26,7 @@ const Container = styled.div`
 const TopContainer = styled.div`
   position: relative;
 
-  height: 504px;
+  height: 100vh;
  
 
   &::before {
@@ -38,29 +41,52 @@ const TopContainer = styled.div`
     background-size: cover !important;
     background-attachment: fixed;
     background: ${ props => props.background ? `url(${props.background}) center no-repeat` : null };
+    opacity: .18;
 
   }
 `
+const MainLogo = styled.div`
+  height: 100vh;
+  width: calc(100vw - 120px);
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 const Slugline = styled.div`
   width: 100%;
-  height: 132px;
-  background-color: rgba(31,41,54,0.66);
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#202a37+0,202a37+100&0+0,1+100 */
-  background: -moz-linear-gradient(top, rgba(32,42,55,0) 0%, rgba(32,42,55,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(32,42,55,0) 0%,rgba(32,42,55,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(32,42,55,0) 0%,rgba(32,42,55,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00202a37', endColorstr='#202a37',GradientType=0 ); /* IE6-9 */
-  position: absolute;
-  bottom: 0;
+  height: 60px;
+  letter-spacing: 0.03em;
   font-family: 'Quicksand';
-  font-weight: 400;
-  font-size: 30px;
-  color: ${gold};
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 24px;
+  color: ${white};
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 15px;
+
+  @media (max-width: 812px) { /* mobile */
+    padding-top: 2em;
+    font-size: 18px;
+  } 
+`
+
+const Image = styled.img`
+  width: 100%;
+  max-width: 1000px;
+
+  @media (min-width: 1025px) { /* desktop */
+    width: 90%;
+  }
+
+  @media (max-width: 812px) { /* mobile */
+    
+  } 
 `
 
 export default ({ data, location }) => {
@@ -71,7 +97,11 @@ export default ({ data, location }) => {
   return (
     <Container>
       <TopContainer background={background}>
-        <Slugline>An online companion to the award-winning documentary series</Slugline>
+        <MainLogo>
+          <Image src={LogoMain} />
+          <Slugline>An online companion to the award-winning documentary series</Slugline>
+
+        </MainLogo>
       </TopContainer>
     </Container>
   )
