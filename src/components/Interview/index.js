@@ -542,6 +542,7 @@ const getTags = array => {
 const getRelatedContent = array => {
   const cards = {
     articles: [],
+    interviews: [],
     clips: [],
     faqs: [],
   }

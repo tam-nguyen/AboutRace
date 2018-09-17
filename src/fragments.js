@@ -215,6 +215,9 @@ export const FullInterviewFragment = graphql`
         ... on node__article {
           ...ArticleFragment
         }
+        ... on node__interview {
+          ...InterviewFragment
+        }
       }
       field_which_subtheme_does_this_b {
         id

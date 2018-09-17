@@ -10,8 +10,10 @@ import {
 
 import {
   gold,
+  white,
   purple,
   smokeblue,
+  lavendar,
 } from '../../colors'
 
 const Container = styled.div`
@@ -28,7 +30,7 @@ const Container = styled.div`
   
   background-color: ${purple};
 
-  height: 72px;
+  height: 96px;
 
   @media (min-width: 1025px) { /* desktop */
     justify-content: flex-end;
@@ -48,6 +50,7 @@ const Container = styled.div`
 
 const ItemsContainer = styled.div`
   
+  padding-right: 60px;
 
   @media (min-width: 1025px) { /* desktop */
   
@@ -66,23 +69,22 @@ const Item = styled(Link)`
   text-aligment: center;
   text-decoration: none;
 
-  color: ${props => props.selected ? gold : smokeblue};
+  color: ${props => props.selected ? white : lavendar};
+  font-weight: ${props => props.selected ? 500 : 400};
 
   text-transform: uppercase;
 
   font-family: 'Quicksand';
-  font-weight: 500;
   font-size: 10pt;
-  line-height: 30px;
   letter-spacing: 0.22em;
 
-  margin-right: 1em;
+  margin-left: 1em;
 
   @media (min-width: 1025px) { /* desktop */
     /*margin-right: 45px;*/
-    margin-right: 2vw;
-    font-size: 14px;
-    letter-spacing: 0.12em;
+    margin-left: 3vw;
+    font-size: 12px;
+    letter-spacing: 0.22em;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -104,8 +106,7 @@ const MobileItem = styled(Item)`
 
 const Logo = styled.div`
   flex: 1;
-  margin-top: 6px;
-  padding-left: 36px;
+  padding-left: 60px;
   padding-right: 36px;
 
   @media (max-width: 812px) { /* mobile */

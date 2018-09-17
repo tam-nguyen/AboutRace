@@ -18,6 +18,8 @@ export const gold = '#FFF9DB';
 export const wetpaint = '#e8f2f2';
 export const interviews = '#ecd8c7';
 export const articles = '#b5cec7';
+export const midnight = '#19112E';
+export const lavendar = '#D8CBFF';
 
 export const backgroundColor = '#f7f7f7';
 export const darkBackgroundColor = '#202A37';
@@ -38,4 +40,4 @@ export const clipTickerColor = '#363D43'
 
 export const teachingBlue = '#E3F8FF'
 
-export const episodeColors = ['#e8f2f2', '#fcf1ff', '#fee1db']
+export const episodeColors = ['#facd65', '#ffb558', '#f6955c']
