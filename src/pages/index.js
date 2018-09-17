@@ -177,9 +177,10 @@ const VimeoContainer = styled.div`
 `
 
 const Under = styled.div`
-  font-family: Quicksand;
+  font-family: 'Quicksand';
   font-style: normal;
-  line-height: 28px;
+  line-height: 24px;
+  padding-top: 12px;
   font-size: 24px;
   text-align: center;
   letter-spacing: 0.03em;
@@ -192,17 +193,20 @@ const Under = styled.div`
 `
 
 const Summary = styled.div`
-  font-family: Quicksand;
-  font-style: normal;
-  line-height: 21px;
-  font-size: 14px;
+  font-family: 'ff-tisa-web-pro';
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 17px;
   text-align: center;
-  letter-spacing: 0.03em;
 
   max-width: 510px;
   padding-bottom: 102px;
 
   color: ${fogwhite};
+
+  & p {
+    margin-top: 0;
+  }
 
   @media (max-width: 812px) { /* mobile */
     display: none;
@@ -276,7 +280,7 @@ class Index extends Component {
 
     const trailerData = get(this, 'props.data.allTaxonomyTermHomePage.edges').map( ({node}) => node )[0]
     // const summary = get(trailerData, 'field_site_summary_tagline.processed')
-    const summary = get(trailerClip, 'title')
+    const summary = get(trailerData, 'field_small_text_under_john_powe.processed')
     const under = get(trailerData, 'field_text_under_john_a_powell_v.processed')
 
     return (
@@ -431,6 +435,9 @@ export const query = graphql`
             processed
           }
           field_text_under_john_a_powell_v {
+            processed
+          }
+          field_small_text_under_john_powe {
             processed
           }
         }
