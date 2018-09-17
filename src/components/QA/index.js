@@ -53,12 +53,9 @@ const Container = styled.div`
 
 const TopContainer = styled.div`
   position: relative;
-  padding-top: 60px;
+
   display: flex;
   flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
 
   width: 100%;
   height: auto;
@@ -71,6 +68,12 @@ const TopContainer = styled.div`
   @media (max-width: 812px) { /* mobile */
     z-index: 1;
   }
+`
+const CenterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
 `
 
 const BottomContaniner = styled.div`
@@ -240,6 +243,7 @@ const getRelatedContent = array => {
     interviews: [],
     clips: [],
     faqs: [],
+    qa: [],
   }
 
   array && array.forEach(item => {
@@ -262,17 +266,15 @@ const getRelatedContent = array => {
 }
 
 const AllEntitiesContainer = styled(Row)`
-  width: 100vw;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
-  position: fixed;
-  top: 90px;
-  right: 60px;
+  padding-top: 30px;
+  padding-left: 60px;
 
   z-index: 4;
 
   @media (min-width: 1025px) { /* desktop */
-    
+
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -649,15 +651,17 @@ class QA extends React.Component {
         }
         <TopContainer overlay={overlay}>
           { !overlay && <AllEntities /> }
-          <InnerTopContainer>
-            { left && <Chevron to={left} left={true}/>}
-            <TopCard>
-              <Question>Question:</Question>
-              <Title>{title}</Title>
-              <Description dangerouslySetInnerHTML={{ __html: description }}/>
-            </TopCard>
-            { right && <Chevron to={right}/>}
-          </InnerTopContainer>
+          <CenterContainer>
+            <InnerTopContainer>
+              { left && <Chevron to={left} left={true}/>}
+              <TopCard>
+                <Question>Question:</Question>
+                <Title>{title}</Title>
+                <Description dangerouslySetInnerHTML={{ __html: description }}/>
+              </TopCard>
+              { right && <Chevron to={right}/>}
+            </InnerTopContainer>
+          </CenterContainer>
         </TopContainer>
         <BottomContaniner overlay={overlay}>
           <Answers>Answers:</Answers>

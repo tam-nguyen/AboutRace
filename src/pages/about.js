@@ -42,8 +42,10 @@ const TopContainer = styled(Column)`
   background-color: ${smokegrey};
   justify-content: center;
   align-items: center;
-  padding-top: 150px;
-  padding-bottom: 90px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 const Quote = styled.div`
@@ -57,6 +59,10 @@ const Quote = styled.div`
   color: #F5F5F5;
 
   max-width: 683px;
+
+  & p {
+    margin: 0;
+  }
 `
 
 const Author = styled(Quote)`
@@ -65,6 +71,7 @@ const Author = styled(Quote)`
   font-weight: 500;
   font-style: normal;
   letter-spacing: 0.012em;
+  opacity: .50;
 `
 
 const SubTitle = styled.div`
