@@ -8,7 +8,8 @@ import {
   getGradient,
   smokeblue,
   fogwhite,
-  wetpaint
+  wetpaint,
+  concrete
 } from '../../colors'
 
 const Container = styled.div`
@@ -99,7 +100,7 @@ const SubThemes = styled.div`
 
 const DetailContainer = styled.div`
   display: flex;
-  background-color: ${wetpaint};
+  background-color: ${concrete};
   border-radius: 3px;
   padding: 15px;
 `
