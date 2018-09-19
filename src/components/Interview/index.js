@@ -314,7 +314,7 @@ const SideBar = styled(Column)`
 `
 
 const AuthorImage = styled.div`
-  height: 228px;
+  height: 348px;
   min-width: 100%;
 
   background-size: cover !important;
