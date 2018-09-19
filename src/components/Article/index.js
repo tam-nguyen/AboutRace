@@ -91,11 +91,12 @@ const BottomContaniner = styled.div`
 
 const MainImage = styled.div`
   width: auto;
-  height: 374px;
+  height: 456px;
   margin-top: -30px;
   margin-left: -7vw;
   margin-right: -7vw;
   margin-bottom: 15px;
+  border-bottom: solid 1px #ececec;
 
   background-size: cover !important;
   background-attachment: fixed;
