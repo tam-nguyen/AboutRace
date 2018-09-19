@@ -8,8 +8,7 @@ import {
   getGradient,
   smokeblue,
   fogwhite,
-  wetpaint,
-  concrete
+  wetpaint
 } from '../../colors'
 
 const Container = styled.div`
@@ -46,9 +45,7 @@ const MainImage = styled.div`
 `
 
 const Info = styled.div`
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-bottom: 30px;
+  padding: 30px 60px 0px 60px;
 
   max-width: 1320px;
   margin: 0 auto;
@@ -71,7 +68,7 @@ const Explore = styled.div`
 `
 
 const Title = styled.div`
-  font-family: 'Quicksand';
+  font-family: 'ff-tisa-web-pro';
   line-height: 48px;
   font-size: 48px;
   padding-bottom: 18px;
@@ -100,9 +97,10 @@ const SubThemes = styled.div`
 
 const DetailContainer = styled.div`
   display: flex;
-  background-color: ${concrete};
   border-radius: 3px;
+  background-color: ${wetpaint};
   padding: 15px;
+  padding-left: 30px;
 `
 
 const LeftCol = styled.div`

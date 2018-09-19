@@ -314,7 +314,7 @@ const SideBar = styled(Column)`
 `
 
 const AuthorImage = styled.div`
-  height: 228px;
+  height: 348px;
   min-width: 100%;
 
   background-size: cover !important;
@@ -556,7 +556,7 @@ const getRelatedContent = array => {
       case 'node__article':
         cards.articles.push(item)
         break
-        case 'node__interview':
+      case 'node__interview':
         cards.interviews.push(item)
         break
       case 'node__clip':
