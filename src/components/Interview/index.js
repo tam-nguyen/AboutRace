@@ -545,6 +545,7 @@ const getRelatedContent = array => {
     interviews: [],
     clips: [],
     faqs: [],
+    qa: [],
   }
 
   array && array.forEach(item => {

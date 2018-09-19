@@ -15,6 +15,7 @@ export {
 } from './overlay'
 
 export SVGLogo from './SVGLogo'
+export SVGLogoMain from './SVGLogoMain'
 export SVGChevron from './SVGChevron'
 export SVGArrow from './SVGArrow'
 export SVGLink from './SVGLink'

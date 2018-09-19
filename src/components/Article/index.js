@@ -491,9 +491,10 @@ const getTags = array => {
 const getRelatedContent = array => {
   const cards = {
     articles: [],
+    interviews: [],
     clips: [],
     faqs: [],
-    interviews: [],
+    qa: [],
   }
 
   array && array.forEach(item => {
