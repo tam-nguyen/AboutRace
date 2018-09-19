@@ -16,7 +16,8 @@ import {
   white,
   getGradient,
   softblack,
-  smokeblue
+  smokeblue,
+  wetpaint
 } from '../colors'
 
 const queryString = require('query-string');
@@ -32,9 +33,9 @@ const Container = styled.div`
 `
 
 const Header = styled.div`
-  text-align: center;
+  padding: 60px;
 
-  padding-top: 60px;
+  background-color: ${wetpaint};
 
   height: auto;
   
@@ -88,19 +89,13 @@ const Chevron = () => <ChevronContainer>
 
 const Row = styled.div`
   position: relative;
-
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
 `
 
 const Title = styled.div`
   color: ${softblack};
-  font-family: 'Quicksand';
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 42px;
+  font-family: 'ff-tisa-web-pro';
+  font-size: 48px;
+  line-height: 48px;
 
   padding-bottom: 18px;
 `
@@ -112,7 +107,6 @@ const TopLink = styled(Link)`
   line-height: 42px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin: 0 auto;
   
   color: ${softblack};
 `
@@ -123,9 +117,8 @@ const Description = styled.div`
   font-weight: 400;
   line-height: 24px;
   color: ${softblack};
-  margin: 0 auto;
 
-  max-width: 469px;
+  max-width: 600px;
   & p {
     margin: 0;
   }
