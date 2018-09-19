@@ -45,7 +45,7 @@ const MainImage = styled.div`
 `
 
 const Info = styled.div`
-  padding: 30px 60px 60px 60px;
+  padding: 30px 60px 0px 60px;
 
   max-width: 1320px;
   margin: 0 auto;
@@ -98,6 +98,9 @@ const SubThemes = styled.div`
 const DetailContainer = styled.div`
   display: flex;
   border-radius: 3px;
+  background-color: ${wetpaint};
+  padding: 15px;
+  padding-left: 30px;
 `
 
 const LeftCol = styled.div`
