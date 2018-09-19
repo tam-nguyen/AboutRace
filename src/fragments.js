@@ -87,6 +87,9 @@ export const FullArticleFragment = graphql`
         ... on node__article {
           ...ArticleFragment
         }
+        ... on node__interview {
+          ...InterviewFragment
+        }
         ... on node__quickfact {
           ...QuickfactWithRelatedContentFragment
         }
