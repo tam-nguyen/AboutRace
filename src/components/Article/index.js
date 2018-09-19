@@ -259,7 +259,7 @@ width: 336px;
 `
 
 const AuthorImage = styled.div`
-  height: 228px;
+  height: 348px;
 
   border-top-right-radius: 3px;
 
