@@ -7,7 +7,7 @@ export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
-export const green = '#b5d6d4';
+export const green = '#cbc6e8';
 export const smokegrey = '#475158';
 export const fogwhite = '#F5F5F5';
 export const smokeblue = '#74a3bd';
