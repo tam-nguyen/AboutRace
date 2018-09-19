@@ -118,7 +118,7 @@ const Description = styled.div`
   line-height: 24px;
   color: ${softblack};
 
-  max-width: 469px;
+  max-width: 600px;
   & p {
     margin: 0;
   }
