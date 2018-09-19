@@ -16,8 +16,6 @@ const Container = styled.div`
 
   padding-top: 15px;
 
-  background-color: ${smokeblue};
-
   @media (max-width: 812px) { /* mobile */
     padding-top: 0;
   }
@@ -47,7 +45,7 @@ const MainImage = styled.div`
 const Info = styled.div`
   padding-left: 60px;
   padding-right: 60px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 
   max-width: 1320px;
   margin: 0 auto;
