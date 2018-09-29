@@ -33,7 +33,7 @@ const Container = styled.div`
   height: 96px;
 
   @media (min-width: 1025px) { /* desktop */
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   @media (max-width: 812px) { /* mobile */
@@ -50,7 +50,6 @@ const Container = styled.div`
 
 const ItemsContainer = styled.div`
   
-  padding-right: 60px;
 
   @media (min-width: 1025px) { /* desktop */
   
@@ -143,17 +142,29 @@ class Header extends React.Component {
           open={open}
           onClick={ e => this.setState({open: !open})}
         />
-        <Logo><Link href='/'><SVGLogo/></Link></Logo>
-        <ItemsContainer>
-          {
-            pages.map( ({name, link}, index) => <Item
-              selected={name.indexOf(currentSection) >= 0}
-              href={link}
-              key={index}
-            >{name}</Item>)
-          }
-        </ItemsContainer>
-
+        {
+          (currentSection) ? [
+            <Logo><Link href='/'><SVGLogo /></Link></Logo>,
+            <ItemsContainer style={{ paddingRight: 60 + 'px' }}>
+              {
+                pages.map(({ name, link }, index) => <Item
+                  selected={name.indexOf(currentSection) >= 0}
+                  href={link}
+                  key={index}
+                >{name}</Item>)
+              }
+            </ItemsContainer>
+          ] :
+            <ItemsContainer >
+              {
+                pages.map(({ name, link }, index) => <Item
+                  selected={name.indexOf(currentSection) >= 0}
+                  href={link}
+                  key={index}
+                >{name}</Item>)
+              }
+            </ItemsContainer>
+        }
         { open && <Link href='/'><SVGLogo/></Link> }
         {
           open && pages.map( ({name, link}, index) => <MobileItem
