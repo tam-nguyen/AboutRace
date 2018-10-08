@@ -194,7 +194,7 @@ const SubTitle = styled.div`
   line-height: 28px;
   letter-spacing: 0.22em;
 
-  color: ${softblack};
+  color: ${white};
 
   text-transform: uppercase;
 
@@ -623,7 +623,7 @@ class QA extends React.Component {
           <FiledUnderContainer>
             <SubTitle>filed under:</SubTitle>
             {
-              filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link}>{name}</FiledUnderLink>)
+              filedUnder && filedUnder.map( ({name, link}, key) => <FiledUnderLink key={key} to={link} color={white}>{name}</FiledUnderLink>)
             }
           </FiledUnderContainer>
 
