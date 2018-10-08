@@ -61,7 +61,7 @@ const Filters = ({selected, select}) => <FiltersContainer>
   }
 </FiltersContainer>
 
-const description = `In the United States, buying a home is the key to achieving the American Dream. Forty-two percent of the net worth of all households consists of equity in their homes - that means for most Americans, their homes are their single largest asset. Homeownership provides families with the means to invest in education, business opportunities, retirement and resources for the next generation.`
+// const description = `In the United States, buying a home is the key to achieving the American Dream. Forty-two percent of the net worth of all households consists of equity in their homes - that means for most Americans, their homes are their single largest asset. Homeownership provides families with the means to invest in education, business opportunities, retirement and resources for the next generation.`
 
 class Clips extends React.Component {
   constructor(props) {
@@ -75,6 +75,7 @@ class Clips extends React.Component {
   render() {
     const title = "Clips"
     const clips = get(this, `props.data.allNodeClip.edges`).map(edge => edge.node)
+    const description = get(this, `props.data.allTaxonomyTermClipsPage.edges[0].node.description.processed`)
 
     const props = {
       title,
@@ -109,7 +110,16 @@ export const query = graphql`
 		      ...FullClipFragment
 		    }
 		  }
-		}
+    }
+    allTaxonomyTermClipsPage {
+      edges {
+        node {
+          description {
+            processed
+          }
+        }
+      }
+    }
   }
 `
 

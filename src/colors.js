@@ -7,20 +7,21 @@ export const whiteShadowTrans = 'rgba(252, 252, 252, 0.92)';
 export const red = '#E06363';
 export const darkWhite = '#DEDEDE';
 
-export const green = '#b5d6d4';
+export const green = '#cbc6e8';
 export const smokegrey = '#475158';
 export const fogwhite = '#F5F5F5';
-export const smokeblue = '#c4d6e0';
+export const smokeblue = '#74a3bd';
 export const smokelime = '#f3d9d4';
 export const rose = '#f1dfff';
 export const purple = 'rgba(33, 29, 36, .92)';
 export const gold = '#FFF9DB';
-export const wetpaint = '#e8f2f2';
+export const wetpaint = '#daeff3';
 export const interviews = '#ecd8c7';
 export const articles = '#b5cec7';
 export const midnight = '#19112E';
 export const lavendar = '#D8CBFF';
 export const concrete = '#ececec';
+export const luminous = '#0eff0c';
 
 export const backgroundColor = '#f7f7f7';
 export const darkBackgroundColor = '#202A37';

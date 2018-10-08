@@ -97,7 +97,7 @@ const Description = styled.div`
   
   max-width: 469px;
   text-align: left;
-  color: ${smokeblue};
+  color: ${fogwhite};
 
   & p {
     margin: 0;

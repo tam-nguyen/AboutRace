@@ -58,8 +58,8 @@ const TopContainer = styled.div`
   width: 100%;
   height: auto;
 
-  background-color: ${episodeColors[0]};
-
+  background-color: ${ props => props.fieldEpisode ? episodeColors[props.fieldEpisode - 1] : null};
+  
   @media (min-width: 1025px) { /* desktop */
 
   }
@@ -425,7 +425,7 @@ const nodeName = 'nodeClip'
 class Clip extends React.Component {
   constructor(props) {
     super(props);
-
+    
     const background = get(props, `data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
   
     this.state = {
@@ -489,6 +489,7 @@ class Clip extends React.Component {
   render() {
     const {tagName, tagCards} = this.state
     const {overlay} = this.props
+    const fieldEpisode = get(this,`props.data.${nodeName}.field_episode`);
 
     // const background = get(this, `props.data.${nodeName}.relationships.field_poster_image.localFile.childImageSharp.original.src`)
     const videoURL = get(this, `props.data.${nodeName}.field_external_video_url.uri`)
@@ -523,7 +524,7 @@ class Clip extends React.Component {
         {
           this.renderOverlay(tagName, tagCards)
         }
-        <TopContainer overlay={overlay}>
+        <TopContainer overlay={overlay} fieldEpisode={fieldEpisode}>
           { !overlay && <AllEntities /> }
           <Content>
             <SideBar>

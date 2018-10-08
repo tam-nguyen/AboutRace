@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import FlipMove from 'react-flip-move'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from '../../utils/kebabCase'
 // import get from 'lodash/get'
 
 import Filters from '../Filters'
